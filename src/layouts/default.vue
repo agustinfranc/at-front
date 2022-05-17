@@ -10,7 +10,7 @@
     <v-app-bar app>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
-      <v-toolbar-title>Application</v-toolbar-title>
+      <v-toolbar-title>Nexos</v-toolbar-title>
     </v-app-bar>
 
     <v-main>
@@ -20,7 +20,7 @@
 </template>
 
 <script lang='ts'>
-import { defineComponent } from "vue"
+import { defineComponent } from "vue" // preguntar si hace falta
 export default defineComponent({
   name: 'Home',
 
@@ -31,4 +31,3 @@ export default defineComponent({
   }
 })
 </script>
-

@@ -1,18 +1,18 @@
 <template>
-  <Home />
+  <Layout />
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 
 // Components
-import Home from '../components/Home.vue';
+import Layout from '../layouts/default.vue';
 
 export default defineComponent({
   name: 'HomeView',
 
   components: {
-    Home,
+    Layout,
   },
 });
 </script>
