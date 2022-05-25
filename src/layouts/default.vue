@@ -48,9 +48,8 @@
     </v-app-bar>
 
     <v-main>
-      <Prueba></Prueba>
+      
     </v-main>
-    
     <v-card>
       <v-footer color="grey">
         <v-col class="text-center" cols="12">
@@ -63,15 +62,8 @@
 
 <script lang="ts">
 import { defineComponent } from "vue"; // preguntar si hace falta
-import Prueba from '../components/form.vue';
-
-
 export default defineComponent({
   name: "Home",
-
-  components: {
-    Prueba
-  },
 
   data() {
     return {
