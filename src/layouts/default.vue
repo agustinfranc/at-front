@@ -3,41 +3,11 @@
     <v-navigation-drawer v-model="drawer" app>
       <v-list>
         <v-list-item v-for="item in items" :key="item.title" :to="item.to">
-          <v-list-item-content>
+          <v-list-item-header>
             <v-list-item-title v-text="item.title" />
-          </v-list-item-content>
+          </v-list-item-header>
         </v-list-item>
       </v-list>
-      <template v-slot:append>
-        <v-list>
-          <v-list-item @click.stop="$vuetify.theme.dark = !$vuetify.theme.dark">
-            <v-list-item-action>
-              <v-icon class="mx-5" v-if="!$vuetify.theme.dark"
-                >mdi-weather-sunny</v-icon
-              >
-              <v-icon class="mx-5" v-else>mdi-weather-night</v-icon>
-            </v-list-item-action>
-
-            <v-list-item-content>
-              <v-list-item-title
-                v-if="$vuetify.theme.dark"
-                v-text="'Modo Oscuro'"
-              />
-              <v-list-item-title v-else v-text="'Modo Claro'" />
-            </v-list-item-content>
-          </v-list-item>
-
-          <v-list-item @click.stop="logout">
-            <v-list-item-action>
-              <v-icon class="mx-5">mdi-logout</v-icon>
-            </v-list-item-action>
-
-            <v-list-item-content>
-              <v-list-item-title v-text="'Salir'" />
-            </v-list-item-content>
-          </v-list-item>
-        </v-list>
-      </template>
     </v-navigation-drawer>
 
     <v-app-bar app>
@@ -58,9 +28,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue"; // preguntar si hace falta
+import { defineComponent } from "vue";
+
 export default defineComponent({
-  name: "Home",
+  name: "DefaultLayout",
 
   data() {
     return {
