@@ -62,8 +62,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue"; // preguntar si hace falta
-import Prueba from '../components/Forms/clientForm.vue';
+import { defineComponent } from "vue";
+import Prueba from '../components/Calendar/calendar.vue';
 
 
 export default defineComponent({
