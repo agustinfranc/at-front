@@ -5,15 +5,14 @@
 
       <v-card-text>
         <v-form ref="form" v-model="valid" lazy-validation>
+          <Name />
 
-          <Name/>
+          <DNI />
 
-          <DNI/>
+          <Telephone />
 
-          <Telephone/>
+          <Rate />
 
-          <Rate/>
-      
           <v-btn
             :disabled="!valid"
             color="success"
@@ -30,17 +29,17 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import Name from './nameForm.vue'
-import DNI from './dniForm.vue'
-import Telephone from './telephoneForm.vue'
-import Rate from './rateForm.vue'
+import Name from "./nameForm.vue";
+import DNI from "./dniForm.vue";
+import Telephone from "./telephoneForm.vue";
+import Rate from "./rateForm.vue";
 
-export default defineComponent ({
+export default defineComponent({
   components: {
     Name,
     DNI,
     Telephone,
-    Rate
+    Rate,
   },
 
   data: () => ({

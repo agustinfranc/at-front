@@ -10,7 +10,7 @@
 <script>
 export default {
   data: () => ({
-    nombre:'',  
+    nombre: "",
     nombreRules: [
       (v) => !!v || "Falta el nombre del cliente",
       (v) => (v && v.length <= 50) || "Nombre muy largo",
