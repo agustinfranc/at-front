@@ -32,7 +32,6 @@
           >
             Enviar
           </v-btn>
-
         </v-form>
       </v-card-text>
     </v-card>
@@ -42,12 +41,12 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import Name from "./nameForm.vue";
-import SendButton from './sendButton.vue'
+import SendButton from "./sendButton.vue";
 
 export default defineComponent({
   components: {
     Name,
-    SendButton
+    SendButton,
   },
 
   data: () => ({
@@ -57,13 +56,13 @@ export default defineComponent({
       color: "black",
     },
 
-    roles : ["Admin","Empleado"],
+    roles: ["Admin", "Empleado"],
 
     valid: true,
     form: {
       nombre: "",
       pass: "",
-      role: ""
+      role: "",
     },
     passRules: [(v) => !!v || "Falta la constraseña del Usuario"],
   }),

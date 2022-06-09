@@ -4,10 +4,8 @@
   </v-btn>
 </template>
 
-
 <script>
-
 export default {
-  props: ['valid']
-}
+  props: ["valid"],
+};
 </script>
