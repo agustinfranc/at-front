@@ -1,18 +1,18 @@
 <template>
-  <Client />
+  <Clients />
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 
 // Components
-import Client from "@/components/forms/client.vue";
+import Clients from "@/components/tables/clients.vue";
 
 export default defineComponent({
   name: "NewClientView",
 
   components: {
-    Client,
+    Clients,
   },
 });
 </script>
