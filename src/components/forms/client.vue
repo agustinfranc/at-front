@@ -20,10 +20,10 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import Name from "./nameForm.vue";
-import DNI from "./dniForm.vue";
-import Telephone from "./telephoneForm.vue";
-import SendButton from "./sendButton.vue";
+import Name from "./name.vue";
+import DNI from "./dni.vue";
+import Telephone from "./telephone.vue";
+import SendButton from "./send.vue";
 
 export default defineComponent({
   components: {

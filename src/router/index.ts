@@ -22,6 +22,11 @@ const router = createRouter({
       name: "calendar",
       component: () => import("../views/CalendarView.vue"),
     },
+    {
+      path: "/client",
+      name: "client",
+      component: () => import("../views/NewClientView.vue"),
+    },
   ],
 });
 

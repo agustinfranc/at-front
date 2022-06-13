@@ -76,7 +76,7 @@ export default defineComponent({
         },
         {
           title: "Clientes",
-          to: "/clients",
+          to: "/client",
         },
         {
           title: "Acompañadores",
