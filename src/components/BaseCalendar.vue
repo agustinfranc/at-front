@@ -1,14 +1,16 @@
 <template>
-  <vue-cal
-    :selected-date="date"
-    :time-from="9 * 60"
-    :time-to="25 * 60"
-    :disable-views="['years']"
-    :events="events"
-    locale="es"
-    today-button
-  >
-  </vue-cal>
+  <v-container>
+    <vue-cal
+      :selected-date="date"
+      :time-from="9 * 60"
+      :time-to="25 * 60"
+      :disable-views="['years']"
+      :events="events"
+      locale="es"
+      today-button
+    >
+    </vue-cal>
+  </v-container>
 </template>
 
 <script lang="ts">

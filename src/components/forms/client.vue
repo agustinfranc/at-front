@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-container>
     <v-card>
       <v-card-title>Cliente Nuevo</v-card-title>
 
@@ -15,7 +15,7 @@
         </v-form>
       </v-card-text>
     </v-card>
-  </div>
+  </v-container>
 </template>
 
 <script lang="ts">
