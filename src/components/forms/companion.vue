@@ -29,10 +29,10 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import Name from "./nameForm.vue";
-import DNI from "./dniForm.vue";
-import Telephone from "./telephoneForm.vue";
-import Rate from "./rateForm.vue";
+import Name from "./name.vue";
+import DNI from "./dni.vue";
+import Telephone from "./telephone.vue";
+import Rate from "./rate.vue";
 
 export default defineComponent({
   components: {

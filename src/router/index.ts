@@ -32,6 +32,16 @@ const router = createRouter({
       name: "client",
       component: () => import("../views/NewClientView.vue"),
     },
+    {
+      path: "/companions",
+      name: "companions",
+      component: () => import("../views/CompanionsView.vue"),
+    },
+    {
+      path: "/companion",
+      name: "companion",
+      component: () => import("../views/NewCompanionView.vue"),
+    },
   ],
 });
 

@@ -80,7 +80,7 @@ export default defineComponent({
         },
         {
           title: "Acompañadores",
-          to: "/acompañadores",
+          to: "/companions",
         },
         {
           title: "Usuarios",
