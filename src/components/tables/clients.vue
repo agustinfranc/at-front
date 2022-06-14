@@ -11,7 +11,16 @@
           <v-spacer></v-spacer>
           <v-col align-self="end" cols="12" sm="4">
             <v-sheet class="ma-2 pa-2">
-              <v-btn dark class="mb-2" v-bind="attrs" v-on="on" to="/client">
+              <v-btn
+                rounded="lg"
+                block
+                variant="outlined"
+                dark
+                class="mb-2"
+                v-bind="attrs"
+                v-on="on"
+                to="/client"
+              >
                 Nuevo
               </v-btn>
             </v-sheet>

@@ -50,14 +50,13 @@
       <slot></slot>
     </v-main>
 
-    <v-footer class="d-flex flex-column">
-      <!-- <v-col class="text-center" cols="12">
+    <v-card>
+      <v-footer color="grey">
+        <v-col class="text-center" cols="12">
           {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
-        </v-col> -->
-      <div class="bg-grey text-white text-center w-100">
-        {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
-      </div>
-    </v-footer>
+        </v-col>
+      </v-footer>
+    </v-card>
   </v-app>
 </template>
 
