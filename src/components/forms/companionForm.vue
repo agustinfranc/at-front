@@ -1,7 +1,7 @@
 <template>
-  <v-container>
+  <div>
     <v-card>
-      <v-card-title>Cliente Nuevo</v-card-title>
+      <v-card-title>Acompañador Nuevo</v-card-title>
 
       <v-card-text>
         <v-form ref="form" v-model="valid" lazy-validation>
@@ -11,26 +11,35 @@
 
           <Telephone />
 
-          <SendButton :valid="valid" />
+          <Rate />
+
+          <v-btn
+            :disabled="!valid"
+            color="success"
+            class="mr-4"
+            @click="validate"
+          >
+            Enviar
+          </v-btn>
         </v-form>
       </v-card-text>
     </v-card>
-  </v-container>
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import Name from "./name.vue";
-import DNI from "./dni.vue";
-import Telephone from "./telephone.vue";
-import SendButton from "./send.vue";
+import Name from "./nameField.vue";
+import DNI from "./dniField.vue";
+import Telephone from "./telephoneField.vue";
+import Rate from "./rateField.vue";
 
 export default defineComponent({
   components: {
     Name,
     DNI,
     Telephone,
-    SendButton,
+    Rate,
   },
 
   data: () => ({

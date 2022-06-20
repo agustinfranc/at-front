@@ -1,17 +1,23 @@
 <template>
   <div>
     <v-card>
-      <v-card-title>Acompañador Nuevo</v-card-title>
+      <v-card-title>Usuario Nuevo</v-card-title>
 
       <v-card-text>
         <v-form ref="form" v-model="valid" lazy-validation>
           <Name />
 
-          <DNI />
+          <Password />
 
-          <Telephone />
-
-          <Rate />
+          <v-select
+            v-model="form.role"
+            :items="roles"
+            item-value="id"
+            item-text="nombre"
+            :rules="[(v) => !!v || 'Ingresar rol']"
+            label="Rol"
+            required
+          ></v-select>
 
           <v-btn
             :disabled="!valid"
@@ -29,17 +35,15 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import Name from "./name.vue";
-import DNI from "./dni.vue";
-import Telephone from "./telephone.vue";
-import Rate from "./rate.vue";
+import Name from "./nameForm.vue";
+import SendButton from "./sendButton.vue";
+import Password from "./passwordField.vue";
 
 export default defineComponent({
   components: {
     Name,
-    DNI,
-    Telephone,
-    Rate,
+    SendButton,
+    Password,
   },
 
   data: () => ({
@@ -48,12 +52,16 @@ export default defineComponent({
       text: "",
       color: "black",
     },
+
+    roles: ["Admin", "Empleado"],
+
     valid: true,
     form: {
       nombre: "",
-      dni: "",
-      telefono: "",
+      pass: "",
+      role: "",
     },
+    passRules: [(v) => !!v || "Falta la constraseña del Usuario"],
   }),
 });
 </script>

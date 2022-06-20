@@ -6,7 +6,7 @@
 import { defineComponent } from "vue";
 
 // Components
-import Client from "@/components/forms/client.vue";
+import Client from "@/components/forms/clientForm.vue";
 
 export default defineComponent({
   name: "NewClientView",

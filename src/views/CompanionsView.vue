@@ -6,7 +6,7 @@
 import { defineComponent } from "vue";
 
 // Components
-import Companions from "@/components/tables/companions.vue";
+import Companions from "@/components/tables/companionsTable.vue";
 
 export default defineComponent({
   name: "CompanionsView",
