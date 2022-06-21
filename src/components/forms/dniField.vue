@@ -8,10 +8,13 @@
 </template>
 
 <script lang="ts">
-export default {
+import { defineComponent } from "vue";
+
+export default defineComponent({
+  name: "DniField",
   data: () => ({
     dni: "",
     dniRules: [(v) => !!v || "Falta el DNI del cliente"],
   }),
-};
+});
 </script>

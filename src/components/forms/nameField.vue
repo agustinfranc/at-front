@@ -7,8 +7,10 @@
   ></v-text-field>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from "vue";
+export default defineComponent({
+  name: "NameField",
   data: () => ({
     name: "",
     nameRules: [
@@ -16,5 +18,5 @@ export default {
       (v) => (v && v.length <= 50) || "Nombre muy largo",
     ],
   }),
-};
+});
 </script>

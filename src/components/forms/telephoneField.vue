@@ -8,10 +8,13 @@
 </template>
 
 <script lang="ts">
-export default {
+import { defineComponent } from "vue";
+
+export default defineComponent({
+  name: "TelephoneField",
   data: () => ({
     telephone: "",
     telephoneRules: [(v) => !!v || "Falta el teléfono del cliente"],
   }),
-};
+});
 </script>

@@ -35,14 +35,15 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import Name from "./nameForm.vue";
-import SendButton from "./sendButton.vue";
+import Name from "./nameField.vue";
+import SubmitButton from "./submitButton.vue";
 import Password from "./passwordField.vue";
 
 export default defineComponent({
+  name: "UserForm",
   components: {
     Name,
-    SendButton,
+    SubmitButton,
     Password,
   },
 

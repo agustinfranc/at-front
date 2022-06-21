@@ -11,7 +11,7 @@
 
           <Telephone />
 
-          <SendButton :valid="valid" />
+          <SubmitButton :valid="valid" />
         </v-form>
       </v-card-text>
     </v-card>
@@ -26,6 +26,7 @@ import Telephone from "./telephoneField.vue";
 import SubmitButton from "./SubmitButton.vue";
 
 export default defineComponent({
+  name: "ClientForm",
   components: {
     Name,
     DNI,

@@ -35,6 +35,7 @@ import Telephone from "./telephoneField.vue";
 import Rate from "./rateField.vue";
 
 export default defineComponent({
+  name: "CompanionForm",
   components: {
     Name,
     DNI,

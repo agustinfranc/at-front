@@ -8,10 +8,13 @@
 </template>
 
 <script lang="ts">
-export default {
+import { defineComponent } from "vue";
+
+export default defineComponent({
+  name: "RateField",
   data: () => ({
     rate: "",
     rateRules: [(v) => !!v || "Falta la tarifa del acompañador"],
   }),
-};
+});
 </script>

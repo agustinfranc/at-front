@@ -4,8 +4,11 @@
   </v-btn>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from "vue";
+
+export default defineComponent({
+  name: "SubmitButton",
   props: ["valid"],
-};
+});
 </script>

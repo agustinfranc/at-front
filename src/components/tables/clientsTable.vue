@@ -17,8 +17,6 @@
                 variant="outlined"
                 dark
                 class="mb-2"
-                v-bind="attrs"
-                v-on="on"
                 to="/client"
               >
                 Nuevo
@@ -46,7 +44,10 @@
 </template>
 
 <script lang="ts">
-export default {
+import { defineComponent } from "vue";
+
+export default defineComponent({
+  name: "ClientsTable",
   data() {
     return {
       desserts: [
@@ -93,5 +94,5 @@ export default {
       ],
     };
   },
-};
+});
 </script>
