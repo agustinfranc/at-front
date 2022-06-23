@@ -1,24 +1,28 @@
 <template>
-  <vue-cal
-    :selected-date="date"
-    :time-from="9 * 60"
-    :time-to="25 * 60"
-    :disable-views="['years']"
-    :events="events"
-    locale="es"
-    today-button
-  >
-  </vue-cal>
+  <v-container>
+    <vue-cal
+      :selected-date="date"
+      :time-from="9 * 60"
+      :time-to="25 * 60"
+      :disable-views="['years']"
+      :events="events"
+      locale="es"
+      today-button
+    >
+    </vue-cal>
+  </v-container>
 </template>
 
 <script lang="ts">
 import VueCal from "vue-cal";
 import "vue-cal/dist/vuecal.css";
 import "vue-cal/dist/i18n/es.js";
+import { defineComponent } from "vue";
 
 const today = new Date();
 
-export default {
+export default defineComponent({
+  name: "BaseCalendar",
   components: { VueCal },
 
   data: () => ({
@@ -50,7 +54,7 @@ export default {
       },
     ],
   }),
-};
+});
 </script>
 
 <style>

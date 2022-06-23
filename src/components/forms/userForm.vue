@@ -7,12 +7,7 @@
         <v-form ref="form" v-model="valid" lazy-validation>
           <Name />
 
-          <v-text-field
-            v-model="form.pass"
-            label="Constraseña"
-            :rules="passRules"
-            required
-          ></v-text-field>
+          <Password />
 
           <v-select
             v-model="form.role"
@@ -40,13 +35,16 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import Name from "./nameForm.vue";
-import SendButton from "./sendButton.vue";
+import Name from "./nameField.vue";
+import SubmitButton from "./submitButton.vue";
+import Password from "./passwordField.vue";
 
 export default defineComponent({
+  name: "UserForm",
   components: {
     Name,
-    SendButton,
+    SubmitButton,
+    Password,
   },
 
   data: () => ({

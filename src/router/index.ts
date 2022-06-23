@@ -7,7 +7,7 @@ const router = createRouter({
     {
       path: "/",
       name: "home",
-      component: HomeView,
+      component: () => import("../views/CalendarView.vue"),
     },
     {
       path: "/about",
@@ -21,6 +21,26 @@ const router = createRouter({
       path: "/calendar",
       name: "calendar",
       component: () => import("../views/CalendarView.vue"),
+    },
+    {
+      path: "/clients",
+      name: "clients",
+      component: () => import("../views/ClientsView.vue"),
+    },
+    {
+      path: "/client",
+      name: "client",
+      component: () => import("../views/NewClientView.vue"),
+    },
+    {
+      path: "/companions",
+      name: "companions",
+      component: () => import("../views/CompanionsView.vue"),
+    },
+    {
+      path: "/companion",
+      name: "companion",
+      component: () => import("../views/NewCompanionView.vue"),
     },
   ],
 });

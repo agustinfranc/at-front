@@ -1,18 +1,18 @@
 <template>
-  <BaseCalendar />
+  <Companions />
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 
 // Components
-import BaseCalendar from "@/components/BaseCalendar.vue";
+import Companions from "@/components/tables/companionsTable.vue";
 
 export default defineComponent({
-  name: "CalendarView",
+  name: "CompanionsView",
 
   components: {
-    BaseCalendar,
+    Companions,
   },
 });
 </script>

@@ -29,12 +29,13 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import Name from "./nameForm.vue";
-import DNI from "./dniForm.vue";
-import Telephone from "./telephoneForm.vue";
-import Rate from "./rateForm.vue";
+import Name from "./nameField.vue";
+import DNI from "./dniField.vue";
+import Telephone from "./telephoneField.vue";
+import Rate from "./rateField.vue";
 
 export default defineComponent({
+  name: "CompanionForm",
   components: {
     Name,
     DNI,
