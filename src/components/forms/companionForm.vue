@@ -5,13 +5,41 @@
 
       <v-card-text>
         <v-form ref="form" v-model="valid" lazy-validation>
-          <Name />
+          <Name
+            :value="form.name"
+            @updateName="
+              (v) => {
+                form.name = v.target.value;
+              }
+            "
+          />
 
-          <DNI />
+          <DNI
+            :value="form.dni"
+            @updateDNI="
+              (v) => {
+                form.dni = v.target.value;
+              }
+            "
+          />
 
-          <Telephone />
+          <Telephone
+            :value="form.telephone"
+            @updateTelephone="
+              (v) => {
+                form.telephone = v.target.value;
+              }
+            "
+          />
 
-          <Rate />
+          <Rate
+            :value="form.rate"
+            @updateRate="
+              (v) => {
+                form.rate = v.target.value;
+              }
+            "
+          />
 
           <v-btn
             :disabled="!valid"
@@ -51,9 +79,10 @@ export default defineComponent({
     },
     valid: true,
     form: {
-      nombre: "",
+      name: "",
       dni: "",
-      telefono: "",
+      telephone: "",
+      rate: "",
     },
   }),
 });

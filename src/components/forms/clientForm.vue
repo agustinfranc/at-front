@@ -5,11 +5,32 @@
 
       <v-card-text>
         <v-form ref="form" v-model="valid" lazy-validation>
-          <Name />
+          <Name
+            :value="form.name"
+            @updateName="
+              (v) => {
+                form.name = v.target.value;
+              }
+            "
+          />
 
-          <DNI />
+          <DNI
+            :value="form.dni"
+            @updateDNI="
+              (v) => {
+                form.dni = v.target.value;
+              }
+            "
+          />
 
-          <Telephone />
+          <Telephone
+            :value="form.telephone"
+            @updateTelephone="
+              (v) => {
+                form.telephone = v.target.value;
+              }
+            "
+          />
 
           <SubmitButton :valid="valid" />
         </v-form>
@@ -34,6 +55,12 @@ export default defineComponent({
     SubmitButton,
   },
 
+  methods: {
+    pruebita(v) {
+      this.form.name = v.target.value;
+    },
+  },
+
   data: () => ({
     snackbar: {
       display: false,
@@ -42,9 +69,9 @@ export default defineComponent({
     },
     valid: true,
     form: {
-      nombre: "",
+      name: "",
       dni: "",
-      telefono: "",
+      telephone: "",
     },
   }),
 });
