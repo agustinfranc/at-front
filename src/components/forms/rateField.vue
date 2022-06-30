@@ -5,7 +5,6 @@
     label="Tarifa"
     :rules="rateRules"
     required
-    @input="(event) => $emit('updateRate', event)"
   ></v-text-field>
 </template>
 

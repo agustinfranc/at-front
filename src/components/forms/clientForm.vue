@@ -5,32 +5,21 @@
 
       <v-card-text>
         <v-form ref="form" v-model="valid" lazy-validation>
-          <Name
+          <!-- Old way replaced by line 18 -->
+
+          <!-- <Name
             :value="form.name"
             @updateName="
               (v) => {
                 form.name = v.target.value;
               }
             "
-          />
+          /> -->
+          <Name v-model="form.name" />
 
-          <DNI
-            :value="form.dni"
-            @updateDNI="
-              (v) => {
-                form.dni = v.target.value;
-              }
-            "
-          />
+          <DNI v-model="form.dni" />
 
-          <Telephone
-            :value="form.telephone"
-            @updateTelephone="
-              (v) => {
-                form.telephone = v.target.value;
-              }
-            "
-          />
+          <Telephone v-model="form.telephone" />
 
           <SubmitButton :valid="valid" />
         </v-form>
@@ -53,12 +42,6 @@ export default defineComponent({
     DNI,
     Telephone,
     SubmitButton,
-  },
-
-  methods: {
-    pruebita(v) {
-      this.form.name = v.target.value;
-    },
   },
 
   data: () => ({

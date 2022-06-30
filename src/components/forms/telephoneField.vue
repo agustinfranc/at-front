@@ -4,7 +4,6 @@
     v-model="telephone"
     label="Teléfono"
     :rules="telephoneRules"
-    @input="(event) => $emit('updateTelephone', event)"
     required
   ></v-text-field>
 </template>

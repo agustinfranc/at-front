@@ -1,45 +1,17 @@
 <template>
-  <div>
+  <v-container>
     <v-card>
       <v-card-title>Acompañador Nuevo</v-card-title>
 
       <v-card-text>
         <v-form ref="form" v-model="valid" lazy-validation>
-          <Name
-            :value="form.name"
-            @updateName="
-              (v) => {
-                form.name = v.target.value;
-              }
-            "
-          />
+          <Name v-model="form.name" />
 
-          <DNI
-            :value="form.dni"
-            @updateDNI="
-              (v) => {
-                form.dni = v.target.value;
-              }
-            "
-          />
+          <DNI v-model="form.dni" />
 
-          <Telephone
-            :value="form.telephone"
-            @updateTelephone="
-              (v) => {
-                form.telephone = v.target.value;
-              }
-            "
-          />
+          <Telephone v-model="form.telephone" />
 
-          <Rate
-            :value="form.rate"
-            @updateRate="
-              (v) => {
-                form.rate = v.target.value;
-              }
-            "
-          />
+          <Rate v-model="form.rate" />
 
           <v-btn
             :disabled="!valid"
@@ -52,7 +24,7 @@
         </v-form>
       </v-card-text>
     </v-card>
-  </div>
+  </v-container>
 </template>
 
 <script lang="ts">

@@ -4,7 +4,6 @@
     :rules="nameRules"
     label="Nombre"
     required
-    @input="(event) => $emit('updateName', event)"
   ></v-text-field>
 </template>
 

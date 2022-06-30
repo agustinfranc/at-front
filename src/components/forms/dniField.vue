@@ -5,7 +5,6 @@
     :rules="dniRules"
     label="DNI"
     required
-    @input="(event) => $emit('updateDNI', event)"
   ></v-text-field>
 </template>
 
