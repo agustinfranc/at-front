@@ -4,6 +4,7 @@
     v-model="telephone"
     label="Teléfono"
     :rules="telephoneRules"
+    required
   ></v-text-field>
 </template>
 
@@ -11,10 +12,13 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
+  props: ["value"],
   name: "TelephoneField",
-  data: () => ({
-    telephone: "",
-    telephoneRules: [(v) => !!v || "Falta el teléfono del cliente"],
-  }),
+  data() {
+    return {
+      telephone: this.value,
+      telephoneRules: [(v) => !!v || "Falta el teléfono del cliente"],
+    };
+  },
 });
 </script>

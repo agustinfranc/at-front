@@ -4,6 +4,7 @@
     v-model="rate"
     label="Tarifa"
     :rules="rateRules"
+    required
   ></v-text-field>
 </template>
 
@@ -11,10 +12,13 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
+  props: ["value"],
   name: "RateField",
-  data: () => ({
-    rate: "",
-    rateRules: [(v) => !!v || "Falta la tarifa del acompañador"],
-  }),
+  data() {
+    return {
+      rate: this.value,
+      rateRules: [(v) => !!v || "Falta la tarifa del acompañador"],
+    };
+  },
 });
 </script>

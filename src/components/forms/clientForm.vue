@@ -5,11 +5,21 @@
 
       <v-card-text>
         <v-form ref="form" v-model="valid" lazy-validation>
-          <Name />
+          <!-- Old way replaced by line 18 -->
 
-          <DNI />
+          <!-- <Name
+            :value="form.name"
+            @updateName="
+              (v) => {
+                form.name = v.target.value;
+              }
+            "
+          /> -->
+          <Name v-model="form.name" />
 
-          <Telephone />
+          <DNI v-model="form.dni" />
+
+          <Telephone v-model="form.telephone" />
 
           <SubmitButton :valid="valid" />
         </v-form>
@@ -42,9 +52,9 @@ export default defineComponent({
     },
     valid: true,
     form: {
-      nombre: "",
+      name: "",
       dni: "",
-      telefono: "",
+      telephone: "",
     },
   }),
 });

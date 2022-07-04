@@ -1,17 +1,17 @@
 <template>
-  <div>
+  <v-container>
     <v-card>
       <v-card-title>Acompañador Nuevo</v-card-title>
 
       <v-card-text>
         <v-form ref="form" v-model="valid" lazy-validation>
-          <Name />
+          <Name v-model="form.name" />
 
-          <DNI />
+          <DNI v-model="form.dni" />
 
-          <Telephone />
+          <Telephone v-model="form.telephone" />
 
-          <Rate />
+          <Rate v-model="form.rate" />
 
           <v-btn
             :disabled="!valid"
@@ -24,7 +24,7 @@
         </v-form>
       </v-card-text>
     </v-card>
-  </div>
+  </v-container>
 </template>
 
 <script lang="ts">
@@ -51,9 +51,10 @@ export default defineComponent({
     },
     valid: true,
     form: {
-      nombre: "",
+      name: "",
       dni: "",
-      telefono: "",
+      telephone: "",
+      rate: "",
     },
   }),
 });
