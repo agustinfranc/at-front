@@ -39,6 +39,7 @@
           <tr v-for="item in desserts" :key="item.name">
             <td>{{ item.name }}</td>
             <td>{{ item.calories }}</td>
+            <td>{{ item.rate }}</td>
           </tr>
         </tbody>
       </v-table>
@@ -52,44 +53,24 @@ export default {
     return {
       desserts: [
         {
-          name: "Frozen Yogurt",
-          calories: 159,
+          name: "Franco Cavallini",
+          calories: 39458753,
+          rate: 350,
         },
         {
-          name: "Ice cream sandwich",
-          calories: 237,
+          name: "Juan Cruz Torasini",
+          calories: 39567890,
+          rate: 400,
         },
         {
-          name: "Eclair",
-          calories: 262,
+          name: "Joaquin Misisco",
+          calories: 38345678,
+          rate: 500,
         },
         {
-          name: "Cupcake",
-          calories: 305,
-        },
-        {
-          name: "Gingerbread",
-          calories: 356,
-        },
-        {
-          name: "Jelly bean",
-          calories: 375,
-        },
-        {
-          name: "Lollipop",
-          calories: 392,
-        },
-        {
-          name: "Honeycomb",
-          calories: 408,
-        },
-        {
-          name: "Donut",
-          calories: 452,
-        },
-        {
-          name: "KitKat",
-          calories: 518,
+          name: "Tomás Vazquez",
+          calories: 40123876,
+          rate: 250,
         },
       ],
     };

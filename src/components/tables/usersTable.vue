@@ -5,7 +5,7 @@
         <v-row>
           <v-col align-self="start" cols="12" sm="4">
             <v-sheet class="ma-2 pa-2">
-              <v-card-title>Clientes</v-card-title>
+              <v-card-title>Usuarios</v-card-title>
             </v-sheet>
           </v-col>
           <v-spacer></v-spacer>
@@ -17,7 +17,7 @@
                 variant="outlined"
                 dark
                 class="mb-2"
-                to="/client"
+                to="/user"
               >
                 Nuevo
               </v-btn>
@@ -30,14 +30,12 @@
           <tr>
             <th class="text-left">Nombre</th>
             <th class="text-left">DNI</th>
-            <th class="text-left">Teléfono</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="item in desserts" :key="item.name">
             <td>{{ item.name }}</td>
             <td>{{ item.calories }}</td>
-            <td>{{ item.telephone }}</td>
           </tr>
         </tbody>
       </v-table>
@@ -54,24 +52,16 @@ export default defineComponent({
     return {
       desserts: [
         {
-          name: "Agustín Amato",
-          calories: 39678543,
-          telephone: 45902345,
+          name: "Administrador",
+          calories: 123456789,
         },
         {
-          name: "Gastón Malalel",
-          calories: 56900546,
-          telephone: 46789031,
+          name: "Empleado 1",
+          calories: 123456789,
         },
         {
-          name: "Nicolás Arriada",
-          calories: 45865431,
-          telephone: 43895433,
-        },
-        {
-          name: "Micaela Pérez",
-          calories: 40234567,
-          telephone: 1532924113,
+          name: "Empleado 2",
+          calories: 123456789,
         },
       ],
     };

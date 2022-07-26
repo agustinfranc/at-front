@@ -3,11 +3,22 @@
     <v-navigation-drawer v-model="drawer" app>
       <v-list>
         <v-list-item v-for="item in items" :key="item.title" :to="item.to">
+          <v-divider v-if="item.separator"></v-divider>
           <v-list-item-content>
             <v-list-item-title v-text="item.title" />
           </v-list-item-content>
         </v-list-item>
       </v-list>
+
+      <!-- <template v-for="item in items" :key="item.title" :to="item.to">
+        <v-list-item
+          ><v-list-item-content>
+            <v-divider v-if="item.separator"></v-divider>
+            <v-list-item-title v-else v-text="item.title" />
+          </v-list-item-content>
+        </v-list-item>
+      </template> -->
+
       <template v-slot:append>
         <v-list>
           <v-list-item @click.stop="$vuetify.theme.dark = !$vuetify.theme.dark">
@@ -77,6 +88,10 @@ export default defineComponent({
           to: "/calendar",
         },
         {
+          title: "Asignaciones",
+          to: "/assignments",
+        },
+        {
           title: "Clientes",
           to: "/clients",
         },
@@ -85,16 +100,15 @@ export default defineComponent({
           to: "/companions",
         },
         {
-          title: "Usuarios",
-          to: "/usuarios",
+          separator: true,
         },
         {
           title: "Saldos",
           to: "/saldos",
         },
         {
-          title: "Acompañamientos",
-          to: "/acompañamientos",
+          title: "Usuarios",
+          to: "/users",
         },
       ],
     };

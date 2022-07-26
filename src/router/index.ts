@@ -42,6 +42,26 @@ const router = createRouter({
       name: "companion",
       component: () => import("../views/NewCompanionView.vue"),
     },
+    {
+      path: "/users",
+      name: "users",
+      component: () => import("../views/UsersView.vue"),
+    },
+    {
+      path: "/user",
+      name: "user",
+      component: () => import("../views/NewUserView.vue"),
+    },
+    {
+      path: "/assignments",
+      name: "assignments",
+      component: () => import("../views/AssignmentsView.vue"),
+    },
+    {
+      path: "/assignment",
+      name: "assignment",
+      component: () => import("../views/NewAssignmentView.vue"),
+    },
   ],
 });
 
