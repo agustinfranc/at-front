@@ -16,7 +16,7 @@ export default defineComponent({
     return {
       name: this.value,
       nameRules: [
-        (v) => !!v || "Falta el nombre del cliente",
+        (v) => !!v || "Falta el nombre",
         (v) => (v && v.length <= 50) || "Nombre muy largo",
       ],
     };

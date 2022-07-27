@@ -5,7 +5,7 @@
         <v-row>
           <v-col align-self="start" cols="12" sm="4">
             <v-sheet class="ma-2 pa-2">
-              <v-card-title>Clientes</v-card-title>
+              <v-card-title>Usuarios</v-card-title>
             </v-sheet>
           </v-col>
           <v-spacer></v-spacer>
@@ -17,7 +17,7 @@
                 variant="outlined"
                 dark
                 class="mb-2"
-                to="/client"
+                to="/user"
               >
                 Nuevo
               </v-btn>
@@ -30,14 +30,12 @@
           <tr>
             <th class="text-left">Nombre</th>
             <th class="text-left">DNI</th>
-            <th class="text-left">Teléfono</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in clients" :key="item.name">
+          <tr v-for="item in users" :key="item.name">
             <td>{{ item.name }}</td>
             <td>{{ item.dni }}</td>
-            <td>{{ item.telephone }}</td>
           </tr>
         </tbody>
       </v-table>
@@ -52,26 +50,18 @@ export default defineComponent({
   name: "ClientsTable",
   data() {
     return {
-      clients: [
+      users: [
         {
-          name: "Agustín Amato",
-          dni: 39678543,
-          telephone: 45902345,
+          name: "Administrador",
+          dni: 123456789,
         },
         {
-          name: "Gastón Malalel",
-          dni: 56900546,
-          telephone: 46789031,
+          name: "Empleado 1",
+          dni: 123456789,
         },
         {
-          name: "Nicolás Arriada",
-          dni: 45865431,
-          telephone: 43895433,
-        },
-        {
-          name: "Micaela Pérez",
-          dni: 40234567,
-          telephone: 1532924113,
+          name: "Empleado 2",
+          dni: 123456789,
         },
       ],
     };

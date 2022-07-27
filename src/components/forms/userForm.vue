@@ -1,36 +1,21 @@
 <template>
-  <div>
+  <v-container>
     <v-card>
       <v-card-title>Usuario Nuevo</v-card-title>
 
       <v-card-text>
         <v-form ref="form" v-model="valid" lazy-validation>
-          <Name />
+          <Name v-model="form.username" />
 
-          <Password />
+          <Password v-model="form.password" />
 
-          <v-select
-            v-model="form.role"
-            :items="roles"
-            item-value="id"
-            item-text="nombre"
-            :rules="[(v) => !!v || 'Ingresar rol']"
-            label="Rol"
-            required
-          ></v-select>
+          <SelectRole v-model="form.role" :items="roles" label="Rol" />
 
-          <v-btn
-            :disabled="!valid"
-            color="success"
-            class="mr-4"
-            @click="validate"
-          >
-            Enviar
-          </v-btn>
+          <SubmitButton :valid="valid" />
         </v-form>
       </v-card-text>
     </v-card>
-  </div>
+  </v-container>
 </template>
 
 <script lang="ts">
@@ -38,6 +23,7 @@ import { defineComponent } from "vue";
 import Name from "./nameField.vue";
 import SubmitButton from "./submitButton.vue";
 import Password from "./passwordField.vue";
+import SelectRole from "./selectField.vue";
 
 export default defineComponent({
   name: "UserForm",
@@ -45,6 +31,7 @@ export default defineComponent({
     Name,
     SubmitButton,
     Password,
+    SelectRole,
   },
 
   data: () => ({
@@ -58,8 +45,8 @@ export default defineComponent({
 
     valid: true,
     form: {
-      nombre: "",
-      pass: "",
+      username: "",
+      password: "",
       role: "",
     },
     passRules: [(v) => !!v || "Falta la constraseña del Usuario"],
