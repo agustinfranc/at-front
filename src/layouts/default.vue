@@ -10,15 +10,6 @@
         </v-list-item>
       </v-list>
 
-      <!-- <template v-for="item in items" :key="item.title" :to="item.to">
-        <v-list-item
-          ><v-list-item-content>
-            <v-divider v-if="item.separator"></v-divider>
-            <v-list-item-title v-else v-text="item.title" />
-          </v-list-item-content>
-        </v-list-item>
-      </template> -->
-
       <template v-slot:append>
         <v-list>
           <v-list-item @click.stop="$vuetify.theme.dark = !$vuetify.theme.dark">

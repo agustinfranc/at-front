@@ -10,30 +10,12 @@
             :items="clients"
             label="Cliente"
           />
-          <!-- <v-combobox
-            v-model="form.client"
-            :items="clients"
-            item-value="id"
-            item-text="nombre"
-            :rules="[(v) => !!v || 'Ingresar Cliente']"
-            label="Cliente"
-            required
-          ></v-combobox> -->
 
           <ComboboxField
             v-model="form.companion"
             :items="companions"
             label="Acompañante"
           />
-          <!-- <v-combobox
-            v-model="form.companion"
-            :items="companions"
-            item-value="id"
-            item-text="nombre"
-            :rules="[(v) => !!v || 'Ingresar Acompañante']"
-            label="Acompañante"
-            required
-          ></v-combobox> -->
           <ComboboxField
             v-model="form.days"
             :items="days"
@@ -41,15 +23,6 @@
             multiple
             chips
           />
-          <!-- <v-combobox
-            v-model="form.days"
-            :items="days"
-            :rules="[(v) => !!v || 'Ingresar días']"
-            label="Días"
-            required
-            multiple
-            chips
-          ></v-combobox> -->
 
           <div class="text-caption">Horas</div>
 
@@ -87,7 +60,6 @@
         </v-form>
       </v-card-text>
     </v-card>
-    {{ form }}
   </v-container>
 </template>
 

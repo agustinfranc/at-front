@@ -36,9 +36,9 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in desserts" :key="item.name">
+          <tr v-for="item in companions" :key="item.name">
             <td>{{ item.name }}</td>
-            <td>{{ item.calories }}</td>
+            <td>{{ item.dni }}</td>
             <td>{{ item.rate }}</td>
           </tr>
         </tbody>
@@ -51,25 +51,25 @@
 export default {
   data() {
     return {
-      desserts: [
+      companions: [
         {
           name: "Franco Cavallini",
-          calories: 39458753,
+          dni: 39458753,
           rate: 350,
         },
         {
           name: "Juan Cruz Torasini",
-          calories: 39567890,
+          dni: 39567890,
           rate: 400,
         },
         {
           name: "Joaquin Misisco",
-          calories: 38345678,
+          dni: 38345678,
           rate: 500,
         },
         {
           name: "Tomás Vazquez",
-          calories: 40123876,
+          dni: 40123876,
           rate: 250,
         },
       ],

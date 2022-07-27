@@ -34,9 +34,9 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in desserts" :key="item.name">
+          <tr v-for="item in clients" :key="item.name">
             <td>{{ item.name }}</td>
-            <td>{{ item.calories }}</td>
+            <td>{{ item.dni }}</td>
             <td>{{ item.telephone }}</td>
           </tr>
         </tbody>
@@ -52,25 +52,25 @@ export default defineComponent({
   name: "ClientsTable",
   data() {
     return {
-      desserts: [
+      clients: [
         {
           name: "Agustín Amato",
-          calories: 39678543,
+          dni: 39678543,
           telephone: 45902345,
         },
         {
           name: "Gastón Malalel",
-          calories: 56900546,
+          dni: 56900546,
           telephone: 46789031,
         },
         {
           name: "Nicolás Arriada",
-          calories: 45865431,
+          dni: 45865431,
           telephone: 43895433,
         },
         {
           name: "Micaela Pérez",
-          calories: 40234567,
+          dni: 40234567,
           telephone: 1532924113,
         },
       ],

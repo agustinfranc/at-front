@@ -33,9 +33,9 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in desserts" :key="item.name">
+          <tr v-for="item in users" :key="item.name">
             <td>{{ item.name }}</td>
-            <td>{{ item.calories }}</td>
+            <td>{{ item.dni }}</td>
           </tr>
         </tbody>
       </v-table>
@@ -50,18 +50,18 @@ export default defineComponent({
   name: "ClientsTable",
   data() {
     return {
-      desserts: [
+      users: [
         {
           name: "Administrador",
-          calories: 123456789,
+          dni: 123456789,
         },
         {
           name: "Empleado 1",
-          calories: 123456789,
+          dni: 123456789,
         },
         {
           name: "Empleado 2",
-          calories: 123456789,
+          dni: 123456789,
         },
       ],
     };
