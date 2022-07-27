@@ -34,9 +34,9 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in desserts" :key="item.name">
+          <tr v-for="item in assignments" :key="item.name">
             <td>{{ item.name }}</td>
-            <td>{{ item.calories }}</td>
+            <td>{{ item.client }}</td>
             <td>{{ item.fecha }}</td>
           </tr>
         </tbody>
@@ -52,55 +52,55 @@ export default defineComponent({
   name: "ClientsTable",
   data() {
     return {
-      desserts: [
+      assignments: [
         {
           name: "Cavallini",
-          calories: "Misisco",
+          client: "Misisco",
           fecha: "7/8/22",
         },
         {
           name: "Cavallini",
-          calories: "Misisco",
+          client: "Misisco",
           fecha: "7/8/22",
         },
         {
           name: "Torasini",
-          calories: "Arriada",
+          client: "Arriada",
           fecha: "9/8/22",
         },
         {
           name: "Cavallini",
-          calories: "Misisco",
+          client: "Misisco",
           fecha: "10/8/22",
         },
         {
           name: "Torasini",
-          calories: "Arriada",
+          client: "Arriada",
           fecha: "11/8/22",
         },
         {
           name: "Cavallini",
-          calories: "Misisco",
+          client: "Misisco",
           fecha: "11/8/22",
         },
         {
           name: "Torasini",
-          calories: "Arriada",
+          client: "Arriada",
           fecha: "12/8/22",
         },
         {
           name: "Cavallini",
-          calories: "Misisco",
+          client: "Misisco",
           fecha: "13/8/22",
         },
         {
           name: "Torasini",
-          calories: "Arriada",
+          client: "Arriada",
           fecha: "13/8/22",
         },
         {
           name: "Vazquez",
-          calories: "Arriada",
+          client: "Arriada",
           fecha: "13/8/22",
         },
       ],
