@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-card>
-      <v-card-title>Acompañador Nuevo</v-card-title>
+      <v-card-title>Acompañador/Asistente Nuevo</v-card-title>
 
       <v-card-text>
         <v-form ref="form" v-model="valid" lazy-validation>
@@ -11,7 +11,13 @@
 
           <Telephone v-model="form.telephone" />
 
-          <Rate v-model="form.rate" />
+          <ComboboxField
+            v-model="form.extras"
+            :items="extrasItems"
+            label="Extras"
+            multiple
+            chips
+          />
 
           <v-btn
             :disabled="!valid"
@@ -32,7 +38,7 @@ import { defineComponent } from "vue";
 import Name from "./nameField.vue";
 import DNI from "./dniField.vue";
 import Telephone from "./telephoneField.vue";
-import Rate from "./rateField.vue";
+import ComboboxField from "./comboboxField.vue";
 
 export default defineComponent({
   name: "CompanionForm",
@@ -40,10 +46,12 @@ export default defineComponent({
     Name,
     DNI,
     Telephone,
-    Rate,
+    ComboboxField,
   },
 
   data: () => ({
+    extrasItems: ["Monotributo", "Antecedentes Penales", "Seguros"],
+
     snackbar: {
       display: false,
       text: "",
@@ -54,7 +62,7 @@ export default defineComponent({
       name: "",
       dni: "",
       telephone: "",
-      rate: "",
+      extras: [],
     },
   }),
 });

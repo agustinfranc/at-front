@@ -21,6 +21,16 @@
 
           <Telephone v-model="form.telephone" />
 
+          <Rate v-model="form.rate" />
+
+          <v-textarea
+            class="mx-2"
+            label="Excepciones"
+            rows="1"
+            prepend-inner-icon="mdi-comment"
+            v-model="form.comments"
+          ></v-textarea>
+
           <SubmitButton :valid="valid" />
         </v-form>
       </v-card-text>
@@ -34,6 +44,7 @@ import Name from "./nameField.vue";
 import DNI from "./dniField.vue";
 import Telephone from "./telephoneField.vue";
 import SubmitButton from "./SubmitButton.vue";
+import Rate from "./rateField.vue";
 
 export default defineComponent({
   name: "ClientForm",
@@ -42,6 +53,7 @@ export default defineComponent({
     DNI,
     Telephone,
     SubmitButton,
+    Rate,
   },
 
   data: () => ({
@@ -55,6 +67,8 @@ export default defineComponent({
       name: "",
       dni: "",
       telephone: "",
+      rate: "",
+      comments: "",
     },
   }),
 });

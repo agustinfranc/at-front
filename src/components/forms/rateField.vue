@@ -17,7 +17,7 @@ export default defineComponent({
   data() {
     return {
       rate: this.value,
-      rateRules: [(v) => !!v || "Falta la tarifa del acompañador"],
+      rateRules: [(v) => !!v || "Falta la tarifa"],
     };
   },
 });
