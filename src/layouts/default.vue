@@ -79,7 +79,7 @@ export default defineComponent({
           to: "/calendar",
         },
         {
-          title: "Asignaciones",
+          title: "Acompañamientos",
           to: "/assignments",
         },
         {
