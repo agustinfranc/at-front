@@ -11,6 +11,14 @@
 
           <Telephone v-model="form.telephone" />
 
+          <v-text-field
+            type="number"
+            v-model="form.maxTaxable"
+            label="Máximo Facturable"
+            required
+            prefix="$"
+          ></v-text-field>
+
           <ComboboxField
             v-model="form.extras"
             :items="extrasItems"
@@ -63,6 +71,7 @@ export default defineComponent({
       dni: "",
       telephone: "",
       extras: [],
+      maxTaxable: "",
     },
   }),
 });
