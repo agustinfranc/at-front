@@ -62,6 +62,16 @@ const router = createRouter({
       name: "assignment",
       component: () => import("../views/NewAssignmentView.vue"),
     },
+    {
+      path: "/exceptions",
+      name: "exceptions",
+      component: () => import("../views/ExceptionsView.vue"),
+    },
+    {
+      path: "/exception",
+      name: "exception",
+      component: () => import("../views/NewExceptionView.vue"),
+    },
   ],
 });
 
