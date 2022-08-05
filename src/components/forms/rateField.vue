@@ -5,6 +5,7 @@
     label="Tarifa"
     :rules="rateRules"
     required
+    prefix="$"
   ></v-text-field>
 </template>
 

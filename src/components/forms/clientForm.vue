@@ -23,9 +23,11 @@
 
           <Rate v-model="form.rate" />
 
+          <v-text-field label="Porcentaje Facturado" prefix="%"></v-text-field>
+
           <v-textarea
             class="mx-2"
-            label="Excepciones"
+            label="Comentarios"
             rows="1"
             prepend-inner-icon="mdi-comment"
             v-model="form.comments"

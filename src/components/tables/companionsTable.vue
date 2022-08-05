@@ -48,7 +48,11 @@
 </template>
 
 <script lang="ts">
-export default {
+import { defineComponent } from "vue";
+
+export default defineComponent({
+  name: "CompanionsTable",
+
   data() {
     return {
       companions: [
@@ -75,5 +79,5 @@ export default {
       ],
     };
   },
-};
+});
 </script>

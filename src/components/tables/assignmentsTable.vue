@@ -49,7 +49,7 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "ClientsTable",
+  name: "AssignmentsTable",
   data() {
     return {
       assignments: [
