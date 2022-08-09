@@ -11,13 +11,12 @@
 
           <Telephone v-model="form.telephone" />
 
-          <v-text-field
+          <TextField
             type="number"
             v-model="form.maxTaxable"
             label="Máximo Facturable"
-            required
             prefix="$"
-          ></v-text-field>
+          ></TextField>
 
           <ComboboxField
             v-model="form.extras"
@@ -28,8 +27,6 @@
           />
 
           <SubmitButton :valid="valid" />
-
-          {{ form }}
         </v-form>
       </v-card-text>
     </v-card>
@@ -42,6 +39,7 @@ import Name from "./nameField.vue";
 import DNI from "./dniField.vue";
 import Telephone from "./telephoneField.vue";
 import ComboboxField from "./comboboxField.vue";
+import TextField from "./textField.vue";
 import SubmitButton from "./submitButton.vue";
 
 export default defineComponent({
@@ -52,6 +50,7 @@ export default defineComponent({
     Telephone,
     ComboboxField,
     SubmitButton,
+    TextField,
   },
 
   data: () => ({
