@@ -5,7 +5,7 @@
         <v-list-item v-for="item in items" :key="item.title" :to="item.to">
           <v-divider v-if="item.separator"></v-divider>
           <v-list-item-content>
-            <v-list-item-title v-text="item.title" />
+            <v-list-item-title class="font-weight-light" v-text="item.title" />
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -45,7 +45,7 @@
     <v-app-bar app>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
-      <v-toolbar-title>Nexos</v-toolbar-title>
+      <v-toolbar-title class="font-weight-light text-h5">Nexos</v-toolbar-title>
     </v-app-bar>
 
     <v-main>
@@ -79,7 +79,7 @@ export default defineComponent({
           to: "/calendar",
         },
         {
-          title: "Asignaciones",
+          title: "Acompañamientos",
           to: "/assignments",
         },
         {

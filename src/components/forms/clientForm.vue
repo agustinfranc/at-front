@@ -5,21 +5,25 @@
 
       <v-card-text>
         <v-form ref="form" v-model="valid" lazy-validation>
-          <!-- Old way replaced by line 18 -->
-
-          <!-- <Name
-            :value="form.name"
-            @updateName="
-              (v) => {
-                form.name = v.target.value;
-              }
-            "
-          /> -->
           <Name v-model="form.name" />
 
           <DNI v-model="form.dni" />
 
           <Telephone v-model="form.telephone" />
+
+          <Rate v-model="form.rate" />
+
+          <TextField
+            v-model="form.tax_percentage"
+            label="Porcentaje Facturado"
+            prefix="%"
+            type="number"
+          />
+
+          <TextAreaField
+            label="Comentarios"
+            v-model="form.comments"
+          ></TextAreaField>
 
           <SubmitButton :valid="valid" />
         </v-form>
@@ -34,6 +38,9 @@ import Name from "./nameField.vue";
 import DNI from "./dniField.vue";
 import Telephone from "./telephoneField.vue";
 import SubmitButton from "./SubmitButton.vue";
+import Rate from "./rateField.vue";
+import TextField from "./textField.vue";
+import TextAreaField from "./textAreaField.vue";
 
 export default defineComponent({
   name: "ClientForm",
@@ -42,20 +49,28 @@ export default defineComponent({
     DNI,
     Telephone,
     SubmitButton,
+    Rate,
+    TextField,
+    TextAreaField,
   },
 
-  data: () => ({
-    snackbar: {
-      display: false,
-      text: "",
-      color: "black",
-    },
-    valid: true,
-    form: {
-      name: "",
-      dni: "",
-      telephone: "",
-    },
-  }),
+  data() {
+    return {
+      snackbar: {
+        display: false,
+        text: "",
+        color: "black",
+      },
+      valid: true,
+      form: {
+        name: "",
+        dni: "",
+        telephone: "",
+        rate: "",
+        comments: "",
+        tax_percentage: "",
+      },
+    };
+  },
 });
 </script>

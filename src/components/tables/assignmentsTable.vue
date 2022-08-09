@@ -5,7 +5,7 @@
         <v-row>
           <v-col align-self="start" cols="12" sm="4">
             <v-sheet class="ma-2 pa-2">
-              <v-card-title>Asignaciones</v-card-title>
+              <v-card-title>Acompañamientos</v-card-title>
             </v-sheet>
           </v-col>
           <v-spacer></v-spacer>
@@ -49,7 +49,7 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "ClientsTable",
+  name: "AssignmentsTable",
   data() {
     return {
       assignments: [

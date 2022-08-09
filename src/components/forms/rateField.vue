@@ -5,6 +5,7 @@
     label="Tarifa"
     :rules="rateRules"
     required
+    prefix="$"
   ></v-text-field>
 </template>
 
@@ -17,7 +18,7 @@ export default defineComponent({
   data() {
     return {
       rate: this.value,
-      rateRules: [(v) => !!v || "Falta la tarifa del acompañador"],
+      rateRules: [(v) => !!v || "Falta la tarifa"],
     };
   },
 });

@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-card>
-      <v-card-title>Acompañador Nuevo</v-card-title>
+      <v-card-title>Acompañante Nuevo</v-card-title>
 
       <v-card-text>
         <v-form ref="form" v-model="valid" lazy-validation>
@@ -11,16 +11,22 @@
 
           <Telephone v-model="form.telephone" />
 
-          <Rate v-model="form.rate" />
+          <TextField
+            type="number"
+            v-model="form.maxTaxable"
+            label="Máximo Facturable"
+            prefix="$"
+          ></TextField>
 
-          <v-btn
-            :disabled="!valid"
-            color="success"
-            class="mr-4"
-            @click="validate"
-          >
-            Enviar
-          </v-btn>
+          <ComboboxField
+            v-model="form.extras"
+            :items="extrasItems"
+            label="Extras"
+            multiple
+            chips
+          />
+
+          <SubmitButton :valid="valid" />
         </v-form>
       </v-card-text>
     </v-card>
@@ -32,7 +38,9 @@ import { defineComponent } from "vue";
 import Name from "./nameField.vue";
 import DNI from "./dniField.vue";
 import Telephone from "./telephoneField.vue";
-import Rate from "./rateField.vue";
+import ComboboxField from "./comboboxField.vue";
+import TextField from "./textField.vue";
+import SubmitButton from "./submitButton.vue";
 
 export default defineComponent({
   name: "CompanionForm",
@@ -40,10 +48,14 @@ export default defineComponent({
     Name,
     DNI,
     Telephone,
-    Rate,
+    ComboboxField,
+    SubmitButton,
+    TextField,
   },
 
   data: () => ({
+    extrasItems: ["Monotributo", "Antecedentes Penales", "Seguros"],
+
     snackbar: {
       display: false,
       text: "",
@@ -54,7 +66,8 @@ export default defineComponent({
       name: "",
       dni: "",
       telephone: "",
-      rate: "",
+      extras: [],
+      maxTaxable: "",
     },
   }),
 });
