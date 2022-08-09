@@ -5,16 +5,6 @@
 
       <v-card-text>
         <v-form ref="form" v-model="valid" lazy-validation>
-          <!-- Old way replaced by line 18 -->
-
-          <!-- <Name
-            :value="form.name"
-            @updateName="
-              (v) => {
-                form.name = v.target.value;
-              }
-            "
-          /> -->
           <Name v-model="form.name" />
 
           <DNI v-model="form.dni" />
@@ -64,21 +54,23 @@ export default defineComponent({
     TextAreaField,
   },
 
-  data: () => ({
-    snackbar: {
-      display: false,
-      text: "",
-      color: "black",
-    },
-    valid: true,
-    form: {
-      name: "",
-      dni: "",
-      telephone: "",
-      rate: "",
-      comments: "",
-      tax_percentage: "",
-    },
-  }),
+  data() {
+    return {
+      snackbar: {
+        display: false,
+        text: "",
+        color: "black",
+      },
+      valid: true,
+      form: {
+        name: "",
+        dni: "",
+        telephone: "",
+        rate: "",
+        comments: "",
+        tax_percentage: "",
+      },
+    };
+  },
 });
 </script>

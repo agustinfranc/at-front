@@ -83,10 +83,6 @@ export default defineComponent({
           to: "/assignments",
         },
         {
-          title: "Excepciones",
-          to: "/exceptions",
-        },
-        {
           title: "Clientes",
           to: "/clients",
         },
