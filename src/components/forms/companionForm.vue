@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-card>
-      <v-card-title>Acompañador/Asistente Nuevo</v-card-title>
+      <v-card-title>Acompañante Nuevo</v-card-title>
 
       <v-card-text>
         <v-form ref="form" v-model="valid" lazy-validation>
@@ -27,14 +27,9 @@
             chips
           />
 
-          <v-btn
-            :disabled="!valid"
-            color="success"
-            class="mr-4"
-            @click="validate"
-          >
-            Enviar
-          </v-btn>
+          <SubmitButton :valid="valid" />
+
+          {{ form }}
         </v-form>
       </v-card-text>
     </v-card>
@@ -47,6 +42,7 @@ import Name from "./nameField.vue";
 import DNI from "./dniField.vue";
 import Telephone from "./telephoneField.vue";
 import ComboboxField from "./comboboxField.vue";
+import SubmitButton from "./submitButton.vue";
 
 export default defineComponent({
   name: "CompanionForm",
@@ -55,6 +51,7 @@ export default defineComponent({
     DNI,
     Telephone,
     ComboboxField,
+    SubmitButton,
   },
 
   data: () => ({

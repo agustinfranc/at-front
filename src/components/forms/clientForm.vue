@@ -23,15 +23,17 @@
 
           <Rate v-model="form.rate" />
 
-          <v-text-field label="Porcentaje Facturado" prefix="%"></v-text-field>
+          <TextField
+            v-model="form.tax_percentage"
+            label="Porcentaje Facturado"
+            prefix="%"
+            type="number"
+          />
 
-          <v-textarea
-            class="mx-2"
+          <TextAreaField
             label="Comentarios"
-            rows="1"
-            prepend-inner-icon="mdi-comment"
             v-model="form.comments"
-          ></v-textarea>
+          ></TextAreaField>
 
           <SubmitButton :valid="valid" />
         </v-form>
@@ -47,6 +49,8 @@ import DNI from "./dniField.vue";
 import Telephone from "./telephoneField.vue";
 import SubmitButton from "./SubmitButton.vue";
 import Rate from "./rateField.vue";
+import TextField from "./textField.vue";
+import TextAreaField from "./textAreaField.vue";
 
 export default defineComponent({
   name: "ClientForm",
@@ -56,6 +60,8 @@ export default defineComponent({
     Telephone,
     SubmitButton,
     Rate,
+    TextField,
+    TextAreaField,
   },
 
   data: () => ({
@@ -71,6 +77,7 @@ export default defineComponent({
       telephone: "",
       rate: "",
       comments: "",
+      tax_percentage: "",
     },
   }),
 });
