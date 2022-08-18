@@ -47,6 +47,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import Client from "../../api/client/index";
 
 export default defineComponent({
   name: "ClientsTable",
@@ -75,6 +76,10 @@ export default defineComponent({
         },
       ],
     };
+  },
+
+  async mounted() {
+    this.clients = await Client.get();
   },
 });
 </script>
