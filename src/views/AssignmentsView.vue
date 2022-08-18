@@ -1,36 +1,35 @@
 <template>
-  <Assignments :columnDefinitions="columnDefs.value" />
+  <LazyTable :columns="columns" endpoint="/assignments" />
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 
 // Components
-import Assignments from "@/components/tables/genericTable.vue";
-import { reactive } from "vue"; //el onMounted va acá para la API
-
+import LazyTable from "@/components/tables/lazyTable.vue";
 export default defineComponent({
   name: "AssignmentsView",
 
   components: {
-    Assignments,
+    LazyTable,
   },
-  setup() {
-    const rowData = reactive({}); // Set rowData to Array of Objects, one Object per Row
 
-    // Each Column Definition results in one Column.
-    const columnDefs = reactive({
-      value: [
-        { field: "Cliente" },
-        { field: "Acompañador" },
-        { field: "Fecha" },
-        { field: "Horas" },
-      ],
-    });
-
+  data() {
     return {
-      columnDefs,
-      rowData,
+      columns: [
+        {
+          field: "Cliente",
+        },
+        {
+          field: "Acompañante",
+        },
+        {
+          field: "Fecha",
+        },
+        {
+          field: "Horas",
+        },
+      ],
     };
   },
 });

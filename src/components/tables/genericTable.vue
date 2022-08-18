@@ -3,14 +3,14 @@
     <button @click="deselectRows">deselect rows</button>
     <ag-grid-vue
       class="ag-theme-alpine"
-      :rowData="rowData.value"
       style="height: 500px"
+      :columnDefs="columnDefs.value"
+      :rowData="rowData.value"
       :defaultColDef="defaultColDef"
       rowSelection="multiple"
       animateRows="true"
       @cell-clicked="cellWasClicked"
       @grid-ready="onGridReady"
-      :columnDefs="columnDefinitions"
     >
     </ag-grid-vue>
   </v-container>
@@ -24,12 +24,14 @@ import "ag-grid-community/styles/ag-grid.css"; // Core grid CSS, always needed
 import "ag-grid-community/styles/ag-theme-alpine.css"; // Optional theme CSS
 
 export default defineComponent({
-  props: ["columnDefinitions"],
+  props: {
+    columns: Array,
+  },
   name: "Table",
   components: {
     AgGridVue,
   },
-  setup() {
+  setup(props) {
     const gridApi = ref(null); // Optional - for accessing Grid's API
 
     // Obtain API from grid's onGridReady event
@@ -38,6 +40,11 @@ export default defineComponent({
     };
 
     const rowData = reactive({}); // Set rowData to Array of Objects, one Object per Row
+
+    // Each Column Definition results in one Column.
+    const columnDefs = reactive({
+      value: props.columns,
+    });
 
     // DefaultColDef sets props common to all Columns
     const defaultColDef = {
@@ -55,7 +62,7 @@ export default defineComponent({
 
     return {
       onGridReady,
-      //columnDefs,
+      columnDefs,
       rowData,
       defaultColDef,
       cellWasClicked: (event) => {
