@@ -4,7 +4,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import Assignemts from "../api/assignments/index";
+import AssignmentsApi from "../api/assignments/index";
 
 // Components
 import LazyTable from "@/components/tables/lazyTable.vue";
@@ -17,7 +17,7 @@ export default defineComponent({
 
   data() {
     return {
-      getAssignments: Assignemts.get,
+      getAssignments: AssignmentsApi.get,
 
       columns: [
         {

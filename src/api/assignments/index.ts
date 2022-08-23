@@ -1,14 +1,13 @@
 import axios from "../../plugins/axios";
 
-class Assignments {
+class AssignmentsApi {
   static async get() {
     try {
-      const response = await axios.get("/assignments");
-      return response;
+      return await axios.get("/assignments");
     } catch (error) {
       return error;
     }
   }
 }
 
-export default Assignments;
+export default AssignmentsApi;

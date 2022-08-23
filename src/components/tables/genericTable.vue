@@ -56,13 +56,6 @@ export default defineComponent({
       flex: 1,
     };
 
-    // Example load data from sever
-    /* onMounted(() => {
-      fetch("https://www.ag-grid.com/example-assets/row-data.json")
-        .then((result) => result.json())
-        .then((remoteRowData) => (rowData.value = remoteRowData));
-    }); */
-
     return {
       onGridReady,
       columnDefs,
@@ -79,5 +72,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style lang="scss"></style>
