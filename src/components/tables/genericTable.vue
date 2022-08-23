@@ -26,6 +26,7 @@ import "ag-grid-community/styles/ag-theme-alpine.css"; // Optional theme CSS
 export default defineComponent({
   props: {
     columns: Array,
+    rows: Array,
   },
   name: "Table",
   components: {
@@ -39,7 +40,9 @@ export default defineComponent({
       gridApi.value = params.api;
     };
 
-    const rowData = reactive({}); // Set rowData to Array of Objects, one Object per Row
+    const rowData = reactive({
+      value: props.rows,
+    }); // Set rowData to Array of Objects, one Object per Row
 
     // Each Column Definition results in one Column.
     const columnDefs = reactive({
@@ -54,11 +57,11 @@ export default defineComponent({
     };
 
     // Example load data from sever
-    onMounted(() => {
+    /* onMounted(() => {
       fetch("https://www.ag-grid.com/example-assets/row-data.json")
         .then((result) => result.json())
         .then((remoteRowData) => (rowData.value = remoteRowData));
-    });
+    }); */
 
     return {
       onGridReady,
