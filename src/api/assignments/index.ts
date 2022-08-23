@@ -8,6 +8,15 @@ class AssignmentsApi {
       return error;
     }
   }
+
+  static async post(assignment) {
+    try {
+      const response = await axios.post("/assignment", assignment);
+      return response;
+    } catch (error) {
+      return error;
+    }
+  }
 }
 
 export default AssignmentsApi;

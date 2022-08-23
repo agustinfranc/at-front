@@ -78,6 +78,13 @@ export default defineComponent({
     Password,
     ComboboxField,
   },
+  props: {
+    request: Function,
+  },
+
+  async validate() {
+    this.request(this.form);
+  },
 
   data: () => ({
     snackbar: {
