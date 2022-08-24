@@ -70,7 +70,7 @@ import SubmitButton from "./submitButton.vue";
 import Password from "./passwordField.vue";
 import ComboboxField from "./comboboxField.vue";
 
-import AssignemtPost from "@/api/assignments/index";
+import AssignemtApi from "@/api/assignments/index";
 
 export default defineComponent({
   name: "UserForm",
@@ -87,7 +87,7 @@ export default defineComponent({
 
   data() {
     return {
-      assignmentPost: AssignemtPost.post,
+      assignmentPost: AssignemtApi.post,
 
       snackbar: {
         display: false,

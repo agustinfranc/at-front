@@ -11,8 +11,7 @@ class AssignmentsApi {
 
   static async post(assignment) {
     try {
-      const response = await axios.post("/assignment", assignment);
-      return response;
+      return await axios.post("/assignment", assignment);
     } catch (error) {
       return error;
     }
