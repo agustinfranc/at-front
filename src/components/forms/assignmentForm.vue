@@ -70,8 +70,10 @@ import SubmitButton from "./submitButton.vue";
 import Password from "./passwordField.vue";
 import ComboboxField from "./comboboxField.vue";
 
+import AssignmentsApi from "@/api/assignments/index";
+
 export default defineComponent({
-  name: "UserForm",
+  name: "AssignmentForm",
   components: {
     Name,
     SubmitButton,
@@ -79,35 +81,43 @@ export default defineComponent({
     ComboboxField,
   },
 
-  data: () => ({
-    snackbar: {
-      display: false,
-      text: "",
-      color: "black",
-    },
+  async validate() {
+    this.request(this.form);
+  },
 
-    clients: ["Franco Cavallini", "Gastón Malalel"],
-    companions: ["Juan Cruz Torasini", "Joaquín Misisco"],
-    days: [
-      "Lunes",
-      "Martes",
-      "Miércoles",
-      "Jueves",
-      "Viernes",
-      "Sábado",
-      "Domingo",
-    ],
+  data() {
+    return {
+      assignmentPost: AssignmentsApi.post,
 
-    valid: true,
-    form: {
-      client: "",
-      companion: "",
-      days: [],
-      hours: "",
-      periodic: false,
-      enabled: true,
-    },
-    passRules: [(v) => !!v || "Falta la constraseña del Usuario"],
-  }),
+      snackbar: {
+        display: false,
+        text: "",
+        color: "black",
+      },
+
+      clients: ["Franco Cavallini", "Gastón Malalel"],
+      companions: ["Juan Cruz Torasini", "Joaquín Misisco"],
+      days: [
+        "Lunes",
+        "Martes",
+        "Miércoles",
+        "Jueves",
+        "Viernes",
+        "Sábado",
+        "Domingo",
+      ],
+
+      valid: true,
+      form: {
+        client: "",
+        companion: "",
+        days: [],
+        hours: "",
+        periodic: false,
+        enabled: true,
+      },
+      passRules: [(v) => !!v || "Falta la constraseña del Usuario"],
+    };
+  },
 });
 </script>
