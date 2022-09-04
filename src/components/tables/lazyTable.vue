@@ -17,7 +17,7 @@ export default defineComponent({
   },
 
   async mounted() {
-    this.rows = await this.request();
+    this.rows = await this.request?.();
   },
 
   data() {
