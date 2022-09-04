@@ -4,17 +4,13 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import ClientApi from "../../api/client/index";
+import ClientApi from "@/api/client/index";
 import LazyTable from "@/components/tables/lazyTable.vue";
 
 export default defineComponent({
   name: "ClientsTable",
   components: {
     LazyTable,
-  },
-
-  async mounted() {
-    console.log(this.getClients);
   },
   data() {
     return {
@@ -41,6 +37,9 @@ export default defineComponent({
         },
       ],
     };
+  },
+  async mounted() {
+    console.log(await this.getClients);
   },
 });
 </script>

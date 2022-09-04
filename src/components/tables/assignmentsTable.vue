@@ -12,7 +12,6 @@ export default defineComponent({
   components: {
     LazyTable,
   },
-
   data() {
     return {
       getAssignments: AssignmentsApi.get,
