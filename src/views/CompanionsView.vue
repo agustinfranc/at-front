@@ -1,18 +1,15 @@
 <template>
-  <Companions />
+  <CompanionsTable />
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-
-// Components
-import Companions from "@/components/tables/companionsTable.vue";
+import CompanionsTable from "@/components/tables/CompanionsTable.vue";
 
 export default defineComponent({
   name: "CompanionsView",
-
   components: {
-    Companions,
+    CompanionsTable,
   },
 });
 </script>
