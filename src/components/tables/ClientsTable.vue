@@ -5,7 +5,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import ClientApi from "@/api/client/index";
-import LazyTable from "@/components/tables/lazyTable.vue";
+import LazyTable from "@/components/tables/LazyTable.vue";
 
 export default defineComponent({
   name: "ClientsTable",
@@ -14,6 +14,8 @@ export default defineComponent({
   },
   data() {
     return {
+      //TODO: tipar data
+
       getClients: ClientApi.get,
       clients: [],
       columns: [
@@ -37,9 +39,6 @@ export default defineComponent({
         },
       ],
     };
-  },
-  async mounted() {
-    console.log(await this.getClients);
   },
 });
 </script>

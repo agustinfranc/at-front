@@ -4,14 +4,14 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import GenericTable from "./genericTable.vue";
+import GenericTable from "./GenericTable.vue";
 
 export default defineComponent({
+  name: "LazyTable",
   props: {
     columns: Array,
     request: Function,
   },
-  name: "LazyTable",
   components: {
     GenericTable,
   },
