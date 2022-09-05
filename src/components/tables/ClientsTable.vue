@@ -1,5 +1,5 @@
 <template>
-  <LazyTable :columns="columns" @request="getClients" />
+  <LazyTable :columns="columns" :request="getClients" />
 </template>
 
 <script lang="ts">

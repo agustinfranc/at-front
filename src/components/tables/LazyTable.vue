@@ -9,21 +9,27 @@ import GenericTable from "./GenericTable.vue";
 export default defineComponent({
   name: "LazyTable",
   props: {
-    columns: Array,
-    request: Function,
+    columns: {
+      type: Array,
+      required: true,
+    },
+    request: {
+      type: Function,
+      required: true,
+    },
   },
   components: {
     GenericTable,
-  },
-
-  async mounted() {
-    this.rows = await this.request?.();
   },
 
   data() {
     return {
       rows: [],
     };
+  },
+
+  async mounted() {
+    this.rows = await this.request();
   },
 });
 </script>
