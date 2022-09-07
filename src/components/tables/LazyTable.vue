@@ -29,7 +29,8 @@ export default defineComponent({
   },
 
   async mounted() {
-    this.rows = await this.request();
+    const res = await this.request();
+    this.rows = res.data;
   },
 });
 </script>

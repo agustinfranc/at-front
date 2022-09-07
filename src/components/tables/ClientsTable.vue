@@ -17,25 +17,24 @@ export default defineComponent({
       //TODO: tipar data
 
       getClients: ClientApi.get,
-      clients: [],
       columns: [
         {
-          field: "Nombre",
+          field: "name",
         },
         {
-          field: "DNI",
+          field: "dni",
         },
         {
-          field: "Telefono",
+          field: "phone",
         },
         {
-          field: "Precio",
+          field: "rate",
         },
         {
-          field: "Máximo Facturable",
+          field: "taxable",
         },
         {
-          field: "Comentarios",
+          field: "comments",
         },
       ],
     };
