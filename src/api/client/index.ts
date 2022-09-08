@@ -1,14 +1,13 @@
-import axios from "../../plugins/axios";
+import axios from "@/plugins/axios";
 
-class Client {
+class ClientApi {
   static async get() {
     try {
-      const response = await axios.get("/clients");
-      return response;
+      return await axios.get("/clients");
     } catch (error) {
       return error;
     }
   }
 }
 
-export default Client;
+export default ClientApi;

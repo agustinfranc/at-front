@@ -1,21 +1,22 @@
 <template>
-  <LazyTable :columns="columns" @request="getAssignments" />
+  <LazyTable :columns="columns" :request="getAssignments" />
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import AssignmentsApi from "@/api/assignments/index";
-import LazyTable from "@/components/tables/lazyTable.vue";
+import AssignmentApi from "@/api/assignment/index";
+import LazyTable from "@/components/tables/LazyTable.vue";
 
 export default defineComponent({
   name: "AssignmentsTable",
   components: {
     LazyTable,
   },
-
   data() {
     return {
-      getAssignments: AssignmentsApi.get,
+      //TODO: tipar data
+
+      getAssignments: AssignmentApi.get,
 
       columns: [
         {

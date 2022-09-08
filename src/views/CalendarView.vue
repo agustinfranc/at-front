@@ -4,13 +4,10 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-
-// Components
 import BaseCalendar from "@/components/BaseCalendar.vue";
 
 export default defineComponent({
   name: "CalendarView",
-
   components: {
     BaseCalendar,
   },

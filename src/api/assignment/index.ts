@@ -1,6 +1,6 @@
-import axios from "../../plugins/axios";
+import axios from "@/plugins/axios";
 
-class AssignmentsApi {
+class AssignmentApi {
   static async get() {
     try {
       return await axios.get("/assignments");
@@ -9,6 +9,7 @@ class AssignmentsApi {
     }
   }
 
+  //TODO: tipar assignment
   static async post(assignment) {
     try {
       return await axios.post("/assignment", assignment);
@@ -18,4 +19,4 @@ class AssignmentsApi {
   }
 }
 
-export default AssignmentsApi;
+export default AssignmentApi;
