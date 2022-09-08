@@ -19,21 +19,27 @@ export default defineComponent({
       getClients: ClientApi.get,
       columns: [
         {
+          headerName: "Nombre",
           field: "name",
         },
         {
+          headerName: "Dni",
           field: "dni",
         },
         {
+          headerName: "Telefono",
           field: "phone",
         },
         {
+          headerName: "Tarifa",
           field: "rate",
         },
         {
+          headerName: "Máximo Facturable",
           field: "taxable",
         },
         {
+          headerName: "Comentarios",
           field: "comments",
         },
       ],
