@@ -34,7 +34,7 @@ export default defineComponent({
   },
   setup(props) {
     // Set rowData to Array of Objects, one Object per Row
-    const rowData = computed(() => props.rows)
+    const rowData = computed(() => props.rows);
 
     // Each Column Definition results in one Column.
     const columnDefs = reactive({
