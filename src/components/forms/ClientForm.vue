@@ -9,12 +9,12 @@
 
           <DNI v-model="form.dni" />
 
-          <Telephone v-model="form.telephone" />
+          <Telephone v-model="form.phone" />
 
           <Rate v-model="form.rate" />
 
           <TextField
-            v-model="form.tax_percentage"
+            v-model="form.taxable"
             label="Porcentaje Facturado"
             prefix="%"
             type="number"
@@ -25,7 +25,7 @@
             v-model="form.comments"
           ></TextAreaField>
 
-          <SubmitButton :valid="valid" />
+          <SubmitButton :valid="valid" v-on:click="postClient" />
         </v-form>
       </v-card-text>
     </v-card>
@@ -41,6 +41,7 @@ import SubmitButton from "./SubmitButton.vue";
 import Rate from "./rateField.vue";
 import TextField from "./textField.vue";
 import TextAreaField from "./textAreaField.vue";
+import ClientApi from "@/api/client/index";
 
 export default defineComponent({
   name: "ClientForm",
@@ -54,6 +55,13 @@ export default defineComponent({
     TextAreaField,
   },
 
+  methods: {
+    async postClient() {
+      ClientApi.post(this.form);
+      console.log(this.form);
+    },
+  },
+
   data() {
     return {
       snackbar: {
@@ -65,10 +73,10 @@ export default defineComponent({
       form: {
         name: "",
         dni: "",
-        telephone: "",
+        phone: "",
         rate: "",
         comments: "",
-        tax_percentage: "",
+        taxable: "",
       },
     };
   },

@@ -70,7 +70,7 @@ import SubmitButton from "./submitButton.vue";
 import Password from "./passwordField.vue";
 import ComboboxField from "./comboboxField.vue";
 
-import AssignmentsApi from "@/api/assignments/index";
+import AssignmentsApi from "@/api/assignment/index";
 
 export default defineComponent({
   name: "AssignmentForm",
