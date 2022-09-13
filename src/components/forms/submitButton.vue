@@ -1,7 +1,5 @@
 <template>
-  <v-btn :disabled="!valid" color="success" class="mr-4" @click="validate">
-    Enviar
-  </v-btn>
+  <v-btn :disabled="!valid" color="success" class="mr-4"> Enviar </v-btn>
 </template>
 
 <script lang="ts">

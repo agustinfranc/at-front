@@ -7,7 +7,7 @@
         <v-form ref="form" v-model="valid" lazy-validation>
           <Name v-model="form.name" />
 
-          <DNI v-model="form.dni" />
+          <TextField v-model="form.dni" type="number" label="Dni"></TextField>
 
           <Telephone v-model="form.phone" />
 
@@ -25,7 +25,7 @@
             v-model="form.comments"
           ></TextAreaField>
 
-          <SubmitButton :valid="valid" v-on:click="postClient" />
+          <SubmitButton :valid="valid" @click="postClient" />
         </v-form>
       </v-card-text>
     </v-card>
@@ -35,7 +35,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import Name from "./nameField.vue";
-import DNI from "./dniField.vue";
+import Dni from "./dniField.vue";
 import Telephone from "./telephoneField.vue";
 import SubmitButton from "./SubmitButton.vue";
 import Rate from "./rateField.vue";
@@ -47,7 +47,7 @@ export default defineComponent({
   name: "ClientForm",
   components: {
     Name,
-    DNI,
+    Dni,
     Telephone,
     SubmitButton,
     Rate,
@@ -58,6 +58,17 @@ export default defineComponent({
   methods: {
     async postClient() {
       ClientApi.post(this.form);
+
+      /* const res = await ClientApi.post(this.form);
+
+      if (res.data) {
+        /* this.snackbar.text = "Cliente agregado con exito";
+        this.snackbar.display = true; 
+        this.$emit("onShowSnackbar", ["Cliente agregado con exito"]);
+      } else {
+        this.snackbar.text = res.response.data.message;
+        this.snackbar.display = true;
+      }*/
       console.log(this.form);
     },
   },
