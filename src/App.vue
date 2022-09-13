@@ -4,6 +4,14 @@
       <DefaultLayout>
         <router-view />
       </DefaultLayout>
+
+      <v-snackbar
+        v-model="snackbar.display"
+        :color="snackbar.color"
+        @onShowSnackbar="showSnackbar"
+      >
+        {{ snackbar.text }}
+      </v-snackbar>
     </v-main>
   </v-app>
 </template>
@@ -18,9 +26,21 @@ export default defineComponent({
     DefaultLayout,
   },
 
+  methods: {
+    showSnackbar(text: string) {
+      this.snackbar.display = true;
+      this.snackbar.text = text;
+      console.log("funca");
+    },
+  },
+
   data() {
     return {
-      //
+      snackbar: {
+        display: false,
+        text: "",
+        color: "black",
+      },
     };
   },
 });
