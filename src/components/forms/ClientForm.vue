@@ -58,7 +58,6 @@ export default defineComponent({
   methods: {
     async postClient() {
       ClientApi.post(this.form);
-      console.log(this.form);
     },
   },
 
