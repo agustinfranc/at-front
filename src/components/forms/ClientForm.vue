@@ -7,14 +7,14 @@
         <v-form ref="form" v-model="valid" lazy-validation>
           <Name v-model="form.name" />
 
-          <DNI v-model="form.dni" />
+          <TextField v-model="form.dni" type="number" label="Dni"></TextField>
 
-          <Telephone v-model="form.telephone" />
+          <Telephone v-model="form.phone" />
 
           <Rate v-model="form.rate" />
 
           <TextField
-            v-model="form.tax_percentage"
+            v-model="form.taxable"
             label="Porcentaje Facturado"
             prefix="%"
             type="number"
@@ -25,7 +25,7 @@
             v-model="form.comments"
           ></TextAreaField>
 
-          <SubmitButton :valid="valid" />
+          <SubmitButton :valid="valid" @click="postClient" />
         </v-form>
       </v-card-text>
     </v-card>
@@ -35,23 +35,30 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import Name from "./nameField.vue";
-import DNI from "./dniField.vue";
+import Dni from "./dniField.vue";
 import Telephone from "./telephoneField.vue";
 import SubmitButton from "./SubmitButton.vue";
 import Rate from "./rateField.vue";
 import TextField from "./textField.vue";
 import TextAreaField from "./textAreaField.vue";
+import ClientApi from "@/api/client/index";
 
 export default defineComponent({
   name: "ClientForm",
   components: {
     Name,
-    DNI,
+    Dni,
     Telephone,
     SubmitButton,
     Rate,
     TextField,
     TextAreaField,
+  },
+
+  methods: {
+    async postClient() {
+      ClientApi.post(this.form);
+    },
   },
 
   data() {
@@ -65,10 +72,10 @@ export default defineComponent({
       form: {
         name: "",
         dni: "",
-        telephone: "",
+        phone: "",
         rate: "",
         comments: "",
-        tax_percentage: "",
+        taxable: "",
       },
     };
   },

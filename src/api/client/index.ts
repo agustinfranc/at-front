@@ -8,6 +8,14 @@ class ClientApi {
       return error;
     }
   }
+
+  static async post(client) {
+    try {
+      return await axios.post("/clients", client);
+    } catch (error) {
+      return error;
+    }
+  }
 }
 
 export default ClientApi;
