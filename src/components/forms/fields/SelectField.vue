@@ -1,25 +1,23 @@
 <template>
-  <v-combobox
+  <v-select
     :items="items"
     item-value="id"
     item-text="nombre"
     :rules="[(v) => !!v || 'Ingresar']"
     :label="label"
     required
-    :multiple="multiple"
-  ></v-combobox>
+  ></v-select>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  props: ["value", "items", "label", "multiple"],
-  name: "ComboboxField",
+  props: ["value", "items", "label"],
+  name: "SelectField",
   data() {
     return {
       value: this.value,
-      ComboboxRules: [(v) => !!v || "Completar"],
     };
   },
 });

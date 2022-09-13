@@ -21,7 +21,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import Name from "./nameField.vue";
-import SubmitButton from "./submitButton.vue";
+import SubmitButton from "./SubmitButton.vue";
 import Password from "./passwordField.vue";
 import SelectRole from "./selectField.vue";
 

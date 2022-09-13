@@ -38,9 +38,9 @@ import { defineComponent } from "vue";
 import Name from "./nameField.vue";
 import DNI from "./dniField.vue";
 import Telephone from "./telephoneField.vue";
-import ComboboxField from "./comboboxField.vue";
-import TextField from "./textField.vue";
-import SubmitButton from "./submitButton.vue";
+import ComboboxField from "./ComboboxField.vue";
+import TextField from "./TextField.vue";
+import SubmitButton from "./SubmitButton.vue";
 
 export default defineComponent({
   name: "CompanionForm",

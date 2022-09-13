@@ -5,13 +5,33 @@
 
       <v-card-text>
         <v-form ref="form" v-model="valid" lazy-validation>
-          <Name v-model="form.name" />
+          <TextField
+            v-model="form.name"
+            label="Nombre"
+            required
+            :rules="[
+              (v) => !!v || 'Falta el nombre',
+              (v) => (v && v.length <= 50) || 'Nombre muy largo',
+            ]"
+          ></TextField>
 
           <TextField v-model="form.dni" type="number" label="Dni"></TextField>
 
-          <Telephone v-model="form.phone" />
+          <TextField
+            v-model="form.phone"
+            type="number"
+            label="Teléfono"
+            :rules="[(v) => !!v || 'Falta el teléfono del cliente']"
+          />
 
-          <Rate v-model="form.rate" />
+          <TextField
+            type="number"
+            v-model="form.rate"
+            label="Tarifa"
+            :rules="[(v) => !!v || 'Falta la tarifa']"
+            required
+            prefix="$"
+          ></TextField>
 
           <TextField
             v-model="form.taxable"
@@ -34,40 +54,27 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import Name from "./nameField.vue";
-import Dni from "./dniField.vue";
-import Telephone from "./telephoneField.vue";
 import SubmitButton from "./SubmitButton.vue";
-import Rate from "./rateField.vue";
-import TextField from "./textField.vue";
-import TextAreaField from "./textAreaField.vue";
+import TextField from "./fields/TextField.vue";
+import TextAreaField from "./fields/TextAreaField.vue";
 import ClientApi from "@/api/client/index";
 
 export default defineComponent({
   name: "ClientForm",
   components: {
-    Name,
-    Dni,
-    Telephone,
     SubmitButton,
-    Rate,
     TextField,
     TextAreaField,
   },
 
   methods: {
     async postClient() {
-      ClientApi.post(this.form);
+      await ClientApi.post(this.form);
     },
   },
 
   data() {
     return {
-      snackbar: {
-        display: false,
-        text: "",
-        color: "black",
-      },
       valid: true,
       form: {
         name: "",
