@@ -62,7 +62,7 @@ export default defineComponent({
       defaultColDef,
       cellWasClicked: (event) => {
         // Example of consuming Grid Event
-        console.log("cell was clicked", event);
+        // console.log("cell was clicked", event);
       },
       deselectRows: () => {
         gridApi.value.deselectAll();

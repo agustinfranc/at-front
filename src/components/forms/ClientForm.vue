@@ -45,7 +45,7 @@
             v-model="form.comments"
           ></TextAreaField>
 
-          <SubmitButton :valid="valid" @click="postClient" />
+          <SubmitButton :valid="valid" @click="storeClient" />
         </v-form>
       </v-card-text>
     </v-card>
@@ -68,8 +68,9 @@ export default defineComponent({
   },
 
   methods: {
-    async postClient() {
-      await ClientApi.post(this.form);
+    async storeClient() {
+      // Si el client tuviera id, haria update y no create
+      await ClientApi.create({ ...this.form });
     },
   },
 
