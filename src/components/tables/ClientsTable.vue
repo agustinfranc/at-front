@@ -6,6 +6,7 @@
 import { defineComponent } from "vue";
 import ClientApi from "@/api/client/index";
 import LazyTable from "@/components/tables/LazyTable.vue";
+import type { ColDef } from "@/components/tables/interfaces/GenericTable/ColumnDefinitions";
 
 export default defineComponent({
   name: "ClientsTable",
@@ -14,8 +15,6 @@ export default defineComponent({
   },
   data() {
     return {
-      //TODO: tipar data
-
       getClients: ClientApi.get,
       columns: [
         {
@@ -42,7 +41,7 @@ export default defineComponent({
           headerName: "Comentarios",
           field: "comments",
         },
-      ],
+      ] as ColDef[],
     };
   },
 });
