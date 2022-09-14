@@ -49,6 +49,9 @@
         </v-form>
       </v-card-text>
     </v-card>
+    <v-snackbar v-model="snackbar.display" :color="snackbar.color">
+      {{ snackbar.text }}
+    </v-snackbar>
   </v-container>
 </template>
 
@@ -70,12 +73,27 @@ export default defineComponent({
   methods: {
     async storeClient() {
       // Si el client tuviera id, haria update y no create
-      await ClientApi.create({ ...this.form });
+      const res = await ClientApi.create({ ...this.form });
+
+      if (res.data) {
+        this.snackbar.text = "Cliente agregado con exito";
+        this.snackbar.display = true;
+        this.snackbar.color = "green";
+      } else {
+        this.snackbar.text = res.response.data.message;
+        this.snackbar.display = true;
+        this.snackbar.color = "red";
+      }
     },
   },
 
   data() {
     return {
+      snackbar: {
+        display: false,
+        text: "",
+        color: "",
+      },
       valid: true,
       form: {
         name: "",

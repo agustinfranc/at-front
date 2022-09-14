@@ -30,6 +30,9 @@
         </v-form>
       </v-card-text>
     </v-card>
+    <v-snackbar v-model="snackbar.display" :color="snackbar.color">
+      {{ snackbar.text }}
+    </v-snackbar>
   </v-container>
 </template>
 
@@ -51,6 +54,22 @@ export default defineComponent({
     ComboboxField,
     SubmitButton,
     TextField,
+  },
+
+  methods: {
+    async storeCompanion() {
+      const res = await CompanionApi.create({ ...this.form });
+
+      if (res.data) {
+        this.snackbar.text = "Acompañante agregado con exito";
+        this.snackbar.display = true;
+        this.snackbar.color = "green";
+      } else {
+        this.snackbar.text = res.response.data.message;
+        this.snackbar.display = true;
+        this.snackbar.color = "red";
+      }
+    },
   },
 
   data: () => ({
