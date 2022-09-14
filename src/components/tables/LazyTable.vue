@@ -5,7 +5,7 @@
 <script lang="ts">
 import { defineComponent, type PropType } from "vue";
 import GenericTable from "./GenericTable.vue";
-import type { ColDef } from "@/components/tables/interfaces/GenericTable/ColumnDefinitions";
+import type { ColDef } from "@/components/tables/interfaces/GenericTable/columnDefinitions";
 
 export default defineComponent({
   name: "LazyTable",

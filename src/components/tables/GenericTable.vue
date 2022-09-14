@@ -21,7 +21,7 @@ import { AgGridVue } from "ag-grid-vue3"; // the AG Grid Vue Component
 import { reactive, ref, defineComponent, computed, type PropType } from "vue";
 import "ag-grid-community/styles/ag-grid.css"; // Core grid CSS, always needed
 import "ag-grid-community/styles/ag-theme-alpine.css"; // Optional theme CSS
-import type { ColDef } from "@/components/tables/interfaces/GenericTable/ColumnDefinitions";
+import type { ColDef } from "@/components/tables/interfaces/GenericTable/columnDefinitions";
 
 export default defineComponent({
   props: {

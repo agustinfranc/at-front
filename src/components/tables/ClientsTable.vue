@@ -6,7 +6,7 @@
 import { defineComponent } from "vue";
 import ClientApi from "@/api/client/index";
 import LazyTable from "@/components/tables/LazyTable.vue";
-import type { ColDef } from "@/components/tables/interfaces/GenericTable/ColumnDefinitions";
+import type { ColDef } from "@/components/tables/interfaces/GenericTable/columnDefinitions";
 
 export default defineComponent({
   name: "ClientsTable",
