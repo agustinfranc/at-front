@@ -49,6 +49,8 @@
         </v-form>
       </v-card-text>
     </v-card>
+
+    <!-- TODO: refactorizar: creacion de componente global -->
     <v-snackbar v-model="snackbar.display" :color="snackbar.color">
       {{ snackbar.text }}
     </v-snackbar>
