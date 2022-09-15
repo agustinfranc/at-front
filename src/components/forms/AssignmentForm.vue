@@ -60,6 +60,7 @@
         </v-form>
       </v-card-text>
     </v-card>
+
     <v-snackbar v-model="snackbar.display" :color="snackbar.color">
       {{ snackbar.text }}
     </v-snackbar>
