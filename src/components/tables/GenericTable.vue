@@ -18,15 +18,21 @@
 
 <script lang="ts">
 import { AgGridVue } from "ag-grid-vue3"; // the AG Grid Vue Component
-import { reactive, ref, defineComponent, computed } from "vue";
-
+import { reactive, ref, defineComponent, computed, type PropType } from "vue";
 import "ag-grid-community/styles/ag-grid.css"; // Core grid CSS, always needed
 import "ag-grid-community/styles/ag-theme-alpine.css"; // Optional theme CSS
+import type { ColDef } from "@/components/tables/interfaces/GenericTable/columnDefinitions";
 
 export default defineComponent({
   props: {
-    columns: Array,
-    rows: Array,
+    columns: {
+      type: Array as PropType<ColDef[]>,
+      required: true,
+    },
+    rows: {
+      type: Array,
+      required: true,
+    },
   },
   name: "GenericTable",
   components: {
@@ -38,7 +44,7 @@ export default defineComponent({
 
     // Each Column Definition results in one Column.
     const columnDefs = reactive({
-      value: props.columns,
+      value: props.columns as ColDef[],
     });
 
     // DefaultColDef sets props common to all Columns
@@ -62,7 +68,7 @@ export default defineComponent({
       defaultColDef,
       cellWasClicked: (event) => {
         // Example of consuming Grid Event
-        console.log("cell was clicked", event);
+        // console.log("cell was clicked", event);
       },
       deselectRows: () => {
         gridApi.value.deselectAll();

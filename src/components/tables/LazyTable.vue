@@ -1,36 +1,31 @@
 <template>
-  <GenericTable :columns="columns" :rows="rows" />
+  <GenericTable :columns="columns" :rows="rows.value" />
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
+import { reactive, onMounted, type PropType } from "vue";
+import type { ColDef } from "@/components/tables/interfaces/GenericTable/columnDefinitions";
 import GenericTable from "./GenericTable.vue";
 
-export default defineComponent({
-  name: "LazyTable",
-  props: {
-    columns: {
-      type: Array,
-      required: true,
-    },
-    request: {
-      type: Function,
-      required: true,
-    },
+const props = defineProps({
+  columns: {
+    type: Array as PropType<ColDef[]>,
+    required: true,
   },
-  components: {
-    GenericTable,
+  request: {
+    type: Function,
+    required: true,
   },
+});
 
-  data() {
-    return {
-      rows: [],
-    };
-  },
+// We use reactive instead of ref
+const rows = reactive({ value: [] });
 
-  async mounted() {
-    const res = await this.request();
-    this.rows = res.data;
-  },
+onMounted(async () => {
+  const res = await props.request();
+
+  if (!res.data) return;
+
+  rows.value = res.data;
 });
 </script>
