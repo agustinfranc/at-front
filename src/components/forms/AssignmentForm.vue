@@ -85,6 +85,7 @@ export default defineComponent({
     async storeAssignment() {
       const res = await AssignmentsApi.create({ ...this.form });
 
+      // TODO: refactor
       if (res.data) {
         this.snackbar.text = "Acompañamiento agregado con exito";
         this.snackbar.display = true;
