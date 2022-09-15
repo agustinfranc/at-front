@@ -66,7 +66,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import SubmitButton from "./SubmitButton.vue";
-import ComboboxField from "./ComboboxField.vue";
+import ComboboxField from "./fields/ComboboxField.vue";
 
 import AssignmentsApi from "@/api/assignment/index";
 
