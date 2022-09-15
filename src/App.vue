@@ -18,14 +18,6 @@ export default defineComponent({
     DefaultLayout,
   },
 
-  methods: {
-    showSnackbar(text: string) {
-      this.snackbar.display = true;
-      this.snackbar.text = text;
-      console.log("funca");
-    },
-  },
-
   data() {
     return {
       snackbar: {
