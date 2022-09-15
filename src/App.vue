@@ -4,14 +4,6 @@
       <DefaultLayout>
         <router-view />
       </DefaultLayout>
-
-      <v-snackbar
-        v-model="snackbar.display"
-        :color="snackbar.color"
-        @onShowSnackbar="showSnackbar"
-      >
-        {{ snackbar.text }}
-      </v-snackbar>
     </v-main>
   </v-app>
 </template>
