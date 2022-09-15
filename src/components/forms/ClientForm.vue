@@ -54,7 +54,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import SubmitButton from "./SubmitButton.vue";
+import SubmitButton from "./common/SubmitButton.vue";
 import TextField from "./fields/TextField.vue";
 import TextAreaField from "./fields/TextAreaField.vue";
 import ClientApi from "@/api/client/index";
