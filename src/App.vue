@@ -20,11 +20,6 @@ export default defineComponent({
 
   data() {
     return {
-      snackbar: {
-        display: false,
-        text: "",
-        color: "black",
-      },
     };
   },
 });
