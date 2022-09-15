@@ -6,7 +6,7 @@
 import { defineComponent } from "vue";
 
 // Components
-import Users from "@/components/tables/usersTable.vue";
+import Users from "@/components/tables/UsersTable.vue";
 
 export default defineComponent({
   name: "UsersView",

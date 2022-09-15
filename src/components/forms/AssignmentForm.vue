@@ -65,7 +65,6 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import SubmitButton from "./common/SubmitButton.vue";
 import ComboboxField from "./fields/ComboboxField.vue";
 
 import AssignmentsApi from "@/api/assignment/index";
@@ -73,7 +72,6 @@ import AssignmentsApi from "@/api/assignment/index";
 export default defineComponent({
   name: "AssignmentForm",
   components: {
-    SubmitButton,
     ComboboxField,
   },
 
