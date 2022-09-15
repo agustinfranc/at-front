@@ -5,12 +5,6 @@
 
       <v-card-text>
         <v-form ref="form" v-model="valid" lazy-validation>
-          <Name v-model="form.name" />
-
-          <DNI v-model="form.dni" />
-
-          <Telephone v-model="form.telephone" />
-
           <TextField
             type="number"
             v-model="form.maxTaxable"
@@ -35,19 +29,13 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import Name from "./nameField.vue";
-import DNI from "./dniField.vue";
-import Telephone from "./telephoneField.vue";
-import ComboboxField from "./ComboboxField.vue";
-import TextField from "./TextField.vue";
+import ComboboxField from "./fields/ComboboxField.vue";
+import TextField from "./fields/TextField.vue";
 import SubmitButton from "./SubmitButton.vue";
 
 export default defineComponent({
   name: "CompanionForm",
   components: {
-    Name,
-    DNI,
-    Telephone,
     ComboboxField,
     SubmitButton,
     TextField,
