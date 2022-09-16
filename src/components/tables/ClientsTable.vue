@@ -1,5 +1,11 @@
 <template>
-  <LazyTable :columns="columns" :request="ClientApi.get" />
+  <v-container>
+    <div class="mb-5">
+      <p class="text-h4 text--primary">Clientes</p>
+    </div>
+
+    <LazyTable :columns="columns" :request="ClientApi.get" />
+  </v-container>
 </template>
 
 <script setup lang="ts">
