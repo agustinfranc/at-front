@@ -1,3 +1,15 @@
 <template>
-  <h1>Companion Form</h1>
+  <CompanionForm />
 </template>
+
+<script lang="ts">
+import { defineComponent } from "vue";
+import CompanionForm from "@/components/forms/CompanionForm.vue";
+
+export default defineComponent({
+  name: "NewCompanionView",
+  components: {
+    CompanionForm,
+  },
+});
+</script>

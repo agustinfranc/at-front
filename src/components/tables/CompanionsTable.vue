@@ -1,83 +1,54 @@
 <template>
   <v-container>
-    <v-card>
-      <v-container>
-        <v-row>
-          <v-col align-self="start" cols="12" sm="4">
-            <v-sheet class="ma-2 pa-2">
-              <v-card-title>Acompañantes</v-card-title>
-            </v-sheet>
-          </v-col>
-          <v-spacer></v-spacer>
-          <v-col align-self="end" cols="12" sm="4">
-            <v-sheet class="ma-2 pa-2">
-              <v-btn
-                rounded="lg"
-                block
-                variant="outlined"
-                dark
-                class="mb-2"
-                v-bind="attrs"
-                v-on="on"
-                to="/companion"
-              >
-                Nuevo
-              </v-btn>
-            </v-sheet>
-          </v-col>
-        </v-row>
-      </v-container>
-      <v-table fixed-header>
-        <thead>
-          <tr>
-            <th class="text-left">Nombre</th>
-            <th class="text-left">DNI</th>
-            <th class="text-left">Tarifa</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="item in companions" :key="item.name">
-            <td>{{ item.name }}</td>
-            <td>{{ item.dni }}</td>
-            <td>{{ item.rate }}</td>
-          </tr>
-        </tbody>
-      </v-table>
-    </v-card>
+    <v-row>
+      <v-col align-self="start" cols="12" sm="4">
+        <p class="text-h4 text--primary">Acompañantes</p>
+      </v-col>
+      <v-spacer></v-spacer>
+      <v-col align-self="end" cols="12" sm="4">
+        <v-sheet class="ma-2 pa-2">
+          <v-btn
+            rounded="lg"
+            block
+            variant="outlined"
+            dark
+            class="mb-2 text--primary"
+            to="/companion"
+          >
+            Nuevo
+          </v-btn>
+        </v-sheet>
+      </v-col>
+    </v-row>
+    <LazyTable :columns="columns" :request="CompanionApi.get" />
   </v-container>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
+import CompanionApi from "@/api/companion/index";
+import LazyTable from "@/components/tables/LazyTable.vue";
+import type { ColDef } from "@/components/tables/interfaces/GenericTable/columnDefinitions";
 
-export default defineComponent({
-  name: "CompanionsTable",
-
-  data() {
-    return {
-      companions: [
-        {
-          name: "Franco Cavallini",
-          dni: 39458753,
-          rate: 350,
-        },
-        {
-          name: "Juan Cruz Torasini",
-          dni: 39567890,
-          rate: 400,
-        },
-        {
-          name: "Joaquin Misisco",
-          dni: 38345678,
-          rate: 500,
-        },
-        {
-          name: "Tomás Vazquez",
-          dni: 40123876,
-          rate: 250,
-        },
-      ],
-    };
+const columns = [
+  {
+    headerName: "Nombre",
+    field: "name",
   },
-});
+  {
+    headerName: "Dni",
+    field: "dni",
+  },
+  {
+    headerName: "Telefono",
+    field: "phone",
+  },
+  {
+    headerName: "Máximo Facturable",
+    field: "taxable",
+  },
+  {
+    headerName: "Extras",
+    field: "extras",
+  },
+] as ColDef[];
 </script>

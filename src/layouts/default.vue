@@ -46,7 +46,7 @@ export default defineComponent({
         {
           title: "Calendario",
           to: "/calendar",
-          icon: "mdi-view-dashboard",
+          icon: "mdi-calendar-month",
         },
         {
           title: "Acompañamientos",
