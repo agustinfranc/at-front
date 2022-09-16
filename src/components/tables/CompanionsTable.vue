@@ -5,7 +5,7 @@
         <v-row>
           <v-col align-self="start" cols="12" sm="4">
             <v-sheet class="ma-2 pa-2">
-              <v-card-title>Acompañadores</v-card-title>
+              <v-card-title>Acompañantes</v-card-title>
             </v-sheet>
           </v-col>
           <v-spacer></v-spacer>
