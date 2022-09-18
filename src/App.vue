@@ -17,10 +17,5 @@ export default defineComponent({
   components: {
     DefaultLayout,
   },
-
-  data() {
-    return {
-    };
-  },
 });
 </script>

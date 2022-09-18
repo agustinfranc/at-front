@@ -10,8 +10,8 @@
             label="Nombre"
             required
             :rules="[
-              (v) => !!v || 'Falta el nombre',
-              (v) => (v && v.length <= 50) || 'Nombre muy largo',
+              (v: any) => !!v || 'Falta el nombre',
+              (v: string | any[]) => (v && v.length <= 50) || 'Nombre muy largo',
             ]"
           ></TextField>
 
@@ -21,14 +21,14 @@
             v-model="form.phone"
             type="number"
             label="Teléfono"
-            :rules="[(v) => !!v || 'Falta el teléfono del cliente']"
+            :rules="[(v: any) => !!v || 'Falta el teléfono del cliente']"
           />
 
           <TextField
             type="number"
             v-model="form.rate"
             label="Tarifa"
-            :rules="[(v) => !!v || 'Falta la tarifa']"
+            :rules="[(v: any) => !!v || 'Falta la tarifa']"
             required
             prefix="$"
           ></TextField>
@@ -63,6 +63,7 @@ import SubmitButton from "./common/SubmitButton.vue";
 import TextField from "./fields/TextField.vue";
 import TextAreaField from "./fields/TextAreaField.vue";
 import ClientApi from "@/api/client/index";
+import { ClientService } from "@/services/clientService";
 
 export default defineComponent({
   name: "ClientForm",
@@ -75,17 +76,20 @@ export default defineComponent({
   methods: {
     async storeClient() {
       // Si el client tuviera id, haria update y no create
-      const res = await ClientApi.create({ ...this.form });
+      const { error } = await new ClientService(new ClientApi()).create({
+        ...this.form,
+      });
 
-      if (res.data) {
-        this.snackbar.text = "Cliente agregado con exito";
-        this.snackbar.display = true;
-        this.snackbar.color = "green";
-      } else {
-        this.snackbar.text = res.response.data.message;
+      if (error) {
+        this.snackbar.text = error.response?.data?.message || error.message;
         this.snackbar.display = true;
         this.snackbar.color = "red";
+        return;
       }
+
+      this.snackbar.text = "Cliente agregado con exito";
+      this.snackbar.display = true;
+      this.snackbar.color = "green";
     },
   },
 
