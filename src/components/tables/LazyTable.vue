@@ -12,20 +12,20 @@ const props = defineProps({
     type: Array as PropType<ColDef[]>,
     required: true,
   },
-  request: {
-    type: Function,
+  service: {
+    type: Object,
     required: true,
   },
 });
 
 // We use reactive instead of ref
-const rows = reactive({ value: [] });
+const rows = reactive({ value: [] as any[] });
 
 onMounted(async () => {
-  const res = await props.request();
+  const { data, error } = await props.service.find();
 
-  if (!res.data) return;
+  if (error) return;
 
-  rows.value = res.data;
+  rows.value = data;
 });
 </script>

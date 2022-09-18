@@ -20,7 +20,8 @@
         </v-sheet>
       </v-col>
     </v-row>
-    <LazyTable :columns="columns" :request="ClientApi.get" />
+
+    <LazyTable :columns="columns" :service="service" />
   </v-container>
 </template>
 
@@ -28,6 +29,9 @@
 import ClientApi from "@/api/client/index";
 import LazyTable from "@/components/tables/LazyTable.vue";
 import type { ColDef } from "@/components/tables/interfaces/GenericTable/columnDefinitions";
+import { ClientService } from "@/services/clientService";
+
+const service = new ClientService(new ClientApi());
 
 const columns = [
   {
