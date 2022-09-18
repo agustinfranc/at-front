@@ -4,18 +4,18 @@
       <DefaultLayout>
         <router-view />
       </DefaultLayout>
+
+      <v-snackbar v-model="snackbar.display" :color="snackbar.color">
+        {{ snackbar.text }}
+      </v-snackbar>
     </v-main>
   </v-app>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
 import DefaultLayout from "./layouts/default.vue";
+import { useSnackbarStore } from "@/stores/snackbar";
 
-export default defineComponent({
-  name: "App",
-  components: {
-    DefaultLayout,
-  },
-});
+const store = useSnackbarStore();
+const snackbar = store.snackbar;
 </script>

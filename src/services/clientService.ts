@@ -16,6 +16,6 @@ export class ClientService extends ApiService {
   }
 
   async create(client: Client): Promise<ApiServiceResponse<Client>> {
-    return await this.handleRequest<Client>(this.api.create, { data: client });
+    return await this.handleRequest<Client>(this.api.create, { ...client });
   }
 }

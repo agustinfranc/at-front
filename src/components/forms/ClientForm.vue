@@ -6,7 +6,7 @@
       <v-card-text>
         <v-form ref="form" v-model="valid" lazy-validation>
           <TextField
-            v-model="form.name"
+            v-model="fields.name"
             label="Nombre"
             required
             :rules="[
@@ -15,10 +15,10 @@
             ]"
           ></TextField>
 
-          <TextField v-model="form.dni" type="number" label="Dni"></TextField>
+          <TextField v-model="fields.dni" type="number" label="Dni"></TextField>
 
           <TextField
-            v-model="form.phone"
+            v-model="fields.phone"
             type="number"
             label="Teléfono"
             :rules="[(v: any) => !!v || 'Falta el teléfono del cliente']"
@@ -26,7 +26,7 @@
 
           <TextField
             type="number"
-            v-model="form.rate"
+            v-model="fields.rate"
             label="Tarifa"
             :rules="[(v: any) => !!v || 'Falta la tarifa']"
             required
@@ -34,7 +34,7 @@
           ></TextField>
 
           <TextField
-            v-model="form.taxable"
+            v-model="fields.taxable"
             label="Porcentaje Facturado"
             prefix="%"
             type="number"
@@ -42,74 +42,48 @@
 
           <TextAreaField
             label="Comentarios"
-            v-model="form.comments"
+            v-model="fields.comments"
           ></TextAreaField>
 
           <SubmitButton :valid="valid" @click="storeClient" />
         </v-form>
       </v-card-text>
     </v-card>
-
-    <!-- TODO: refactorizar: creacion de componente global -->
-    <v-snackbar v-model="snackbar.display" :color="snackbar.color">
-      {{ snackbar.text }}
-    </v-snackbar>
   </v-container>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
+import { reactive, ref, toRaw } from "vue";
 import SubmitButton from "./common/SubmitButton.vue";
 import TextField from "./fields/TextField.vue";
 import TextAreaField from "./fields/TextAreaField.vue";
 import ClientApi from "@/api/client/index";
 import { ClientService } from "@/services/clientService";
+import { useSnackbarStore } from "@/stores/snackbar";
+import Client from "@/api/client/interface";
 
-export default defineComponent({
-  name: "ClientForm",
-  components: {
-    SubmitButton,
-    TextField,
-    TextAreaField,
-  },
+const valid = ref(true);
+const fields = reactive(new Client());
 
-  methods: {
-    async storeClient() {
-      // Si el client tuviera id, haria update y no create
-      const { error } = await new ClientService(new ClientApi()).create({
-        ...this.form,
-      });
+// declare template ref form
+const form = ref();
 
-      if (error) {
-        this.snackbar.text = error.response?.data?.message || error.message;
-        this.snackbar.display = true;
-        this.snackbar.color = "red";
-        return;
-      }
+async function storeClient() {
+  const formValidation = await form.value.validate();
+  if (!formValidation.isValid) return;
 
-      this.snackbar.text = "Cliente agregado con exito";
-      this.snackbar.display = true;
-      this.snackbar.color = "green";
-    },
-  },
+  // Si el client tuviera id, haria update y no create
+  const { error } = await new ClientService(new ClientApi()).create({
+    ...toRaw(fields),
+  });
 
-  data() {
-    return {
-      snackbar: {
-        display: false,
-        text: "",
-        color: "",
-      },
-      valid: true,
-      form: {
-        name: "",
-        dni: "",
-        phone: "",
-        rate: "",
-        comments: "",
-        taxable: "",
-      },
-    };
-  },
-});
+  const snackbarStore = useSnackbarStore();
+
+  if (!error) {
+    snackbarStore.showSuccess({
+      text: "Cliente agregado con exito",
+    });
+    return;
+  }
+}
 </script>

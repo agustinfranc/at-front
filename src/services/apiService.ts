@@ -1,4 +1,5 @@
 import type { AxiosError, AxiosPromise } from "axios";
+import { useSnackbarStore } from "@/stores/snackbar";
 
 export interface ApiServiceResponse<T, D = ErrorApiServiceResponse> {
   data?: T;
@@ -11,9 +12,7 @@ interface ErrorApiServiceResponse {
 }
 
 export abstract class ApiService {
-  constructor() {
-    // declare pinia here
-  }
+  constructor(private snackbarStore = useSnackbarStore()) {}
 
   protected async handleRequest<T>(
     request: { (param: any): AxiosPromise },
@@ -21,10 +20,14 @@ export abstract class ApiService {
   ): Promise<ApiServiceResponse<T>> {
     try {
       return await request(payload);
-    } catch (error: unknown) {
-      console.log(error);
-      // dispatch message with pinia
-      return { error } as { error: AxiosError<ErrorApiServiceResponse> };
+    } catch (e: unknown) {
+      const error = e as AxiosError<ErrorApiServiceResponse>;
+
+      this.snackbarStore.showError({
+        text: error?.response?.data?.message || error?.message,
+      });
+
+      return { error };
     }
   }
 }
