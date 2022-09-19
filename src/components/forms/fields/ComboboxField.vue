@@ -5,7 +5,6 @@
     item-text="nombre"
     :rules="[(v) => !!v || 'Ingresar']"
     :label="label"
-    required
     :multiple="multiple"
   ></v-combobox>
 </template>

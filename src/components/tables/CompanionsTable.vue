@@ -29,11 +29,19 @@ const columns = [
   },
   {
     headerName: "Máximo Facturable",
-    field: "taxable",
+    field: "max_taxable",
   },
   {
-    headerName: "Extras",
-    field: "extras",
+    headerName: "Monotributo",
+    field: "monotax",
+  },
+  {
+    headerName: "Antecedentes",
+    field: "criminal_record",
+  },
+  {
+    headerName: "Seguro",
+    field: "insurance",
   },
 ] as ColDef[];
 </script>

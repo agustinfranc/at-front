@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <TableHeader title="Asignaciones" route="/assignment" />
+    <TableHeader title="Acompañamientos" route="/assignment" />
     <LazyTable :columns="columns" :request="getAssignments" />
   </v-container>
 </template>

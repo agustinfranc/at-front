@@ -6,7 +6,7 @@
       <v-card-text>
         <v-form ref="form" v-model="valid" lazy-validation>
           <TextField
-            v-model="form.name"
+            v-model="fields.name"
             label="Nombre"
             required
             :rules="[
@@ -15,10 +15,10 @@
             ]"
           ></TextField>
 
-          <TextField v-model="form.dni" type="number" label="Dni"></TextField>
+          <TextField v-model="fields.dni" type="number" label="Dni"></TextField>
 
           <TextField
-            v-model="form.phone"
+            v-model="fields.phone"
             type="number"
             label="Teléfono"
             :rules="[(v) => !!v || 'Falta el teléfono del acompañante']"
@@ -26,73 +26,50 @@
 
           <TextField
             type="number"
-            v-model="form.maxTaxable"
+            v-model="fields.max_taxable"
             label="Máximo Facturable"
             prefix="$"
           ></TextField>
-
-          <ComboboxField v-model="form.extras" label="Extras" multiple chips />
 
           <SubmitButton :valid="valid" @click="storeCompanion" />
         </v-form>
       </v-card-text>
     </v-card>
-
-    <!-- TODO: refactorizar: creacion de componente global -->
-    <v-snackbar v-model="snackbar.display" :color="snackbar.color">
-      {{ snackbar.text }}
-    </v-snackbar>
   </v-container>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
+import { reactive, ref, toRaw } from "vue";
 import SubmitButton from "./common/SubmitButton.vue";
 import TextField from "./fields/TextField.vue";
-import ComboboxField from "./fields/ComboboxField.vue";
 import CompanionApi from "@/api/companion/index";
+import { CompanionService } from "@/services/companionService";
+import { useSnackbarStore } from "@/stores/snackbar";
+import Companion from "@/api/companion/interface";
 
-export default defineComponent({
-  name: "ClientForm",
-  components: {
-    SubmitButton,
-    TextField,
-    ComboboxField,
-  },
+const valid = ref(true);
+const fields = reactive(new Companion());
 
-  methods: {
-    async storeCompanion() {
-      // Si el client tuviera id, haria update y no create
-      const res = await CompanionApi.create({ ...this.form });
+// declare template ref form
+const form = ref();
 
-      if (res.data) {
-        this.snackbar.text = "Acompañante agregado con exito";
-        this.snackbar.display = true;
-        this.snackbar.color = "green";
-      } else {
-        this.snackbar.text = res.response.data.message;
-        this.snackbar.display = true;
-        this.snackbar.color = "red";
-      }
-    },
-  },
+async function storeCompanion() {
+  const formValidation = await form.value.validate();
+  console.log("hola", formValidation);
+  if (!formValidation.valid) return;
 
-  data() {
-    return {
-      snackbar: {
-        display: false,
-        text: "",
-        color: "",
-      },
-      valid: true,
-      form: {
-        name: "",
-        dni: "",
-        phone: "",
-        maxTaxable: "",
-        extras: "",
-      },
-    };
-  },
-});
+  // Si el acompañante tuviera id, haria update y no create
+  const { error } = await new CompanionService(new CompanionApi()).create({
+    ...toRaw(fields),
+  });
+
+  const snackbarStore = useSnackbarStore();
+
+  if (!error) {
+    snackbarStore.showSuccess({
+      text: "Acompañante agregado con exito",
+    });
+    return;
+  }
+}
 </script>

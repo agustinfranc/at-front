@@ -70,7 +70,7 @@ const form = ref();
 
 async function storeClient() {
   const formValidation = await form.value.validate();
-  if (!formValidation.isValid) return;
+  if (!formValidation.valid) return;
 
   // Si el client tuviera id, haria update y no create
   const { error } = await new ClientService(new ClientApi()).create({
