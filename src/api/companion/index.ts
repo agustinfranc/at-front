@@ -4,7 +4,7 @@ import type Companion from "./interface";
 
 class CompanionApi extends ApiEngine {
   static async get(): Promise<AxiosResponse<Companion[]> | unknown> {
-    return await super.request({ method: "get", path: "/companion" });
+    return await super.request({ method: "get", path: "/companions" });
   }
 
   static async create(
