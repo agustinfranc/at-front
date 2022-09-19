@@ -1,26 +1,7 @@
 <template>
   <v-container>
-    <v-row>
-      <v-col align-self="start" cols="12" sm="4">
-        <p class="text-h4 text--primary">Acompañantes</p>
-      </v-col>
-      <v-spacer></v-spacer>
-      <v-col align-self="end" cols="12" sm="4">
-        <v-sheet class="ma-2 pa-2">
-          <v-btn
-            rounded="lg"
-            block
-            variant="outlined"
-            dark
-            class="mb-2 text--primary"
-            to="/companion"
-          >
-            Nuevo
-          </v-btn>
-        </v-sheet>
-      </v-col>
-    </v-row>
-    <LazyTable :columns="columns" :request="CompanionApi.get" />
+    <TableHeader title="Acompañantes" route="/companion" />
+    <LazyTable :columns="columns" :service="service" />
   </v-container>
 </template>
 
@@ -28,6 +9,10 @@
 import CompanionApi from "@/api/companion/index";
 import LazyTable from "@/components/tables/LazyTable.vue";
 import type { ColDef } from "@/components/tables/interfaces/GenericTable/columnDefinitions";
+import TableHeader from "./extras/TableHeader.vue";
+import { CompanionService } from "@/services/companionService";
+
+const service = new CompanionService(new CompanionApi());
 
 const columns = [
   {

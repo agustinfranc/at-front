@@ -1,20 +1,18 @@
-import type { AxiosResponse } from "axios";
-import { ApiEngine } from "../engine";
+import type { AxiosPromise } from "axios";
 import type Companion from "./interface";
+import axiosInstance from "@/plugins/axios";
 
-class CompanionApi extends ApiEngine {
-  static async get(): Promise<AxiosResponse<Companion[]> | unknown> {
-    return await super.request({ method: "get", path: "/companions" });
+class CompanionApi {
+  getAll(): AxiosPromise<Companion[]> {
+    return axiosInstance.get("/companions");
   }
 
-  static async create(
-    companion: Companion
-  ): Promise<AxiosResponse<Companion> | unknown> {
-    return await super.request({
-      method: "post",
-      path: "/companions",
-      data: companion,
-    });
+  getOne(): AxiosPromise<Companion[]> {
+    return axiosInstance.get("/companions");
+  }
+
+  create(companion: Companion): AxiosPromise<Companion> {
+    return axiosInstance.post("/companions", companion);
   }
 }
 

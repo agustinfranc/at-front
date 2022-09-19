@@ -1,25 +1,6 @@
 <template>
   <v-container>
-    <v-row>
-      <v-col align-self="start" cols="12" sm="4">
-        <p class="text-h4 text--primary">Clientes</p>
-      </v-col>
-      <v-spacer></v-spacer>
-      <v-col align-self="end" cols="12" sm="4">
-        <v-sheet class="ma-2 pa-2">
-          <v-btn
-            rounded="lg"
-            block
-            variant="outlined"
-            dark
-            class="mb-2 text--primary"
-            to="/client"
-          >
-            Nuevo
-          </v-btn>
-        </v-sheet>
-      </v-col>
-    </v-row>
+    <TableHeader title="Clientes" route="/client" />
 
     <LazyTable :columns="columns" :service="service" />
   </v-container>
@@ -28,6 +9,7 @@
 <script setup lang="ts">
 import ClientApi from "@/api/client/index";
 import LazyTable from "@/components/tables/LazyTable.vue";
+import TableHeader from "./extras/TableHeader.vue";
 import type { ColDef } from "@/components/tables/interfaces/GenericTable/columnDefinitions";
 import { ClientService } from "@/services/clientService";
 
