@@ -1,8 +1,6 @@
 <template>
   <v-container>
-    <div class="mb-5">
-      <p class="text-h4 text--primary">Clientes</p>
-    </div>
+    <TableHeader title="Clientes" route="/client" />
 
     <LazyTable :columns="columns" :service="service" />
   </v-container>
@@ -11,6 +9,7 @@
 <script setup lang="ts">
 import ClientApi from "@/api/client/index";
 import LazyTable from "@/components/tables/LazyTable.vue";
+import TableHeader from "./extras/TableHeader.vue";
 import type { ColDef } from "@/components/tables/interfaces/GenericTable/columnDefinitions";
 import { ClientService } from "@/services/clientService";
 
