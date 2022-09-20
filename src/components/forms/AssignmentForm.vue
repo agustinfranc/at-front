@@ -60,6 +60,10 @@
         </v-form>
       </v-card-text>
     </v-card>
+
+    <v-snackbar v-model="snackbar.display" :color="snackbar.color">
+      {{ snackbar.text }}
+    </v-snackbar>
   </v-container>
 </template>
 
@@ -75,14 +79,25 @@ export default defineComponent({
     ComboboxField,
   },
 
-  async validate() {
-    this.request(this.form);
+  methods: {
+    async storeAssignment() {
+      const res = await AssignmentsApi.create({ ...this.form });
+
+      // TODO: refactor
+      if (res.data) {
+        this.snackbar.text = "Acompañamiento agregado con exito";
+        this.snackbar.display = true;
+        this.snackbar.color = "green";
+      } else {
+        this.snackbar.text = res.response.data.message;
+        this.snackbar.display = true;
+        this.snackbar.color = "red";
+      }
+    },
   },
 
   data() {
     return {
-      assignmentPost: AssignmentsApi.post,
-
       snackbar: {
         display: false,
         text: "",

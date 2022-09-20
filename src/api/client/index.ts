@@ -1,20 +1,18 @@
-import type { AxiosResponse } from "axios";
-import { ApiEngine } from "../engine";
+import type { AxiosPromise } from "axios";
 import type Client from "./interface";
+import axiosInstance from "@/plugins/axios";
 
-class ClientApi extends ApiEngine {
-  static async get(): Promise<AxiosResponse<Client[]> | unknown> {
-    return await super.request({ method: "get", path: "/clients" });
+class ClientApi {
+  getAll(): AxiosPromise<Client[]> {
+    return axiosInstance.get("/clients");
   }
 
-  static async create(
-    client: Client
-  ): Promise<AxiosResponse<Client> | unknown> {
-    return await super.request({
-      method: "post",
-      path: "/clients",
-      data: client,
-    });
+  getOne(): AxiosPromise<Client[]> {
+    return axiosInstance.get("/clients");
+  }
+
+  create(client: Client): AxiosPromise<Client> {
+    return axiosInstance.post("/clients", client);
   }
 }
 

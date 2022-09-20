@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <div>
     <!-- <button @click="deselectRows">deselect rows</button> -->
     <ag-grid-vue
       class="ag-theme-alpine"
@@ -13,7 +13,7 @@
       @grid-ready="onGridReady"
     >
     </ag-grid-vue>
-  </v-container>
+  </div>
 </template>
 
 <script lang="ts">

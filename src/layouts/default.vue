@@ -1,67 +1,36 @@
 <template>
-  <v-app id="inspire">
-    <v-navigation-drawer v-model="drawer" app>
-      <v-list>
-        <v-list-item v-for="item in items" :key="item.title" :to="item.to">
-          <v-divider v-if="item.separator"></v-divider>
-          <v-list-item-content>
-            <v-list-item-title class="font-weight-light" v-text="item.title" />
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-
-      <template v-slot:append>
+  <v-card class="h-100">
+    <v-layout class="h-100">
+      <v-navigation-drawer expand-on-hover rail>
         <v-list>
-          <v-list-item @click.stop="$vuetify.theme.dark = !$vuetify.theme.dark">
-            <v-list-item-action>
-              <v-icon class="mx-5" v-if="!$vuetify.theme.dark"
-                >mdi-weather-sunny</v-icon
-              >
-              <v-icon class="mx-5" v-else>mdi-weather-night</v-icon>
-            </v-list-item-action>
+          <v-list-item
+            prepend-avatar="https://randomuser.me/api/portraits/women/85.jpg"
+            title="Usuario Admin"
+            subtitle="ejemplo@gmail.com"
+          ></v-list-item>
+        </v-list>
 
-            <v-list-item-content>
-              <v-list-item-title
-                v-if="$vuetify.theme.dark"
-                v-text="'Modo Oscuro'"
-              />
-              <v-list-item-title v-else v-text="'Modo Claro'" />
-            </v-list-item-content>
-          </v-list-item>
+        <v-divider></v-divider>
 
-          <v-list-item @click.stop="logout">
-            <v-list-item-action>
-              <v-icon class="mx-5">mdi-logout</v-icon>
-            </v-list-item-action>
-
-            <v-list-item-content>
-              <v-list-item-title v-text="'Salir'" />
-            </v-list-item-content>
+        <v-list density="compact" nav>
+          <v-list-item
+            v-for="item in items"
+            :prepend-icon="item.icon"
+            :key="item.title"
+            :to="item.to"
+            :value="item.title"
+            :title="item.title"
+          >
+            <v-divider v-if="item.separator"></v-divider>
           </v-list-item>
         </v-list>
-      </template>
-    </v-navigation-drawer>
+      </v-navigation-drawer>
 
-    <v-app-bar app>
-      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-
-      <v-toolbar-title class="font-weight-light text-h5">Nexos</v-toolbar-title>
-    </v-app-bar>
-
-    <v-main>
-      <slot></slot>
-    </v-main>
-
-    <v-card>
-      <v-footer color="grey">
-        <v-row>
-          <v-col class="text-center" cols="12">
-            {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
-          </v-col>
-        </v-row>
-      </v-footer>
-    </v-card>
-  </v-app>
+      <v-main>
+        <slot></slot>
+      </v-main>
+    </v-layout>
+  </v-card>
 </template>
 
 <script lang="ts">
@@ -77,29 +46,36 @@ export default defineComponent({
         {
           title: "Calendario",
           to: "/calendar",
+          icon: "mdi-calendar-month",
         },
         {
           title: "Acompañamientos",
           to: "/assignments",
+          icon: "mdi-account-multiple",
         },
         {
           title: "Clientes",
           to: "/clients",
+          icon: "mdi-home-city",
         },
         {
-          title: "Acompañadores",
+          title: "Acompañantes",
           to: "/companions",
+          icon: "mdi-account",
         },
         {
           separator: true,
+          icon: "",
         },
         {
           title: "Saldos",
           to: "/saldos",
+          icon: "mdi-folder",
         },
         {
           title: "Usuarios",
           to: "/users",
+          icon: "mdi-account-group-outline",
         },
       ],
     };

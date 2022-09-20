@@ -1,9 +1,9 @@
-export default interface Client {
+export default class Client {
   id?: number;
-  name: string;
-  dni: string;
-  phone: string;
-  rate: string;
-  taxable: string;
-  comments?: string;
+  name: string = "";
+  dni: string = "";
+  phone: string = "";
+  rate: string = "";
+  taxable: string = "";
+  comments?: string = "";
 }

@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-card>
-      <v-card-title>Cliente Nuevo</v-card-title>
+      <v-card-title>Acompañante Nuevo</v-card-title>
 
       <v-card-text>
         <v-form ref="form" v-model="valid" lazy-validation>
@@ -10,8 +10,8 @@
             label="Nombre"
             required
             :rules="[
-              (v: any) => !!v || 'Falta el nombre',
-              (v: string | any[]) => (v && v.length <= 50) || 'Nombre muy largo',
+              (v) => !!v || 'Falta el nombre',
+              (v) => (v && v.length <= 50) || 'Nombre muy largo',
             ]"
           ></TextField>
 
@@ -21,31 +21,17 @@
             v-model="fields.phone"
             type="number"
             label="Teléfono"
-            :rules="[(v: any) => !!v || 'Falta el teléfono del cliente']"
+            :rules="[(v) => !!v || 'Falta el teléfono del acompañante']"
           />
 
           <TextField
             type="number"
-            v-model="fields.rate"
-            label="Tarifa"
-            :rules="[(v: any) => !!v || 'Falta la tarifa']"
-            required
+            v-model="fields.max_taxable"
+            label="Máximo Facturable"
             prefix="$"
           ></TextField>
 
-          <TextField
-            v-model="fields.taxable"
-            label="Porcentaje Facturado"
-            prefix="%"
-            type="number"
-          />
-
-          <TextAreaField
-            label="Comentarios"
-            v-model="fields.comments"
-          ></TextAreaField>
-
-          <SubmitButton :valid="valid" @click="storeClient" />
+          <SubmitButton :valid="valid" @click="storeCompanion" />
         </v-form>
       </v-card-text>
     </v-card>
@@ -56,24 +42,24 @@
 import { reactive, ref, toRaw } from "vue";
 import SubmitButton from "./common/SubmitButton.vue";
 import TextField from "./fields/TextField.vue";
-import TextAreaField from "./fields/TextAreaField.vue";
-import ClientApi from "@/api/client/index";
-import { ClientService } from "@/services/clientService";
+import CompanionApi from "@/api/companion/index";
+import { CompanionService } from "@/services/companionService";
 import { useSnackbarStore } from "@/stores/snackbar";
-import Client from "@/api/client/interface";
+import Companion from "@/api/companion/interface";
 
 const valid = ref(true);
-const fields = reactive(new Client());
+const fields = reactive(new Companion());
 
 // declare template ref form
 const form = ref();
 
-async function storeClient() {
+async function storeCompanion() {
   const formValidation = await form.value.validate();
+  console.log("hola", formValidation);
   if (!formValidation.valid) return;
 
-  // Si el client tuviera id, haria update y no create
-  const { error } = await new ClientService(new ClientApi()).create({
+  // Si el acompañante tuviera id, haria update y no create
+  const { error } = await new CompanionService(new CompanionApi()).create({
     ...toRaw(fields),
   });
 
@@ -81,7 +67,7 @@ async function storeClient() {
 
   if (!error) {
     snackbarStore.showSuccess({
-      text: "Cliente agregado con exito",
+      text: "Acompañante agregado con exito",
     });
     return;
   }
