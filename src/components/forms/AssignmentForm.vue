@@ -6,18 +6,18 @@
       <v-card-text>
         <v-form ref="form" v-model="valid" lazy-validation>
           <ComboboxField
-            v-model="form.client"
+            v-model="fields.client_id"
             :items="clients"
             label="Cliente"
           />
 
           <ComboboxField
-            v-model="form.companion"
+            v-model="fields.companion"
             :items="companions"
             label="Acompañante"
           />
           <ComboboxField
-            v-model="form.days"
+            v-model="fields.days"
             :items="days"
             label="Días"
             multiple
@@ -29,14 +29,14 @@
           <v-slider
             step="1"
             show-ticks="always"
-            v-model="form.hours"
+            v-model="fields.hours"
             thumb-label
             :max="24"
             :min="0"
           >
             <template v-slot:append>
               <v-text-field
-                v-model="form.hours"
+                v-model="fields.hours"
                 type="number"
                 density="compact"
                 hide-details
@@ -45,9 +45,9 @@
             </template>
           </v-slider>
 
-          <v-checkbox v-model="form.periodic" label="Periódico"></v-checkbox>
+          <v-checkbox v-model="fields.periodic" label="Periódico"></v-checkbox>
 
-          <v-checkbox v-model="form.enabled" label="Habilitado"></v-checkbox>
+          <v-checkbox v-model="fields.enabled" label="Habilitado"></v-checkbox>
 
           <v-btn
             :disabled="!valid"
@@ -67,66 +67,36 @@
   </v-container>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
+import { reactive, ref, toRaw } from "vue";
 import ComboboxField from "./fields/ComboboxField.vue";
-
 import AssignmentsApi from "@/api/assignment/index";
+import Assignment from "@/api/assignment/interface";
+import { AssignmentService } from "@/services/assignmentService";
+import { useSnackbarStore } from "@/stores/snackbar";
 
-export default defineComponent({
-  name: "AssignmentForm",
-  components: {
-    ComboboxField,
-  },
+const valid = ref(true);
+const fields = reactive(new Assignment());
 
-  methods: {
-    async storeAssignment() {
-      const res = await AssignmentsApi.create({ ...this.form });
+// declare template ref form
+const form = ref();
 
-      // TODO: refactor
-      if (res.data) {
-        this.snackbar.text = "Acompañamiento agregado con exito";
-        this.snackbar.display = true;
-        this.snackbar.color = "green";
-      } else {
-        this.snackbar.text = res.response.data.message;
-        this.snackbar.display = true;
-        this.snackbar.color = "red";
-      }
-    },
-  },
+async function storeAssignment() {
+  const formValidation = await form.value.validate();
+  if (!formValidation.valid) return;
 
-  data() {
-    return {
-      snackbar: {
-        display: false,
-        text: "",
-        color: "black",
-      },
+  // Si el client tuviera id, haria update y no create
+  const { error } = await new AssignmentService(new AssignmentsApi()).create({
+    ...toRaw(fields),
+  });
 
-      clients: ["Franco Cavallini", "Gastón Malalel"],
-      companions: ["Juan Cruz Torasini", "Joaquín Misisco"],
-      days: [
-        "Lunes",
-        "Martes",
-        "Miércoles",
-        "Jueves",
-        "Viernes",
-        "Sábado",
-        "Domingo",
-      ],
+  const snackbarStore = useSnackbarStore();
 
-      valid: true,
-      form: {
-        client: "",
-        companion: "",
-        days: [],
-        hours: "",
-        periodic: false,
-        enabled: true,
-      },
-      passRules: [(v) => !!v || "Falta la constraseña del Usuario"],
-    };
-  },
-});
+  if (!error) {
+    snackbarStore.showSuccess({
+      text: "Asignación agregada con exito",
+    });
+    return;
+  }
+}
 </script>
