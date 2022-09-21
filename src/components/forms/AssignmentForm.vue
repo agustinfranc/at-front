@@ -16,6 +16,7 @@
             :items="companions"
             label="Acompañante"
           />
+
           <ComboboxField
             v-model="fields.days"
             :items="days"
