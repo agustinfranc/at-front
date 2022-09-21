@@ -31,7 +31,33 @@
             prefix="$"
           ></TextField>
 
-          <SubmitButton :valid="valid" @click="storeCompanion" />
+          <v-expansion-panels>
+            <v-expansion-panel>
+              <v-expansion-panel-title> Extras </v-expansion-panel-title>
+              <v-expansion-panel-text>
+                <div class="d-flex justify-center align-center">
+                  <v-checkbox
+                    v-model="fields.monotax"
+                    :label="`Es Monotributista`"
+                  />
+                </div>
+                <div class="d-flex justify-center align-center">
+                  <v-checkbox
+                    v-model="fields.criminal_record"
+                    :label="`Tiene antecedentes penales`"
+                  />
+                </div>
+                <div class="d-flex justify-center align-center">
+                  <v-checkbox
+                    v-model="fields.insurance"
+                    :label="`Tiene seguro`"
+                  />
+                </div>
+              </v-expansion-panel-text>
+            </v-expansion-panel>
+          </v-expansion-panels>
+
+          <SubmitButton class="my-5" :valid="valid" @click="storeCompanion" />
         </v-form>
       </v-card-text>
     </v-card>
@@ -55,7 +81,6 @@ const form = ref();
 
 async function storeCompanion() {
   const formValidation = await form.value.validate();
-  console.log("hola", formValidation);
   if (!formValidation.valid) return;
 
   // Si el acompañante tuviera id, haria update y no create
