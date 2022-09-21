@@ -31,27 +31,33 @@
             prefix="$"
           ></TextField>
 
-          <v-card class="mx-auto my-5">
-            <v-list>
-              <v-list-group>
-                <template v-slot:activator="{ props }">
-                  <v-list-item v-bind="props" title="Extras"></v-list-item>
-                </template>
-                <v-list-item>
-                  <v-row class="d-flex justify-center align-center">
-                    <v-checkbox v-model="fields.monotax"
-                      >Monotributo</v-checkbox
-                    >
-                    <v-checkbox v-model="fields.criminal_record"
-                      >Antecedentes</v-checkbox
-                    >
-                    <v-checkbox v-model="fields.insurance">Seguro</v-checkbox>
-                  </v-row>
-                </v-list-item>
-              </v-list-group>
-            </v-list>
-          </v-card>
-          <SubmitButton :valid="valid" @click="storeCompanion" />
+          <v-expansion-panels>
+            <v-expansion-panel>
+              <v-expansion-panel-title> Extras </v-expansion-panel-title>
+              <v-expansion-panel-text>
+                <div class="d-flex justify-center align-center">
+                  <v-checkbox
+                    v-model="fields.monotax"
+                    :label="`Es Monotributista`"
+                  />
+                </div>
+                <div class="d-flex justify-center align-center">
+                  <v-checkbox
+                    v-model="fields.criminal_record"
+                    :label="`Tiene antecedentes penales`"
+                  />
+                </div>
+                <div class="d-flex justify-center align-center">
+                  <v-checkbox
+                    v-model="fields.insurance"
+                    :label="`Tiene seguro`"
+                  />
+                </div>
+              </v-expansion-panel-text>
+            </v-expansion-panel>
+          </v-expansion-panels>
+
+          <SubmitButton class="my-5" :valid="valid" @click="storeCompanion" />
         </v-form>
       </v-card-text>
     </v-card>
@@ -66,7 +72,6 @@ import CompanionApi from "@/api/companion/index";
 import { CompanionService } from "@/services/companionService";
 import { useSnackbarStore } from "@/stores/snackbar";
 import Companion from "@/api/companion/interface";
-import ComboboxField from "./fields/ComboboxField.vue";
 
 const valid = ref(true);
 const fields = reactive(new Companion());
@@ -76,7 +81,6 @@ const form = ref();
 
 async function storeCompanion() {
   const formValidation = await form.value.validate();
-  console.log("hola", formValidation);
   if (!formValidation.valid) return;
 
   // Si el acompañante tuviera id, haria update y no create
