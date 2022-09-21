@@ -31,17 +31,5 @@ const columns = [
     headerName: "Máximo Facturable",
     field: "max_taxable",
   },
-  {
-    headerName: "Monotributo",
-    field: "monotax",
-  },
-  {
-    headerName: "Antecedentes",
-    field: "criminal_record",
-  },
-  {
-    headerName: "Seguro",
-    field: "insurance",
-  },
 ] as ColDef[];
 </script>

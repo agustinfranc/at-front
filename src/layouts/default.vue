@@ -1,7 +1,7 @@
 <template>
   <v-card class="h-100">
     <v-layout class="h-100">
-      <v-navigation-drawer expand-on-hover rail>
+      <v-navigation-drawer expand-on-hover rail permanent>
         <v-list>
           <v-list-item
             prepend-avatar="https://randomuser.me/api/portraits/women/85.jpg"

@@ -31,6 +31,26 @@
             prefix="$"
           ></TextField>
 
+          <v-card class="mx-auto my-5">
+            <v-list>
+              <v-list-group>
+                <template v-slot:activator="{ props }">
+                  <v-list-item v-bind="props" title="Extras"></v-list-item>
+                </template>
+                <v-list-item>
+                  <v-row class="d-flex justify-center align-center">
+                    <v-checkbox v-model="fields.monotax"
+                      >Monotributo</v-checkbox
+                    >
+                    <v-checkbox v-model="fields.criminal_record"
+                      >Antecedentes</v-checkbox
+                    >
+                    <v-checkbox v-model="fields.insurance">Seguro</v-checkbox>
+                  </v-row>
+                </v-list-item>
+              </v-list-group>
+            </v-list>
+          </v-card>
           <SubmitButton :valid="valid" @click="storeCompanion" />
         </v-form>
       </v-card-text>
@@ -46,6 +66,7 @@ import CompanionApi from "@/api/companion/index";
 import { CompanionService } from "@/services/companionService";
 import { useSnackbarStore } from "@/stores/snackbar";
 import Companion from "@/api/companion/interface";
+import ComboboxField from "./fields/ComboboxField.vue";
 
 const valid = ref(true);
 const fields = reactive(new Companion());
