@@ -11,11 +11,22 @@
             label="Cliente"
           />
 
-          <ComboboxField
+          <v-combobox
+            :v-model="fields.companion_id"
+            :items="companions"
+            label="Acompañante"
+            item-title="name"
+            item-value="id"
+          >
+          </v-combobox>
+
+          <!-- <ComboboxField
             v-model="fields.companion_id"
             :items="companions"
             label="Acompañante"
-          />
+            item-title="name"
+            item-value="id"
+          /> -->
 
           <ComboboxField
             v-model="fields.days"
@@ -55,19 +66,32 @@
       </v-card-text>
     </v-card>
   </v-container>
+  {{ companions }}
 </template>
 
 <script setup lang="ts">
-import { reactive, ref, toRaw } from "vue";
+import { onMounted, reactive, ref, toRaw, type Ref } from "vue";
 import ComboboxField from "./fields/ComboboxField.vue";
 import AssignmentsApi from "@/api/assignment/index";
+import ClientApi from "@/api/client";
 import Assignment from "@/api/assignment/interface";
 import { AssignmentService } from "@/services/assignmentService";
 import { useSnackbarStore } from "@/stores/snackbar";
 import SubmitButton from "./common/SubmitButton.vue";
+import { ClientService } from "@/services/clientService";
+import CompanionApi from "@/api/companion";
+import { CompanionService } from "@/services/companionService";
+import type Client from "@/api/client/interface";
+import type Companion from "@/api/companion/interface";
 
 const valid = ref(true);
 const fields = reactive(new Assignment());
+
+const clientService = new ClientService(new ClientApi());
+const companionService = new CompanionService(new CompanionApi());
+
+const clients: Ref<Client[] | undefined> = ref();
+const companions: Ref<Companion[] | undefined> = ref();
 
 // declare template ref form
 const form = ref();
@@ -90,4 +114,18 @@ async function storeAssignment() {
     return;
   }
 }
+
+onMounted(async () => {
+  const clientsData = await clientService.find();
+  const companionsData = await companionService.find();
+
+  if (clientsData.error || companionsData.error) return;
+
+  clients.value = clientsData.data;
+  companions.value = companionsData.data;
+
+  console.log(clients.value);
+});
+
+const days = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes"];
 </script>

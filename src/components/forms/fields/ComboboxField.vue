@@ -2,23 +2,27 @@
   <v-combobox
     :items="items"
     item-value="id"
-    item-text="nombre"
-    :rules="[(v) => !!v || 'Ingresar']"
+    item-title="name"
     :label="label"
     :multiple="multiple"
   ></v-combobox>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-
-export default defineComponent({
-  props: ["value", "items", "label", "multiple"],
-  name: "ComboboxField",
-  data() {
-    return {
-      value: this.value,
-    };
+<script setup lang="ts">
+const props = defineProps({
+  itemValue: {
+    type: String,
+    //default: "id",
   },
+  itemText: {
+    type: String,
+    //default: "name",
+  },
+  label: String,
+  multiple: {
+    type: Boolean,
+    //default: false,
+  },
+  items: null,
 });
 </script>
