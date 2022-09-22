@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <TableHeader title="Acompañamientos" route="/assignment" />
+    <TableHeader title="Acompañamientos" route="assignment" />
     <LazyTable :columns="columns" :service="service" />
   </v-container>
 </template>
@@ -10,6 +10,7 @@ import AssignmentApi from "@/api/assignment/index";
 import LazyTable from "@/components/tables/LazyTable.vue";
 import TableHeader from "./extras/TableHeader.vue";
 import { AssignmentService } from "@/services/assignmentService";
+import type { ColDef } from "@/components/tables/interfaces/GenericTable/columnDefinitions";
 
 const service = new AssignmentService(new AssignmentApi());
 
@@ -30,5 +31,5 @@ const columns = [
     headerName: "Horas",
     field: "hours",
   },
-];
+] as ColDef[];
 </script>

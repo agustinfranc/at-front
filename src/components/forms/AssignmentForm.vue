@@ -12,7 +12,7 @@
           />
 
           <ComboboxField
-            v-model="fields.companion"
+            v-model="fields.companion_id"
             :items="companions"
             label="Acompañante"
           />
@@ -50,21 +50,10 @@
 
           <v-checkbox v-model="fields.enabled" label="Habilitado"></v-checkbox>
 
-          <v-btn
-            :disabled="!valid"
-            color="success"
-            class="mr-4"
-            @click="validate"
-          >
-            Enviar
-          </v-btn>
+          <SubmitButton :valid="valid" @click="storeAssignment" />
         </v-form>
       </v-card-text>
     </v-card>
-
-    <v-snackbar v-model="snackbar.display" :color="snackbar.color">
-      {{ snackbar.text }}
-    </v-snackbar>
   </v-container>
 </template>
 
@@ -75,6 +64,7 @@ import AssignmentsApi from "@/api/assignment/index";
 import Assignment from "@/api/assignment/interface";
 import { AssignmentService } from "@/services/assignmentService";
 import { useSnackbarStore } from "@/stores/snackbar";
+import SubmitButton from "./common/SubmitButton.vue";
 
 const valid = ref(true);
 const fields = reactive(new Assignment());
@@ -86,7 +76,7 @@ async function storeAssignment() {
   const formValidation = await form.value.validate();
   if (!formValidation.valid) return;
 
-  // Si el client tuviera id, haria update y no create
+  // Si el assignment tuviera id, haria update y no create
   const { error } = await new AssignmentService(new AssignmentsApi()).create({
     ...toRaw(fields),
   });

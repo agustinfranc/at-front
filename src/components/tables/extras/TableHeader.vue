@@ -12,7 +12,7 @@
           variant="outlined"
           dark
           class="mb-2 text--primary"
-          :to="route"
+          :to="`/${route}`"
         >
           Nuevo
         </v-btn>
