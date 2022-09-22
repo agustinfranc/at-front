@@ -1,15 +1,16 @@
 <template>
   <v-combobox
     :items="items"
-    item-value="id"
-    item-title="name"
+    :item-title="itemText"
+    :item-value="itemValue"
     :label="label"
     :multiple="multiple"
   ></v-combobox>
 </template>
 
 <script setup lang="ts">
-const props = defineProps({
+// TODO: usar la doc que te pase para definir defaults
+defineProps({
   itemValue: {
     type: String,
     //default: "id",
@@ -18,7 +19,10 @@ const props = defineProps({
     type: String,
     //default: "name",
   },
-  label: String,
+  label: {
+    type: String,
+    required: true,
+  },
   multiple: {
     type: Boolean,
     //default: false,

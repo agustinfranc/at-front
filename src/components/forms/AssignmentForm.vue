@@ -11,12 +11,13 @@
             label="Cliente"
           />
 
+          <!-- TODO: reemplazar por ComboboxField -->
           <v-combobox
             :v-model="fields.companion_id"
             :items="companions"
-            label="Acompañante"
             item-title="name"
             item-value="id"
+            label="Acompañante"
           >
           </v-combobox>
 
@@ -24,8 +25,6 @@
             v-model="fields.companion_id"
             :items="companions"
             label="Acompañante"
-            item-title="name"
-            item-value="id"
           /> -->
 
           <ComboboxField
@@ -81,8 +80,6 @@ import SubmitButton from "./common/SubmitButton.vue";
 import { ClientService } from "@/services/clientService";
 import CompanionApi from "@/api/companion";
 import { CompanionService } from "@/services/companionService";
-import type Client from "@/api/client/interface";
-import type Companion from "@/api/companion/interface";
 
 const valid = ref(true);
 const fields = reactive(new Assignment());
@@ -90,11 +87,13 @@ const fields = reactive(new Assignment());
 const clientService = new ClientService(new ClientApi());
 const companionService = new CompanionService(new CompanionApi());
 
-const clients: Ref<Client[] | undefined> = ref();
-const companions: Ref<Companion[] | undefined> = ref();
+const clients = ref();
+const companions = ref();
 
 // declare template ref form
 const form = ref();
+
+const days = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes"];
 
 async function storeAssignment() {
   const formValidation = await form.value.validate();
@@ -123,9 +122,5 @@ onMounted(async () => {
 
   clients.value = clientsData.data;
   companions.value = companionsData.data;
-
-  console.log(clients.value);
 });
-
-const days = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes"];
 </script>
