@@ -55,7 +55,6 @@ const form = ref();
 
 async function storeCompanion() {
   const formValidation = await form.value.validate();
-  console.log("hola", formValidation);
   if (!formValidation.valid) return;
 
   // Si el acompañante tuviera id, haria update y no create
