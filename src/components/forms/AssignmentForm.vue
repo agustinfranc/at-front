@@ -65,7 +65,6 @@
       </v-card-text>
     </v-card>
   </v-container>
-  {{ companions }}
 </template>
 
 <script setup lang="ts">
