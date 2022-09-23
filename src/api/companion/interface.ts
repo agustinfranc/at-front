@@ -1,10 +1,12 @@
 export default class Companion {
   id?: number;
   name: string = "";
-  dni: string = "";
+  cuit: string = "";
   phone: string = "";
+  nationality: string = "";
+  birth: string = "";
   max_taxable: number = 0;
-  monotax?: boolean | null = null;
-  criminal_record?: boolean | null = null;
-  insurance?: boolean | null = null;
+  monotax: boolean = false;
+  criminal_record: boolean = false;
+  insurance: boolean = false;
 }
