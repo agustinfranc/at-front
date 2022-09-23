@@ -6,7 +6,7 @@ export default class Companion {
   nationality: string = "";
   birth: string = "";
   max_taxable: number = 0;
-  monotax: boolean | null = false;
-  criminal_record: boolean | null = false;
-  insurance: boolean | null = false;
+  monotax: boolean = false;
+  criminal_record: boolean = false;
+  insurance: boolean = false;
 }

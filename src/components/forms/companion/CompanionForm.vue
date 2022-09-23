@@ -10,8 +10,8 @@
             label="Nombre"
             required
             :rules="[
-              (v) => !!v || 'Falta el nombre',
-              (v) => (v && v.length <= 50) || 'Nombre muy largo',
+              (v: string) => !!v || 'Falta el nombre',
+              (v: string) => (v && v.length <= 50) || 'Nombre muy largo',
             ]"
           ></TextField>
 
@@ -21,29 +21,11 @@
             label="CUIT"
           ></TextField>
 
-          <v-expansion-panels>
-            <v-expansion-panel>
-              <v-expansion-panel-title> Nacimiento </v-expansion-panel-title>
-              <v-expansion-panel-text>
-                <div class="d-flex justify-center align-center">
-                  <vue-cal
-                    class="vuecal--date-picker"
-                    xsmall
-                    hide-view-selector
-                    :time="false"
-                    :transitions="false"
-                    active-view="month"
-                    :disable-views="['week']"
-                    style="max-width: 70%; height: 230px"
-                    locale="es"
-                    @cell-click="assignDate"
-                  >
-                  </vue-cal>
-                </div>
-              </v-expansion-panel-text>
-            </v-expansion-panel>
-          </v-expansion-panels>
+          <CompanionFormBirthdate
+            @updateValue="(value) => (fields.birth = value)"
+          />
 
+          <!-- TODO: crear componente -->
           <v-select
             v-model="fields.nationality"
             type="text"
@@ -56,7 +38,7 @@
             v-model="fields.phone"
             type="number"
             label="Teléfono"
-            :rules="[(v) => !!v || 'Falta el teléfono del acompañante']"
+            :rules="[(v: any) => !!v || 'Falta el teléfono del acompañante']"
           />
 
           <TextField
@@ -66,6 +48,7 @@
             prefix="$"
           ></TextField>
 
+          <!-- TODO: crear componente -->
           <v-expansion-panels>
             <v-expansion-panel>
               <v-expansion-panel-title> Extras </v-expansion-panel-title>
@@ -96,19 +79,20 @@
         </v-form>
       </v-card-text>
     </v-card>
+
+    {{ fields }}
   </v-container>
 </template>
 
 <script setup lang="ts">
 import { reactive, ref, toRaw } from "vue";
-import SubmitButton from "./common/SubmitButton.vue";
-import TextField from "./fields/TextField.vue";
+import SubmitButton from "../common/SubmitButton.vue";
+import TextField from "../fields/TextField.vue";
 import CompanionApi from "@/api/companion/index";
 import { CompanionService } from "@/services/companionService";
 import { useSnackbarStore } from "@/stores/snackbar";
 import Companion from "@/api/companion/interface";
-import VueCal from "vue-cal";
-import "vue-cal/dist/vuecal.css";
+import CompanionFormBirthdate from "./components/CompanionFormBirthdate.vue";
 
 const valid = ref(true);
 const fields = reactive(new Companion());
@@ -125,10 +109,6 @@ const countries = [
   "Chile",
   "México",
 ];
-
-function assignDate(date: Date) {
-  fields.birth = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
-}
 
 async function storeCompanion() {
   const formValidation = await form.value.validate();
