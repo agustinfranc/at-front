@@ -15,7 +15,42 @@
             ]"
           ></TextField>
 
-          <TextField v-model="fields.dni" type="number" label="Dni"></TextField>
+          <TextField
+            v-model="fields.cuit"
+            type="number"
+            label="CUIT"
+          ></TextField>
+
+          <v-expansion-panels>
+            <v-expansion-panel>
+              <v-expansion-panel-title> Nacimiento </v-expansion-panel-title>
+              <v-expansion-panel-text>
+                <div class="d-flex justify-center align-center">
+                  <vue-cal
+                    class="vuecal--date-picker"
+                    xsmall
+                    hide-view-selector
+                    :time="false"
+                    :transitions="false"
+                    active-view="month"
+                    :disable-views="['week']"
+                    style="width: 210px; height: 230px"
+                    locale="es"
+                    @cell-click="assignDate"
+                  >
+                  </vue-cal>
+                </div>
+              </v-expansion-panel-text>
+            </v-expansion-panel>
+          </v-expansion-panels>
+
+          <v-select
+            v-model="fields.nationality"
+            type="text"
+            label="Nacionalidad"
+            :items="countries"
+            class="my-5"
+          ></v-select>
 
           <TextField
             v-model="fields.phone"
@@ -72,12 +107,28 @@ import CompanionApi from "@/api/companion/index";
 import { CompanionService } from "@/services/companionService";
 import { useSnackbarStore } from "@/stores/snackbar";
 import Companion from "@/api/companion/interface";
+import VueCal from "vue-cal";
+import "vue-cal/dist/vuecal.css";
 
 const valid = ref(true);
 const fields = reactive(new Companion());
 
 // declare template ref form
 const form = ref();
+
+const countries = [
+  "Argentina",
+  "Brasil",
+  "Perú",
+  "Bolivia",
+  "Venezuela",
+  "Chile",
+  "México",
+];
+
+function assignDate(date: Date) {
+  fields.birth = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+}
 
 async function storeCompanion() {
   const formValidation = await form.value.validate();
