@@ -10,8 +10,8 @@
             label="Nombre"
             required
             :rules="[
-              (v) => !!v || 'Falta el nombre',
-              (v) => (v && v.length <= 50) || 'Nombre muy largo',
+              (v: string) => !!v || 'Falta el nombre',
+              (v: string) => (v && v.length <= 50) || 'Nombre muy largo',
             ]"
           ></TextField>
 
@@ -21,7 +21,7 @@
             v-model="fields.phone"
             type="number"
             label="Teléfono"
-            :rules="[(v) => !!v || 'Falta el teléfono del acompañante']"
+            :rules="[(v: number) => !!v || 'Falta el teléfono del acompañante']"
           />
 
           <TextField
