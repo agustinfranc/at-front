@@ -10,18 +10,35 @@
             label="Nombre"
             required
             :rules="[
-              (v) => !!v || 'Falta el nombre',
-              (v) => (v && v.length <= 50) || 'Nombre muy largo',
+              (v: string) => !!v || 'Falta el nombre',
+              (v: string) => (v && v.length <= 50) || 'Nombre muy largo',
             ]"
           ></TextField>
 
-          <TextField v-model="fields.dni" type="number" label="Dni"></TextField>
+          <TextField
+            v-model="fields.cuit"
+            type="number"
+            label="CUIT"
+          ></TextField>
+
+          <CompanionFormBirthdate
+            @updateValue="(value) => (fields.birth = value)"
+          />
+
+          <!-- TODO: crear componente -->
+          <v-select
+            v-model="fields.nationality"
+            type="text"
+            label="Nacionalidad"
+            :items="countries"
+            class="my-5"
+          ></v-select>
 
           <TextField
             v-model="fields.phone"
             type="number"
             label="Teléfono"
-            :rules="[(v) => !!v || 'Falta el teléfono del acompañante']"
+            :rules="[(v: any) => !!v || 'Falta el teléfono del acompañante']"
           />
 
           <TextField
@@ -31,6 +48,7 @@
             prefix="$"
           ></TextField>
 
+          <!-- TODO: crear componente -->
           <v-expansion-panels>
             <v-expansion-panel>
               <v-expansion-panel-title> Extras </v-expansion-panel-title>
@@ -66,18 +84,29 @@
 
 <script setup lang="ts">
 import { reactive, ref, toRaw } from "vue";
-import SubmitButton from "./common/SubmitButton.vue";
-import TextField from "./fields/TextField.vue";
+import SubmitButton from "../common/SubmitButton.vue";
+import TextField from "../fields/TextField.vue";
 import CompanionApi from "@/api/companion/index";
 import { CompanionService } from "@/services/companionService";
 import { useSnackbarStore } from "@/stores/snackbar";
 import Companion from "@/api/companion/interface";
+import CompanionFormBirthdate from "./components/CompanionFormBirthdate.vue";
 
 const valid = ref(true);
 const fields = reactive(new Companion());
 
 // declare template ref form
 const form = ref();
+
+const countries = [
+  "Argentina",
+  "Brasil",
+  "Perú",
+  "Bolivia",
+  "Venezuela",
+  "Chile",
+  "México",
+];
 
 async function storeCompanion() {
   const formValidation = await form.value.validate();
