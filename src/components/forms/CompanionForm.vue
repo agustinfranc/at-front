@@ -34,7 +34,7 @@
                     :transitions="false"
                     active-view="month"
                     :disable-views="['week']"
-                    style="width: 210px; height: 230px"
+                    style="max-width: 70%; height: 230px"
                     locale="es"
                     @cell-click="assignDate"
                   >
