@@ -66,12 +66,12 @@ export default defineComponent({
       columnDefs,
       rowData,
       defaultColDef,
-      // cellWasClicked: (
-      //   event
-      // ) => {
-      // Example of consuming Grid Event
-      // console.log("cell was clicked", event);
-      // },
+      cellWasClicked: () =>
+        //   event
+        {
+          // Example of consuming Grid Event
+          // console.log("cell was clicked", event);
+        },
       deselectRows: () => {
         gridApi.value.deselectAll();
       },
