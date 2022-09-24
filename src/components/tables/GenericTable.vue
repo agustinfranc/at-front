@@ -66,7 +66,9 @@ export default defineComponent({
       columnDefs,
       rowData,
       defaultColDef,
-      // cellWasClicked: (event) => {
+      // cellWasClicked: (
+      //   event
+      // ) => {
       // Example of consuming Grid Event
       // console.log("cell was clicked", event);
       // },

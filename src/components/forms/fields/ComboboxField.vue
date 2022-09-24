@@ -3,7 +3,7 @@
     :items="items"
     item-value="id"
     item-text="nombre"
-    :rules="[(v) => !!v || 'Ingresar']"
+    :rules="[(v: string) => !!v || 'Ingresar']"
     :label="label"
     :multiple="multiple"
   ></v-combobox>
