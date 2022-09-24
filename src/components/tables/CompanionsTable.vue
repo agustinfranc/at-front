@@ -20,8 +20,16 @@ const columns = [
     field: "name",
   },
   {
-    headerName: "Dni",
-    field: "dni",
+    headerName: "CUIT",
+    field: "cuit",
+  },
+  {
+    headerName: "Fecha Nacimiento",
+    field: "birth",
+  },
+  {
+    headerName: "Nacionalidad",
+    field: "nationality",
   },
   {
     headerName: "Telefono",
