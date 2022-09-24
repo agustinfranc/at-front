@@ -1,5 +1,5 @@
 <template>
-  <GenericTable :columns="columns" :rows="rows.value" />
+  <GenericTable :columns="columns" :rows="rows.value" class="flex-grow-1" />
 </template>
 
 <script setup lang="ts">

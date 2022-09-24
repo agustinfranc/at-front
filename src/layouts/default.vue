@@ -69,12 +69,12 @@ export default defineComponent({
         },
         {
           title: "Saldos",
-          to: "/saldos",
+          to: "",
           icon: "mdi-folder",
         },
         {
           title: "Usuarios",
-          to: "/users",
+          to: "",
           icon: "mdi-account-group-outline",
         },
       ],

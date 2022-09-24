@@ -1,5 +1,5 @@
 <template>
-  <ClientsTable />
+  <ClientsTable id="clients-table" />
 </template>
 
 <script lang="ts">
