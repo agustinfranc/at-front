@@ -15,10 +15,5 @@ import { defineComponent } from "vue";
 export default defineComponent({
   props: ["value", "items", "label", "multiple"],
   name: "ComboboxField",
-  data() {
-    return {
-      value: this.value,
-    };
-  },
 });
 </script>

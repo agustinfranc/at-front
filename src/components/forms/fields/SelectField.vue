@@ -15,10 +15,5 @@ import { defineComponent } from "vue";
 export default defineComponent({
   props: ["value", "items", "label"],
   name: "SelectField",
-  data() {
-    return {
-      value: this.value,
-    };
-  },
 });
 </script>

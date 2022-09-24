@@ -4,11 +4,11 @@
     <ag-grid-vue
       class="ag-theme-alpine"
       style="height: 500px"
-      :columnDefs="columnDefs.value"
-      :rowData="rowData"
-      :defaultColDef="defaultColDef"
-      rowSelection="multiple"
-      animateRows="true"
+      :column-defs="columnDefs.value"
+      :row-data="rowData"
+      :default-col-def="defaultColDef"
+      row-selection="multiple"
+      animate-rows="true"
       @cell-clicked="cellWasClicked"
       @grid-ready="onGridReady"
     >
@@ -66,10 +66,10 @@ export default defineComponent({
       columnDefs,
       rowData,
       defaultColDef,
-      cellWasClicked: (event) => {
-        // Example of consuming Grid Event
-        // console.log("cell was clicked", event);
-      },
+      // cellWasClicked: (event) => {
+      // Example of consuming Grid Event
+      // console.log("cell was clicked", event);
+      // },
       deselectRows: () => {
         gridApi.value.deselectAll();
       },
