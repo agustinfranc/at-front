@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts">
-//import VueCal from "vue-cal";
+import VueCal from "vue-cal";
 import "vue-cal/dist/vuecal.css";
 import { defineComponent } from "vue";
 
