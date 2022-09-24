@@ -3,7 +3,7 @@
     :items="items"
     item-value="id"
     item-text="nombre"
-    :rules="[(v) => !!v || 'Ingresar']"
+    :rules="[(v: string) => !!v || 'Ingresar']"
     :label="label"
     required
   ></v-select>
@@ -15,10 +15,5 @@ import { defineComponent } from "vue";
 export default defineComponent({
   props: ["value", "items", "label"],
   name: "SelectField",
-  data() {
-    return {
-      value: this.value,
-    };
-  },
 });
 </script>

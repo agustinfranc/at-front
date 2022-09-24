@@ -2,13 +2,13 @@
   <div>
     <!-- <button @click="deselectRows">deselect rows</button> -->
     <ag-grid-vue
-      class="ag-theme-alpine"
-      style="height: 500px"
-      :columnDefs="columnDefs.value"
-      :rowData="rowData"
-      :defaultColDef="defaultColDef"
-      rowSelection="multiple"
-      animateRows="true"
+      class="ag-theme-material"
+      style="height: 100%"
+      :column-defs="columnDefs.value"
+      :row-data="rowData"
+      :default-col-def="defaultColDef"
+      row-selection="multiple"
+      animate-rows="true"
       @cell-clicked="cellWasClicked"
       @grid-ready="onGridReady"
     >
@@ -19,8 +19,9 @@
 <script lang="ts">
 import { AgGridVue } from "ag-grid-vue3"; // the AG Grid Vue Component
 import { reactive, ref, defineComponent, computed, type PropType } from "vue";
-import "ag-grid-community/styles/ag-grid.css"; // Core grid CSS, always needed
-import "ag-grid-community/styles/ag-theme-alpine.css"; // Optional theme CSS
+import "ag-grid-community/styles/ag-grid.min.css"; // Core grid CSS, always needed
+import "ag-grid-community/styles/ag-theme-alpine.min.css"; // Optional theme CSS
+import "ag-grid-community/styles/ag-theme-material.min.css";
 import type { ColDef } from "@/components/tables/interfaces/GenericTable/columnDefinitions";
 
 export default defineComponent({
@@ -66,10 +67,12 @@ export default defineComponent({
       columnDefs,
       rowData,
       defaultColDef,
-      cellWasClicked: (event) => {
-        // Example of consuming Grid Event
-        // console.log("cell was clicked", event);
-      },
+      cellWasClicked: () =>
+        //   event
+        {
+          // Example of consuming Grid Event
+          // console.log("cell was clicked", event);
+        },
       deselectRows: () => {
         gridApi.value.deselectAll();
       },

@@ -22,7 +22,7 @@
           ></TextField>
 
           <CompanionFormBirthdate
-            @updateValue="(value) => (fields.birth = value)"
+            @update-value="(value) => (fields.birth = value)"
           />
 
           <!-- TODO: crear componente -->

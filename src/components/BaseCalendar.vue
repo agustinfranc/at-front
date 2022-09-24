@@ -17,9 +17,8 @@
 </template>
 
 <script lang="ts">
-//import VueCal from "vue-cal";
+import VueCal from "vue-cal";
 import "vue-cal/dist/vuecal.css";
-//import "vue-cal/dist/i18n/es.js";
 import { defineComponent } from "vue";
 
 const today = new Date();

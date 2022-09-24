@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="h-100 d-flex flex-column">
     <TableHeader title="Clientes" route="/client" />
 
     <LazyTable :columns="columns" :service="service" />

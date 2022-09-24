@@ -34,7 +34,7 @@
             :max="24"
             :min="0"
           >
-            <template v-slot:append>
+            <template #append>
               <v-text-field
                 v-model="form.hours"
                 type="number"
