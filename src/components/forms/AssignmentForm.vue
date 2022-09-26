@@ -6,26 +6,18 @@
       <v-card-text>
         <v-form ref="form" v-model="valid" lazy-validation>
           <ComboboxField
-            v-model="fields.client_id"
+            v-model="fields.client_name"
             :items="clients"
+            item-title="name"
             label="Cliente"
           />
 
-          <!-- TODO: reemplazar por ComboboxField -->
-          <v-combobox
-            :v-model="fields.companion_id"
+          <ComboboxField
+            v-model="fields.companion_name"
             :items="companions"
             item-title="name"
-            item-value="id"
             label="Acompañante"
-          >
-          </v-combobox>
-
-          <!-- <ComboboxField
-            v-model="fields.companion_id"
-            :items="companions"
-            label="Acompañante"
-          /> -->
+          />
 
           <ComboboxField
             v-model="fields.days"
@@ -64,6 +56,7 @@
         </v-form>
       </v-card-text>
     </v-card>
+    {{ fields }}
   </v-container>
 </template>
 

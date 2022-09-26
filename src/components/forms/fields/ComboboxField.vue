@@ -1,32 +1,23 @@
 <template>
   <v-combobox
     :items="items"
-    :item-title="itemText"
-    :item-value="itemValue"
+    :item-title="itemTitle"
     :label="label"
     :multiple="multiple"
   ></v-combobox>
 </template>
 
 <script setup lang="ts">
-// TODO: usar la doc que te pase para definir defaults
-defineProps({
-  itemValue: {
-    type: String,
-    //default: "id",
-  },
-  itemText: {
-    type: String,
-    //default: "name",
-  },
-  label: {
-    type: String,
-    required: true,
-  },
-  multiple: {
-    type: Boolean,
-    //default: false,
-  },
-  items: null,
+export interface Props {
+  itemTitle?: string;
+  label?: string;
+  multiple?: boolean;
+  items?: undefined;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  itemValue: "id",
+  itemTitle: "name",
+  multiple: false,
 });
 </script>
