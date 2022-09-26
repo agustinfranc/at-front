@@ -1,6 +1,7 @@
 <template>
-  <v-container>
+  <v-container class="h-100 d-flex flex-column">
     <TableHeader title="Acompañantes" route="/companion" />
+
     <LazyTable :columns="columns" :service="service" />
   </v-container>
 </template>
