@@ -57,6 +57,7 @@
       </v-card-text>
     </v-card>
     {{ fields }}
+    {{ assignmentForm }}
   </v-container>
 </template>
 
@@ -72,9 +73,13 @@ import SubmitButton from "./common/SubmitButton.vue";
 import { ClientService } from "@/services/clientService";
 import CompanionApi from "@/api/companion";
 import { CompanionService } from "@/services/companionService";
+import type Client from "@/api/client/interface";
+import AssignmentForm from "./interfaces/assignmentForm";
+import type Companion from "@/api/companion/interface";
 
 const valid = ref(true);
-const fields = reactive(new Assignment());
+const fields = reactive(new AssignmentForm());
+let assignmentForm = reactive(new Assignment());
 
 const clientService = new ClientService(new ClientApi());
 const companionService = new CompanionService(new CompanionApi());
@@ -87,13 +92,27 @@ const form = ref();
 
 const days = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes"];
 
+function assignId() {
+  assignmentForm = {
+    ...fields,
+    client_id: clients.value.find(
+      (client: Client) => client.name === fields.client_name
+    ).id,
+    companion_id: companions.value.find(
+      (companion: Companion) => companion.name === fields.companion_name
+    ).id,
+  };
+}
+
 async function storeAssignment() {
   const formValidation = await form.value.validate();
   if (!formValidation.valid) return;
 
+  assignId();
+
   // Si el assignment tuviera id, haria update y no create
   const { error } = await new AssignmentService(new AssignmentsApi()).create({
-    ...toRaw(fields),
+    ...toRaw(assignmentForm),
   });
 
   const snackbarStore = useSnackbarStore();

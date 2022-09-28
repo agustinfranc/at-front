@@ -25,10 +25,6 @@ const columns = [
     field: "companion",
   },
   {
-    headerName: "Fecha",
-    field: "date",
-  },
-  {
     headerName: "Horas",
     field: "hours",
   },
