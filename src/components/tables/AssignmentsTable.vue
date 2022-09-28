@@ -25,7 +25,7 @@ const columns = [
     field: "companion.name",
   },
   {
-    headerName: "Horas",
+    headerName: "Horas Diarias",
     field: "hours",
   },
 ] as ColDef[];

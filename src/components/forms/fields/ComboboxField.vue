@@ -12,7 +12,7 @@ export interface Props {
   itemTitle?: string;
   label?: string;
   multiple?: boolean;
-  items?: undefined;
+  items: undefined[];
 }
 
 const props = withDefaults(defineProps<Props>(), {
