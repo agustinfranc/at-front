@@ -1,29 +1,69 @@
 <template>
   <v-container>
-    <v-card>
-      <v-card-title>Cliente Nuevo</v-card-title>
-
+    <v-row class="flex-grow-0">
+      <v-col align-self="center" cols="12" sm="4">
+        <p class="text-h4 text--primary">Cliente</p>
+      </v-col>
+    </v-row>
+    <v-card class="my-4">
       <v-card-text>
         <v-form ref="form" v-model="valid" lazy-validation>
-          <TextField
-            v-model="fields.name"
-            label="Nombre"
-            required
-            :rules="[
+          <v-row class="flex-grow-0">
+            <v-col>
+              <TextField
+                v-model="fields.name"
+                label="Nombre Beneficiario"
+                required
+                :rules="[
               (v: any) => !!v || 'Falta el nombre',
               (v: string | any[]) => (v && v.length <= 50) || 'Nombre muy largo',
             ]"
-          ></TextField>
-
-          <TextField v-model="fields.dni" type="number" label="Dni"></TextField>
-
-          <TextField
-            v-model="fields.phone"
-            type="number"
-            label="Teléfono"
-            :rules="[(v: any) => !!v || 'Falta el teléfono del cliente']"
-          />
-
+              ></TextField>
+            </v-col>
+            <v-col>
+              <TextField
+                v-model="fields.dni"
+                type="number"
+                label="DNI"
+              ></TextField>
+            </v-col>
+          </v-row>
+          <v-row class="flex-grow-0">
+            <v-col>
+              <TextField
+                v-model="fields.phone"
+                type="number"
+                label="Teléfono"
+                :rules="[(v: any) => !!v || 'Falta el teléfono del cliente']"
+              />
+            </v-col>
+            <v-col>
+              <TextField
+                v-model="fields.extra_phone"
+                type="number"
+                label="Teléfono Adicional"
+                :rules="[(v: any) => !!v || 'Falta el teléfono del cliente']"
+              />
+            </v-col>
+            <v-col>
+              <TextField
+                v-model="fields.birthday"
+                label="Nacimiento"
+                placeholder="aaaa/mm/dd"
+              />
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col>
+              <TextField
+                label="Nombre Familiar a Cargo"
+                v-model="fields.guardian_name"
+              />
+            </v-col>
+            <v-col>
+              <TextField label="Domicilio" v-model="fields.address" />
+            </v-col>
+          </v-row>
           <TextField
             type="number"
             v-model="fields.rate"
@@ -31,18 +71,43 @@
             :rules="[(v: any) => !!v || 'Falta la tarifa']"
             required
             prefix="$"
-          ></TextField>
-
-          <TextField
-            v-model="fields.taxable"
-            label="Porcentaje Facturado"
-            prefix="%"
-            type="number"
           />
 
+          <v-row>
+            <v-col>
+              <TextField
+                label="Obra Social"
+                v-model="fields.health_insurance"
+              />
+            </v-col>
+            <v-col>
+              <TextField label="Nro Afiliado" v-model="fields.affiliate" />
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col>
+              <TextField
+                v-model="fields.taxable"
+                label="Porcentaje Facturado"
+                prefix="%"
+                type="number"
+              />
+            </v-col>
+            <v-col
+              ><TextField
+                v-model="fields.budget_date"
+                label="Fecha Presupuesto"
+                placeholder="aaaa/mm/dd"
+              />
+            </v-col>
+          </v-row>
+          <TextField v-model="fields.diagnosis" label="Diagnóstico" />
+
+          <TextField v-model="fields.medicine" label="Medicación" />
+
           <TextAreaField
-            label="Comentarios"
-            v-model="fields.comments"
+            label="Tareas a realizar"
+            v-model="fields.job_description"
           ></TextAreaField>
 
           <SubmitButton :valid="valid" @click="storeClient" />
