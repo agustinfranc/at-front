@@ -18,11 +18,11 @@ const service = new AssignmentService(new AssignmentApi());
 const columns = [
   {
     headerName: "Cliente",
-    field: "client",
+    field: "client.name",
   },
   {
     headerName: "Acompañante",
-    field: "companion",
+    field: "companion.name",
   },
   {
     headerName: "Horas",
