@@ -5,6 +5,7 @@
         <p class="text-h4 text--primary">Cliente</p>
       </v-col>
     </v-row>
+
     <v-card class="my-4">
       <v-card-text>
         <v-form ref="form" v-model="valid" lazy-validation>
@@ -28,6 +29,7 @@
               ></TextField>
             </v-col>
           </v-row>
+
           <v-row class="flex-grow-0">
             <v-col>
               <TextField
@@ -53,6 +55,7 @@
               />
             </v-col>
           </v-row>
+
           <v-row>
             <v-col>
               <TextField
@@ -64,6 +67,7 @@
               <TextField label="Domicilio" v-model="fields.address" />
             </v-col>
           </v-row>
+
           <TextField
             type="number"
             v-model="fields.rate"
@@ -84,6 +88,7 @@
               <TextField label="Nro Afiliado" v-model="fields.affiliate" />
             </v-col>
           </v-row>
+
           <v-row>
             <v-col>
               <TextField
@@ -101,6 +106,7 @@
               />
             </v-col>
           </v-row>
+
           <TextField v-model="fields.diagnosis" label="Diagnóstico" />
 
           <TextField v-model="fields.medicine" label="Medicación" />
