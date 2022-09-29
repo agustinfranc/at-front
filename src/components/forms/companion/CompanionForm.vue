@@ -21,8 +21,11 @@
             label="CUIT"
           ></TextField>
 
-          <CompanionFormBirthdate
-            @update-value="(value) => (fields.birth = value)"
+          <TextField
+            v-model="fields.birthday"
+            type="date"
+            label="Nacimiento"
+            prepend-inner-icon="mdi-calendar-month"
           />
 
           <!-- TODO: crear componente -->
@@ -36,7 +39,6 @@
 
           <TextField
             v-model="fields.phone"
-            type="number"
             label="Teléfono"
             :rules="[(v: any) => !!v || 'Falta el teléfono del acompañante']"
           />
@@ -96,7 +98,6 @@ import CompanionApi from "@/api/companion/index";
 import { CompanionService } from "@/services/companionService";
 import { useSnackbarStore } from "@/stores/snackbar";
 import Companion from "@/api/companion/interface";
-import CompanionFormBirthdate from "./components/CompanionFormBirthdate.vue";
 
 const valid = ref(true);
 const fields = reactive(new Companion());

@@ -29,32 +29,8 @@ const columns = [
     field: "dni",
   },
   {
-    headerName: "Dirección",
-    field: "address",
-  },
-  {
-    headerName: "Telefono",
-    field: "phone",
-  },
-  {
-    headerName: "Obra Social",
-    field: "health_insurance",
-  },
-  {
-    headerName: "Nro Afiliado",
-    field: "affiliate",
-  },
-  {
     headerName: "Tarifa",
     field: "rate",
-  },
-  {
-    headerName: "Máximo Facturable",
-    field: "taxable",
-  },
-  {
-    headerName: "Trabajo a Realizar",
-    field: "treatment",
   },
 ] as ColDef[];
 </script>

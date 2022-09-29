@@ -33,7 +33,6 @@
             <v-col>
               <TextField
                 v-model="fields.phone"
-                type="number"
                 label="Teléfono"
                 :rules="[(v: any) => !!v || 'Falta el teléfono del cliente']"
                 prepend-inner-icon="mdi-phone-in-talk"
@@ -42,13 +41,12 @@
             <v-col>
               <TextField
                 v-model="fields.extra_phone"
-                type="number"
                 label="Teléfono Adicional"
-                :rules="[(v: any) => !!v || 'Falta el teléfono del cliente']"
                 prepend-inner-icon="mdi-phone-plus"
               />
             </v-col>
           </v-row>
+
           <v-row>
             <v-col>
               <TextField
@@ -62,7 +60,6 @@
                 v-model="fields.birthday"
                 type="date"
                 label="Nacimiento"
-                placeholder="aaaa/mm/dd"
                 prepend-inner-icon="mdi-calendar-month"
               />
             </v-col>
@@ -77,7 +74,9 @@
               />
             </v-col>
           </v-row>
+
           <v-divider class="my-5"></v-divider>
+
           <v-row>
             <v-col>
               <TextField
@@ -104,6 +103,7 @@
               <TextField v-model="fields.diagnosis" label="Diagnóstico" />
             </v-col>
           </v-row>
+
           <v-row>
             <v-col>
               <TextField
@@ -115,6 +115,7 @@
           </v-row>
 
           <v-divider class="my-5"></v-divider>
+
           <v-row>
             <v-col>
               <TextField
@@ -125,6 +126,7 @@
               />
             </v-col>
           </v-row>
+
           <v-row>
             <v-col>
               <TextField

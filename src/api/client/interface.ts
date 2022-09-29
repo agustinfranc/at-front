@@ -3,12 +3,12 @@ export default class Client {
   name = "";
   dni = "";
   phone = "";
+  extra_phone = "";
   rate = "";
   taxable = "";
   comments = "";
   address = "";
   guardian_name = "";
-  extra_phone = "";
   birthday = "";
   medicine = "";
   diagnosis = "";
