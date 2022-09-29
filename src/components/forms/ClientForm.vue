@@ -76,20 +76,7 @@
               />
             </v-col>
           </v-row>
-<<<<<<< HEAD
           <v-divider class="my-5"></v-divider>
-=======
-
-          <TextField
-            type="number"
-            v-model="fields.rate"
-            label="Tarifa"
-            :rules="[(v: any) => !!v || 'Falta la tarifa']"
-            required
-            prefix="$"
-          />
-
->>>>>>> b22ae924fa9e5a6979528afe12e51587ea77f95b
           <v-row>
             <v-col>
               <TextField
@@ -103,7 +90,6 @@
             </v-col>
           </v-row>
 
-<<<<<<< HEAD
           <v-row>
             <v-col>
               <TextAreaField
@@ -128,8 +114,6 @@
           </v-row>
 
           <v-divider class="my-5"></v-divider>
-=======
->>>>>>> b22ae924fa9e5a6979528afe12e51587ea77f95b
           <v-row>
             <v-col>
               <TextField
@@ -160,18 +144,6 @@
               />
             </v-col>
           </v-row>
-<<<<<<< HEAD
-=======
-
-          <TextField v-model="fields.diagnosis" label="Diagnóstico" />
-
-          <TextField v-model="fields.medicine" label="Medicación" />
-
-          <TextAreaField
-            label="Tareas a realizar"
-            v-model="fields.job_description"
-          ></TextAreaField>
->>>>>>> b22ae924fa9e5a6979528afe12e51587ea77f95b
 
           <SubmitButton :valid="valid" @click="storeClient" />
         </v-form>
