@@ -5,52 +5,60 @@
 
       <v-card-text>
         <v-form ref="form" v-model="valid" lazy-validation>
-          <ComboboxField
-            v-model="fields.client_name"
-            :items="clients"
-            item-title="name"
-            label="Cliente"
-          />
+          <v-row>
+            <v-col>
+              <ComboboxField
+                v-model="fields.client_name"
+                :items="clients"
+                item-title="name"
+                label="Cliente"
+              />
+            </v-col>
+            <v-col>
+              <ComboboxField
+                v-model="fields.companion_name"
+                :items="companions"
+                item-title="name"
+                label="Acompañante"
+              />
+            </v-col>
+          </v-row>
 
-          <ComboboxField
-            v-model="fields.companion_name"
-            :items="companions"
-            item-title="name"
-            label="Acompañante"
-          />
+          <div class="my-5">
+            <v-row v-for="day in days">
+              <v-col cols="1">
+                <v-checkbox v-model="day.enabled"></v-checkbox>
+              </v-col>
+              <v-col>
+                <v-text-field :model-value="day.type" readonly></v-text-field>
+              </v-col>
+              <v-col>
+                <TextField type="time" label="Desde" />
+              </v-col>
+              <v-col>
+                <TextField type="time" label="Hasta" />
+              </v-col>
+              <v-col>
+                <TextField type="number" label="Horas" />
+              </v-col>
+            </v-row>
+          </div>
 
-          <ComboboxField
-            v-model="fields.days"
-            :items="days"
-            label="Días"
-            multiple
-            chips
-          />
+          <v-row>
+            <v-col>
+              <v-checkbox
+                v-model="fields.periodic"
+                label="Periódico"
+              ></v-checkbox>
+            </v-col>
 
-          <div class="text-caption">Horas</div>
-
-          <v-slider
-            step="1"
-            show-ticks="always"
-            v-model="fields.hours"
-            thumb-label
-            :max="24"
-            :min="0"
-          >
-            <template v-slot:append>
-              <v-text-field
-                v-model="fields.hours"
-                type="number"
-                density="compact"
-                hide-details
-                variant="outlined"
-              ></v-text-field>
-            </template>
-          </v-slider>
-
-          <v-checkbox v-model="fields.periodic" label="Periódico"></v-checkbox>
-
-          <v-checkbox v-model="fields.enabled" label="Habilitado"></v-checkbox>
+            <v-col>
+              <v-checkbox
+                v-model="fields.enabled"
+                label="Habilitado"
+              ></v-checkbox>
+            </v-col>
+          </v-row>
 
           <SubmitButton :valid="valid" @click="storeAssignment" />
         </v-form>
@@ -76,6 +84,7 @@ import { CompanionService } from "@/services/companionService";
 import type Client from "@/api/client/interface";
 import AssignmentForm from "./interfaces/assignmentForm";
 import type Companion from "@/api/companion/interface";
+import TextField from "./fields/TextField.vue";
 
 const valid = ref(true);
 const fields = reactive(new AssignmentForm());
@@ -90,7 +99,16 @@ const companions = ref();
 // declare template ref form
 const form = ref();
 
-const days = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes"];
+const days = [
+  { enabled: false, type: "Domingo" },
+  { enabled: false, type: "Lunes" },
+  { enabled: false, type: "Martes" },
+  { enabled: false, type: "Miercoles" },
+  { enabled: false, type: "Jueves" },
+  { enabled: false, type: "Viernes" },
+  { enabled: false, type: "Sabado" },
+  { enabled: false, type: "Domingo" },
+];
 
 function assignId() {
   assignmentForm = {
