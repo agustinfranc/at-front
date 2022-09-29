@@ -8,7 +8,7 @@ export interface ApiServiceResponse<T, D = ErrorApiServiceResponse> {
 
 interface ErrorApiServiceResponse {
   message?: string;
-  errors?: any;
+  errors?: { [key: string]: string | string[] };
 }
 
 export abstract class ApiService {

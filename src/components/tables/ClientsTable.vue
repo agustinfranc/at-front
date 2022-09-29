@@ -1,6 +1,7 @@
 <template>
-  <v-container>
-    <TableHeader title="Clientes" route="client" />
+  <v-container class="h-100 d-flex flex-column">
+    <TableHeader title="Clientes" route="/client" />
+
     <LazyTable :columns="columns" :service="service" />
   </v-container>
 </template>
@@ -20,24 +21,16 @@ const columns = [
     field: "name",
   },
   {
+    headerName: "Nombre Tutor",
+    field: "guardian_name",
+  },
+  {
     headerName: "Dni",
     field: "dni",
   },
   {
-    headerName: "Telefono",
-    field: "phone",
-  },
-  {
     headerName: "Tarifa",
     field: "rate",
-  },
-  {
-    headerName: "Máximo Facturable",
-    field: "taxable",
-  },
-  {
-    headerName: "Comentarios",
-    field: "comments",
   },
 ] as ColDef[];
 </script>

@@ -1,10 +1,10 @@
 <template>
-  <v-row>
-    <v-col align-self="start" cols="12" sm="4">
+  <v-row class="flex-grow-0">
+    <v-col align-self="center" cols="12" sm="4">
       <p class="text-h4 text--primary">{{ title }}</p>
     </v-col>
     <v-spacer></v-spacer>
-    <v-col align-self="end" cols="12" sm="4">
+    <v-col align-self="center" cols="12" sm="4">
       <v-sheet class="ma-2 pa-2">
         <v-btn
           rounded="lg"
@@ -22,8 +22,14 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps({
-  title: String,
-  route: String,
+defineProps({
+  title: {
+    type: String,
+    required: true,
+  },
+  route: {
+    type: String,
+    required: true,
+  },
 });
 </script>
