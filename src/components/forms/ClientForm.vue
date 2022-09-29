@@ -22,10 +22,9 @@
             </v-col>
             <v-col>
               <TextField
-                v-model="fields.dni"
-                type="number"
-                label="DNI"
-              ></TextField>
+                label="Nombre Familiar a Cargo"
+                v-model="fields.guardian_name"
+              />
             </v-col>
           </v-row>
           <v-row class="flex-grow-0">
@@ -35,6 +34,7 @@
                 type="number"
                 label="Teléfono"
                 :rules="[(v: any) => !!v || 'Falta el teléfono del cliente']"
+                prepend-inner-icon="mdi-phone-in-talk"
               />
             </v-col>
             <v-col>
@@ -43,47 +43,74 @@
                 type="number"
                 label="Teléfono Adicional"
                 :rules="[(v: any) => !!v || 'Falta el teléfono del cliente']"
+                prepend-inner-icon="mdi-phone-plus"
               />
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col>
+              <TextField
+                v-model="fields.dni"
+                type="number"
+                label="DNI"
+              ></TextField>
             </v-col>
             <v-col>
               <TextField
                 v-model="fields.birthday"
                 label="Nacimiento"
                 placeholder="aaaa/mm/dd"
+                prepend-inner-icon="mdi-calendar-month"
               />
             </v-col>
           </v-row>
           <v-row>
             <v-col>
               <TextField
-                label="Nombre Familiar a Cargo"
-                v-model="fields.guardian_name"
+                label="Domicilio"
+                v-model="fields.address"
+                prepend-inner-icon="mdi-map-marker-radius"
               />
             </v-col>
-            <v-col>
-              <TextField label="Domicilio" v-model="fields.address" />
-            </v-col>
           </v-row>
-          <TextField
-            type="number"
-            v-model="fields.rate"
-            label="Tarifa"
-            :rules="[(v: any) => !!v || 'Falta la tarifa']"
-            required
-            prefix="$"
-          />
-
+          <v-divider class="my-5"></v-divider>
           <v-row>
             <v-col>
               <TextField
                 label="Obra Social"
                 v-model="fields.health_insurance"
+                prepend-inner-icon="mdi-medical-bag"
               />
             </v-col>
             <v-col>
               <TextField label="Nro Afiliado" v-model="fields.affiliate" />
             </v-col>
           </v-row>
+
+          <v-row>
+            <v-col>
+              <TextAreaField
+                label="Tareas a realizar"
+                v-model="fields.job_description"
+              ></TextAreaField>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col>
+              <TextField v-model="fields.diagnosis" label="Diagnóstico" />
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col>
+              <TextField
+                v-model="fields.medicine"
+                label="Medicación"
+                prepend-inner-icon="mdi-pill"
+              />
+            </v-col>
+          </v-row>
+
+          <v-divider class="my-5"></v-divider>
           <v-row>
             <v-col>
               <TextField
@@ -93,22 +120,27 @@
                 type="number"
               />
             </v-col>
+          </v-row>
+          <v-row>
+            <v-col>
+              <TextField
+                type="number"
+                v-model="fields.rate"
+                label="Tarifa"
+                :rules="[(v: any) => !!v || 'Falta la tarifa']"
+                required
+                prepend-inner-icon="mdi-currency-usd"
+              />
+            </v-col>
             <v-col
               ><TextField
                 v-model="fields.budget_date"
                 label="Fecha Presupuesto"
                 placeholder="aaaa/mm/dd"
+                prepend-inner-icon="mdi-calendar-month"
               />
             </v-col>
           </v-row>
-          <TextField v-model="fields.diagnosis" label="Diagnóstico" />
-
-          <TextField v-model="fields.medicine" label="Medicación" />
-
-          <TextAreaField
-            label="Tareas a realizar"
-            v-model="fields.job_description"
-          ></TextAreaField>
 
           <SubmitButton :valid="valid" @click="storeClient" />
         </v-form>
