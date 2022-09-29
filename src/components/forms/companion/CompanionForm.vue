@@ -71,6 +71,12 @@
                     :label="`Tiene seguro`"
                   />
                 </div>
+                <div class="d-flex justify-center align-center">
+                  <v-checkbox
+                    v-model="fields.has_sign_contract"
+                    :label="`Firmo Contrato`"
+                  />
+                </div>
               </v-expansion-panel-text>
             </v-expansion-panel>
           </v-expansion-panels>
