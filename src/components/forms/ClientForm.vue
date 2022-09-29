@@ -94,7 +94,7 @@
             <v-col>
               <TextAreaField
                 label="Tareas a realizar"
-                v-model="fields.job_description"
+                v-model="fields.treatment"
               ></TextAreaField>
             </v-col>
           </v-row>

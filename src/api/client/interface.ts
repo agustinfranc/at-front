@@ -12,7 +12,7 @@ export default class Client {
   birthday = "";
   medicine = "";
   diagnosis = "";
-  job_description = "";
+  treatment = "";
   health_insurance = "";
   affiliate = "";
   budget_date = "";
