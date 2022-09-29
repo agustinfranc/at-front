@@ -21,24 +21,16 @@ const columns = [
     field: "name",
   },
   {
+    headerName: "Nombre Tutor",
+    field: "guardian_name",
+  },
+  {
     headerName: "Dni",
     field: "dni",
   },
   {
-    headerName: "Telefono",
-    field: "phone",
-  },
-  {
     headerName: "Tarifa",
     field: "rate",
-  },
-  {
-    headerName: "Máximo Facturable",
-    field: "taxable",
-  },
-  {
-    headerName: "Comentarios",
-    field: "comments",
   },
 ] as ColDef[];
 </script>

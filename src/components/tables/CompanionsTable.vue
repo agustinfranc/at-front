@@ -26,7 +26,7 @@ const columns = [
   },
   {
     headerName: "Fecha Nacimiento",
-    field: "birth",
+    field: "birthday",
   },
   {
     headerName: "Nacionalidad",
