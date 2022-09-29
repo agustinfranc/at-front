@@ -139,6 +139,7 @@
             <v-col
               ><TextField
                 v-model="fields.budget_date"
+                type="date"
                 label="Fecha Presupuesto"
                 placeholder="aaaa/mm/dd"
                 prepend-inner-icon="mdi-calendar-month"
