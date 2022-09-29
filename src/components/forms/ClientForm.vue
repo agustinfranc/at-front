@@ -60,6 +60,7 @@
             <v-col>
               <TextField
                 v-model="fields.birthday"
+                type="date"
                 label="Nacimiento"
                 placeholder="aaaa/mm/dd"
                 prepend-inner-icon="mdi-calendar-month"
