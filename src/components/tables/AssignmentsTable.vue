@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <TableHeader title="Acompañamientos" route="assignment" />
+    <TableHeader title="Acompañamientos" route="assignments/new" />
 
     <LazyTable :columns="columns" :service="service" />
   </v-container>
@@ -25,8 +25,8 @@ const columns = [
     field: "companion.name",
   },
   {
-    headerName: "Horas Diarias",
-    field: "hours",
+    headerName: "Periodico",
+    field: "periodic",
   },
 ] as ColDef[];
 </script>
