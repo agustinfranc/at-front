@@ -15,11 +15,7 @@
             ]"
           ></TextField>
 
-          <TextField
-            v-model="fields.cuit"
-            type="number"
-            label="CUIT"
-          ></TextField>
+          <TextField v-model="fields.cuit" label="CUIT"></TextField>
 
           <TextField
             v-model="fields.birthday"
