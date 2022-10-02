@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-card>
-      <v-card-title>Asignación</v-card-title>
+      <v-card-title class="mb-5">{{ title }}</v-card-title>
 
       <v-card-text>
         <v-form ref="form" v-model="valid" lazy-validation>
@@ -27,27 +27,38 @@
           </v-row>
 
           <div class="my-5">
-            <v-row v-for="day in fields.weekdays">
+            <v-row v-for="day in fields.days">
               <v-col cols="1">
                 <v-checkbox v-model="day.enabled"></v-checkbox>
               </v-col>
               <v-col>
                 <v-text-field
-                  :model-value="day.type"
+                  v-model="day.type"
                   readonly
                   :disabled="!day.enabled"
-                ></v-text-field>
+                />
               </v-col>
               <v-col>
-                <TextField type="time" label="Desde" :disabled="!day.enabled" />
+                <v-text-field
+                  v-model="day.from"
+                  type="time"
+                  label="Desde"
+                  :disabled="!day.enabled"
+                />
               </v-col>
               <v-col>
-                <TextField type="time" label="Hasta" :disabled="!day.enabled" />
+                <v-text-field
+                  v-model="day.to"
+                  type="time"
+                  label="Hasta"
+                  :disabled="!day.enabled"
+                />
               </v-col>
               <v-col>
-                <TextField
+                <v-text-field
                   type="number"
                   label="Horas"
+                  v-model="day.hours"
                   :disabled="!day.enabled"
                 />
               </v-col>
@@ -78,7 +89,7 @@
 </template>
 
 <script setup lang="ts">
-import { onBeforeMount, onMounted, reactive, ref, toRaw, type Ref } from "vue";
+import { onBeforeMount, onMounted, reactive, ref } from "vue";
 import ComboboxField from "./fields/ComboboxField.vue";
 import AssignmentsApi from "@/api/assignment/index";
 import ClientApi from "@/api/client";
@@ -91,7 +102,6 @@ import { CompanionService } from "@/services/companionService";
 import type Client from "@/api/client/interface";
 import AssignmentForm from "./interfaces/assignmentForm";
 import type Companion from "@/api/companion/interface";
-import TextField from "./fields/TextField.vue";
 import { cloneDeep } from "lodash";
 // import _ from "@/plugins/lodash" not working
 
@@ -106,6 +116,9 @@ const companions = ref();
 
 // declare template ref form
 const form = ref();
+
+// TODO: verifico  si la ruta tiene id
+const title = 1 === 1 ? "Nueva asignación" : "Asignacion #12";
 
 async function storeAssignment() {
   const formValidation = await form.value.validate();
