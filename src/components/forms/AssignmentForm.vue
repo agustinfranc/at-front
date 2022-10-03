@@ -33,7 +33,7 @@
               </v-col>
               <v-col>
                 <v-text-field
-                  v-model="day.day_type_name"
+                  v-model="day.day_title"
                   readonly
                   :disabled="!day.enabled"
                 />
