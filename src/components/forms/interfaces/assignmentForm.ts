@@ -8,7 +8,7 @@ export default class AssignmentForm {
   days = [
     {
       enabled: false,
-      day_title: "Domingo",
+      title: "Domingo",
       id: 1,
       from: "",
       to: "",
@@ -16,7 +16,7 @@ export default class AssignmentForm {
     },
     {
       enabled: false,
-      day_title: "Lunes",
+      title: "Lunes",
       id: 2,
       from: "",
       to: "",
@@ -24,7 +24,7 @@ export default class AssignmentForm {
     },
     {
       enabled: false,
-      day_title: "Martes",
+      title: "Martes",
       id: 3,
       from: "",
       to: "",
@@ -32,7 +32,7 @@ export default class AssignmentForm {
     },
     {
       enabled: false,
-      day_title: "Miercoles",
+      title: "Miercoles",
       id: 4,
       from: "",
       to: "",
@@ -40,7 +40,7 @@ export default class AssignmentForm {
     },
     {
       enabled: false,
-      day_title: "Jueves",
+      title: "Jueves",
       id: 5,
       from: "",
       to: "",
@@ -48,7 +48,7 @@ export default class AssignmentForm {
     },
     {
       enabled: false,
-      day_title: "Viernes",
+      title: "Viernes",
       id: 6,
       from: "",
       to: "",
@@ -56,7 +56,7 @@ export default class AssignmentForm {
     },
     {
       enabled: false,
-      day_title: "Sabado",
+      title: "Sabado",
       id: 7,
       from: "",
       to: "",
