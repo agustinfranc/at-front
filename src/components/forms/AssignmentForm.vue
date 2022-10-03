@@ -12,7 +12,7 @@
                 :items="clients"
                 item-title="name"
                 label="Cliente"
-                :rules="[(v: string) => !!v || 'Debe seleccionar un cliente']"
+                :rules="[(v: string) => !!v || 'Este campo es requerido']"
               />
             </v-col>
             <v-col>
@@ -21,7 +21,7 @@
                 :items="companions"
                 item-title="name"
                 label="Acompañante"
-                :rules="[(v: string) => !!v || 'Debe seleccionar un acompañante']"
+                :rules="[(v: string) => !!v || 'Este campo es requerido']"
               />
             </v-col>
           </v-row>
@@ -33,7 +33,7 @@
               </v-col>
               <v-col>
                 <v-text-field
-                  v-model="day.type"
+                  v-model="day.day_type_name"
                   readonly
                   :disabled="!day.enabled"
                 />
@@ -60,6 +60,7 @@
                   label="Horas"
                   v-model="day.hours"
                   :disabled="!day.enabled"
+                  :rules="[(v: number) => (!!v || !day.enabled) || 'Este campo es requerido']"
                 />
               </v-col>
             </v-row>
