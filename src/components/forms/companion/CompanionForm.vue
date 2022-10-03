@@ -79,7 +79,14 @@
             </v-expansion-panel>
           </v-expansion-panels>
 
-          <SubmitButton class="my-5" :valid="valid" @click="storeCompanion" />
+          <v-btn
+            :disabled="!valid"
+            color="success"
+            class="mr-4"
+            @click="storeCompanion"
+          >
+            Guardar
+          </v-btn>
         </v-form>
       </v-card-text>
     </v-card>
