@@ -159,7 +159,7 @@
           <v-btn
             :disabled="!valid"
             color="success"
-            class="mr-4"
+            class="my-5"
             @click="storeClient"
           >
             Guardar

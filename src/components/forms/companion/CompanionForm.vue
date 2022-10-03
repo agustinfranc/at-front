@@ -9,19 +9,27 @@
             v-model="fields.name"
             label="Nombre"
             required
+            append-inner-icon="mdi-exclamation"
             :rules="[
-              (v: string) => !!v || 'Falta el nombre',
-              (v: string) => (v && v.length <= 50) || 'Nombre muy largo',
+              (v: any) => !!v || 'Este campo es requerido',
+              (v: string | any[]) => (v && v.length <= 50) || 'El nombre excede los 50 digitos',
             ]"
           ></TextField>
 
-          <TextField v-model="fields.cuit" label="CUIT"></TextField>
+          <TextField
+            v-model="fields.cuit"
+            label="CUIT"
+            append-inner-icon="mdi-exclamation"
+            :rules="[(v: any) => !!v || 'Este campo es requerido']"
+          ></TextField>
 
           <TextField
             v-model="fields.birthday"
             type="date"
             label="Nacimiento"
             prepend-inner-icon="mdi-calendar-month"
+            append-inner-icon="mdi-exclamation"
+            :rules="[(v: any) => !!v || 'Este campo es requerido']"
           />
 
           <!-- TODO: crear componente -->
@@ -29,14 +37,16 @@
             v-model="fields.nationality"
             type="text"
             label="Nacionalidad"
+            append-inner-icon="mdi-exclamation"
+            :rules="[(v: any) => !!v || 'Este campo es requerido']"
             :items="countries"
-            class="my-5"
           ></v-select>
 
           <TextField
             v-model="fields.phone"
             label="Teléfono"
-            :rules="[(v: any) => !!v || 'Falta el teléfono del acompañante']"
+            append-inner-icon="mdi-exclamation"
+            :rules="[(v: any) => !!v || 'Este campo es requerido']"
           />
 
           <TextField
@@ -82,7 +92,7 @@
           <v-btn
             :disabled="!valid"
             color="success"
-            class="mr-4"
+            class="my-5"
             @click="storeCompanion"
           >
             Guardar
