@@ -15,10 +15,11 @@
                 v-model="fields.name"
                 label="Nombre Beneficiario"
                 required
+                append-inner-icon="mdi-exclamation"
                 :rules="[
-              (v: any) => !!v || 'Falta el nombre',
-              (v: string | any[]) => (v && v.length <= 50) || 'Nombre muy largo',
-            ]"
+                  (v: any) => !!v || 'Este campo es requerido',
+                  (v: string | any[]) => (v && v.length <= 50) || 'El nombre excede los 50 digitos',
+                ]"
               ></TextField>
             </v-col>
             <v-col>
@@ -34,8 +35,9 @@
               <TextField
                 v-model="fields.phone"
                 label="Teléfono"
-                :rules="[(v: any) => !!v || 'Falta el teléfono del cliente']"
+                append-inner-icon="mdi-exclamation"
                 prepend-inner-icon="mdi-phone-in-talk"
+                :rules="[(v: any) => !!v || 'Este campo es requerido']"
               />
             </v-col>
             <v-col>
@@ -53,6 +55,8 @@
                 v-model="fields.dni"
                 type="number"
                 label="DNI"
+                append-inner-icon="mdi-exclamation"
+                :rules="[(v: any) => !!v || 'Este campo es requerido']"
               ></TextField>
             </v-col>
             <v-col>
@@ -123,6 +127,8 @@
                 label="Porcentaje Facturado"
                 prefix="%"
                 type="number"
+                append-inner-icon="mdi-exclamation"
+                :rules="[(v: any) => !!v || 'Este campo es requerido']"
               />
             </v-col>
           </v-row>
@@ -133,9 +139,10 @@
                 type="number"
                 v-model="fields.rate"
                 label="Tarifa"
-                :rules="[(v: any) => !!v || 'Falta la tarifa']"
                 required
                 prepend-inner-icon="mdi-currency-usd"
+                append-inner-icon="mdi-exclamation"
+                :rules="[(v: any) => !!v || 'Este campo es requerido']"
               />
             </v-col>
             <v-col
@@ -149,7 +156,14 @@
             </v-col>
           </v-row>
 
-          <SubmitButton :valid="valid" @click="storeClient" />
+          <v-btn
+            :disabled="!valid"
+            color="success"
+            class="my-5"
+            @click="storeClient"
+          >
+            Guardar
+          </v-btn>
         </v-form>
       </v-card-text>
     </v-card>
