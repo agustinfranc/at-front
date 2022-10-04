@@ -1,6 +1,6 @@
 <template>
   <v-container class="h-100 d-flex flex-column">
-    <TableHeader title="Acompañamientos" route="assignments/new" />
+    <TableHeader title="Acompañamientos" :route="{ name: 'new-assignment' }" />
 
     <LazyTable :columns="columns" :service="service"> </LazyTable>
   </v-container>

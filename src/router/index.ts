@@ -27,8 +27,8 @@ const router = createRouter({
       component: () => import("../views/ClientsView.vue"),
     },
     {
-      path: "/client",
-      name: "client",
+      path: "/clients/new",
+      name: "new-client",
       component: () => import("../views/NewClientView.vue"),
     },
     {
@@ -37,8 +37,8 @@ const router = createRouter({
       component: () => import("../views/CompanionsView.vue"),
     },
     {
-      path: "/companion",
-      name: "companion",
+      path: "/companions/new",
+      name: "new-companion",
       component: () => import("../views/NewCompanionView.vue"),
     },
     {
