@@ -23,6 +23,7 @@ import "ag-grid-community/styles/ag-grid.min.css"; // Core grid CSS, always need
 import "ag-grid-community/styles/ag-theme-alpine.min.css"; // Optional theme CSS
 import "ag-grid-community/styles/ag-theme-material.min.css";
 import type { ColDef } from "@/components/tables/interfaces/GenericTable/columnDefinitions";
+import type { CellClickedEvent } from "ag-grid-community";
 
 export default defineComponent({
   props: {
@@ -67,7 +68,7 @@ export default defineComponent({
       columnDefs,
       rowData,
       defaultColDef,
-      cellWasClicked: () =>
+      cellWasClicked: (event: CellClickedEvent) =>
         //   event
         {
           // Example of consuming Grid Event

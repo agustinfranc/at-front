@@ -28,7 +28,7 @@ defineProps({
     required: true,
   },
   route: {
-    type: String,
+    type: Object,
     required: true,
   },
 });
