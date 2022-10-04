@@ -27,7 +27,7 @@
           </v-row>
 
           <div class="my-5">
-            <v-row v-for="day in fields.days">
+            <v-row v-for="day in fields.days" :key="day.id">
               <v-col cols="1">
                 <v-checkbox v-model="day.enabled"></v-checkbox>
               </v-col>
@@ -119,7 +119,7 @@ const companions = ref();
 const form = ref();
 
 // TODO: verifico  si la ruta tiene id
-const title = 1 === 1 ? "Nueva asignación" : "Asignacion #12";
+const title = "Nueva asignación";
 
 async function storeAssignment() {
   const formValidation = await form.value.validate();

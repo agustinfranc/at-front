@@ -2,8 +2,8 @@ export default class AssignmentForm {
   id?: number;
   client_name: string | null = null;
   companion_name: string | null = null;
-  periodic: boolean = false;
-  enabled: boolean = true;
+  periodic = false;
+  enabled = true;
   // TODO: traer los days del BE
   days = [
     {

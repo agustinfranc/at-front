@@ -105,7 +105,6 @@
 
 <script setup lang="ts">
 import { reactive, ref, toRaw } from "vue";
-import SubmitButton from "../common/SubmitButton.vue";
 import TextField from "../fields/TextField.vue";
 import CompanionApi from "@/api/companion/index";
 import { CompanionService } from "@/services/companionService";
