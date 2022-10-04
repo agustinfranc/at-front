@@ -35,17 +35,13 @@ export default defineComponent({
       type: Array,
       required: true,
     },
-    showDetails: {
-      type: Function,
-      required: true,
-    },
   },
   name: "GenericTable",
   components: {
     AgGridVue,
   },
 
-  setup(props, showDetails) {
+  setup(props, context) {
     // Set rowData to Array of Objects, one Object per Row
     const rowData = computed(() => props.rows);
 
@@ -73,12 +69,9 @@ export default defineComponent({
       columnDefs,
       rowData,
       defaultColDef,
-      cellWasClicked: (event: CellClickedEvent) =>
-        //   event
-        {
-          console.log(event.data.id);
-          showDetails(event.data.id);
-        },
+      cellWasClicked: (event: CellClickedEvent) => {
+        context.emit("showDetails", event.data.id);
+      },
       deselectRows: () => {
         gridApi.value.deselectAll();
       },

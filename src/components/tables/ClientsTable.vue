@@ -5,7 +5,7 @@
     <LazyTable
       :columns="columns"
       :service="service"
-      :showDetails="showClient"
+      @showDetails="(id) => showClient(id)"
     />
   </v-container>
 </template>
