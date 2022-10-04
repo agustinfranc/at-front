@@ -50,7 +50,7 @@ export default defineComponent({
         },
         {
           title: "Acompañamientos",
-          to: "",
+          to: "/assignments",
           icon: "mdi-account-multiple",
         },
         {

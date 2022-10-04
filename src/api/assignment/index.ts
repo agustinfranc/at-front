@@ -1,21 +1,18 @@
-import axios from "@/plugins/axios";
+import type { AxiosPromise } from "axios";
+import type Assignment from "./interface";
+import axiosInstance from "@/plugins/axios";
 
 class AssignmentApi {
-  static async get() {
-    try {
-      return await axios.get("/assignments");
-    } catch (error) {
-      return error;
-    }
+  getAll(): AxiosPromise<Assignment[]> {
+    return axiosInstance.get("/assignments");
   }
 
-  //TODO: tipar assignment
-  static async post(assignment) {
-    try {
-      return await axios.post("/assignment", assignment);
-    } catch (error) {
-      return error;
-    }
+  getOne(): AxiosPromise<Assignment[]> {
+    return axiosInstance.get("/assignments");
+  }
+
+  create(assignment: Assignment): AxiosPromise<Assignment> {
+    return axiosInstance.post("/assignments", assignment);
   }
 }
 

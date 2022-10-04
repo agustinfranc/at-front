@@ -1,44 +1,40 @@
 <template>
   <v-container class="h-100 d-flex flex-column">
-    <TableHeader title="Acompañamientos" route="/assignment" />
+    <TableHeader title="Acompañamientos" route="assignments/new" />
 
-    <LazyTable :columns="columns" :request="getAssignments" />
+    <LazyTable :columns="columns" :service="service"> </LazyTable>
   </v-container>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
 import AssignmentApi from "@/api/assignment/index";
 import LazyTable from "@/components/tables/LazyTable.vue";
 import TableHeader from "./extras/TableHeader.vue";
+import { AssignmentService } from "@/services/assignmentService";
+import type {
+  ColDef,
+  ValueFormatterParams,
+} from "@/components/tables/interfaces/GenericTable/columnDefinitions";
 
-export default defineComponent({
-  name: "AssignmentsTable",
-  components: {
-    LazyTable,
-    TableHeader,
+const service = new AssignmentService(new AssignmentApi());
+
+const columns = [
+  {
+    headerName: "Cliente",
+    field: "client.name",
   },
-  data() {
-    return {
-      //TODO: tipar data
-
-      getAssignments: AssignmentApi.get,
-
-      columns: [
-        {
-          field: "Cliente",
-        },
-        {
-          field: "Acompañante",
-        },
-        {
-          field: "Fecha",
-        },
-        {
-          field: "Horas",
-        },
-      ],
-    };
+  {
+    headerName: "Acompañante",
+    field: "companion.name",
   },
-});
+  {
+    headerName: "Periodico",
+    field: "periodic",
+    valueFormatter: booleanFormatter,
+  },
+] as ColDef[];
+
+function booleanFormatter(params: ValueFormatterParams) {
+  return params.value ? "Si" : "No";
+}
 </script>

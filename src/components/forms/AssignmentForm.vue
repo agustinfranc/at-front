@@ -1,132 +1,171 @@
 <template>
   <v-container>
     <v-card>
-      <v-card-title>Asignación</v-card-title>
+      <v-card-title class="mb-5">{{ title }}</v-card-title>
 
       <v-card-text>
         <v-form ref="form" v-model="valid" lazy-validation>
-          <ComboboxField
-            v-model="form.client"
-            :items="clients"
-            label="Cliente"
-          />
+          <v-row>
+            <v-col>
+              <ComboboxField
+                v-model="fields.client_name"
+                :items="clients"
+                item-title="name"
+                label="Cliente"
+                :rules="[(v: string) => !!v || 'Este campo es requerido']"
+              />
+            </v-col>
+            <v-col>
+              <ComboboxField
+                v-model="fields.companion_name"
+                :items="companions"
+                item-title="name"
+                label="Acompañante"
+                :rules="[(v: string) => !!v || 'Este campo es requerido']"
+              />
+            </v-col>
+          </v-row>
 
-          <ComboboxField
-            v-model="form.companion"
-            :items="companions"
-            label="Acompañante"
-          />
-          <ComboboxField
-            v-model="form.days"
-            :items="days"
-            label="Días"
-            multiple
-            chips
-          />
+          <div class="my-5">
+            <v-row v-for="day in fields.days">
+              <v-col cols="1">
+                <v-checkbox v-model="day.enabled"></v-checkbox>
+              </v-col>
+              <v-col>
+                <v-text-field
+                  v-model="day.title"
+                  readonly
+                  :disabled="!day.enabled"
+                />
+              </v-col>
+              <v-col>
+                <v-text-field
+                  v-model="day.from"
+                  type="time"
+                  label="Desde"
+                  :disabled="!day.enabled"
+                />
+              </v-col>
+              <v-col>
+                <v-text-field
+                  v-model="day.to"
+                  type="time"
+                  label="Hasta"
+                  :disabled="!day.enabled"
+                />
+              </v-col>
+              <v-col>
+                <v-text-field
+                  type="number"
+                  label="Horas"
+                  v-model="day.hours"
+                  :disabled="!day.enabled"
+                  :rules="[(v: number) => (!!v || !day.enabled) || 'Este campo es requerido']"
+                />
+              </v-col>
+            </v-row>
+          </div>
 
-          <div class="text-caption">Horas</div>
+          <v-row>
+            <v-col>
+              <v-checkbox
+                v-model="fields.periodic"
+                label="Periódico"
+              ></v-checkbox>
+            </v-col>
 
-          <v-slider
-            step="1"
-            show-ticks="always"
-            v-model="form.hours"
-            thumb-label
-            :max="24"
-            :min="0"
-          >
-            <template #append>
-              <v-text-field
-                v-model="form.hours"
-                type="number"
-                density="compact"
-                hide-details
-                variant="outlined"
-              ></v-text-field>
-            </template>
-          </v-slider>
+            <v-col>
+              <v-checkbox
+                v-model="fields.enabled"
+                label="Habilitado"
+              ></v-checkbox>
+            </v-col>
+          </v-row>
 
-          <v-checkbox v-model="form.periodic" label="Periódico"></v-checkbox>
-
-          <v-checkbox v-model="form.enabled" label="Habilitado"></v-checkbox>
-
-          <v-btn
-            :disabled="!valid"
-            color="success"
-            class="mr-4"
-            @click="validate"
-          >
-            Enviar
-          </v-btn>
+          <SubmitButton :valid="valid" @click="storeAssignment" />
         </v-form>
       </v-card-text>
     </v-card>
-
-    <v-snackbar v-model="snackbar.display" :color="snackbar.color">
-      {{ snackbar.text }}
-    </v-snackbar>
   </v-container>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
+import { onBeforeMount, onMounted, reactive, ref } from "vue";
 import ComboboxField from "./fields/ComboboxField.vue";
-
 import AssignmentsApi from "@/api/assignment/index";
+import ClientApi from "@/api/client";
+import { AssignmentService } from "@/services/assignmentService";
+import { useSnackbarStore } from "@/stores/snackbar";
+import SubmitButton from "./common/SubmitButton.vue";
+import { ClientService } from "@/services/clientService";
+import CompanionApi from "@/api/companion";
+import { CompanionService } from "@/services/companionService";
+import type Client from "@/api/client/interface";
+import AssignmentForm from "./interfaces/assignmentForm";
+import type Companion from "@/api/companion/interface";
+import { cloneDeep } from "lodash";
+// import _ from "@/plugins/lodash" not working
 
-export default defineComponent({
-  name: "AssignmentForm",
-  components: {
-    ComboboxField,
-  },
+const valid = ref(true);
+const fields = reactive(new AssignmentForm());
 
-  methods: {
-    async storeAssignment() {
-      const res = await AssignmentsApi.create({ ...this.form });
+const clientService = new ClientService(new ClientApi());
+const companionService = new CompanionService(new CompanionApi());
 
-      // TODO: refactor
-      if (res.data) {
-        this.snackbar.text = "Acompañamiento agregado con exito";
-        this.snackbar.display = true;
-        this.snackbar.color = "green";
-      } else {
-        this.snackbar.text = res.response.data.message;
-        this.snackbar.display = true;
-        this.snackbar.color = "red";
-      }
-    },
-  },
+const clients = ref();
+const companions = ref();
 
-  data() {
-    return {
-      snackbar: {
-        display: false,
-        text: "",
-        color: "black",
-      },
+// declare template ref form
+const form = ref();
 
-      clients: ["Franco Cavallini", "Gastón Malalel"],
-      companions: ["Juan Cruz Torasini", "Joaquín Misisco"],
-      days: [
-        "Lunes",
-        "Martes",
-        "Miércoles",
-        "Jueves",
-        "Viernes",
-        "Sábado",
-        "Domingo",
-      ],
+// TODO: verifico  si la ruta tiene id
+const title = 1 === 1 ? "Nueva asignación" : "Asignacion #12";
 
-      valid: true,
-      form: {
-        client: "",
-        companion: "",
-        days: [],
-        hours: "",
-        periodic: false,
-        enabled: true,
-      },
-      passRules: [(v) => !!v || "Falta la constraseña del Usuario"],
-    };
-  },
+async function storeAssignment() {
+  const formValidation = await form.value.validate();
+  if (!formValidation.valid) return;
+
+  const assignmentForm = getForm();
+
+  // Si el assignment tuviera id, haria update y no create
+  const { error } = await new AssignmentService(new AssignmentsApi()).create(
+    cloneDeep(assignmentForm)
+  );
+
+  const snackbarStore = useSnackbarStore();
+
+  if (!error) {
+    snackbarStore.showSuccess({
+      text: "Asignación agregada con exito",
+    });
+    return;
+  }
+}
+
+function getForm() {
+  return {
+    ...fields,
+    client_id: clients.value.find(
+      (client: Client) => client.name === fields.client_name
+    ).id,
+    companion_id: companions.value.find(
+      (companion: Companion) => companion.name === fields.companion_name
+    ).id,
+  };
+}
+
+onBeforeMount(() => {
+  clients.value = [];
+  companions.value = [];
+});
+
+onMounted(async () => {
+  const clientsData = await clientService.find();
+  const companionsData = await companionService.find();
+
+  if (clientsData.error || companionsData.error) return;
+
+  clients.value = clientsData.data;
+  companions.value = companionsData.data;
 });
 </script>
