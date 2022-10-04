@@ -9,7 +9,7 @@
       :default-col-def="defaultColDef"
       row-selection="multiple"
       animate-rows="true"
-      @cell-clicked="event"
+      @cell-clicked="cellWasClicked"
       @grid-ready="onGridReady"
     >
     </ag-grid-vue>
@@ -35,8 +35,8 @@ export default defineComponent({
       type: Array,
       required: true,
     },
-    event: {
-      type: undefined,
+    showDetails: {
+      type: Function,
       required: true,
     },
   },
@@ -44,7 +44,8 @@ export default defineComponent({
   components: {
     AgGridVue,
   },
-  setup(props) {
+
+  setup(props, showDetails) {
     // Set rowData to Array of Objects, one Object per Row
     const rowData = computed(() => props.rows);
 
@@ -75,8 +76,8 @@ export default defineComponent({
       cellWasClicked: (event: CellClickedEvent) =>
         //   event
         {
-          // Example of consuming Grid Event
-          // console.log("cell was clicked", event);
+          console.log(event.data.id);
+          showDetails(event.data.id);
         },
       deselectRows: () => {
         gridApi.value.deselectAll();

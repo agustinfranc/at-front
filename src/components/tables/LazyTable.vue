@@ -2,7 +2,7 @@
   <GenericTable
     :columns="columns"
     :rows="rows.value"
-    :event="event"
+    :showDetails="showDetails"
     class="flex-grow-1"
   />
 </template>
@@ -21,8 +21,8 @@ const props = defineProps({
     type: Object,
     required: true,
   },
-  event: {
-    type: undefined,
+  showDetails: {
+    type: Function,
     required: true,
   },
 });

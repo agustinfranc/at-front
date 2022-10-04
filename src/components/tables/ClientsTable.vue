@@ -2,7 +2,11 @@
   <v-container class="h-100 d-flex flex-column">
     <TableHeader title="Clientes" route="client" />
 
-    <LazyTable :columns="columns" :service="service" :event="showClient" />
+    <LazyTable
+      :columns="columns"
+      :service="service"
+      :showDetails="showClient"
+    />
   </v-container>
 </template>
 
@@ -17,7 +21,8 @@ import { useRouter } from "vue-router";
 const service = new ClientService(new ClientApi());
 const router = useRouter();
 
-function showClient() {
+function showClient(id: string) {
+  console.log(id);
   router.push({
     name: "client-details",
   });
