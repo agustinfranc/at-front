@@ -1,5 +1,10 @@
 <template>
-  <GenericTable :columns="columns" :rows="rows.value" class="flex-grow-1" />
+  <GenericTable
+    :columns="columns"
+    :rows="rows.value"
+    class="flex-grow-1"
+    @showDetails="$emit('showDetails')"
+  />
 </template>
 
 <script setup lang="ts">
@@ -17,6 +22,10 @@ const props = defineProps({
     required: true,
   },
 });
+
+function sendId(id: string) {
+  //this.$emit("showDetails", id);
+}
 
 // We use reactive instead of ref
 const rows = reactive({ value: [] as any[] });
