@@ -9,7 +9,7 @@
       :default-col-def="defaultColDef"
       row-selection="multiple"
       animate-rows="true"
-      @cell-clicked="cellWasClicked"
+      @cell-clicked="event"
       @grid-ready="onGridReady"
     >
     </ag-grid-vue>
@@ -33,6 +33,10 @@ export default defineComponent({
     },
     rows: {
       type: Array,
+      required: true,
+    },
+    event: {
+      type: undefined,
       required: true,
     },
   },

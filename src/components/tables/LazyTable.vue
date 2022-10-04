@@ -1,5 +1,10 @@
 <template>
-  <GenericTable :columns="columns" :rows="rows.value" class="flex-grow-1" />
+  <GenericTable
+    :columns="columns"
+    :rows="rows.value"
+    :event="event"
+    class="flex-grow-1"
+  />
 </template>
 
 <script setup lang="ts">
@@ -14,6 +19,10 @@ const props = defineProps({
   },
   service: {
     type: Object,
+    required: true,
+  },
+  event: {
+    type: undefined,
     required: true,
   },
 });

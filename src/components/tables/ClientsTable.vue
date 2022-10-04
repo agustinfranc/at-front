@@ -1,8 +1,8 @@
 <template>
   <v-container class="h-100 d-flex flex-column">
-    <TableHeader title="Clientes" route="/client" />
+    <TableHeader title="Clientes" route="client" />
 
-    <LazyTable :columns="columns" :service="service" />
+    <LazyTable :columns="columns" :service="service" :event="showClient" />
   </v-container>
 </template>
 
@@ -12,8 +12,16 @@ import LazyTable from "@/components/tables/LazyTable.vue";
 import TableHeader from "./extras/TableHeader.vue";
 import type { ColDef } from "@/components/tables/interfaces/GenericTable/columnDefinitions";
 import { ClientService } from "@/services/clientService";
+import { useRouter } from "vue-router";
 
 const service = new ClientService(new ClientApi());
+const router = useRouter();
+
+function showClient() {
+  router.push({
+    name: "client-details",
+  });
+}
 
 const columns = [
   {
@@ -25,12 +33,19 @@ const columns = [
     field: "guardian_name",
   },
   {
+    headerName: "Teléfono",
+    field: "phone",
+  },
+  {
     headerName: "Dni",
     field: "dni",
   },
   {
     headerName: "Tarifa",
     field: "rate",
+    cellRenderer: (params: any) => {
+      return "$ " + params.value;
+    },
   },
 ] as ColDef[];
 </script>

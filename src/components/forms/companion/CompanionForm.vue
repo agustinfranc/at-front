@@ -1,8 +1,7 @@
 <template>
   <v-container>
+    <TitleComponent title="Acompañante"></TitleComponent>
     <v-card>
-      <v-card-title>Acompañante Nuevo</v-card-title>
-
       <v-card-text>
         <v-form ref="form" v-model="valid" lazy-validation>
           <TextField
@@ -32,15 +31,15 @@
             :rules="[(v: any) => !!v || 'Este campo es requerido']"
           />
 
-          <!-- TODO: crear componente -->
-          <v-select
+          <SelectField
             v-model="fields.nationality"
             type="text"
             label="Nacionalidad"
             append-inner-icon="mdi-exclamation"
             :rules="[(v: any) => !!v || 'Este campo es requerido']"
             :items="countries"
-          ></v-select>
+          >
+          </SelectField>
 
           <TextField
             v-model="fields.phone"
@@ -53,7 +52,7 @@
             type="number"
             v-model="fields.max_taxable"
             label="Máximo Facturable"
-            prefix="$"
+            prepend-inner-icon="mdi-currency-usd"
           ></TextField>
 
           <!-- TODO: crear componente -->
@@ -111,6 +110,8 @@ import CompanionApi from "@/api/companion/index";
 import { CompanionService } from "@/services/companionService";
 import { useSnackbarStore } from "@/stores/snackbar";
 import Companion from "@/api/companion/interface";
+import TitleComponent from "../extras/TitleComponent.vue";
+import SelectField from "../fields/SelectField.vue";
 
 const valid = ref(true);
 const fields = reactive(new Companion());
