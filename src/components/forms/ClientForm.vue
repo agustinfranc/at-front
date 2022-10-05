@@ -138,7 +138,7 @@
               <TextField
                 type="number"
                 v-model="fields.rate"
-                label="Tarifa"
+                label="Tarifa por hora"
                 required
                 prepend-inner-icon="mdi-currency-usd"
                 append-inner-icon="mdi-exclamation"
