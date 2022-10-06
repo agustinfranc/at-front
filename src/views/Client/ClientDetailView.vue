@@ -9,7 +9,7 @@
 import ClientApi from "@/api/client";
 import { ClientService } from "@/services/clientService";
 import { onBeforeMount, onMounted, ref } from "vue";
-import { useRouter, useRoute } from "vue-router";
+import { useRoute } from "vue-router";
 
 const client = ref();
 const clientService = new ClientService(new ClientApi());
@@ -26,7 +26,5 @@ onMounted(async () => {
   client.value = clientsData.data;
 
   if (clientsData.error) return;
-
-  console.log(clientsData);
 });
 </script>

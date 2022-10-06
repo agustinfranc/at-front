@@ -7,8 +7,8 @@ class ClientApi {
     return axiosInstance.get("/clients");
   }
 
-  getOne(id: number): AxiosPromise<Client> {
-    return axiosInstance.get(`/clients/${id}`);
+  getOne(id: any): AxiosPromise<Client> {
+    return axiosInstance.get(`/clients/${id.id}`);
   }
 
   create(client: Client): AxiosPromise<Client> {
