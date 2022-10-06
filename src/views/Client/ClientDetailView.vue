@@ -1,7 +1,60 @@
 <template>
   <v-container>
-    <h1>Client Details</h1>
-    {{ client }}
+    <TitleComponent :title="client.name"></TitleComponent>
+    <v-card class="my-4">
+      <v-row>
+        <v-col>
+          <v-card-text> Dirección: {{ client.address }} </v-card-text>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col>
+          <v-card-text> Teléfono: {{ client.phone }} </v-card-text>
+        </v-col>
+        <v-col>
+          <v-card-text> Teléfono Extra: {{ client.extra_phone }} </v-card-text>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col>
+          <v-card-text> Dni: {{ client.dni }} </v-card-text>
+        </v-col>
+        <v-col>
+          <v-card-text> Nacimiento: {{ client.birthday }} </v-card-text>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col>
+          <v-card-text>
+            Nombre a cargo: {{ client.guardian_name }}
+          </v-card-text>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col>
+          <v-card-text>
+            Obra Social: {{ client.health_insurance }}
+          </v-card-text>
+        </v-col>
+        <v-col>
+          <v-card-text> Afiliado: {{ client.affiliate }} </v-card-text>
+        </v-col>
+      </v-row>
+
+      <v-card-text> Diagnosis: {{ client.diagnosis }} </v-card-text>
+      <v-card-text> Tratamiento: {{ client.treatment }} </v-card-text>
+      <v-card-text> Medicamento: {{ client.medicine }} </v-card-text>
+      <v-row>
+        <v-col>
+          <v-card-text> Tarifa: {{ client.rate }} </v-card-text>
+        </v-col>
+        <v-col>
+          <v-card-text>
+            Fecha Presupuesto: {{ client.budget_date }}
+          </v-card-text>
+        </v-col>
+      </v-row>
+    </v-card>
   </v-container>
 </template>
 
@@ -10,6 +63,7 @@ import ClientApi from "@/api/client";
 import { ClientService } from "@/services/clientService";
 import { onBeforeMount, onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
+import TitleComponent from "../../components/forms/extras/TitleComponent.vue";
 
 const client = ref();
 const clientService = new ClientService(new ClientApi());
