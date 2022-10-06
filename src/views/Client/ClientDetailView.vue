@@ -21,7 +21,8 @@ onBeforeMount(() => {
 });
 
 onMounted(async () => {
-  const clientsData = await clientService.findOne(route.params.id);
+  const clientId = route.params.id as string;
+  const clientsData = await clientService.findOne(parseInt(clientId));
   client.value = clientsData.data;
 
   if (clientsData.error) return;

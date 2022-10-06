@@ -12,7 +12,7 @@ export class ClientService extends ApiService {
   }
 
   async findOne(id: number): Promise<ApiServiceResponse<Client>> {
-    return await this.handleRequest<Client>(this.api.getOne(id));
+    return await this.handleRequest<Client>(this.api.getOne, { id });
   }
 
   async create(client: Client): Promise<ApiServiceResponse<Client>> {
