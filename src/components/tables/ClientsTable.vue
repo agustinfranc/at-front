@@ -22,9 +22,8 @@ const service = new ClientService(new ClientApi());
 const router = useRouter();
 
 function showClient(id: string) {
-  console.log(id);
   router.push({
-    name: "client-details",
+    path: `/clients/${id}`,
   });
 }
 
