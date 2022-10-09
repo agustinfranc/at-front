@@ -9,7 +9,7 @@
 <script setup lang="ts">
 import AssignmentApi from "@/api/assignment/index";
 import LazyTable from "@/components/tables/LazyTable.vue";
-import TableHeader from "./extras/TableHeader.vue";
+import TableHeader from "@/components/tables/extras/TableHeader.vue";
 import { AssignmentService } from "@/services/assignmentService";
 import type {
   ColDef,

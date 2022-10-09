@@ -103,6 +103,7 @@ import { CompanionService } from "@/services/companionService";
 import type Client from "@/api/client/interface";
 import AssignmentForm from "../interfaces/assignmentForm";
 import type Companion from "@/api/companion/interface";
+// @ts-ignore
 import { cloneDeep } from "lodash";
 // import _ from "@/plugins/lodash" not working
 

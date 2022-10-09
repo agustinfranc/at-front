@@ -11,8 +11,8 @@ export class AssignmentService extends ApiService {
     return await this.handleRequest<Assignment[]>(this.api.getAll);
   }
 
-  async findOne(): Promise<ApiServiceResponse<Assignment>> {
-    return await this.handleRequest<Assignment>(this.api.getOne);
+  async findOne(id: number): Promise<ApiServiceResponse<Assignment>> {
+    return await this.handleRequest<Assignment>(this.api.getOne, id);
   }
 
   async create(
