@@ -91,17 +91,17 @@
 
 <script setup lang="ts">
 import { onBeforeMount, onMounted, reactive, ref } from "vue";
-import ComboboxField from "./fields/ComboboxField.vue";
+import ComboboxField from "@/components/forms/fields/ComboboxField.vue";
 import AssignmentsApi from "@/api/assignment/index";
 import ClientApi from "@/api/client";
 import { AssignmentService } from "@/services/assignmentService";
 import { useSnackbarStore } from "@/stores/snackbar";
-import SubmitButton from "./common/SubmitButton.vue";
+import SubmitButton from "@/components/forms/common/SubmitButton.vue";
 import { ClientService } from "@/services/clientService";
 import CompanionApi from "@/api/companion";
 import { CompanionService } from "@/services/companionService";
 import type Client from "@/api/client/interface";
-import AssignmentForm from "./interfaces/assignmentForm";
+import AssignmentForm from "../interfaces/assignmentForm";
 import type Companion from "@/api/companion/interface";
 import { cloneDeep } from "lodash";
 // import _ from "@/plugins/lodash" not working
