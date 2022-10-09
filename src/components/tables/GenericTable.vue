@@ -40,7 +40,7 @@ export default defineComponent({
   components: {
     AgGridVue,
   },
-  setup(props) {
+  setup(props, context) {
     // Set rowData to Array of Objects, one Object per Row
     const rowData = computed(() => props.rows);
 
@@ -69,11 +69,7 @@ export default defineComponent({
       rowData,
       defaultColDef,
       cellWasClicked: (event: CellClickedEvent) =>
-        //   event
-        {
-          // Example of consuming Grid Event
-          // console.log("cell was clicked", event);
-        },
+        context.emit("cellClick", event.data),
       deselectRows: () => {
         gridApi.value.deselectAll();
       },

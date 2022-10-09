@@ -1,8 +1,9 @@
 <template>
   <v-container class="h-100 d-flex flex-column">
-    <TableHeader title="Acompañamientos" :route="{ name: 'new-assignment' }" />
+    <TableHeader title="Acompañamientos" :route="{ name: 'assignment-new' }" />
 
-    <LazyTable :columns="columns" :service="service"> </LazyTable>
+    <LazyTable :columns="columns" :service="service" @cellClick="showDetails">
+    </LazyTable>
   </v-container>
 </template>
 
@@ -15,9 +16,11 @@ import type {
   ColDef,
   ValueFormatterParams,
 } from "@/components/tables/interfaces/GenericTable/columnDefinitions";
+import type Assignment from "@/api/assignment/interface";
+import { useRouter } from "vue-router";
 
 const service = new AssignmentService(new AssignmentApi());
-
+const router = useRouter();
 const columns = [
   {
     headerName: "Cliente",
@@ -36,5 +39,12 @@ const columns = [
 
 function booleanFormatter(params: ValueFormatterParams) {
   return params.value ? "Si" : "No";
+}
+
+function showDetails(assignment: Assignment) {
+  router.push({
+    name: "assignment-detail",
+    params: { id: assignment.id },
+  });
 }
 </script>

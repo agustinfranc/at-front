@@ -58,8 +58,13 @@ const router = createRouter({
     },
     {
       path: "/assignments/new",
-      name: "new-assignment",
+      name: "assignment-new",
       component: () => import("../views/Assignment/NewAssignmentView.vue"),
+    },
+    {
+      path: "/assignments/:id",
+      name: "assignment-detail",
+      component: () => import("../views/Assignment/AssignmentDetailView.vue"),
     },
   ],
 });
