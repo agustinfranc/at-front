@@ -104,13 +104,12 @@
 
 <script setup lang="ts">
 import { reactive, ref, toRaw } from "vue";
-import SubmitButton from "../common/SubmitButton.vue";
 import TextField from "../fields/TextField.vue";
 import CompanionApi from "@/api/companion/index";
 import { CompanionService } from "@/services/companionService";
 import { useSnackbarStore } from "@/stores/snackbar";
 import Companion from "@/api/companion/interface";
-import TitleComponent from "../extras/TitleComponent.vue";
+import TitleComponent from "../extras/FormTitle.vue";
 import SelectField from "../fields/SelectField.vue";
 
 const valid = ref(true);

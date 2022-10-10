@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <TitleComponent title="Cliente"></TitleComponent>
+    <FormTitle title="Cliente"></FormTitle>
 
     <v-card class="my-4">
       <v-card-text>
@@ -168,14 +168,13 @@
 
 <script setup lang="ts">
 import { reactive, ref, toRaw } from "vue";
-import SubmitButton from "./common/SubmitButton.vue";
 import TextField from "./fields/TextField.vue";
 import TextAreaField from "./fields/TextAreaField.vue";
 import ClientApi from "@/api/client/index";
 import { ClientService } from "@/services/clientService";
 import { useSnackbarStore } from "@/stores/snackbar";
 import Client from "@/api/client/interface";
-import TitleComponent from "./extras/TitleComponent.vue";
+import FormTitle from "./extras/FormTitle.vue";
 
 const valid = ref(true);
 const fields = reactive(new Client());
