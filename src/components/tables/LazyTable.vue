@@ -26,6 +26,6 @@ onMounted(async () => {
 
   if (error || !data) return;
 
-  rows.value = data;
+  rows.value = data.data;
 });
 </script>
