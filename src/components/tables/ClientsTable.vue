@@ -1,7 +1,7 @@
 <template>
   <v-container class="h-100 d-flex flex-column">
     <TableHeader title="Clientes" :route="{ name: 'new-client' }" />
-    <LazyTable :columns="columns" :service="service" @rowClick="showClient" />
+    <LazyTable :columns="columns" :service="service" @cellClick="showClient" />
   </v-container>
 </template>
 

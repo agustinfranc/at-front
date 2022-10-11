@@ -70,7 +70,7 @@ export default defineComponent({
       rowData,
       defaultColDef,
       cellWasClicked: (event: CellClickedEvent) => {
-        context.emit("rowClick", event.data.id);
+        context.emit("cellClick", event.data);
       },
       deselectRows: () => {
         gridApi.value.deselectAll();
