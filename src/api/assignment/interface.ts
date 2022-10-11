@@ -7,7 +7,20 @@ export default interface Assignment {
   client: Client;
   companion_id: number;
   companion: Companion;
-  days: [];
+  days: {
+    id: number;
+    value: number;
+    title: string;
+    pivot: {
+      assignment_id: number;
+      day_id: number;
+      from: string;
+      to: string;
+      hours: number;
+      created_at: string;
+      updated_at: string;
+    };
+  }[];
   periodic: boolean;
   enabled: boolean;
   created_at: string;
