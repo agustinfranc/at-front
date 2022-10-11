@@ -43,27 +43,27 @@
             <v-row>
               <v-col>
                 <p class="font-weight-bold">Antecedentes</p>
-                {{ companion.criminal_record }}
+                {{ companion.criminal_record ? "Si" : "No" }}
               </v-col>
               <v-col>
                 <p class="font-weight-bold">Seguro</p>
-                {{ companion.insurance }}
+                {{ companion.insurance ? "Si" : "No" }}
               </v-col>
             </v-row>
             <v-row>
               <v-col>
                 <p class="font-weight-bold">Firmó Contrato</p>
-                {{ companion.has_sign_contract }}
+                {{ companion.has_sign_contract ? "Si" : "No" }}
               </v-col>
               <v-col>
                 <p class="font-weight-bold">Monotributo</p>
-                {{ companion.monotax }}
+                {{ companion.monotax ? "Si" : "No" }}
               </v-col>
             </v-row>
             <v-row>
               <v-col>
                 <p class="font-weight-bold">Máximo Facturable</p>
-                {{ companion.max_taxable }}
+                {{ companion.max_taxable }}%
               </v-col>
             </v-row>
           </v-card-text>
@@ -108,6 +108,5 @@ async function getCompanion() {
   }
 
   if (data) companion.value = data.data;
-  console.log(companion);
 }
 </script>
