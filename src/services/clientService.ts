@@ -11,8 +11,8 @@ export class ClientService extends ApiService {
     return await this.handleRequest<Client[]>(this.api.getAll);
   }
 
-  async findOne(): Promise<ApiServiceResponse<Client>> {
-    return await this.handleRequest<Client>(this.api.getOne);
+  async findOne(id: number): Promise<ApiServiceResponse<Client>> {
+    return await this.handleRequest<Client>(this.api.getOne, id);
   }
 
   async create(client: Client): Promise<ApiServiceResponse<Client>> {

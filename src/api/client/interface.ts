@@ -1,5 +1,5 @@
 export default class Client {
-  id?: number;
+  id? = "";
   name = "";
   dni = "";
   phone = "";
@@ -16,4 +16,6 @@ export default class Client {
   health_insurance = "";
   affiliate = "";
   budget_date = "";
+  created_at = "";
+  updated_at = "";
 }
