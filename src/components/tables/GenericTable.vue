@@ -68,9 +68,8 @@ export default defineComponent({
       columnDefs,
       rowData,
       defaultColDef,
-      cellWasClicked: (event: CellClickedEvent) => {
-        context.emit("cellClick", event.data);
-      },
+      cellWasClicked: (event: CellClickedEvent) =>
+        context.emit("cellClick", event.data),
       deselectRows: () => {
         gridApi.value.deselectAll();
       },
