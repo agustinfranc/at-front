@@ -63,7 +63,7 @@ const router = createRouter({
     },
     {
       path: "/clients/:id",
-      name: "client-details",
+      name: "client-detail",
       component: () => import("../views/Client/ClientDetailView.vue"),
     },
     {

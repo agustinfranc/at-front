@@ -1,4 +1,6 @@
 import type Assignment from "@/api/assignment/interface";
+import type Client from "@/api/client/interface";
+import type Companion from "@/api/companion/interface";
 import type AssignmentForm from "../interfaces/assignmentForm";
 
 export function mapAssignmentForEditForm(
@@ -10,57 +12,86 @@ export function mapAssignmentForEditForm(
     companion_name: assignment.companion.name,
     periodic: assignment.periodic,
     enabled: assignment.enabled,
-    // TODO: finish mapping days
     days: [
-      { enabled: false, title: "Domingo", id: 1, from: "", to: "", hours: 0 },
       {
-        enabled: false,
+        enabled: assignment.days.find((day) => day.value === 0) ? true : false,
+        title: "Domingo",
+        id: 1,
+        value: 0,
+        from: assignment.days.find((day) => day.value === 0)?.pivot.from || "",
+        to: assignment.days.find((day) => day.value === 0)?.pivot.to || "",
+        hours: assignment.days.find((day) => day.value === 0)?.pivot.hours || 0,
+      },
+      {
+        enabled: assignment.days.find((day) => day.value === 1) ? true : false,
         title: "Lunes",
         id: 2,
-        from: "",
-        to: "",
-        hours: 0,
+        value: 1,
+        from: assignment.days.find((day) => day.value === 1)?.pivot.from || "",
+        to: assignment.days.find((day) => day.value === 1)?.pivot.to || "",
+        hours: assignment.days.find((day) => day.value === 1)?.pivot.hours || 0,
       },
       {
-        enabled: false,
+        enabled: assignment.days.find((day) => day.value === 2) ? true : false,
         title: "Martes",
         id: 3,
-        from: "",
-        to: "",
-        hours: 0,
+        value: 2,
+        from: assignment.days.find((day) => day.value === 2)?.pivot.from || "",
+        to: assignment.days.find((day) => day.value === 2)?.pivot.to || "",
+        hours: assignment.days.find((day) => day.value === 2)?.pivot.hours || 0,
       },
       {
-        enabled: false,
+        enabled: assignment.days.find((day) => day.value === 3) ? true : false,
         title: "Miercoles",
         id: 4,
-        from: "",
-        to: "",
-        hours: 0,
+        value: 3,
+        from: assignment.days.find((day) => day.value === 3)?.pivot.from || "",
+        to: assignment.days.find((day) => day.value === 3)?.pivot.to || "",
+        hours: assignment.days.find((day) => day.value === 3)?.pivot.hours || 0,
       },
       {
-        enabled: false,
+        enabled: assignment.days.find((day) => day.value === 4) ? true : false,
         title: "Jueves",
         id: 5,
-        from: "",
-        to: "",
-        hours: 0,
+        value: 4,
+        from: assignment.days.find((day) => day.value === 4)?.pivot.from || "",
+        to: assignment.days.find((day) => day.value === 4)?.pivot.to || "",
+        hours: assignment.days.find((day) => day.value === 4)?.pivot.hours || 0,
       },
       {
-        enabled: false,
+        enabled: assignment.days.find((day) => day.value === 5) ? true : false,
         title: "Viernes",
         id: 6,
-        from: "",
-        to: "",
-        hours: 0,
+        value: 5,
+        from: assignment.days.find((day) => day.value === 5)?.pivot.from || "",
+        to: assignment.days.find((day) => day.value === 5)?.pivot.to || "",
+        hours: assignment.days.find((day) => day.value === 5)?.pivot.hours || 0,
       },
       {
-        enabled: false,
+        enabled: assignment.days.find((day) => day.value === 6) ? true : false,
         title: "Sabado",
         id: 7,
-        from: "",
-        to: "",
-        hours: 0,
+        value: 6,
+        from: assignment.days.find((day) => day.value === 6)?.pivot.from || "",
+        to: assignment.days.find((day) => day.value === 6)?.pivot.to || "",
+        hours: assignment.days.find((day) => day.value === 6)?.pivot.hours || 0,
       },
     ],
+  };
+}
+
+export function mapFormForRequest(
+  fields: AssignmentForm,
+  clients: Client[],
+  companions: Companion[]
+) {
+  return {
+    ...fields,
+    client_id: clients.find(
+      (client: Client) => client.name === fields.client_name
+    )?.id,
+    companion_id: companions.find(
+      (companion: Companion) => companion.name === fields.companion_name
+    )?.id,
   };
 }

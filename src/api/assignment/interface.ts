@@ -9,8 +9,17 @@ export default interface Assignment {
   companion: Companion;
   days: {
     id: number;
+    value: number;
     title: string;
-    pivot: { from: string; to: string; hours: number };
+    pivot: {
+      assignment_id: number;
+      day_id: number;
+      from: string;
+      to: string;
+      hours: number;
+      created_at: string;
+      updated_at: string;
+    };
   }[];
   periodic: boolean;
   enabled: boolean;

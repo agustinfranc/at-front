@@ -22,4 +22,12 @@ export class AssignmentService extends ApiService {
       ...assignment,
     });
   }
+
+  async update(
+    assignment: Assignment
+  ): Promise<ApiServiceResponse<Assignment>> {
+    return await this.handleRequest<Assignment>(this.api.update, {
+      ...assignment,
+    });
+  }
 }
