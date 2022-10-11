@@ -111,7 +111,7 @@ import type Companion from "@/api/companion/interface";
 import { cloneDeep } from "lodash";
 import { useRoute } from "vue-router";
 import { useGetAssignmentService } from "@/composables/assignment";
-import type Assignment from "@/api/assignment/interface";
+import { mapAssignmentForEditForm } from "./formHelpers";
 // import _ from "@/plugins/lodash" not working
 
 const route = useRoute();
@@ -137,7 +137,6 @@ const { assignment, error } = useGetAssignmentService();
 watch(assignment, () => {
   if (assignment.value) {
     fields.value = mapAssignmentForEditForm(assignment.value);
-    // fields.value.periodic = assignment.value.periodic;
   }
 });
 
@@ -171,69 +170,6 @@ function getForm() {
     companion_id: companions.value.find(
       (companion: Companion) => companion.name === fields.value.companion_name
     ).id,
-  };
-}
-
-// TODO: remove function from here
-function mapAssignmentForEditForm(assignment: Assignment): AssignmentForm {
-  return {
-    id: assignment.id,
-    client_name: assignment.client.name,
-    companion_name: assignment.companion.name,
-    periodic: assignment.periodic,
-    enabled: assignment.enabled,
-    // TODO: finish mapping days
-    days: [
-      { enabled: false, title: "Domingo", id: 1, from: "", to: "", hours: 0 },
-      {
-        enabled: false,
-        title: "Lunes",
-        id: 2,
-        from: "",
-        to: "",
-        hours: 0,
-      },
-      {
-        enabled: false,
-        title: "Martes",
-        id: 3,
-        from: "",
-        to: "",
-        hours: 0,
-      },
-      {
-        enabled: false,
-        title: "Miercoles",
-        id: 4,
-        from: "",
-        to: "",
-        hours: 0,
-      },
-      {
-        enabled: false,
-        title: "Jueves",
-        id: 5,
-        from: "",
-        to: "",
-        hours: 0,
-      },
-      {
-        enabled: false,
-        title: "Viernes",
-        id: 6,
-        from: "",
-        to: "",
-        hours: 0,
-      },
-      {
-        enabled: false,
-        title: "Sabado",
-        id: 7,
-        from: "",
-        to: "",
-        hours: 0,
-      },
-    ],
   };
 }
 
