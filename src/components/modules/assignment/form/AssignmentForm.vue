@@ -86,11 +86,15 @@
         </v-form>
       </v-card-text>
     </v-card>
+
+    {{ fields }}
+    <p></p>
+    {{ assignment }}
   </v-container>
 </template>
 
 <script setup lang="ts">
-import { onBeforeMount, onMounted, reactive, ref } from "vue";
+import { onMounted, ref, unref, watch } from "vue";
 import ComboboxField from "@/components/forms/fields/ComboboxField.vue";
 import AssignmentsApi from "@/api/assignment/index";
 import ClientApi from "@/api/client";
@@ -105,13 +109,18 @@ import AssignmentForm from "../interfaces/assignmentForm";
 import type Companion from "@/api/companion/interface";
 // @ts-ignore
 import { cloneDeep } from "lodash";
+import { useRoute } from "vue-router";
+import { useGetAssignmentService } from "@/composables/assignment";
+import type Assignment from "@/api/assignment/interface";
 // import _ from "@/plugins/lodash" not working
 
-const valid = ref(true);
-const fields = reactive(new AssignmentForm());
-
+const route = useRoute();
 const clientService = new ClientService(new ClientApi());
 const companionService = new CompanionService(new CompanionApi());
+const isEdit = () => !!route.params?.id;
+
+const valid = ref(true);
+const fields = ref(new AssignmentForm());
 
 const clients = ref();
 const companions = ref();
@@ -119,8 +128,18 @@ const companions = ref();
 // declare template ref form
 const form = ref();
 
-// TODO: verifico  si la ruta tiene id
-const title = "Nueva asignación";
+const title = isEdit()
+  ? `Acompañamiento #${route.params.id}`
+  : "Nuevo acompañamiento";
+
+const { assignment, error } = useGetAssignmentService();
+
+watch(assignment, () => {
+  if (assignment.value) {
+    fields.value = mapAssignmentForEditForm(assignment.value);
+    // fields.value.periodic = assignment.value.periodic;
+  }
+});
 
 async function storeAssignment() {
   const formValidation = await form.value.validate();
@@ -145,20 +164,78 @@ async function storeAssignment() {
 
 function getForm() {
   return {
-    ...fields,
+    ...fields.value,
     client_id: clients.value.find(
-      (client: Client) => client.name === fields.client_name
+      (client: Client) => client.name === fields.value.client_name
     ).id,
     companion_id: companions.value.find(
-      (companion: Companion) => companion.name === fields.companion_name
+      (companion: Companion) => companion.name === fields.value.companion_name
     ).id,
   };
 }
 
-onBeforeMount(() => {
-  clients.value = [];
-  companions.value = [];
-});
+// TODO: remove function from here
+function mapAssignmentForEditForm(assignment: Assignment): AssignmentForm {
+  return {
+    id: assignment.id,
+    client_name: assignment.client.name,
+    companion_name: assignment.companion.name,
+    periodic: assignment.periodic,
+    enabled: assignment.enabled,
+    // TODO: finish mapping days
+    days: [
+      { enabled: false, title: "Domingo", id: 1, from: "", to: "", hours: 0 },
+      {
+        enabled: false,
+        title: "Lunes",
+        id: 2,
+        from: "",
+        to: "",
+        hours: 0,
+      },
+      {
+        enabled: false,
+        title: "Martes",
+        id: 3,
+        from: "",
+        to: "",
+        hours: 0,
+      },
+      {
+        enabled: false,
+        title: "Miercoles",
+        id: 4,
+        from: "",
+        to: "",
+        hours: 0,
+      },
+      {
+        enabled: false,
+        title: "Jueves",
+        id: 5,
+        from: "",
+        to: "",
+        hours: 0,
+      },
+      {
+        enabled: false,
+        title: "Viernes",
+        id: 6,
+        from: "",
+        to: "",
+        hours: 0,
+      },
+      {
+        enabled: false,
+        title: "Sabado",
+        id: 7,
+        from: "",
+        to: "",
+        hours: 0,
+      },
+    ],
+  };
+}
 
 onMounted(async () => {
   const clientsData = await clientService.find();
@@ -166,7 +243,7 @@ onMounted(async () => {
 
   if (clientsData.error || companionsData.error) return;
 
-  clients.value = clientsData.data;
-  companions.value = companionsData.data;
+  clients.value = clientsData.data?.data || [];
+  companions.value = companionsData.data || [];
 });
 </script>
