@@ -71,6 +71,11 @@ const router = createRouter({
       name: "assignment-detail",
       component: () => import("../views/Assignment/AssignmentDetailView.vue"),
     },
+    {
+      path: "/companions/:id",
+      name: "companion-detail",
+      component: () => import("../views/Companion/CompanionDetailView.vue"),
+    },
   ],
 });
 

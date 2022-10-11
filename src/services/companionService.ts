@@ -11,8 +11,8 @@ export class CompanionService extends ApiService {
     return await this.handleRequest<Companion[]>(this.api.getAll);
   }
 
-  async findOne(): Promise<ApiServiceResponse<Companion>> {
-    return await this.handleRequest<Companion>(this.api.getOne);
+  async findOne(id: number): Promise<ApiServiceResponse<Companion>> {
+    return await this.handleRequest<Companion>(this.api.getOne, id);
   }
 
   async create(companion: Companion): Promise<ApiServiceResponse<Companion>> {
