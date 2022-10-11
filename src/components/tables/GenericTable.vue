@@ -40,7 +40,6 @@ export default defineComponent({
   components: {
     AgGridVue,
   },
-
   setup(props, context) {
     // Set rowData to Array of Objects, one Object per Row
     const rowData = computed(() => props.rows);
