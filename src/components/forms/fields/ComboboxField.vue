@@ -9,13 +9,13 @@
 
 <script setup lang="ts">
 export interface Props {
-  itemTitle?: string;
-  label?: string;
-  multiple?: boolean;
+  label: string;
   items: undefined[];
+  itemTitle?: string;
+  multiple?: boolean;
 }
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   itemValue: "id",
   itemTitle: "name",
   multiple: false,

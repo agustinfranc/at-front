@@ -24,8 +24,8 @@ const rows = reactive({ value: [] as any[] });
 onMounted(async () => {
   const { data, error } = await props.service.find();
 
-  if (error) return;
+  if (error || !data) return;
 
-  rows.value = data;
+  rows.value = data.data;
 });
 </script>

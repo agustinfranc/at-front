@@ -3,5 +3,5 @@
 </template>
 
 <script setup lang="ts">
-import AssignmentsTable from "@/components/tables/AssignmentsTable.vue";
+import AssignmentsTable from "@/components/modules/assignment/table/AssignmentsTable.vue";
 </script>

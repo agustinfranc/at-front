@@ -4,7 +4,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import AssignmentForm from "@/components/forms/AssignmentForm.vue";
+import AssignmentForm from "@/components/modules/assignment/form/AssignmentForm.vue";
 
 export default defineComponent({
   name: "NewAssignmentView",

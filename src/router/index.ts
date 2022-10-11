@@ -27,8 +27,8 @@ const router = createRouter({
       component: () => import("../views/ClientsView.vue"),
     },
     {
-      path: "/client",
-      name: "client",
+      path: "/clients/new",
+      name: "new-client",
       component: () => import("../views/NewClientView.vue"),
     },
     {
@@ -37,8 +37,8 @@ const router = createRouter({
       component: () => import("../views/CompanionsView.vue"),
     },
     {
-      path: "/companion",
-      name: "companion",
+      path: "/companions/new",
+      name: "new-companion",
       component: () => import("../views/NewCompanionView.vue"),
     },
     {
@@ -58,13 +58,18 @@ const router = createRouter({
     },
     {
       path: "/assignments/new",
-      name: "new-assignment",
+      name: "assignment-new",
       component: () => import("../views/Assignment/NewAssignmentView.vue"),
     },
     {
       path: "/clients/:id",
       name: "client-details",
       component: () => import("../views/Client/ClientDetailView.vue"),
+    },
+    {
+      path: "/assignments/:id",
+      name: "assignment-detail",
+      component: () => import("../views/Assignment/AssignmentDetailView.vue"),
     },
   ],
 });

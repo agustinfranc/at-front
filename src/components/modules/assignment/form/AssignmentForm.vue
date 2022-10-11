@@ -27,7 +27,7 @@
           </v-row>
 
           <div class="my-5">
-            <v-row v-for="day in fields.days">
+            <v-row v-for="day in fields.days" :key="day.id">
               <v-col cols="1">
                 <v-checkbox v-model="day.enabled"></v-checkbox>
               </v-col>
@@ -91,18 +91,19 @@
 
 <script setup lang="ts">
 import { onBeforeMount, onMounted, reactive, ref } from "vue";
-import ComboboxField from "./fields/ComboboxField.vue";
+import ComboboxField from "@/components/forms/fields/ComboboxField.vue";
 import AssignmentsApi from "@/api/assignment/index";
 import ClientApi from "@/api/client";
 import { AssignmentService } from "@/services/assignmentService";
 import { useSnackbarStore } from "@/stores/snackbar";
-import SubmitButton from "./common/SubmitButton.vue";
+import SubmitButton from "@/components/forms/common/SubmitButton.vue";
 import { ClientService } from "@/services/clientService";
 import CompanionApi from "@/api/companion";
 import { CompanionService } from "@/services/companionService";
 import type Client from "@/api/client/interface";
-import AssignmentForm from "./interfaces/assignmentForm";
+import AssignmentForm from "../interfaces/assignmentForm";
 import type Companion from "@/api/companion/interface";
+// @ts-ignore
 import { cloneDeep } from "lodash";
 // import _ from "@/plugins/lodash" not working
 
@@ -119,7 +120,7 @@ const companions = ref();
 const form = ref();
 
 // TODO: verifico  si la ruta tiene id
-const title = 1 === 1 ? "Nueva asignación" : "Asignacion #12";
+const title = "Nueva asignación";
 
 async function storeAssignment() {
   const formValidation = await form.value.validate();
