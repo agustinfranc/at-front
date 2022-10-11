@@ -90,47 +90,64 @@
 </template>
 
 <script setup lang="ts">
-import { onBeforeMount, onMounted, reactive, ref } from "vue";
-import ComboboxField from "./fields/ComboboxField.vue";
+import { onMounted, ref, watch } from "vue";
+import ComboboxField from "@/components/forms/fields/ComboboxField.vue";
 import AssignmentsApi from "@/api/assignment/index";
 import ClientApi from "@/api/client";
 import { AssignmentService } from "@/services/assignmentService";
 import { useSnackbarStore } from "@/stores/snackbar";
-import SubmitButton from "./common/SubmitButton.vue";
+import SubmitButton from "@/components/forms/common/SubmitButton.vue";
 import { ClientService } from "@/services/clientService";
 import CompanionApi from "@/api/companion";
 import { CompanionService } from "@/services/companionService";
-import type Client from "@/api/client/interface";
-import AssignmentForm from "./interfaces/assignmentForm";
-import type Companion from "@/api/companion/interface";
+import AssignmentForm from "../interfaces/assignmentForm";
+// @ts-ignore
 import { cloneDeep } from "lodash";
+import { useRoute } from "vue-router";
+import { useGetAssignmentService } from "@/composables/assignment";
+import { mapAssignmentForEditForm, mapFormForRequest } from "./formHelpers";
 // import _ from "@/plugins/lodash" not working
 
-const valid = ref(true);
-const fields = reactive(new AssignmentForm());
-
+const route = useRoute();
 const clientService = new ClientService(new ClientApi());
 const companionService = new CompanionService(new CompanionApi());
 
+const form = ref(); // declare template ref form
+const valid = ref(true);
+const fields = ref(new AssignmentForm());
 const clients = ref();
 const companions = ref();
 
-// declare template ref form
-const form = ref();
+const isEdit = () => !!route.params?.id;
 
-// TODO: verifico  si la ruta tiene id
-const title = "Nueva asignación";
+const title = isEdit()
+  ? `Acompañamiento #${route.params.id}`
+  : "Nuevo acompañamiento";
+
+const { assignment } = useGetAssignmentService();
+watch(assignment, () => {
+  if (assignment.value) {
+    fields.value = mapAssignmentForEditForm(assignment.value);
+  }
+});
 
 async function storeAssignment() {
   const formValidation = await form.value.validate();
   if (!formValidation.valid) return;
 
-  const assignmentForm = getForm();
-
-  // Si el assignment tuviera id, haria update y no create
-  const { error } = await new AssignmentService(new AssignmentsApi()).create(
-    cloneDeep(assignmentForm)
+  const assignmentForm = mapFormForRequest(
+    fields.value,
+    clients.value,
+    companions.value
   );
+
+  const { error } = isEdit()
+    ? await new AssignmentService(new AssignmentsApi()).update(
+        cloneDeep(assignmentForm)
+      )
+    : await new AssignmentService(new AssignmentsApi()).create(
+        cloneDeep(assignmentForm)
+      );
 
   const snackbarStore = useSnackbarStore();
 
@@ -142,30 +159,13 @@ async function storeAssignment() {
   }
 }
 
-function getForm() {
-  return {
-    ...fields,
-    client_id: clients.value.find(
-      (client: Client) => client.name === fields.client_name
-    ).id,
-    companion_id: companions.value.find(
-      (companion: Companion) => companion.name === fields.companion_name
-    ).id,
-  };
-}
-
-onBeforeMount(() => {
-  clients.value = [];
-  companions.value = [];
-});
-
 onMounted(async () => {
   const clientsData = await clientService.find();
   const companionsData = await companionService.find();
 
   if (clientsData.error || companionsData.error) return;
 
-  clients.value = clientsData.data;
-  companions.value = companionsData.data;
+  clients.value = clientsData.data?.data || [];
+  companions.value = companionsData.data || [];
 });
 </script>

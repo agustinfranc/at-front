@@ -2,7 +2,7 @@ import type { AxiosError, AxiosPromise } from "axios";
 import { useSnackbarStore } from "@/stores/snackbar";
 
 export interface ApiServiceResponse<T, D = ErrorApiServiceResponse> {
-  data?: T;
+  data?: { data: T };
   error?: AxiosError<D>;
 }
 

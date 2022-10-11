@@ -1,3 +1,7 @@
 <template>
-  <h1>Asignacion #1</h1>
+  <AssignmentDetail />
 </template>
+
+<script setup lang="ts">
+import AssignmentDetail from "@/components/modules/assignment/detail/AssignmentDetail.vue";
+</script>

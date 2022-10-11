@@ -7,12 +7,16 @@ class AssignmentApi {
     return axiosInstance.get("/assignments");
   }
 
-  getOne(): AxiosPromise<Assignment[]> {
-    return axiosInstance.get("/assignments");
+  getOne(id: number): AxiosPromise<Assignment[]> {
+    return axiosInstance.get(`/assignments/${id}`);
   }
 
   create(assignment: Assignment): AxiosPromise<Assignment> {
     return axiosInstance.post("/assignments", assignment);
+  }
+
+  update(assignment: Assignment): AxiosPromise<Assignment> {
+    return axiosInstance.put(`/assignments/${assignment.id}`, assignment);
   }
 }
 

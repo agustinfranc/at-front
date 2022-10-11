@@ -1,10 +1,6 @@
 <template>
   <v-container>
-    <v-row class="flex-grow-0">
-      <v-col align-self="center" cols="12" sm="4">
-        <p class="text-h4 text--primary">Cliente</p>
-      </v-col>
-    </v-row>
+    <FormTitle title="Cliente"></FormTitle>
 
     <v-card class="my-4">
       <v-card-text>
@@ -178,6 +174,7 @@ import ClientApi from "@/api/client/index";
 import { ClientService } from "@/services/clientService";
 import { useSnackbarStore } from "@/stores/snackbar";
 import Client from "@/api/client/interface";
+import FormTitle from "./extras/FormTitle.vue";
 
 const valid = ref(true);
 const fields = reactive(new Client());
