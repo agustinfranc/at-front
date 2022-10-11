@@ -130,6 +130,6 @@ async function getClient() {
     return;
   }
 
-  if (data) client.value = data;
+  if (data) client.value = data.data;
 }
 </script>

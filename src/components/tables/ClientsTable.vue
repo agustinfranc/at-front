@@ -12,14 +12,15 @@ import TableHeader from "./extras/TableHeader.vue";
 import type { ColDef } from "@/components/tables/interfaces/GenericTable/columnDefinitions";
 import { ClientService } from "@/services/clientService";
 import { useRouter } from "vue-router";
+import type Client from "@/api/client/interface";
 
 const service = new ClientService(new ClientApi());
 const router = useRouter();
 
-function showClient(id: number) {
+function showClient(client: Client) {
   router.push({
     name: "client-detail",
-    params: { id },
+    params: { id: client.id },
   });
 }
 
