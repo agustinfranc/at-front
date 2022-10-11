@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <TitleComponent title="Acompañante"></TitleComponent>
+    <FormTitle title="Acompañante"></FormTitle>
     <v-card>
       <v-card-text>
         <v-form ref="form" v-model="valid" lazy-validation>
@@ -109,8 +109,8 @@ import CompanionApi from "@/api/companion/index";
 import { CompanionService } from "@/services/companionService";
 import { useSnackbarStore } from "@/stores/snackbar";
 import Companion from "@/api/companion/interface";
-import TitleComponent from "../extras/FormTitle.vue";
 import SelectField from "../fields/SelectField.vue";
+import FormTitle from "../extras/FormTitle.vue";
 
 const valid = ref(true);
 const fields = reactive(new Companion());

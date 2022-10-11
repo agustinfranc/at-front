@@ -17,7 +17,7 @@ import { useRouter } from "vue-router";
 const service = new ClientService(new ClientApi());
 const router = useRouter();
 
-function showClient(id: string) {
+function showClient(id: number) {
   router.push({
     name: "client-details",
     params: { id },
