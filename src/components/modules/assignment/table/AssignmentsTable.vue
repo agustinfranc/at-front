@@ -69,7 +69,7 @@ const columns = [
     cellRenderer: () => `
       <button type="button" class="v-icon notranslate v-icon--link mdi mdi-delete theme--light" style="font-size: 16px;"></button>
     `,
-    onCellClicked: (event: CellClickedEvent) => handleDelete(event.data),
+    onCellClicked: (event: CellClickedEvent) => handleDeletion(event.data),
     hide: true,
   },
 ] as ColDef[];
@@ -92,7 +92,7 @@ function goToEdition(assignment: Assignment) {
   });
 }
 
-function handleDelete(assignment: Assignment) {
+function handleDeletion(assignment: Assignment) {
   console.log(assignment);
 }
 </script>
