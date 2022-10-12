@@ -19,7 +19,7 @@ const router = useRouter();
 
 function showClient(client: Client) {
   router.push({
-    name: "client-details",
+    name: "client-detail",
     params: { id: client.id },
   });
 }

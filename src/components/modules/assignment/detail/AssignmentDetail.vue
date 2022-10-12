@@ -2,7 +2,7 @@
   <v-container>
     <v-card class="my-4">
       <v-progress-linear
-        v-if="loading"
+        v-if="!assignment && !error"
         class="position-absolute"
         height="10"
         indeterminate
@@ -25,7 +25,7 @@
           <v-row>
             <v-col>
               <p class="font-weight-bold">Dias</p>
-              <span v-for="day in assignment.days">
+              <span v-for="day in assignment.days" :key="day.id">
                 {{ day.title }}
                 de {{ day.pivot.from }} a {{ day.pivot.to }} ({{
                   day.pivot.hours
@@ -60,41 +60,7 @@
 </template>
 
 <script setup lang="ts">
-import AssignmentApi from "@/api/assignment";
-import type Assignment from "@/api/assignment/interface";
-import { AssignmentService } from "@/services/assignmentService";
-import { useSnackbarStore } from "@/stores/snackbar";
-import { onMounted, ref, type Ref } from "vue";
-import { useRoute } from "vue-router";
+import { useGetAssignmentService } from "@/composables/assignment";
 
-const route = useRoute();
-const assignmentService = new AssignmentService(new AssignmentApi());
-const snackbarStore = useSnackbarStore();
-
-let assignment: Ref<Assignment | undefined> = ref();
-let loading = ref(false);
-
-onMounted(async () => {
-  await getAssignment();
-});
-
-async function getAssignment() {
-  loading.value = true;
-
-  const assignmentId = route.params.id as string;
-  const { error, data } = await assignmentService.findOne(
-    parseInt(assignmentId)
-  );
-
-  loading.value = false;
-
-  if (error) {
-    snackbarStore.showError({
-      text: error.message,
-    });
-    return;
-  }
-
-  if (data) assignment.value = data.data;
-}
+const { assignment, error } = useGetAssignmentService();
 </script>

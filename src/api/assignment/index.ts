@@ -14,6 +14,10 @@ class AssignmentApi {
   create(assignment: Assignment): AxiosPromise<Assignment> {
     return axiosInstance.post("/assignments", assignment);
   }
+
+  update(assignment: Assignment): AxiosPromise<Assignment> {
+    return axiosInstance.put(`/assignments/${assignment.id}`, assignment);
+  }
 }
 
 export default AssignmentApi;
