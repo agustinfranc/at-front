@@ -115,7 +115,7 @@ onMounted(async () => {
   await getClient();
 });
 
-function renderNullableTableCell(value: string) {
+function renderNullableTableCell(value: string | number) {
   return value ?? "-";
 }
 
