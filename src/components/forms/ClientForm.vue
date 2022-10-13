@@ -123,8 +123,6 @@
                 label="Porcentaje Facturado"
                 prefix="%"
                 type="number"
-                append-inner-icon="mdi-exclamation"
-                :rules="[(v: any) => !!v || 'Este campo es requerido']"
               />
             </v-col>
           </v-row>
