@@ -7,8 +7,8 @@ class CompanionApi {
     return axiosInstance.get("/companions");
   }
 
-  getOne(): AxiosPromise<Companion[]> {
-    return axiosInstance.get("/companions");
+  getOne(id: number): AxiosPromise<Companion> {
+    return axiosInstance.get(`/companions/${id}`);
   }
 
   create(companion: Companion): AxiosPromise<Companion> {
