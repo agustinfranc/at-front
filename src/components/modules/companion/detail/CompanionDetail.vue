@@ -43,27 +43,27 @@
             <v-row>
               <v-col>
                 <p class="font-weight-bold">Antecedentes</p>
-                {{ companion.criminal_record ? "Si" : "No" }}
+                {{ renderBooleanTableCell(companion.criminal_record) }}
               </v-col>
               <v-col>
                 <p class="font-weight-bold">Seguro</p>
-                {{ companion.insurance ? "Si" : "No" }}
+                {{ renderBooleanTableCell(companion.insurance) }}
               </v-col>
             </v-row>
             <v-row>
               <v-col>
                 <p class="font-weight-bold">Firmó Contrato</p>
-                {{ companion.has_sign_contract ? "Si" : "No" }}
+                {{ renderBooleanTableCell(companion.has_sign_contract) }}
               </v-col>
               <v-col>
                 <p class="font-weight-bold">Monotributo</p>
-                {{ companion.monotax ? "Si" : "No" }}
+                {{ renderBooleanTableCell(companion.monotax) }}
               </v-col>
             </v-row>
             <v-row>
               <v-col>
                 <p class="font-weight-bold">Máximo Facturable</p>
-                {{ companion.max_taxable }}%
+                {{ companion.max_taxable ? companion.max_taxable + "%" : "_" }}
               </v-col>
             </v-row>
           </v-card-text>
@@ -91,6 +91,10 @@ let loading = ref(false);
 onMounted(async () => {
   await getCompanion();
 });
+
+function renderBooleanTableCell(value: boolean) {
+  return value ? "Si" : "No";
+}
 
 async function getCompanion() {
   loading.value = true;
