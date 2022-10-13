@@ -63,7 +63,9 @@
             <v-row>
               <v-col>
                 <p class="font-weight-bold">Máximo Facturable</p>
-                {{ companion.max_taxable }}%
+                {{
+                  companion.max_taxable ? companion.max_taxable + "%" : "_____"
+                }}
               </v-col>
             </v-row>
           </v-card-text>

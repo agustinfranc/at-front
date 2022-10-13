@@ -32,6 +32,13 @@ const columns = [
   {
     headerName: "Nombre Tutor",
     field: "guardian_name",
+    cellRenderer: (params: any) => {
+      if (params.value) {
+        return params.value;
+      } else {
+        return "_____";
+      }
+    },
   },
   {
     headerName: "Teléfono",
@@ -45,7 +52,11 @@ const columns = [
     headerName: "Tarifa",
     field: "rate",
     cellRenderer: (params: any) => {
-      return "$ " + params.value;
+      if (params.value) {
+        return "$ " + params.value;
+      } else {
+        return "_____";
+      }
     },
   },
 ] as ColDef[];

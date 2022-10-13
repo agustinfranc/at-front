@@ -20,7 +20,7 @@
               </v-col>
               <v-col>
                 <p class="font-weight-bold">Nombre a Cargo</p>
-                {{ client.guardian_name }}
+                {{ client.guardian_name ? client.guardian_name : "_____" }}
               </v-col>
             </v-row>
             <v-row>
@@ -30,7 +30,7 @@
               </v-col>
               <v-col>
                 <p class="font-weight-bold">Teléfono Extra</p>
-                {{ client.extra_phone }}
+                {{ client.extra_phone ? client.extra_phone : "_____" }}
               </v-col>
             </v-row>
             <v-row>
@@ -40,53 +40,55 @@
               </v-col>
               <v-col>
                 <p class="font-weight-bold">Nacimiento</p>
-                {{ client.birthday }}
+                {{ client.birthday ? client.birthday : "_____" }}
               </v-col>
             </v-row>
             <v-row>
               <v-col>
                 <p class="font-weight-bold">Dirección</p>
-                {{ client.address }}
+                {{ client.address ? client.address : "_____" }}
               </v-col>
             </v-row>
             <v-divider class="my-5"></v-divider>
             <v-row>
               <v-col>
                 <p class="font-weight-bold">Obra Social</p>
-                {{ client.health_insurance }}
+                {{
+                  client.health_insurance ? client.health_insurance : "_____"
+                }}
               </v-col>
               <v-col>
                 <p class="font-weight-bold">Afiliado</p>
-                {{ client.affiliate }}
+                {{ client.affiliate ? client.affiliate : "_____" }}
               </v-col>
             </v-row>
             <v-row>
               <v-col>
                 <p class="font-weight-bold">Diagnosis</p>
-                {{ client.diagnosis }}
+                {{ client.diagnosis ? client.diagnosis : "_____" }}
               </v-col>
             </v-row>
             <v-row>
               <v-col>
                 <p class="font-weight-bold">Tratamiento</p>
-                {{ client.treatment }}
+                {{ client.treatment ? client.treatment : "_____" }}
               </v-col>
             </v-row>
             <v-row>
               <v-col>
                 <p class="font-weight-bold">Medicamento</p>
-                {{ client.medicine }}
+                {{ client.medicine ? client.medicine : "_____" }}
               </v-col>
             </v-row>
             <v-divider class="my-5"></v-divider>
             <v-row>
               <v-col>
                 <p class="font-weight-bold">Tarifa</p>
-                ${{ client.rate }}
+                {{ client.rate ? "$" + client.rate : "_____" }}
               </v-col>
               <v-col>
                 <p class="font-weight-bold">Fecha Presupuesto</p>
-                {{ client.budget_date }}
+                {{ client.budget_date ? client.budget_date : "_____" }}
               </v-col>
             </v-row>
           </v-card-text>
