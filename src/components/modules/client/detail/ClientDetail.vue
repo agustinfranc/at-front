@@ -20,7 +20,7 @@
               </v-col>
               <v-col>
                 <p class="font-weight-bold">Nombre a Cargo</p>
-                {{ client.guardian_name ? client.guardian_name : "_____" }}
+                {{ renderNullableTableCell(client.guardian_name) }}
               </v-col>
             </v-row>
             <v-row>
@@ -30,7 +30,7 @@
               </v-col>
               <v-col>
                 <p class="font-weight-bold">Teléfono Extra</p>
-                {{ client.extra_phone ? client.extra_phone : "_____" }}
+                {{ renderNullableTableCell(client.extra_phone) }}
               </v-col>
             </v-row>
             <v-row>
@@ -40,55 +40,53 @@
               </v-col>
               <v-col>
                 <p class="font-weight-bold">Nacimiento</p>
-                {{ client.birthday ? client.birthday : "_____" }}
+                {{ renderNullableTableCell(client.birthday) }}
               </v-col>
             </v-row>
             <v-row>
               <v-col>
                 <p class="font-weight-bold">Dirección</p>
-                {{ client.address ? client.address : "_____" }}
+                {{ renderNullableTableCell(client.address) }}
               </v-col>
             </v-row>
             <v-divider class="my-5"></v-divider>
             <v-row>
               <v-col>
                 <p class="font-weight-bold">Obra Social</p>
-                {{
-                  client.health_insurance ? client.health_insurance : "_____"
-                }}
+                {{ renderNullableTableCell(client.health_insurance) }}
               </v-col>
               <v-col>
                 <p class="font-weight-bold">Afiliado</p>
-                {{ client.affiliate ? client.affiliate : "_____" }}
+                {{ renderNullableTableCell(client.affiliate) }}
               </v-col>
             </v-row>
             <v-row>
               <v-col>
                 <p class="font-weight-bold">Diagnosis</p>
-                {{ client.diagnosis ? client.diagnosis : "_____" }}
+                {{ renderNullableTableCell(client.diagnosis) }}
               </v-col>
             </v-row>
             <v-row>
               <v-col>
                 <p class="font-weight-bold">Tratamiento</p>
-                {{ client.treatment ? client.treatment : "_____" }}
+                {{ renderNullableTableCell(client.treatment) }}
               </v-col>
             </v-row>
             <v-row>
               <v-col>
                 <p class="font-weight-bold">Medicamento</p>
-                {{ client.medicine ? client.medicine : "_____" }}
+                {{ renderNullableTableCell(client.medicine) }}
               </v-col>
             </v-row>
             <v-divider class="my-5"></v-divider>
             <v-row>
               <v-col>
                 <p class="font-weight-bold">Tarifa</p>
-                {{ client.rate ? "$" + client.rate : "_____" }}
+                {{ renderNullableNumberCell(client.rate) }}
               </v-col>
               <v-col>
                 <p class="font-weight-bold">Fecha Presupuesto</p>
-                {{ client.budget_date ? client.budget_date : "_____" }}
+                {{ renderNullableTableCell(client.budget_date) }}
               </v-col>
             </v-row>
           </v-card-text>
@@ -116,6 +114,14 @@ let loading = ref(false);
 onMounted(async () => {
   await getClient();
 });
+
+function renderNullableTableCell(value: string) {
+  return value ?? "-";
+}
+
+function renderNullableNumberCell(value: number) {
+  return value ? "$" + value : "-";
+}
 
 async function getClient() {
   loading.value = true;
