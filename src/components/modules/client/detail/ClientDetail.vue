@@ -82,7 +82,7 @@
             <v-row>
               <v-col>
                 <p class="font-weight-bold">Tarifa</p>
-                {{ renderNullableNumberCell(client.rate) }}
+                {{ renderNullableRateCell(client.rate) }}
               </v-col>
               <v-col>
                 <p class="font-weight-bold">Fecha Presupuesto</p>
@@ -119,7 +119,7 @@ function renderNullableTableCell(value: string | number) {
   return value ?? "-";
 }
 
-function renderNullableNumberCell(value: number) {
+function renderNullableRateCell(value: number | string) {
   return value ? "$" + value : "-";
 }
 
