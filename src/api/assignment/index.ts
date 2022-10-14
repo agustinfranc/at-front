@@ -18,6 +18,10 @@ class AssignmentApi {
   update(assignment: Assignment): AxiosPromise<Assignment> {
     return axiosInstance.put(`/assignments/${assignment.id}`, assignment);
   }
+
+  delete(id: number): AxiosPromise<boolean> {
+    return axiosInstance.delete(`/assignments/${id}`);
+  }
 }
 
 export default AssignmentApi;

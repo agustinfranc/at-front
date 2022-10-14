@@ -30,4 +30,8 @@ export class AssignmentService extends ApiService {
       ...assignment,
     });
   }
+
+  async delete(id: number): Promise<ApiServiceResponse<boolean>> {
+    return await this.handleRequest<boolean>(this.api.delete, id);
+  }
 }
