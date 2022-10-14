@@ -6,10 +6,10 @@
 
     <DeleteItemModal
       v-model="dialog"
-      itemName="acompañante"
-      :item="selectedCompanion"
+      item-name="acompañante"
+      :item="selectedItem"
       @click:outside.stop="dialog = false"
-      @delete="deleteCompanion"
+      @delete="deleteItem"
     />
   </v-container>
 </template>
@@ -23,8 +23,8 @@ import TableHeader from "../../../tables/extras/TableHeader.vue";
 import DeleteItemModal from "@/components/modals/DeleteItemModal.vue";
 import type { ColDef } from "@/components/tables/interfaces/GenericTable/columnDefinitions";
 import type Companion from "@/api/companion/interface";
-import { ref, type Ref } from "vue";
 import type { CellClickedEvent } from "ag-grid-community";
+import { useDeleteItemDialog } from "@/composables/deleteItem";
 
 const service = new CompanionService(new CompanionApi());
 const router = useRouter();
@@ -37,6 +37,7 @@ const columns = [
     suppressMovable: true,
     suppressMenu: true,
     flex: 2,
+    cellClass: "text-blue-accent-4 text-decoration-underline cursor-pointer",
     onCellClicked: (event: CellClickedEvent) => showDetails(event.data),
   },
   {
@@ -98,20 +99,8 @@ function goToEdition(companion: Companion) {
   });
 }
 
-// deleteCompanionModal Logic
-// codigo similar en assignments table, crear composable
+// DeleteItemModal Logic
 
-const dialog = ref(false);
-const selectedCompanion: Ref<Companion | undefined> = ref();
-
-function handleDeletion(companion: Companion) {
-  selectedCompanion.value = companion;
-  dialog.value = true;
-}
-
-function deleteCompanion(id: number) {
-  service.delete(id);
-  // re render lazy table
-  // show success notification
-}
+const { dialog, selectedItem, handleDeletion, deleteItem } =
+  useDeleteItemDialog<Companion>(service);
 </script>

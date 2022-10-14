@@ -6,10 +6,10 @@
 
     <DeleteItemModal
       v-model="dialog"
-      itemName="acompañamiento"
-      :item="selectedAssignment"
+      item-name="acompañamiento"
+      :item="selectedItem"
       @click:outside.stop="dialog = false"
-      @delete="deleteAssignment"
+      @delete="deleteItem"
     />
   </v-container>
 </template>
@@ -28,6 +28,7 @@ import type {
 } from "@/components/tables/interfaces/GenericTable/columnDefinitions";
 import type Assignment from "@/api/assignment/interface";
 import type { CellClickedEvent } from "ag-grid-community";
+import { useDeleteItemDialog } from "@/composables/deleteItem";
 
 const service = new AssignmentService(new AssignmentApi());
 const router = useRouter();
@@ -39,6 +40,7 @@ const columns = [
     suppressMovable: true,
     suppressMenu: true,
     flex: 2,
+    cellClass: "text-blue-accent-4 text-decoration-underline cursor-pointer",
     onCellClicked: (event: CellClickedEvent) => showDetails(event.data),
   },
   {
@@ -101,17 +103,8 @@ function goToEdition(assignment: Assignment) {
   });
 }
 
-// DeleteAssignmentModal Logic
+// DeleteItemModal Logic
 
-const dialog = ref(false);
-const selectedAssignment: Ref<Assignment | undefined> = ref();
-
-function handleDeletion(assignment: Assignment) {
-  selectedAssignment.value = assignment;
-  dialog.value = true;
-}
-
-function deleteAssignment(id: number) {
-  service.delete(id);
-}
+const { dialog, selectedItem, handleDeletion, deleteItem } =
+  useDeleteItemDialog<Assignment>(service);
 </script>

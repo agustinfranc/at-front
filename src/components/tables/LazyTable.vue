@@ -6,6 +6,7 @@
 import { reactive, onMounted, type PropType } from "vue";
 import type { ColDef } from "@/components/tables/interfaces/GenericTable/columnDefinitions";
 import GenericTable from "./GenericTable.vue";
+import type { FindService } from "@/services/interfaces/FindService";
 
 const props = defineProps({
   columns: {
@@ -13,7 +14,7 @@ const props = defineProps({
     required: true,
   },
   service: {
-    type: Object,
+    type: Object as PropType<FindService>,
     required: true,
   },
 });

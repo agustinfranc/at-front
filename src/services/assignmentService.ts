@@ -1,8 +1,13 @@
 import type AssignmentApi from "@/api/assignment";
 import type Assignment from "@/api/assignment/interface";
 import { ApiService, type ApiServiceResponse } from "./apiService";
+import type { DeleteService } from "./interfaces/DeleteService";
+import type { FindService } from "./interfaces/FindService";
 
-export class AssignmentService extends ApiService {
+export class AssignmentService
+  extends ApiService
+  implements DeleteService, FindService
+{
   constructor(private api: AssignmentApi) {
     super();
   }
