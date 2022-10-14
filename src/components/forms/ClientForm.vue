@@ -123,8 +123,6 @@
                 label="Porcentaje Facturado"
                 prefix="%"
                 type="number"
-                append-inner-icon="mdi-exclamation"
-                :rules="[(v: any) => !!v || 'Este campo es requerido']"
               />
             </v-col>
           </v-row>
@@ -135,10 +133,7 @@
                 type="number"
                 v-model="fields.rate"
                 label="Tarifa por hora"
-                required
                 prepend-inner-icon="mdi-currency-usd"
-                append-inner-icon="mdi-exclamation"
-                :rules="[(v: any) => !!v || 'Este campo es requerido']"
               />
             </v-col>
             <v-col

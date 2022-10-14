@@ -90,7 +90,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, watch } from "vue";
+import { onBeforeMount, onMounted, ref, watch } from "vue";
 import ComboboxField from "@/components/forms/fields/ComboboxField.vue";
 import AssignmentsApi from "@/api/assignment/index";
 import ClientApi from "@/api/client";
@@ -159,6 +159,11 @@ async function storeAssignment() {
   }
 }
 
+onBeforeMount(() => {
+  clients.value = [];
+  companions.value = [];
+});
+
 onMounted(async () => {
   const clientsData = await clientService.find();
   const companionsData = await companionService.find();
@@ -166,6 +171,6 @@ onMounted(async () => {
   if (clientsData.error || companionsData.error) return;
 
   clients.value = clientsData.data?.data || [];
-  companions.value = companionsData.data || [];
+  companions.value = companionsData.data?.data || [];
 });
 </script>
