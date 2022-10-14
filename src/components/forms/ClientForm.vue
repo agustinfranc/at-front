@@ -168,11 +168,11 @@ import TextAreaField from "./fields/TextAreaField.vue";
 import ClientApi from "@/api/client/index";
 import { ClientService } from "@/services/clientService";
 import { useSnackbarStore } from "@/stores/snackbar";
-import Client from "@/api/client/interface";
 import FormTitle from "./extras/FormTitle.vue";
+import ClientForm from "../modules/client/interfaces/clientForm";
 
 const valid = ref(true);
-const fields = reactive(new Client());
+const fields = reactive(new ClientForm());
 
 // declare template ref form
 const form = ref();
