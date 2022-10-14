@@ -4,8 +4,8 @@
   <!-- :value="modelValue"
     @input="$emit('update:modelValue', $event.target.value)" -->
 
-  <v-dialog v-model="modelValue" max-width="390">
-    max-width="390" >
+  <!-- eslint-disable-next-line -->
+  <v-dialog v-model="modelValue" max-width="400">
     <v-card>
       <v-card-title class="text-h5"> Eliminar Acompañamiento </v-card-title>
 
