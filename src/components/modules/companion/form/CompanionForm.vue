@@ -104,16 +104,16 @@
 
 <script setup lang="ts">
 import { reactive, ref, toRaw } from "vue";
-import TextField from "../fields/TextField.vue";
+import TextField from "../../../forms/fields/TextField.vue";
 import CompanionApi from "@/api/companion/index";
 import { CompanionService } from "@/services/companionService";
 import { useSnackbarStore } from "@/stores/snackbar";
-import Companion from "@/api/companion/interface";
-import SelectField from "../fields/SelectField.vue";
-import FormTitle from "../extras/FormTitle.vue";
+import SelectField from "../../../forms/fields/SelectField.vue";
+import FormTitle from "../../../forms/extras/FormTitle.vue";
+import CompanionForm from "../interfaces/companionForm";
 
 const valid = ref(true);
-const fields = reactive(new Companion());
+const fields = reactive(new CompanionForm());
 
 // declare template ref form
 const form = ref();

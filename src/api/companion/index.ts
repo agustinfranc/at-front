@@ -14,6 +14,10 @@ class CompanionApi {
   create(companion: Companion): AxiosPromise<Companion> {
     return axiosInstance.post("/companions", companion);
   }
+
+  delete(id: number): AxiosPromise<boolean> {
+    return axiosInstance.delete(`/companions/${id}`);
+  }
 }
 
 export default CompanionApi;
