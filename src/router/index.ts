@@ -75,12 +75,12 @@ const router = createRouter({
       path: "/companions/:id",
       name: "companion-detail",
       component: () => import("../views/Companion/CompanionDetailView.vue"),
-     },
-     {
+    },
+    {
       path: "/assignments/:id/edit",
       name: "assignment-edit",
       component: () => import("../views/Assignment/EditAssignmentView.vue"),
-     },
+    },
   ],
 });
 

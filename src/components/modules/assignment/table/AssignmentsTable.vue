@@ -3,20 +3,29 @@
     <TableHeader title="Acompañamientos" :route="{ name: 'assignment-new' }" />
 
     <LazyTable :columns="columns" :service="service" />
+
+    <DeleteAssignmentModal
+      v-model="dialog"
+      :assignment="selectedAssignment"
+      @click:outside.stop="dialog = false"
+      @delete="deleteAssignment"
+    />
   </v-container>
 </template>
 
 <script setup lang="ts">
+import { reactive, ref, type Ref } from "vue";
+import { useRouter } from "vue-router";
 import AssignmentApi from "@/api/assignment/index";
 import LazyTable from "@/components/tables/LazyTable.vue";
 import TableHeader from "@/components/tables/extras/TableHeader.vue";
+import DeleteAssignmentModal from "@/components/modules/assignment/modals/DeleteAssignmentModal.vue";
 import { AssignmentService } from "@/services/assignmentService";
 import type {
   ColDef,
   ValueFormatterParams,
 } from "@/components/tables/interfaces/GenericTable/columnDefinitions";
 import type Assignment from "@/api/assignment/interface";
-import { useRouter } from "vue-router";
 import type { CellClickedEvent } from "ag-grid-community";
 
 const service = new AssignmentService(new AssignmentApi());
@@ -70,7 +79,6 @@ const columns = [
       <button type="button" class="v-icon notranslate v-icon--link mdi mdi-delete theme--light" style="font-size: 16px;"></button>
     `,
     onCellClicked: (event: CellClickedEvent) => handleDeletion(event.data),
-    hide: true,
   },
 ] as ColDef[];
 
@@ -92,7 +100,17 @@ function goToEdition(assignment: Assignment) {
   });
 }
 
+// DeleteAssignmentModal Logic
+
+const dialog = ref(false);
+const selectedAssignment: Ref<Assignment | undefined> = ref();
+
 function handleDeletion(assignment: Assignment) {
-  console.log(assignment);
+  selectedAssignment.value = assignment;
+  dialog.value = true;
+}
+
+function deleteAssignment(id: number) {
+  service.delete(id);
 }
 </script>
