@@ -1,36 +1,34 @@
 <template>
   <v-container class="h-100 d-flex flex-column">
-    <TableHeader title="Acompañamientos" :route="{ name: 'assignment-new' }" />
+    <TableHeader title="Acompañantes" :route="{ name: 'companion-new' }" />
 
     <LazyTable :columns="columns" :service="service" />
 
     <DeleteItemModal
       v-model="dialog"
-      itemName="acompañamiento"
-      :item="selectedAssignment"
+      itemName="acompañante"
+      :item="selectedCompanion"
       @click:outside.stop="dialog = false"
-      @delete="deleteAssignment"
+      @delete="deleteCompanion"
     />
   </v-container>
 </template>
 
 <script setup lang="ts">
-import { ref, type Ref } from "vue";
 import { useRouter } from "vue-router";
-import AssignmentApi from "@/api/assignment/index";
+import CompanionApi from "@/api/companion/index";
+import { CompanionService } from "@/services/companionService";
 import LazyTable from "@/components/tables/LazyTable.vue";
-import TableHeader from "@/components/tables/extras/TableHeader.vue";
+import TableHeader from "../../../tables/extras/TableHeader.vue";
 import DeleteItemModal from "@/components/modals/DeleteItemModal.vue";
-import { AssignmentService } from "@/services/assignmentService";
-import type {
-  ColDef,
-  ValueFormatterParams,
-} from "@/components/tables/interfaces/GenericTable/columnDefinitions";
-import type Assignment from "@/api/assignment/interface";
+import type { ColDef } from "@/components/tables/interfaces/GenericTable/columnDefinitions";
+import type Companion from "@/api/companion/interface";
+import { ref, type Ref } from "vue";
 import type { CellClickedEvent } from "ag-grid-community";
 
-const service = new AssignmentService(new AssignmentApi());
+const service = new CompanionService(new CompanionApi());
 const router = useRouter();
+
 const columns = [
   {
     headerName: "ID",
@@ -42,22 +40,24 @@ const columns = [
     onCellClicked: (event: CellClickedEvent) => showDetails(event.data),
   },
   {
-    headerName: "Cliente",
-    field: "client.name",
+    headerName: "Nombre",
+    field: "name",
     flex: 10,
   },
   {
-    headerName: "Acompañante",
-    field: "companion.name",
-    flex: 10,
+    headerName: "CUIT",
+    field: "cuit",
+    flex: 8,
   },
   {
-    headerName: "Periodico",
-    field: "periodic",
-    flex: 3,
-    cellClass: "d-flex justify-center",
-    suppressMenu: true,
-    valueFormatter: booleanFormatter,
+    headerName: "Fecha Nacimiento",
+    field: "birthday",
+    flex: 8,
+  },
+  {
+    headerName: "Teléfono",
+    field: "phone",
+    flex: 8,
   },
   {
     suppressMovable: true,
@@ -69,6 +69,7 @@ const columns = [
       <button type="button" class="v-icon notranslate v-icon--link mdi mdi-pencil theme--light" style="font-size: 16px;"></button>
     `,
     onCellClicked: (event: CellClickedEvent) => goToEdition(event.data),
+    hide: true,
   },
   {
     suppressMovable: true,
@@ -83,35 +84,34 @@ const columns = [
   },
 ] as ColDef[];
 
-function booleanFormatter(params: ValueFormatterParams) {
-  return params.value ? "Si" : "No";
-}
-
-function showDetails(assignment: Assignment) {
+function showDetails(companion: Companion) {
   router.push({
-    name: "assignment-detail",
-    params: { id: assignment.id },
+    name: "companion-detail",
+    params: { id: companion.id },
   });
 }
 
-function goToEdition(assignment: Assignment) {
+function goToEdition(companion: Companion) {
   router.push({
-    name: "assignment-edit",
-    params: { id: assignment.id },
+    name: "companion-edit",
+    params: { id: companion.id },
   });
 }
 
-// DeleteAssignmentModal Logic
+// deleteCompanionModal Logic
+// codigo similar en assignments table, crear composable
 
 const dialog = ref(false);
-const selectedAssignment: Ref<Assignment | undefined> = ref();
+const selectedCompanion: Ref<Companion | undefined> = ref();
 
-function handleDeletion(assignment: Assignment) {
-  selectedAssignment.value = assignment;
+function handleDeletion(companion: Companion) {
+  selectedCompanion.value = companion;
   dialog.value = true;
 }
 
-function deleteAssignment(id: number) {
+function deleteCompanion(id: number) {
   service.delete(id);
+  // re render lazy table
+  // show success notification
 }
 </script>

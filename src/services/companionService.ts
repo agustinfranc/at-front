@@ -20,4 +20,8 @@ export class CompanionService extends ApiService {
       ...companion,
     });
   }
+
+  async delete(id: number): Promise<ApiServiceResponse<boolean>> {
+    return await this.handleRequest<boolean>(this.api.delete, id);
+  }
 }

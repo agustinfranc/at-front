@@ -3,5 +3,5 @@
 </template>
 
 <script setup lang="ts">
-import CompanionForm from "@/components/forms/companion/CompanionForm.vue";
+import CompanionForm from "@/components/modules/companion/form/CompanionForm.vue";
 </script>
