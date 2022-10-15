@@ -1,4 +1,6 @@
-export default class CompanionForm {
+import type Companion from "@/api/companion/interface";
+
+export default class CompanionForm implements Companion {
   id?: number;
   name = "";
   cuit = "";

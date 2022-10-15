@@ -1,11 +1,11 @@
 export default interface Companion {
   id?: number;
   name: string;
-  cuit: number;
-  phone: number;
-  nationality: string | null;
-  birthday: string | null;
-  max_taxable: boolean;
+  cuit: string;
+  phone: string;
+  nationality: string;
+  birthday: string;
+  max_taxable: number;
   monotax: boolean;
   criminal_record: boolean;
   insurance: boolean;

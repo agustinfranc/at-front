@@ -15,6 +15,10 @@ class CompanionApi {
     return axiosInstance.post("/companions", companion);
   }
 
+  update(companion: Companion): AxiosPromise<Companion> {
+    return axiosInstance.put(`/companions/${companion.id}`, companion);
+  }
+
   delete(id: number): AxiosPromise<boolean> {
     return axiosInstance.delete(`/companions/${id}`);
   }

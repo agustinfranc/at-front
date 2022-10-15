@@ -70,7 +70,6 @@ const columns = [
       <button type="button" class="v-icon notranslate v-icon--link mdi mdi-pencil theme--light" style="font-size: 16px;"></button>
     `,
     onCellClicked: (event: CellClickedEvent) => goToEdition(event.data),
-    hide: true,
   },
   {
     suppressMovable: true,
