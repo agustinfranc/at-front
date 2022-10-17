@@ -49,12 +49,17 @@ const router = createRouter({
     {
       path: "/companions",
       name: "companions",
-      component: () => import("../views/CompanionsView.vue"),
+      component: () => import("../views/Companion/CompanionsView.vue"),
     },
     {
       path: "/companions/new",
       name: "companion-new",
-      component: () => import("../views/NewCompanionView.vue"),
+      component: () => import("../views/Companion/NewCompanionView.vue"),
+    },
+    {
+      path: "/companions/:id/edit",
+      name: "companion-edit",
+      component: () => import("../views/Companion/EditCompanionView.vue"),
     },
     {
       path: "/companions/:id",
