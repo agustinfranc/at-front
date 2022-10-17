@@ -92,20 +92,22 @@
 <script setup lang="ts">
 import { onBeforeMount, onMounted, ref, watch } from "vue";
 import ComboboxField from "@/components/forms/fields/ComboboxField.vue";
-import AssignmentsApi from "@/api/assignment/index";
 import ClientApi from "@/api/client";
 import { AssignmentService } from "@/services/assignmentService";
-import { useSnackbarStore } from "@/stores/snackbar";
 import SubmitButton from "@/components/forms/common/SubmitButton.vue";
 import { ClientService } from "@/services/clientService";
 import CompanionApi from "@/api/companion";
 import { CompanionService } from "@/services/companionService";
 import AssignmentForm from "../interfaces/assignmentForm";
+// eslint-disable-next-line
 // @ts-ignore
 import { cloneDeep } from "lodash";
 import { useRoute } from "vue-router";
-import { useGetAssignmentService } from "@/composables/assignment";
 import { mapAssignmentForEditForm, mapFormForRequest } from "./formHelpers";
+import type Assignment from "@/api/assignment/interface";
+import { useFindOneService } from "@/composables/findOneItemService";
+import AssignmentApi from "@/api/assignment/index";
+import { useSaveFormService } from "@/composables/saveItemService";
 // import _ from "@/plugins/lodash" not working
 
 const route = useRoute();
@@ -117,17 +119,17 @@ const valid = ref(true);
 const fields = ref(new AssignmentForm());
 const clients = ref();
 const companions = ref();
+const service = new AssignmentService(new AssignmentApi());
 
-const isEdit = () => !!route.params?.id;
-
+const { isEdit, saveItem } = useSaveFormService<AssignmentForm>(service);
 const title = isEdit()
   ? `Acompañamiento #${route.params.id}`
   : "Nuevo acompañamiento";
 
-const { assignment } = useGetAssignmentService();
-watch(assignment, () => {
-  if (assignment.value) {
-    fields.value = mapAssignmentForEditForm(assignment.value);
+const { item } = useFindOneService<Assignment>(service);
+watch(item, () => {
+  if (item.value) {
+    fields.value = mapAssignmentForEditForm(item.value);
   }
 });
 
@@ -141,22 +143,7 @@ async function storeAssignment() {
     companions.value
   );
 
-  const { error } = isEdit()
-    ? await new AssignmentService(new AssignmentsApi()).update(
-        cloneDeep(assignmentForm)
-      )
-    : await new AssignmentService(new AssignmentsApi()).create(
-        cloneDeep(assignmentForm)
-      );
-
-  const snackbarStore = useSnackbarStore();
-
-  if (!error) {
-    snackbarStore.showSuccess({
-      text: "Asignación agregada con exito",
-    });
-    return;
-  }
+  saveItem(cloneDeep(assignmentForm), "assignments");
 }
 
 onBeforeMount(() => {

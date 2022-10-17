@@ -32,14 +32,9 @@ const router = createRouter({
       component: () => import("../views/NewClientView.vue"),
     },
     {
-      path: "/companions",
-      name: "companions",
-      component: () => import("../views/CompanionsView.vue"),
-    },
-    {
-      path: "/companions/new",
-      name: "new-companion",
-      component: () => import("../views/NewCompanionView.vue"),
+      path: "/clients/:id",
+      name: "client-detail",
+      component: () => import("../views/Client/ClientDetailView.vue"),
     },
     {
       path: "/users",
@@ -52,6 +47,26 @@ const router = createRouter({
       component: () => import("../views/NewUserView.vue"),
     },
     {
+      path: "/companions",
+      name: "companions",
+      component: () => import("../views/Companion/CompanionsView.vue"),
+    },
+    {
+      path: "/companions/new",
+      name: "companion-new",
+      component: () => import("../views/Companion/NewCompanionView.vue"),
+    },
+    {
+      path: "/companions/:id/edit",
+      name: "companion-edit",
+      component: () => import("../views/Companion/EditCompanionView.vue"),
+    },
+    {
+      path: "/companions/:id",
+      name: "companion-detail",
+      component: () => import("../views/Companion/CompanionDetailView.vue"),
+    },
+    {
       path: "/assignments",
       name: "assignments",
       component: () => import("../views/Assignment/AssignmentListView.vue"),
@@ -62,19 +77,9 @@ const router = createRouter({
       component: () => import("../views/Assignment/NewAssignmentView.vue"),
     },
     {
-      path: "/clients/:id",
-      name: "client-detail",
-      component: () => import("../views/Client/ClientDetailView.vue"),
-    },
-    {
       path: "/assignments/:id",
       name: "assignment-detail",
       component: () => import("../views/Assignment/AssignmentDetailView.vue"),
-    },
-    {
-      path: "/companions/:id",
-      name: "companion-detail",
-      component: () => import("../views/Companion/CompanionDetailView.vue"),
     },
     {
       path: "/assignments/:id/edit",

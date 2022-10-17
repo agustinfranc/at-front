@@ -1,7 +1,7 @@
 <template>
   <v-container class="h-100 d-flex flex-column">
     <TableHeader title="Clientes" :route="{ name: 'new-client' }" />
-    <LazyTable :columns="columns" :service="service" @cellClick="showClient" />
+    <LazyTable :columns="columns" :service="service" @cell-click="showClient" />
   </v-container>
 </template>
 
@@ -32,7 +32,7 @@ const columns = [
   {
     headerName: "Nombre Tutor",
     field: "guardian_name",
-    cellRenderer: (params: any) => {
+    cellRenderer: (params: { value: string }) => {
       return params.value ?? "-";
     },
   },
@@ -47,7 +47,7 @@ const columns = [
   {
     headerName: "Tarifa",
     field: "rate",
-    cellRenderer: (params: any) => {
+    cellRenderer: (params: { value: string }) => {
       return params.value ? "$" + params.value : "-";
     },
   },

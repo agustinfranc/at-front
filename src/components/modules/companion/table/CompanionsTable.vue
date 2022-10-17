@@ -1,12 +1,12 @@
 <template>
   <v-container class="h-100 d-flex flex-column">
-    <TableHeader title="Acompañamientos" :route="{ name: 'assignment-new' }" />
+    <TableHeader title="Acompañantes" :route="{ name: 'companion-new' }" />
 
     <LazyTable :columns="columns" :service="service" />
 
     <DeleteItemModal
       v-model="dialog"
-      item-name="acompañamiento"
+      item-name="acompañante"
       :item="selectedItem"
       @click:outside.stop="dialog = false"
       @delete="deleteItem"
@@ -16,21 +16,19 @@
 
 <script setup lang="ts">
 import { useRouter } from "vue-router";
-import AssignmentApi from "@/api/assignment/index";
+import CompanionApi from "@/api/companion/index";
+import { CompanionService } from "@/services/companionService";
 import LazyTable from "@/components/tables/LazyTable.vue";
-import TableHeader from "@/components/tables/extras/TableHeader.vue";
+import TableHeader from "../../../tables/extras/TableHeader.vue";
 import DeleteItemModal from "@/components/modals/DeleteItemModal.vue";
-import { AssignmentService } from "@/services/assignmentService";
-import type {
-  ColDef,
-  ValueFormatterParams,
-} from "@/components/tables/interfaces/GenericTable/columnDefinitions";
-import type Assignment from "@/api/assignment/interface";
+import type { ColDef } from "@/components/tables/interfaces/GenericTable/columnDefinitions";
+import type Companion from "@/api/companion/interface";
 import type { CellClickedEvent } from "ag-grid-community";
 import { useDeleteItemDialog } from "@/composables/deleteItem";
 
-const service = new AssignmentService(new AssignmentApi());
+const service = new CompanionService(new CompanionApi());
 const router = useRouter();
+
 const columns = [
   {
     headerName: "ID",
@@ -43,22 +41,24 @@ const columns = [
     onCellClicked: (event: CellClickedEvent) => showDetails(event.data),
   },
   {
-    headerName: "Cliente",
-    field: "client.name",
+    headerName: "Nombre",
+    field: "name",
     flex: 10,
   },
   {
-    headerName: "Acompañante",
-    field: "companion.name",
-    flex: 10,
+    headerName: "CUIT",
+    field: "cuit",
+    flex: 8,
   },
   {
-    headerName: "Periodico",
-    field: "periodic",
-    flex: 3,
-    cellClass: "d-flex justify-center",
-    suppressMenu: true,
-    valueFormatter: booleanFormatter,
+    headerName: "Fecha Nacimiento",
+    field: "birthday",
+    flex: 8,
+  },
+  {
+    headerName: "Teléfono",
+    field: "phone",
+    flex: 8,
   },
   {
     suppressMovable: true,
@@ -84,26 +84,22 @@ const columns = [
   },
 ] as ColDef[];
 
-function booleanFormatter(params: ValueFormatterParams) {
-  return params.value ? "Si" : "No";
-}
-
-function showDetails(assignment: Assignment) {
+function showDetails(companion: Companion) {
   router.push({
-    name: "assignment-detail",
-    params: { id: assignment.id },
+    name: "companion-detail",
+    params: { id: companion.id },
   });
 }
 
-function goToEdition(assignment: Assignment) {
+function goToEdition(companion: Companion) {
   router.push({
-    name: "assignment-edit",
-    params: { id: assignment.id },
+    name: "companion-edit",
+    params: { id: companion.id },
   });
 }
 
 // DeleteItemModal Logic
 
 const { dialog, selectedItem, handleDeletion, deleteItem } =
-  useDeleteItemDialog<Assignment>(service);
+  useDeleteItemDialog<Companion>(service);
 </script>

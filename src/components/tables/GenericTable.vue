@@ -56,10 +56,10 @@ export default defineComponent({
       flex: 1,
     };
 
-    const gridApi = ref(null); // Optional - for accessing Grid's API
+    const gridApi = ref(); // Optional - for accessing Grid's API
 
     // Obtain API from grid's onGridReady event
-    const onGridReady = (params) => {
+    const onGridReady = (params: { api: unknown }) => {
       gridApi.value = params.api;
     };
 

@@ -1,7 +1,8 @@
 <template>
   <v-container>
-    <FormTitle title="Acompañante"></FormTitle>
     <v-card>
+      <v-card-title class="mb-5">{{ title }}</v-card-title>
+
       <v-card-text>
         <v-form ref="form" v-model="valid" lazy-validation>
           <TextField
@@ -10,8 +11,8 @@
             required
             append-inner-icon="mdi-exclamation"
             :rules="[
-              (v: any) => !!v || 'Este campo es requerido',
-              (v: string | any[]) => (v && v.length <= 50) || 'El nombre excede los 50 digitos',
+              (v: string) => !!v || 'Este campo es requerido',
+              (v: string) => (v && v.length <= 50) || 'El nombre excede los 50 digitos',
             ]"
           ></TextField>
 
@@ -19,7 +20,7 @@
             v-model="fields.cuit"
             label="CUIT"
             append-inner-icon="mdi-exclamation"
-            :rules="[(v: any) => !!v || 'Este campo es requerido']"
+            :rules="[(v: string) => !!v || 'Este campo es requerido']"
           ></TextField>
 
           <TextField
@@ -28,15 +29,14 @@
             label="Nacimiento"
             prepend-inner-icon="mdi-calendar-month"
             append-inner-icon="mdi-exclamation"
-            :rules="[(v: any) => !!v || 'Este campo es requerido']"
+            :rules="[(v: string) => !!v || 'Este campo es requerido']"
           />
 
           <SelectField
             v-model="fields.nationality"
-            type="text"
             label="Nacionalidad"
             append-inner-icon="mdi-exclamation"
-            :rules="[(v: any) => !!v || 'Este campo es requerido']"
+            :rules="[(v: string) => !!v || 'Este campo es requerido']"
             :items="countries"
           >
           </SelectField>
@@ -45,7 +45,7 @@
             v-model="fields.phone"
             label="Teléfono"
             append-inner-icon="mdi-exclamation"
-            :rules="[(v: any) => !!v || 'Este campo es requerido']"
+            :rules="[(v: string) => !!v || 'Este campo es requerido']"
           />
 
           <TextField
@@ -103,20 +103,38 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref, toRaw } from "vue";
-import TextField from "../fields/TextField.vue";
+import { ref, watch } from "vue";
+import TextField from "../../../forms/fields/TextField.vue";
 import CompanionApi from "@/api/companion/index";
 import { CompanionService } from "@/services/companionService";
-import { useSnackbarStore } from "@/stores/snackbar";
-import Companion from "@/api/companion/interface";
-import SelectField from "../fields/SelectField.vue";
-import FormTitle from "../extras/FormTitle.vue";
+import SelectField from "../../../forms/fields/SelectField.vue";
+import CompanionForm from "../interfaces/companionForm";
+import { useRoute } from "vue-router";
+import { useFindOneService } from "@/composables/findOneItemService";
+import type Companion from "@/api/companion/interface";
+import { useSaveFormService } from "@/composables/saveItemService";
+// eslint-disable-next-line
+// @ts-ignore
+import { cloneDeep } from "lodash";
 
+const route = useRoute();
+const form = ref(); // declare template ref form
 const valid = ref(true);
-const fields = reactive(new Companion());
+const fields = ref(new CompanionForm());
+const service = new CompanionService(new CompanionApi());
 
-// declare template ref form
-const form = ref();
+const { isEdit, saveItem } = useSaveFormService<CompanionForm>(service);
+
+const title = isEdit()
+  ? `Acompañante #${route.params.id}`
+  : "Nuevo acompañante";
+
+const { item } = useFindOneService<Companion>(service);
+watch(item, () => {
+  if (item.value) {
+    fields.value = item.value;
+  }
+});
 
 const countries = [
   "Argentina",
@@ -132,18 +150,6 @@ async function storeCompanion() {
   const formValidation = await form.value.validate();
   if (!formValidation.valid) return;
 
-  // Si el acompañante tuviera id, haria update y no create
-  const { error } = await new CompanionService(new CompanionApi()).create({
-    ...toRaw(fields),
-  });
-
-  const snackbarStore = useSnackbarStore();
-
-  if (!error) {
-    snackbarStore.showSuccess({
-      text: "Acompañante agregado con exito",
-    });
-    return;
-  }
+  saveItem(cloneDeep(fields.value), "companions");
 }
 </script>
