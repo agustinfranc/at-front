@@ -1,5 +1,4 @@
 import type ClientApi from "@/api/client";
-import type Client from "@/api/client/interface";
 import { ApiService, type ApiServiceResponse } from "./apiService";
 
 export class ClientService extends ApiService {
@@ -7,7 +6,7 @@ export class ClientService extends ApiService {
     super(api);
   }
 
-  async _customMethodExample(): Promise<ApiServiceResponse<any>> {
-    return await this.handleRequest<any>(this.api.getAll);
+  async _customMethodExample(): Promise<ApiServiceResponse<unknown>> {
+    return await this.handleRequest<unknown>(this.api.getAll);
   }
 }

@@ -113,6 +113,7 @@ import { useRoute } from "vue-router";
 import { useFindOneService } from "@/composables/findOneItemService";
 import type Companion from "@/api/companion/interface";
 import { useSaveFormService } from "@/composables/saveItemService";
+// eslint-disable-next-line
 // @ts-ignore
 import { cloneDeep } from "lodash";
 

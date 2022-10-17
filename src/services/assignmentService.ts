@@ -12,8 +12,8 @@ export class AssignmentService
   }
 
   // Example where its defined a new method
-  async _customMethodExample(): Promise<ApiServiceResponse<any>> {
-    return await this.handleRequest<any>(this.api.getAll);
+  async _customMethodExample(): Promise<ApiServiceResponse<unknown>> {
+    return await this.handleRequest<unknown>(this.api.getAll);
   }
 
   // Example where I can replace default find from apiService
