@@ -104,31 +104,32 @@
 </template>
 
 <script setup lang="ts">
-import { ref, toRaw, watch } from "vue";
+import { ref, watch } from "vue";
 import TextField from "../../../forms/fields/TextField.vue";
 import CompanionApi from "@/api/companion/index";
 import { CompanionService } from "@/services/companionService";
-import { useSnackbarStore } from "@/stores/snackbar";
 import SelectField from "../../../forms/fields/SelectField.vue";
 import CompanionForm from "../interfaces/companionForm";
 import { useRoute } from "vue-router";
 import { useFindOneService } from "@/composables/findOneItemService";
 import type Companion from "@/api/companion/interface";
+import { useSaveFormService } from "@/composables/saveItemService";
+// @ts-ignore
+import { cloneDeep } from "lodash";
 
 const route = useRoute();
 const form = ref(); // declare template ref form
 const valid = ref(true);
 const fields = ref(new CompanionForm());
+const service = new CompanionService(new CompanionApi());
 
-const isEdit = () => !!route.params?.id;
+const { isEdit, saveItem } = useSaveFormService<CompanionForm>(service);
 
 const title = isEdit()
   ? `Acompañante #${route.params.id}`
   : "Nuevo acompañante";
 
-const { item } = useFindOneService<Companion>(
-  new CompanionService(new CompanionApi())
-);
+const { item } = useFindOneService<Companion>(service);
 watch(item, () => {
   if (item.value) {
     fields.value = item.value;
@@ -149,23 +150,6 @@ async function storeCompanion() {
   const formValidation = await form.value.validate();
   if (!formValidation.valid) return;
 
-  // TODO: crear composable: start
-  const { data, error } = isEdit()
-    ? await new CompanionService(new CompanionApi()).update({
-        ...toRaw(fields.value),
-      })
-    : await new CompanionService(new CompanionApi()).create({
-        ...toRaw(fields.value),
-      });
-
-  const snackbarStore = useSnackbarStore();
-
-  if (!error) {
-    snackbarStore.showSuccess({
-      text: "Acompañante agregado con exito",
-    });
-    return;
-  }
-  // TODO: crear composable: end
+  saveItem(cloneDeep(fields.value), "companions");
 }
 </script>
