@@ -81,6 +81,11 @@ const router = createRouter({
       name: "assignment-edit",
       component: () => import("../views/Assignment/EditAssignmentView.vue"),
     },
+    {
+      path: "/clients/:id/edit",
+      name: "client-edit",
+      component: () => import("../views/Client/EditClientView.vue"),
+    },
   ],
 });
 

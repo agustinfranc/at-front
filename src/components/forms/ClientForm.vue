@@ -162,29 +162,46 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref, toRaw } from "vue";
+import { reactive, ref, toRaw, watch } from "vue";
 import TextField from "./fields/TextField.vue";
 import TextAreaField from "./fields/TextAreaField.vue";
 import ClientApi from "@/api/client/index";
 import { ClientService } from "@/services/clientService";
 import { useSnackbarStore } from "@/stores/snackbar";
-import Client from "@/api/client/interface";
 import FormTitle from "./extras/FormTitle.vue";
+import { useRoute } from "vue-router";
+import { mapFormForRequest } from "../modules/assignment/form/formHelpers";
+import ClientForm from "../modules/client/interfaces/clientForm";
+import { useGetClientService } from "@/composables/client";
 
 const valid = ref(true);
-const fields = reactive(new Client());
+const fields = reactive(new ClientForm());
+const route = useRoute();
 
 // declare template ref form
 const form = ref();
+
+const isEdit = () => !!route.params?.id;
+
+const title = isEdit() ? `Cliente #${route.params.id}` : "Nuevo cliente";
+
+const { client } = useGetClientService();
+watch(client, () => {
+  if (client.value) {
+    fields.value = mapClientForEditForm(client.value);
+  }
+});
 
 async function storeClient() {
   const formValidation = await form.value.validate();
   if (!formValidation.valid) return;
 
+  const clientForm = mapFormForRequest(fields.value);
+
   // Si el client tuviera id, haria update y no create
-  const { error } = await new ClientService(new ClientApi()).create({
-    ...toRaw(fields),
-  });
+  const { error } = isEdit()
+    ? await new ClientService(new ClientApi()).update(cloneDeep(clientForm))
+    : await new ClientService(new ClientApi()).create(cloneDeep(clientForm));
 
   const snackbarStore = useSnackbarStore();
 
