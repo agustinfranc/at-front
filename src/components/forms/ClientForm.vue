@@ -170,9 +170,10 @@ import { ClientService } from "@/services/clientService";
 import { useSnackbarStore } from "@/stores/snackbar";
 import FormTitle from "./extras/FormTitle.vue";
 import { useRoute } from "vue-router";
-import { mapFormForRequest } from "../modules/assignment/form/formHelpers";
+import { mapFormForRequest } from "../modules/client/form/formHelpers";
 import ClientForm from "../modules/client/interfaces/clientForm";
 import { useGetClientService } from "@/composables/client";
+import { cloneDeep } from "lodash";
 
 const valid = ref(true);
 const fields = reactive(new ClientForm());
