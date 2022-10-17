@@ -2,30 +2,30 @@
   <v-container>
     <v-card class="my-4">
       <v-progress-linear
-        v-if="!assignment && !error"
+        v-if="!item && !error"
         class="position-absolute"
         height="10"
         indeterminate
       ></v-progress-linear>
 
-      <template v-if="assignment">
-        <v-card-title> Acompañamiento #{{ assignment.id }}</v-card-title>
+      <template v-if="item">
+        <v-card-title> Acompañamiento #{{ item.id }}</v-card-title>
 
         <v-card-text>
           <v-row>
             <v-col>
               <p class="font-weight-bold">Cliente</p>
-              {{ assignment.client.name }}
+              {{ item.client.name }}
             </v-col>
             <v-col>
               <p class="font-weight-bold">Acompañante</p>
-              {{ assignment.companion.name }}
+              {{ item.companion.name }}
             </v-col>
           </v-row>
           <v-row>
             <v-col>
               <p class="font-weight-bold">Dias</p>
-              <span v-for="day in assignment.days" :key="day.id">
+              <span v-for="day in item.days" :key="day.id">
                 {{ day.title }}
                 de {{ day.pivot.from }} a {{ day.pivot.to }} ({{
                   day.pivot.hours
@@ -36,21 +36,21 @@
           <v-row>
             <v-col>
               <p class="font-weight-bold">Periódico</p>
-              {{ assignment.periodic ? "Si" : "No" }}
+              {{ item.periodic ? "Si" : "No" }}
             </v-col>
             <v-col>
               <p class="font-weight-bold">Habilitado</p>
-              {{ assignment.enabled ? "Si" : "No" }}
+              {{ item.enabled ? "Si" : "No" }}
             </v-col>
           </v-row>
           <v-row>
             <v-col>
               <p class="font-weight-bold">Creado el</p>
-              {{ assignment.created_at }}
+              {{ item.created_at }}
             </v-col>
             <v-col>
               <p class="font-weight-bold">Modificado el</p>
-              {{ assignment.updated_at ?? "-" }}
+              {{ item.updated_at ?? "-" }}
             </v-col>
           </v-row>
         </v-card-text>
@@ -60,7 +60,12 @@
 </template>
 
 <script setup lang="ts">
-import { useGetAssignmentService } from "@/composables/assignment";
+import AssignmentApi from "@/api/assignment";
+import type Assignment from "@/api/assignment/interface";
+import { useFindOneService } from "@/composables/findOneItemService";
+import { AssignmentService } from "@/services/assignmentService";
 
-const { assignment, error } = useGetAssignmentService();
+const service = new AssignmentService(new AssignmentApi());
+
+const { item, error } = useFindOneService<Assignment>(service);
 </script>
