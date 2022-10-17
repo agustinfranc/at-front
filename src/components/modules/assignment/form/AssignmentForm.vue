@@ -94,7 +94,6 @@ import { onBeforeMount, onMounted, ref, watch } from "vue";
 import ComboboxField from "@/components/forms/fields/ComboboxField.vue";
 import ClientApi from "@/api/client";
 import { AssignmentService } from "@/services/assignmentService";
-import { useSnackbarStore } from "@/stores/snackbar";
 import SubmitButton from "@/components/forms/common/SubmitButton.vue";
 import { ClientService } from "@/services/clientService";
 import CompanionApi from "@/api/companion";
@@ -107,6 +106,7 @@ import { mapAssignmentForEditForm, mapFormForRequest } from "./formHelpers";
 import type Assignment from "@/api/assignment/interface";
 import { useFindOneService } from "@/composables/findOneItemService";
 import AssignmentApi from "@/api/assignment/index";
+import { useSaveFormService } from "@/composables/saveItemService";
 // import _ from "@/plugins/lodash" not working
 
 const route = useRoute();
@@ -118,16 +118,14 @@ const valid = ref(true);
 const fields = ref(new AssignmentForm());
 const clients = ref();
 const companions = ref();
+const service = new AssignmentService(new AssignmentApi());
 
-const isEdit = () => !!route.params?.id;
-
+const { isEdit, saveItem } = useSaveFormService<AssignmentForm>(service);
 const title = isEdit()
   ? `Acompañamiento #${route.params.id}`
   : "Nuevo acompañamiento";
 
-const { item } = useFindOneService<Assignment>(
-  new AssignmentService(new AssignmentApi())
-);
+const { item } = useFindOneService<Assignment>(service);
 watch(item, () => {
   if (item.value) {
     fields.value = mapAssignmentForEditForm(item.value);
@@ -144,24 +142,7 @@ async function storeAssignment() {
     companions.value
   );
 
-  // TODO: crear composable: start
-  const { data, error } = isEdit()
-    ? await new AssignmentService(new AssignmentApi()).update(
-        cloneDeep(assignmentForm)
-      )
-    : await new AssignmentService(new AssignmentApi()).create(
-        cloneDeep(assignmentForm)
-      );
-
-  const snackbarStore = useSnackbarStore();
-
-  if (!error && data) {
-    snackbarStore.showSuccess({
-      text: "Asignación agregada con exito",
-    });
-    return;
-  }
-  // TODO: crear composable: end
+  saveItem(cloneDeep(assignmentForm), "assignments");
 }
 
 onBeforeMount(() => {
