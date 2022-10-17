@@ -5,7 +5,7 @@ export default interface Client {
   phone: string;
   extra_phone: string;
   rate: number;
-  taxable: number;
+  taxable: string;
   comments: string;
   address: string;
   guardian_name: string;
