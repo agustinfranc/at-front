@@ -162,7 +162,7 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref, toRaw, watch } from "vue";
+import { reactive, ref, watch } from "vue";
 import TextField from "./fields/TextField.vue";
 import TextAreaField from "./fields/TextAreaField.vue";
 import ClientApi from "@/api/client/index";
@@ -170,13 +170,16 @@ import { ClientService } from "@/services/clientService";
 import { useSnackbarStore } from "@/stores/snackbar";
 import FormTitle from "./extras/FormTitle.vue";
 import { useRoute } from "vue-router";
-import { mapFormForRequest } from "../modules/client/form/formHelpers";
+import {
+  mapClientForEditForm,
+  mapFormForRequest,
+} from "../modules/client/form/formHelpers";
 import ClientForm from "../modules/client/interfaces/clientForm";
 import { useGetClientService } from "@/composables/client";
 import { cloneDeep } from "lodash";
 
 const valid = ref(true);
-const fields = reactive(new ClientForm());
+const fields = ref(new ClientForm());
 const route = useRoute();
 
 // declare template ref form

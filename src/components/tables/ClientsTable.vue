@@ -2,11 +2,12 @@
   <v-container class="h-100 d-flex flex-column">
     <TableHeader title="Clientes" :route="{ name: 'new-client' }" />
     <LazyTable :columns="columns" :service="service" />
-    <DeleteAssignmentModal
+    <DeleteItemModal
       v-model="dialog"
-      :assignment="selectedClient"
+      item-name="cliente"
+      :item="selectedItem"
       @click:outside.stop="dialog = false"
-      @delete="deleteClient"
+      @delete="deleteItem"
     />
   </v-container>
 </template>
@@ -21,7 +22,8 @@ import { useRouter } from "vue-router";
 import type Client from "@/api/client/interface";
 import { ref, type Ref } from "vue";
 import type { CellClickedEvent } from "ag-grid-community";
-import DeleteAssignmentModal from "../modules/assignment/modals/DeleteAssignmentModal.vue";
+import DeleteItemModal from "../modals/DeleteItemModal.vue";
+import { useDeleteItemDialog } from "@/composables/deleteItem";
 
 const service = new ClientService(new ClientApi());
 const router = useRouter();
@@ -100,15 +102,6 @@ function goToEdition(client: Client) {
   });
 }
 
-const dialog = ref(false);
-const selectedClient: Ref<Client | undefined> = ref();
-
-function handleDeletion(client: Client) {
-  selectedClient.value = client;
-  dialog.value = true;
-}
-
-function deleteClient(id: number) {
-  service.delete(id);
-}
+const { dialog, selectedItem, handleDeletion, deleteItem } =
+  useDeleteItemDialog<Client>(service);
 </script>
