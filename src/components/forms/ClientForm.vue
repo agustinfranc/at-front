@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <FormTitle title="Cliente"></FormTitle>
+    <v-card-title class="mb-5">{{ title }}</v-card-title>
 
     <v-card class="my-4">
       <v-card-text>
@@ -162,37 +162,34 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref, watch } from "vue";
+import { ref, watch } from "vue";
 import TextField from "./fields/TextField.vue";
 import TextAreaField from "./fields/TextAreaField.vue";
 import ClientApi from "@/api/client/index";
 import { ClientService } from "@/services/clientService";
-import { useSnackbarStore } from "@/stores/snackbar";
-import FormTitle from "./extras/FormTitle.vue";
 import { useRoute } from "vue-router";
-import {
-  mapClientForEditForm,
-  mapFormForRequest,
-} from "../modules/client/form/formHelpers";
 import ClientForm from "../modules/client/interfaces/clientForm";
-import { useGetClientService } from "@/composables/client";
 import { cloneDeep } from "lodash";
+import { useSaveFormService } from "@/composables/saveItemService";
+import { useFindOneService } from "@/composables/findOneItemService";
+import type Client from "@/api/client/interface";
 
 const valid = ref(true);
 const fields = ref(new ClientForm());
 const route = useRoute();
+const service = new ClientService(new ClientApi());
 
 // declare template ref form
 const form = ref();
 
-const isEdit = () => !!route.params?.id;
+const { isEdit, saveItem } = useSaveFormService<ClientForm>(service);
 
 const title = isEdit() ? `Cliente #${route.params.id}` : "Nuevo cliente";
 
-const { client } = useGetClientService();
-watch(client, () => {
-  if (client.value) {
-    fields.value = mapClientForEditForm(client.value);
+const { item } = useFindOneService<Client>(service);
+watch(item, () => {
+  if (item.value) {
+    fields.value = item.value;
   }
 });
 
@@ -200,20 +197,6 @@ async function storeClient() {
   const formValidation = await form.value.validate();
   if (!formValidation.valid) return;
 
-  const clientForm = mapFormForRequest(fields.value);
-
-  // Si el client tuviera id, haria update y no create
-  const { error } = isEdit()
-    ? await new ClientService(new ClientApi()).update(cloneDeep(clientForm))
-    : await new ClientService(new ClientApi()).create(cloneDeep(clientForm));
-
-  const snackbarStore = useSnackbarStore();
-
-  if (!error) {
-    snackbarStore.showSuccess({
-      text: "Cliente agregado con exito",
-    });
-    return;
-  }
+  saveItem(cloneDeep(fields.value), "clients");
 }
 </script>

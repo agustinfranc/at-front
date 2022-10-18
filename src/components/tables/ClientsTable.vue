@@ -20,7 +20,6 @@ import type { ColDef } from "@/components/tables/interfaces/GenericTable/columnD
 import { ClientService } from "@/services/clientService";
 import { useRouter } from "vue-router";
 import type Client from "@/api/client/interface";
-import { ref, type Ref } from "vue";
 import type { CellClickedEvent } from "ag-grid-community";
 import DeleteItemModal from "../modals/DeleteItemModal.vue";
 import { useDeleteItemDialog } from "@/composables/deleteItem";
@@ -43,6 +42,7 @@ const columns = [
     suppressMovable: true,
     suppressMenu: true,
     flex: 2,
+    cellClass: "text-blue-accent-4 text-decoration-underline cursor-pointer",
     onCellClicked: (event: CellClickedEvent) => showClient(event.data),
   },
   {
