@@ -81,6 +81,12 @@
             <v-divider class="my-5"></v-divider>
             <v-row>
               <v-col>
+                <p class="font-weight-bold">Porcentaje Facturable</p>
+                {{ renderNullableTaxableCell(client.taxable) }}
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col>
                 <p class="font-weight-bold">Tarifa</p>
                 {{ renderNullableRateCell(client.rate) }}
               </v-col>
@@ -121,6 +127,10 @@ function renderNullableTableCell(value: string | number) {
 
 function renderNullableRateCell(value: number | string) {
   return value ? "$" + value : "-";
+}
+
+function renderNullableTaxableCell(value: number | string) {
+  return value ? value + "%" : "-";
 }
 
 async function getClient() {
