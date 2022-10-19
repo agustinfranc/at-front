@@ -169,6 +169,8 @@ import ClientApi from "@/api/client/index";
 import { ClientService } from "@/services/clientService";
 import { useRoute } from "vue-router";
 import ClientForm from "../modules/client/interfaces/clientForm";
+// eslint-disable-next-line
+// @ts-ignore
 import { cloneDeep } from "lodash";
 import { useSaveFormService } from "@/composables/saveItemService";
 import { useFindOneService } from "@/composables/findOneItemService";
