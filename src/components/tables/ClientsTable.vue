@@ -52,7 +52,7 @@ const columns = [
   {
     headerName: "Nombre Tutor",
     field: "guardian_name",
-    cellRenderer: (params: any) => {
+    cellRenderer: (params: { value: string }) => {
       return params.value ?? "-";
     },
   },
@@ -67,7 +67,7 @@ const columns = [
   {
     headerName: "Tarifa",
     field: "rate",
-    cellRenderer: (params: any) => {
+    cellRenderer: (params: { value: string }) => {
       return params.value ? "$" + params.value : "-";
     },
   },

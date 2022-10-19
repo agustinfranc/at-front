@@ -99,6 +99,7 @@ import { ClientService } from "@/services/clientService";
 import CompanionApi from "@/api/companion";
 import { CompanionService } from "@/services/companionService";
 import AssignmentForm from "../interfaces/assignmentForm";
+// eslint-disable-next-line
 // @ts-ignore
 import { cloneDeep } from "lodash";
 import { useRoute } from "vue-router";

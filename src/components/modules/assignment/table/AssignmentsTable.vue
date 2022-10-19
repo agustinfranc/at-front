@@ -15,7 +15,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref, type Ref } from "vue";
 import { useRouter } from "vue-router";
 import AssignmentApi from "@/api/assignment/index";
 import LazyTable from "@/components/tables/LazyTable.vue";

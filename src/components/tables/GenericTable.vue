@@ -59,7 +59,7 @@ export default defineComponent({
     const gridApi = ref(); // Optional - for accessing Grid's API
 
     // Obtain API from grid's onGridReady event
-    const onGridReady = (params: { api: any }) => {
+    const onGridReady = (params: { api: unknown }) => {
       gridApi.value = params.api;
     };
 
