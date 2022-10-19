@@ -163,12 +163,12 @@
 
 <script setup lang="ts">
 import { ref, watch } from "vue";
-import TextField from "./fields/TextField.vue";
-import TextAreaField from "./fields/TextAreaField.vue";
+import TextField from "../../../forms/fields/TextField.vue";
+import TextAreaField from "../../../forms/fields/TextAreaField.vue";
 import ClientApi from "@/api/client/index";
 import { ClientService } from "@/services/clientService";
 import { useRoute } from "vue-router";
-import ClientForm from "../modules/client/interfaces/clientForm";
+import ClientForm from "../interfaces/clientForm";
 // eslint-disable-next-line
 // @ts-ignore
 import { cloneDeep } from "lodash";
