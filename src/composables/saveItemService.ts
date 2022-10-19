@@ -1,10 +1,11 @@
 import type { AssignmentService } from "@/services/assignmentService";
+import type { ClientService } from "@/services/clientService";
 import type { CompanionService } from "@/services/companionService";
 import { useSnackbarStore } from "@/stores/snackbar";
 import { useRoute, useRouter } from "vue-router";
 
 export function useSaveFormService<T>(
-  service: AssignmentService | CompanionService // type interface SaveService
+  service: AssignmentService | CompanionService | ClientService // type interface SaveService
 ) {
   const route = useRoute();
   const router = useRouter();
