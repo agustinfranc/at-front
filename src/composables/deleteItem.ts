@@ -1,11 +1,13 @@
 import type { DeleteService } from "@/services/interfaces/DeleteService";
+import { useLazyTableStore } from "@/stores/lazyTable";
 import { useSnackbarStore } from "@/stores/snackbar";
 import { ref, type Ref } from "vue";
 
-export function useDeleteItemDialog<T>(service: DeleteService) {
+export function useDeleteItemDialog<T extends object>(service: DeleteService) {
   const dialog = ref(false);
   const selectedItem: Ref<T | undefined> = ref();
   const snackbarStore = useSnackbarStore();
+  const lazyTableStore = useLazyTableStore();
 
   function handleDeletion(item: T) {
     selectedItem.value = item;
@@ -15,9 +17,9 @@ export function useDeleteItemDialog<T>(service: DeleteService) {
   function deleteItem(id: number) {
     service.delete(id).then(() => {
       snackbarStore.showSuccess({
-        text: "Se elimino exitosamente",
+        text: "Se eliminó el item exitosamente",
       });
-      // re render lazy table
+      lazyTableStore.deleteItemFromTable(id);
     });
   }
 

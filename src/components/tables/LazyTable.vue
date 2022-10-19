@@ -1,12 +1,17 @@
 <template>
-  <GenericTable :columns="columns" :rows="rows.value" class="flex-grow-1" />
+  <GenericTable
+    :columns="columns"
+    :rows="store.rows.value"
+    class="flex-grow-1"
+  />
 </template>
 
 <script setup lang="ts">
-import { reactive, onMounted, type PropType } from "vue";
+import { onMounted, type PropType } from "vue";
 import type { ColDef } from "@/components/tables/interfaces/GenericTable/columnDefinitions";
 import GenericTable from "./GenericTable.vue";
 import type { FindService } from "@/services/interfaces/FindService";
+import { useLazyTableStore } from "@/stores/lazyTable";
 
 const props = defineProps({
   columns: {
@@ -19,14 +24,13 @@ const props = defineProps({
   },
 });
 
-// We use reactive instead of ref
-const rows = reactive({ value: [] as any[] });
+const store = useLazyTableStore();
 
 onMounted(async () => {
   const { data, error } = await props.service.find();
 
   if (error || !data) return;
 
-  rows.value = data.data;
+  store.rows.value = data.data;
 });
 </script>
