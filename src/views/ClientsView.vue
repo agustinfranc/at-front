@@ -4,7 +4,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import ClientsTable from "@/components/tables/ClientsTable.vue";
+import ClientsTable from "@/components/modules/client/table/ClientsTable.vue";
 
 export default defineComponent({
   name: "ClientsView",

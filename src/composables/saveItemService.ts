@@ -4,7 +4,7 @@ import type { CompanionService } from "@/services/companionService";
 import { useSnackbarStore } from "@/stores/snackbar";
 import { useRoute, useRouter } from "vue-router";
 
-export function useSaveFormService<T>(
+export function useSaveFormService<T extends object>(
   service: AssignmentService | CompanionService | ClientService // type interface SaveService
 ) {
   const route = useRoute();
