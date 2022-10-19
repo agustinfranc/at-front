@@ -14,6 +14,14 @@ class ClientApi {
   create(client: Client): AxiosPromise<Client> {
     return axiosInstance.post("/clients", client);
   }
+
+  update(client: Client): AxiosPromise<Client> {
+    return axiosInstance.put(`/clients/${client.id}`, client);
+  }
+
+  delete(id: number): AxiosPromise<boolean> {
+    return axiosInstance.delete(`/clients/${id}`);
+  }
 }
 
 export default ClientApi;

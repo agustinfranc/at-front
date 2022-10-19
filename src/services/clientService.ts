@@ -1,12 +1,13 @@
 import type ClientApi from "@/api/client";
 import { ApiService, type ApiServiceResponse } from "./apiService";
+import type { DeleteService } from "./interfaces/DeleteService";
+import type { FindService } from "./interfaces/FindService";
 
-export class ClientService extends ApiService {
+export class ClientService
+  extends ApiService
+  implements DeleteService, FindService
+{
   constructor(private api: ClientApi) {
     super(api);
-  }
-
-  async _customMethodExample(): Promise<ApiServiceResponse<unknown>> {
-    return await this.handleRequest<unknown>(this.api.getAll);
   }
 }
