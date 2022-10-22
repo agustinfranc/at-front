@@ -81,8 +81,14 @@
             <v-divider class="my-5"></v-divider>
             <v-row>
               <v-col>
+                <p class="font-weight-bold">Porcentaje Facturable</p>
+                {{ renderNullableTaxableCell(client.taxable) }}
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col>
                 <p class="font-weight-bold">Tarifa</p>
-                {{ renderNullableRateCell(client.rate) }}
+                {{ renderNullableMoneyCell(client.rate) }}
               </v-col>
               <v-col>
                 <p class="font-weight-bold">Fecha Presupuesto</p>
@@ -99,6 +105,7 @@
 <script setup lang="ts">
 import ClientApi from "@/api/client";
 import type Client from "@/api/client/interface";
+import { renderNullableMoneyCell } from "@/helpers/renderCellMethods";
 import { ClientService } from "@/services/clientService";
 import { useSnackbarStore } from "@/stores/snackbar";
 import { onMounted, ref, type Ref } from "vue";
@@ -119,8 +126,8 @@ function renderNullableTableCell(value: string | number) {
   return value ?? "-";
 }
 
-function renderNullableRateCell(value: number | string) {
-  return value ? "$" + value : "-";
+function renderNullableTaxableCell(value: number | string) {
+  return value ? value + "%" : "-";
 }
 
 async function getClient() {
