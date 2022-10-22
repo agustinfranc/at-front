@@ -76,11 +76,11 @@
 <script setup lang="ts">
 import CompanionApi from "@/api/companion";
 import type Companion from "@/api/companion/interface";
+import { renderNullableMoneyCell } from "@/helpers/renderCellMethods";
 import { CompanionService } from "@/services/companionService";
 import { useSnackbarStore } from "@/stores/snackbar";
 import { onMounted, ref, type Ref } from "vue";
 import { useRoute } from "vue-router";
-import { renderNullableMoneyCell } from "../../cellRenderer/renderNullableMoneyCell";
 
 const route = useRoute();
 const companionService = new CompanionService(new CompanionApi());

@@ -105,11 +105,11 @@
 <script setup lang="ts">
 import ClientApi from "@/api/client";
 import type Client from "@/api/client/interface";
+import { renderNullableMoneyCell } from "@/helpers/renderCellMethods";
 import { ClientService } from "@/services/clientService";
 import { useSnackbarStore } from "@/stores/snackbar";
 import { onMounted, ref, type Ref } from "vue";
 import { useRoute } from "vue-router";
-import { renderNullableMoneyCell } from "../../cellRenderer/renderNullableMoneyCell";
 
 const route = useRoute();
 const clientService = new ClientService(new ClientApi());
