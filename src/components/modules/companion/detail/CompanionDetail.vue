@@ -63,7 +63,7 @@
             <v-row>
               <v-col>
                 <p class="font-weight-bold">Máximo Facturable</p>
-                {{ renderNullableMaxTabableCell(companion.max_taxable) }}
+                {{ renderNullableMoneyCell(companion.max_taxable) }}
               </v-col>
             </v-row>
           </v-card-text>
@@ -80,6 +80,7 @@ import { CompanionService } from "@/services/companionService";
 import { useSnackbarStore } from "@/stores/snackbar";
 import { onMounted, ref, type Ref } from "vue";
 import { useRoute } from "vue-router";
+import { renderNullableMoneyCell } from "../../cellRenderer/renderNullableMoneyCell";
 
 const route = useRoute();
 const companionService = new CompanionService(new CompanionApi());
@@ -94,10 +95,6 @@ onMounted(async () => {
 
 function renderBooleanTableCell(value: boolean) {
   return value ? "Si" : "No";
-}
-
-function renderNullableMaxTabableCell(value: number | string) {
-  return value ? "$" + value : "-";
 }
 
 async function getCompanion() {

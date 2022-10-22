@@ -88,7 +88,7 @@
             <v-row>
               <v-col>
                 <p class="font-weight-bold">Tarifa</p>
-                {{ renderNullableRateCell(client.rate) }}
+                {{ renderNullableMoneyCell(client.rate) }}
               </v-col>
               <v-col>
                 <p class="font-weight-bold">Fecha Presupuesto</p>
@@ -109,6 +109,7 @@ import { ClientService } from "@/services/clientService";
 import { useSnackbarStore } from "@/stores/snackbar";
 import { onMounted, ref, type Ref } from "vue";
 import { useRoute } from "vue-router";
+import { renderNullableMoneyCell } from "../../cellRenderer/renderNullableMoneyCell";
 
 const route = useRoute();
 const clientService = new ClientService(new ClientApi());
@@ -123,10 +124,6 @@ onMounted(async () => {
 
 function renderNullableTableCell(value: string | number) {
   return value ?? "-";
-}
-
-function renderNullableRateCell(value: number | string) {
-  return value ? "$" + value : "-";
 }
 
 function renderNullableTaxableCell(value: number | string) {
