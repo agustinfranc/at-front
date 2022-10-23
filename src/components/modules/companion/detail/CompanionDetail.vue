@@ -63,7 +63,7 @@
             <v-row>
               <v-col>
                 <p class="font-weight-bold">Máximo Facturable</p>
-                {{ companion.max_taxable ? companion.max_taxable + "%" : "_" }}
+                {{ renderNullableMoneyCell(companion.max_taxable) }}
               </v-col>
             </v-row>
           </v-card-text>
@@ -76,6 +76,7 @@
 <script setup lang="ts">
 import CompanionApi from "@/api/companion";
 import type Companion from "@/api/companion/interface";
+import { renderNullableMoneyCell } from "@/helpers/renderCellMethods";
 import { CompanionService } from "@/services/companionService";
 import { useSnackbarStore } from "@/stores/snackbar";
 import { onMounted, ref, type Ref } from "vue";
