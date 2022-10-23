@@ -16,6 +16,7 @@
                   (v: any) => !!v || 'Este campo es requerido',
                   (v: string | any[]) => (v && v.length <= 50) || 'El nombre excede los 50 digitos',
                 ]"
+                @change="(event) => capitalizeField(event.target.value, 'name')"
               ></TextField>
             </v-col>
             <v-col>
@@ -171,7 +172,7 @@ import { useRoute } from "vue-router";
 import ClientForm from "../interfaces/clientForm";
 // eslint-disable-next-line
 // @ts-ignore
-import { cloneDeep } from "lodash";
+import { cloneDeep, startCase, toLower } from "lodash";
 import { useSaveFormService } from "@/composables/saveItemService";
 import { useFindOneService } from "@/composables/findOneItemService";
 import type Client from "@/api/client/interface";
@@ -199,6 +200,12 @@ async function storeClient() {
   const formValidation = await form.value.validate();
   if (!formValidation.valid) return;
 
+  fields.value.name = startCase(toLower(fields.value.name as string));
+
   saveItem(cloneDeep(fields.value), "clients");
+}
+
+function capitalizeField(value: string, field: string) {
+  fields.value[field] = startCase(toLower(value));
 }
 </script>
