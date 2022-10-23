@@ -14,6 +14,7 @@
               (v: string) => !!v || 'Este campo es requerido',
               (v: string) => (v && v.length <= 50) || 'El nombre excede los 50 digitos',
             ]"
+            @change="(event) => capitalizeField(event.target.value, 'name')"
           ></TextField>
 
           <TextField
@@ -115,7 +116,7 @@ import type Companion from "@/api/companion/interface";
 import { useSaveFormService } from "@/composables/saveItemService";
 // eslint-disable-next-line
 // @ts-ignore
-import { cloneDeep } from "lodash";
+import { cloneDeep, startCase, toLower } from "lodash";
 
 const route = useRoute();
 const form = ref(); // declare template ref form
@@ -155,5 +156,9 @@ async function storeCompanion() {
   if (!formValidation.valid) return;
 
   saveItem(cloneDeep(fields.value), "companions");
+}
+
+function capitalizeField(value: string, field: string) {
+  fields.value[field] = startCase(toLower(value));
 }
 </script>
