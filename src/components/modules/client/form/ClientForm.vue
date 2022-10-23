@@ -200,8 +200,6 @@ async function storeClient() {
   const formValidation = await form.value.validate();
   if (!formValidation.valid) return;
 
-  fields.value.name = startCase(toLower(fields.value.name as string));
-
   saveItem(cloneDeep(fields.value), "clients");
 }
 
