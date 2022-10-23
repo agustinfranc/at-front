@@ -141,8 +141,12 @@ const countries = [
   "Brasil",
   "Perú",
   "Bolivia",
+  "Colombia",
+  "Puerto Rico",
+  "Ecuador",
   "Venezuela",
   "Chile",
+  "Paraguay",
   "México",
 ];
 
