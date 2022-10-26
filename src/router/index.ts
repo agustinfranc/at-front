@@ -91,6 +91,11 @@ const router = createRouter({
       name: "client-edit",
       component: () => import("../views/Client/EditClientView.vue"),
     },
+    {
+      path: "/balances",
+      name: "balances",
+      component: () => import("../views/Balance/BalanceView.vue"),
+    },
   ],
 });
 
