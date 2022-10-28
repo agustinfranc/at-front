@@ -38,7 +38,7 @@
               />
             </v-col>
             <v-col>
-              <TextField
+              <TextAreaField
                 v-model="fields.extra_phone"
                 label="Teléfono Adicional"
                 prepend-inner-icon="mdi-phone-plus"
@@ -101,13 +101,13 @@
           </v-row>
           <v-row>
             <v-col>
-              <TextField v-model="fields.diagnosis" label="Diagnóstico" />
+              <TextAreaField v-model="fields.diagnosis" label="Diagnóstico" />
             </v-col>
           </v-row>
 
           <v-row>
             <v-col>
-              <TextField
+              <TextAreaField
                 v-model="fields.medicine"
                 label="Medicación"
                 prepend-inner-icon="mdi-pill"
@@ -159,6 +159,7 @@
         </v-form>
       </v-card-text>
     </v-card>
+    {{ fields }}
   </v-container>
 </template>
 
