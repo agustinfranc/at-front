@@ -159,7 +159,6 @@
         </v-form>
       </v-card-text>
     </v-card>
-    {{ fields }}
   </v-container>
 </template>
 
