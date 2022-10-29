@@ -74,7 +74,7 @@ export default defineComponent({
         },
         {
           title: "Usuarios",
-          to: "",
+          to: "/users",
           icon: "mdi-account-group-outline",
         },
       ],

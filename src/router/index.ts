@@ -91,6 +91,26 @@ const router = createRouter({
       name: "client-edit",
       component: () => import("../views/Client/EditClientView.vue"),
     },
+    {
+      path: "/users",
+      name: "users",
+      component: () => import("../views/User/UserListView.vue"),
+    },
+    {
+      path: "/users/new",
+      name: "user-new",
+      component: () => import("../views/User/NewUserView.vue"),
+    },
+    {
+      path: "/users/:id",
+      name: "user-detail",
+      component: () => import("../views/User/UserDetailView.vue"),
+    },
+    {
+      path: "/users/:id/edit",
+      name: "user-edit",
+      component: () => import("../views/User/EditUserView.vue"),
+    },
   ],
 });
 
