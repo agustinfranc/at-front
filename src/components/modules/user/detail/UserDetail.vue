@@ -18,6 +18,12 @@
               {{ item.name }}
             </v-col>
             <v-col>
+              <p class="font-weight-bold">Email</p>
+              {{ item.email }}
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col>
               <p class="font-weight-bold">Rol</p>
               {{ item.role.name }}
             </v-col>

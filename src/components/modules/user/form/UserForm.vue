@@ -13,10 +13,52 @@
                 required
                 append-inner-icon="mdi-exclamation"
                 :rules="[
-                  (v: any) => !!v || 'Este campo es requerido',
-                  (v: string | any[]) => (v && v.length <= 50) || 'El nombre excede los 80 digitos',
+                  (v: string) => !!v || 'Este campo es requerido',
+                  (v: string) => (v && v.length <= 50) || 'El nombre excede los 80 digitos',
                 ]"
                 @change="(event: any) => capitalizeField(event.target.value, 'name', fields)"
+              />
+            </v-col>
+          </v-row>
+          <v-row
+            ><v-col>
+              <v-text-field
+                v-model="fields.email"
+                label="Email"
+                type="email"
+                required
+                append-inner-icon="mdi-exclamation"
+                :rules="[
+                  (v: string) => !!v || 'Este campo es requerido',
+                  (v: string) => (v && v.length <= 50) || 'El email excede los 100 digitos',
+                ]"
+              />
+            </v-col>
+          </v-row>
+          <v-row
+            ><v-col>
+              <v-text-field
+                v-model="fields.password"
+                label="Contraseña"
+                type="password"
+                :required="!isEdit()"
+                :rules="[
+                  (v: string) => (!!v || isEdit()) || 'Este campo es requerido',
+                ]"
+              />
+            </v-col>
+          </v-row>
+          <v-row
+            ><v-col>
+              <v-text-field
+                v-model="fields.repeate_password"
+                label="Repetir contraseña"
+                type="password"
+                :required="!isEdit()"
+                :rules="[
+                  (v: string) => (!!v || isEdit()) || 'Este campo es requerido',
+                  (v: string) => v === fields.password || 'Ambas contraseñas deben coincidir',
+                ]"
               />
             </v-col>
           </v-row>
@@ -90,7 +132,10 @@ async function store() {
   const formValidation = await form.value.validate();
   if (!formValidation.valid) return;
 
-  const userForm = mapFormForRequest(fields.value, roles);
+  const userForm = mapFormForRequest(
+    fields.value,
+    roles as { title: "Administrador" | "Asistente"; id: number }[]
+  );
 
   saveItem(cloneDeep(userForm), "users");
 }
