@@ -5,6 +5,8 @@ export default class CompanionForm implements Companion {
   name = "";
   cuit = "";
   phone = "";
+  extra_phone = "";
+  extra_phone_reference = "";
   nationality = "";
   birthday = "";
   max_taxable = 0;

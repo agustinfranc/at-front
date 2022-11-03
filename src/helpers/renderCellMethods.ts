@@ -1,3 +1,3 @@
-export function renderNullableMoneyCell(value: number | string) {
+export function renderNullableMoneyCell(value: number | string | null) {
   return value ? "$" + value : "-";
 }
