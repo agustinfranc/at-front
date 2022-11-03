@@ -37,9 +37,20 @@
                 <p class="font-weight-bold">Teléfono</p>
                 {{ companion.phone }}
               </v-col>
+              <v-col>
+                <p class="font-weight-bold">Teléfono Auxiliar</p>
+                {{ companion.extra_phone }}
+              </v-col>
+              <v-col>
+                <p class="font-weight-bold">Referencia Teléfono Auxiliar</p>
+                {{ companion.extra_phone_reference }}
+              </v-col>
             </v-row>
+
             <v-row> </v-row>
+
             <v-divider class="my-5"></v-divider>
+
             <v-row>
               <v-col>
                 <p class="font-weight-bold">Antecedentes</p>
@@ -86,13 +97,14 @@ const route = useRoute();
 const companionService = new CompanionService(new CompanionApi());
 const snackbarStore = useSnackbarStore();
 
-let companion: Ref<Companion | undefined> = ref();
-let loading = ref(false);
+const companion: Ref<Companion | undefined> = ref();
+const loading = ref(false);
 
 onMounted(async () => {
   await getCompanion();
 });
 
+// TODO: llevame esto a un helper
 function renderBooleanTableCell(value: boolean) {
   return value ? "Si" : "No";
 }
@@ -112,6 +124,6 @@ async function getCompanion() {
     return;
   }
 
-  if (data) companion.value = data.data;
+  if (data) companion.value = data.data as Companion;
 }
 </script>

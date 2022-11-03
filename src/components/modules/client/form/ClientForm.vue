@@ -16,7 +16,7 @@
                   (v: any) => !!v || 'Este campo es requerido',
                   (v: string | any[]) => (v && v.length <= 50) || 'El nombre excede los 50 digitos',
                 ]"
-                @change="(event) => capitalizeField(event.target.value, 'name')"
+                @change="(event: any) => capitalizeField(event.target.value, 'name', fields)"
               ></TextField>
             </v-col>
             <v-col>
@@ -31,7 +31,7 @@
             <v-col>
               <TextField
                 v-model="fields.phone"
-                label="Teléfono"
+                label="Teléfono (Hospital)"
                 append-inner-icon="mdi-exclamation"
                 prepend-inner-icon="mdi-phone-in-talk"
                 :rules="[(v: any) => !!v || 'Este campo es requerido']"
@@ -40,7 +40,28 @@
             <v-col>
               <TextAreaField
                 v-model="fields.extra_phone"
-                label="Teléfono Adicional"
+                label="Teléfono Auxiliar"
+                prepend-inner-icon="mdi-phone-plus"
+              />
+            </v-col>
+            <v-col>
+              <TextAreaField
+                v-model="fields.extra_phone_reference"
+                label="Referencia Teléfono Auxiliar"
+                prepend-inner-icon="mdi-phone-plus"
+              />
+            </v-col>
+            <v-col>
+              <TextAreaField
+                v-model="fields.extra_phone_bis"
+                label="Teléfono Auxiliar"
+                prepend-inner-icon="mdi-phone-plus"
+              />
+            </v-col>
+            <v-col>
+              <TextAreaField
+                v-model="fields.extra_phone_bis_reference"
+                label="Referencia Teléfono Auxiliar"
                 prepend-inner-icon="mdi-phone-plus"
               />
             </v-col>
@@ -172,10 +193,11 @@ import { useRoute } from "vue-router";
 import ClientForm from "../interfaces/clientForm";
 // eslint-disable-next-line
 // @ts-ignore
-import { cloneDeep, startCase, toLower } from "lodash";
+import { cloneDeep } from "lodash";
 import { useSaveFormService } from "@/composables/saveItemService";
 import { useFindOneService } from "@/composables/findOneItemService";
 import type Client from "@/api/client/interface";
+import { capitalizeField } from "@/helpers/stringMethods";
 
 const valid = ref(true);
 const fields = ref(new ClientForm());
@@ -201,9 +223,5 @@ async function storeClient() {
   if (!formValidation.valid) return;
 
   saveItem(cloneDeep(fields.value), "clients");
-}
-
-function capitalizeField(value: string, field: string) {
-  fields.value[field] = startCase(toLower(value));
 }
 </script>

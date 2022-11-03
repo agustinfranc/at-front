@@ -1,9 +1,14 @@
-export default class ClientForm {
+import type Client from "@/api/client/interface";
+
+export default class ClientForm implements Client {
   id?: number;
-  name: string | null = null;
+  name = "";
   dni: number | null = null;
   phone: string | null = null;
   extra_phone: string | null = null;
+  extra_phone_reference: string | null = null;
+  extra_phone_bis: string | null = null;
+  extra_phone_bis_reference: string | null = null;
   rate: number | null = null;
   taxable: string | null = null;
   comments: string | null = null;
@@ -16,6 +21,4 @@ export default class ClientForm {
   health_insurance: string | null = null;
   affiliate: string | null = null;
   budget_date: string | null = null;
-  created_at: string | null = null;
-  updated_at: string | null = null;
 }

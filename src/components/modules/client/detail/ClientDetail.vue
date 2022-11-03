@@ -25,12 +25,26 @@
             </v-row>
             <v-row>
               <v-col>
-                <p class="font-weight-bold">Teléfono</p>
+                <p class="font-weight-bold">Teléfono (Hospital)</p>
                 {{ client.phone }}
               </v-col>
               <v-col>
-                <p class="font-weight-bold">Teléfono Extra</p>
+                <p class="font-weight-bold">Teléfono Auxiliar</p>
                 {{ renderNullableTableCell(client.extra_phone) }}
+              </v-col>
+              <v-col>
+                <p class="font-weight-bold">Referencia Teléfono Auxiliar</p>
+                {{ renderNullableTableCell(client.extra_phone_reference) }}
+              </v-col>
+              <v-col>
+                <p class="font-weight-bold">Teléfono Auxiliar Segundo</p>
+                {{ renderNullableTableCell(client.extra_phone_bis) }}
+              </v-col>
+              <v-col>
+                <p class="font-weight-bold">
+                  Referencia Teléfono Auxiliar Segundo
+                </p>
+                {{ renderNullableTableCell(client.extra_phone_bis_reference) }}
               </v-col>
             </v-row>
             <v-row>
@@ -122,11 +136,13 @@ onMounted(async () => {
   await getClient();
 });
 
-function renderNullableTableCell(value: string | number) {
+// TODO: llevame esto a un helper
+function renderNullableTableCell(value: string | number | null) {
   return value ?? "-";
 }
 
-function renderNullableTaxableCell(value: number | string) {
+// TODO: llevame esto a un helper
+function renderNullableTaxableCell(value: number | string | null) {
   return value ? value + "%" : "-";
 }
 
@@ -145,6 +161,6 @@ async function getClient() {
     return;
   }
 
-  if (data) client.value = data.data;
+  if (data) client.value = data.data as Client;
 }
 </script>
