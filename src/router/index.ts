@@ -111,6 +111,12 @@ const router = createRouter({
       name: "user-edit",
       component: () => import("../views/User/EditUserView.vue"),
     },
+    {
+      path: "/assignment-templates",
+      name: "assignment-template",
+      component: () =>
+        import("../views/AssignmentTemplate/AssignmentTemplateListView.vue"),
+    },
   ],
 });
 

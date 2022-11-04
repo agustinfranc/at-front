@@ -49,6 +49,11 @@ export default defineComponent({
           icon: "mdi-calendar-month",
         },
         {
+          title: "Template",
+          to: "/assignment-templates",
+          icon: "mdi-account-multiple-plus",
+        },
+        {
           title: "Acompañamientos",
           to: "/assignments",
           icon: "mdi-account-multiple",
