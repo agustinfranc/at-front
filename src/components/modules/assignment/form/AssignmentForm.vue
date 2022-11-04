@@ -69,13 +69,6 @@
           <v-row>
             <v-col>
               <v-checkbox
-                v-model="fields.periodic"
-                label="Periódico"
-              ></v-checkbox>
-            </v-col>
-
-            <v-col>
-              <v-checkbox
                 v-model="fields.enabled"
                 label="Habilitado"
               ></v-checkbox>

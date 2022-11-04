@@ -10,7 +10,6 @@ export function mapAssignmentForEditForm(
     id: assignment.id,
     client_name: assignment.client.name,
     companion_name: assignment.companion.name,
-    periodic: assignment.periodic,
     enabled: assignment.enabled,
     days: [
       {

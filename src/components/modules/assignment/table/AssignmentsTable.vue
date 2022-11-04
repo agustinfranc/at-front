@@ -53,14 +53,6 @@ const columns = [
     flex: 10,
   },
   {
-    headerName: "Periodico",
-    field: "periodic",
-    flex: 3,
-    cellClass: "d-flex justify-center",
-    suppressMenu: true,
-    valueFormatter: booleanFormatter,
-  },
-  {
     suppressMovable: true,
     sortable: false,
     suppressMenu: true,

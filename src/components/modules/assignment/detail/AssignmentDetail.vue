@@ -35,10 +35,6 @@
           </v-row>
           <v-row>
             <v-col>
-              <p class="font-weight-bold">Periódico</p>
-              {{ item.periodic ? "Si" : "No" }}
-            </v-col>
-            <v-col>
               <p class="font-weight-bold">Habilitado</p>
               {{ item.enabled ? "Si" : "No" }}
             </v-col>

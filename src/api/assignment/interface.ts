@@ -21,7 +21,6 @@ export default interface Assignment {
       updated_at: string;
     };
   }[];
-  periodic: boolean;
   enabled: boolean;
   created_at: string;
   updated_at: string;
