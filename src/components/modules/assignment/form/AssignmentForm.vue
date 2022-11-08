@@ -66,15 +66,6 @@
             </v-row>
           </div>
 
-          <v-row>
-            <v-col>
-              <v-checkbox
-                v-model="fields.enabled"
-                label="Habilitado"
-              ></v-checkbox>
-            </v-col>
-          </v-row>
-
           <SubmitButton :valid="valid" @click="storeAssignment" />
         </v-form>
       </v-card-text>

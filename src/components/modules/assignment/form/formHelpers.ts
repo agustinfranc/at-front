@@ -10,7 +10,6 @@ export function mapAssignmentForEditForm(
     id: assignment.id,
     client_name: assignment.client.name,
     companion_name: assignment.companion.name,
-    enabled: assignment.enabled,
     days: [
       {
         enabled: assignment.days.find((day) => day.value === 0) ? true : false,
