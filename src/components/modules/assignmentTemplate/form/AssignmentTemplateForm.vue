@@ -82,12 +82,15 @@ import SubmitButton from "@/components/forms/common/SubmitButton.vue";
 import { ClientService } from "@/services/clientService";
 import CompanionApi from "@/api/companion";
 import { CompanionService } from "@/services/companionService";
-import AssignmentForm from "../interfaces/assignmentForm";
+import AssignmentForm from "../../assignment/interfaces/assignmentForm";
 // eslint-disable-next-line
 // @ts-ignore
 import { cloneDeep } from "lodash";
 import { useRoute } from "vue-router";
-import { mapAssignmentForEditForm, mapFormForRequest } from "./formHelpers";
+import {
+  mapAssignmentForEditForm,
+  mapFormForRequest,
+} from "./formHelpers
 import type Assignment from "@/api/assignment/interface";
 import { useFindOneService } from "@/composables/findOneItemService";
 import AssignmentApi from "@/api/assignment/index";

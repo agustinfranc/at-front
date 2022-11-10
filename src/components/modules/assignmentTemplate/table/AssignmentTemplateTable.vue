@@ -24,13 +24,11 @@ import LazyTable from "@/components/tables/LazyTable.vue";
 import TableHeader from "@/components/tables/extras/TableHeader.vue";
 import DeleteItemModal from "@/components/modals/DeleteItemModal.vue";
 import { AssignmentService } from "@/services/assignmentService";
-import type {
-  ColDef,
-  ValueFormatterParams,
-} from "@/components/tables/interfaces/GenericTable/columnDefinitions";
+import type { ColDef } from "@/components/tables/interfaces/GenericTable/columnDefinitions";
 import type Assignment from "@/api/assignment/interface";
 import type { CellClickedEvent } from "ag-grid-community";
 import { useDeleteItemDialog } from "@/composables/deleteItem";
+import type AssignmentTemplate from "@/api/assignmentTemplate/interface";
 
 const service = new AssignmentService(new AssignmentApi());
 const router = useRouter();
@@ -79,14 +77,10 @@ const columns = [
   },
 ] as ColDef[];
 
-function booleanFormatter(params: ValueFormatterParams) {
-  return params.value ? "Si" : "No";
-}
-
-function showDetails(assignment: Assignment) {
+function showDetails(assignmentTemplate: AssignmentTemplate) {
   router.push({
-    name: "assignment-detail",
-    params: { id: assignment.id },
+    name: "assignment-template-detail",
+    params: { id: assignmentTemplate.id },
   });
 }
 

@@ -1,16 +1,5 @@
 <template>
-  <AssignmentForm />
+  <h1>Assignment Form</h1>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-import AssignmentForm from "@/components/modules/assignment/form/AssignmentForm.vue";
-
-export default defineComponent({
-  name: "NewAssignmentView",
-
-  components: {
-    AssignmentForm,
-  },
-});
-</script>
+<script setup lang="ts"></script>
