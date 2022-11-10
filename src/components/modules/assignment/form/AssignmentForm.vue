@@ -26,45 +26,23 @@
             </v-col>
           </v-row>
 
-          <div class="my-5">
-            <v-row v-for="day in fields.days" :key="day.id">
-              <v-col cols="1">
-                <v-checkbox v-model="day.enabled"></v-checkbox>
-              </v-col>
-              <v-col>
-                <v-text-field
-                  v-model="day.title"
-                  readonly
-                  :disabled="!day.enabled"
-                />
-              </v-col>
-              <v-col>
-                <v-text-field
-                  v-model="day.from"
-                  type="time"
-                  label="Desde"
-                  :disabled="!day.enabled"
-                />
-              </v-col>
-              <v-col>
-                <v-text-field
-                  v-model="day.to"
-                  type="time"
-                  label="Hasta"
-                  :disabled="!day.enabled"
-                />
-              </v-col>
-              <v-col>
-                <v-text-field
-                  type="number"
-                  label="Horas"
-                  v-model="day.hours"
-                  :disabled="!day.enabled"
-                  :rules="[(v: number) => (!!v || !day.enabled) || 'Este campo es requerido']"
-                />
-              </v-col>
-            </v-row>
-          </div>
+          <v-row>
+            <v-col>
+              <TextField type="date" label="Fecha" />
+            </v-col>
+          </v-row>
+
+          <v-row>
+            <v-col>
+              <TextField type="time" label="Desde" />
+            </v-col>
+            <v-col>
+              <TextField type="time" label="Hasta" />
+            </v-col>
+            <v-col>
+              <TextField type="number" label="Horas" />
+            </v-col>
+          </v-row>
 
           <SubmitButton :valid="valid" @click="storeAssignment" />
         </v-form>
@@ -77,20 +55,20 @@
 import { onBeforeMount, onMounted, ref, watch } from "vue";
 import ComboboxField from "@/components/forms/fields/ComboboxField.vue";
 import ClientApi from "@/api/client";
+import { AssignmentService } from "@/services/assignmentService";
 import SubmitButton from "@/components/forms/common/SubmitButton.vue";
 import { ClientService } from "@/services/clientService";
 import CompanionApi from "@/api/companion";
 import { CompanionService } from "@/services/companionService";
-import AssignmentTemplateForm from "../interfaces/assignmentTemplateForm";
+import AssignmentForm from "../../assignment/interfaces/assignmentForm";
+import TextField from "@/components/forms/fields/TextField.vue";
 // eslint-disable-next-line
 // @ts-ignore
 import { cloneDeep } from "lodash";
 import { useRoute } from "vue-router";
-import { mapAssignmentForEditForm, mapFormForRequest } from "./formHelpers";
-import type AssignmentTemplate from "@/api/assignmentTemplate/interface";
+import type Assignment from "@/api/assignment/interface";
 import { useFindOneService } from "@/composables/findOneItemService";
-import AssignmentTemplateApi from "@/api/assignmentTemplate";
-import { AssignmentTemplateService } from "@/services/assignmentTemplateService";
+import AssignmentApi from "@/api/assignment/index";
 import { useSaveFormService } from "@/composables/saveItemService";
 // import _ from "@/plugins/lodash" not working
 
@@ -100,21 +78,20 @@ const companionService = new CompanionService(new CompanionApi());
 
 const form = ref(); // declare template ref form
 const valid = ref(true);
-const fields = ref(new AssignmentTemplateForm());
+const fields = ref(new AssignmentForm());
 const clients = ref();
 const companions = ref();
-const service = new AssignmentTemplateService(new AssignmentTemplateApi());
+const service = new AssignmentService(new AssignmentApi());
 
-const { isEdit, saveItem } =
-  useSaveFormService<AssignmentTemplateForm>(service);
+const { isEdit, saveItem } = useSaveFormService<AssignmentForm>(service);
 const title = isEdit()
   ? `Acompañamiento #${route.params.id}`
   : "Nuevo acompañamiento";
 
-const { item } = useFindOneService<AssignmentTemplate>(service);
+const { item } = useFindOneService<Assignment>(service);
 watch(item, () => {
   if (item.value) {
-    fields.value = mapAssignmentForEditForm(item.value);
+    fields.value = item.value;
   }
 });
 
@@ -122,13 +99,7 @@ async function storeAssignment() {
   const formValidation = await form.value.validate();
   if (!formValidation.valid) return;
 
-  const assignmentTemplateForm = mapFormForRequest(
-    fields.value,
-    clients.value,
-    companions.value
-  );
-
-  saveItem(cloneDeep(assignmentTemplateForm), "assignments");
+  saveItem(cloneDeep(fields.value), "assignments");
 }
 
 onBeforeMount(() => {

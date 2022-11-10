@@ -1,5 +1,7 @@
 <template>
-  <h1>Assignment Form</h1>
+  <AssignmentForm />
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import AssignmentForm from "@/components/modules/assignment/form/AssignmentForm.vue";
+</script>
