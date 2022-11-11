@@ -28,19 +28,19 @@
 
           <v-row>
             <v-col>
-              <TextField type="date" label="Fecha" />
+              <TextField type="date" label="Fecha" v-model="fields.date" />
             </v-col>
           </v-row>
 
           <v-row>
             <v-col>
-              <TextField type="time" label="Desde" />
+              <TextField type="time" label="Desde" v-model="fields.from" />
             </v-col>
             <v-col>
-              <TextField type="time" label="Hasta" />
+              <TextField type="time" label="Hasta" v-model="fields.to" />
             </v-col>
             <v-col>
-              <TextField type="number" label="Horas" />
+              <TextField type="number" label="Horas" v-model="fields.hours" />
             </v-col>
           </v-row>
 
@@ -48,6 +48,7 @@
         </v-form>
       </v-card-text>
     </v-card>
+    {{ fields }}
   </v-container>
 </template>
 
