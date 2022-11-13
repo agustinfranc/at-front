@@ -86,12 +86,15 @@ import AssignmentTemplateForm from "../interfaces/assignmentTemplateForm";
 // @ts-ignore
 import { cloneDeep } from "lodash";
 import { useRoute } from "vue-router";
-import { mapAssignmentForEditForm, mapFormForRequest } from "./formHelpers";
 import type AssignmentTemplate from "@/api/assignmentTemplate/interface";
 import { useFindOneService } from "@/composables/findOneItemService";
 import AssignmentTemplateApi from "@/api/assignmentTemplate";
 import { AssignmentTemplateService } from "@/services/assignmentTemplateService";
 import { useSaveFormService } from "@/composables/saveItemService";
+import {
+  mapAssignmentTemplateForEditForm,
+  mapFormForRequest,
+} from "@/components/forms/extras/formHelpers";
 // import _ from "@/plugins/lodash" not working
 
 const route = useRoute();
@@ -114,7 +117,7 @@ const title = isEdit()
 const { item } = useFindOneService<AssignmentTemplate>(service);
 watch(item, () => {
   if (item.value) {
-    fields.value = mapAssignmentForEditForm(item.value);
+    fields.value = mapAssignmentTemplateForEditForm(item.value);
   }
 });
 

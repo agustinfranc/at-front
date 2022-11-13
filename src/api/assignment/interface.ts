@@ -7,6 +7,7 @@ export default interface Assignment {
   client: Client;
   companion_id: number;
   companion: Companion;
+  date: string;
   from: string;
   to: string;
   hours: number;

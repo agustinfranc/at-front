@@ -1,10 +1,11 @@
+import type Assignment from "@/api/assignment/interface";
 import type AssignmentTemplate from "@/api/assignmentTemplate/interface";
 import type Client from "@/api/client/interface";
 import type Companion from "@/api/companion/interface";
-import type AssignmentForm from "../../assignment/interfaces/assignmentForm";
-import type AssignmentTemplateForm from "../../assignmentTemplate/interfaces/assignmentTemplateForm";
+import type AssignmentForm from "../../modules/assignment/interfaces/assignmentForm";
+import type AssignmentTemplateForm from "../../modules/assignmentTemplate/interfaces/assignmentTemplateForm";
 
-export function mapAssignmentForEditForm(
+export function mapAssignmentTemplateForEditForm(
   assignmentTemplate: AssignmentTemplate
 ): AssignmentTemplateForm {
   return {
@@ -132,6 +133,20 @@ export function mapAssignmentForEditForm(
           0,
       },
     ],
+  };
+}
+
+export function mapAssignmentForEditForm(
+  assignment: Assignment
+): AssignmentForm {
+  return {
+    id: assignment.id,
+    client_name: assignment.client.name,
+    companion_name: assignment.companion.name,
+    hours: assignment.hours,
+    date: assignment.date,
+    from: assignment.from,
+    to: assignment.to,
   };
 }
 

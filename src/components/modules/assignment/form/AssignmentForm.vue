@@ -48,7 +48,6 @@
         </v-form>
       </v-card-text>
     </v-card>
-    {{ fields }}
   </v-container>
 </template>
 
@@ -71,6 +70,10 @@ import type Assignment from "@/api/assignment/interface";
 import { useFindOneService } from "@/composables/findOneItemService";
 import AssignmentApi from "@/api/assignment/index";
 import { useSaveFormService } from "@/composables/saveItemService";
+import {
+  mapAssignmentForEditForm,
+  mapFormForRequest,
+} from "@/components/forms/extras/formHelpers";
 // import _ from "@/plugins/lodash" not working
 
 const route = useRoute();
@@ -92,7 +95,7 @@ const title = isEdit()
 const { item } = useFindOneService<Assignment>(service);
 watch(item, () => {
   if (item.value) {
-    fields.value = item.value;
+    fields.value = mapAssignmentForEditForm(item.value);
   }
 });
 
@@ -100,7 +103,13 @@ async function storeAssignment() {
   const formValidation = await form.value.validate();
   if (!formValidation.valid) return;
 
-  saveItem(cloneDeep(fields.value), "assignments");
+  const assignmentTemplateForm = mapFormForRequest(
+    fields.value,
+    clients.value,
+    companions.value
+  );
+
+  saveItem(cloneDeep(assignmentTemplateForm), "assignments");
 }
 
 onBeforeMount(() => {

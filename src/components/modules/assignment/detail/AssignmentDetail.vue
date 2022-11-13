@@ -24,13 +24,22 @@
           </v-row>
           <v-row>
             <v-col>
-              <p class="font-weight-bold">Dias</p>
-              <span v-for="day in item.days" :key="day.id">
-                {{ day.title }}
-                de {{ day.pivot.from }} a {{ day.pivot.to }} ({{
-                  day.pivot.hours
-                }}hs)
-              </span>
+              <p class="font-weight-bold">Fecha</p>
+              {{ item.date }}
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col>
+              <p class="font-weight-bold">Desde</p>
+              {{ item.from }}
+            </v-col>
+            <v-col>
+              <p class="font-weight-bold">Hasta</p>
+              {{ item.to }}
+            </v-col>
+            <v-col>
+              <p class="font-weight-bold">Horas</p>
+              {{ item.hours }}
             </v-col>
           </v-row>
           <v-row>
