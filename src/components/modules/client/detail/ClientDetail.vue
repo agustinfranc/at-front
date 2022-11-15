@@ -119,7 +119,11 @@
 <script setup lang="ts">
 import ClientApi from "@/api/client";
 import type Client from "@/api/client/interface";
-import { renderNullableMoneyCell } from "@/helpers/renderCellMethods";
+import {
+  renderNullableMoneyCell,
+  renderNullableTableCell,
+  renderNullableTaxableCell,
+} from "@/helpers/renderCellMethods";
 import { ClientService } from "@/services/clientService";
 import { useSnackbarStore } from "@/stores/snackbar";
 import { onMounted, ref, type Ref } from "vue";
@@ -135,16 +139,6 @@ let loading = ref(false);
 onMounted(async () => {
   await getClient();
 });
-
-// TODO: llevame esto a un helper
-function renderNullableTableCell(value: string | number | null) {
-  return value ?? "-";
-}
-
-// TODO: llevame esto a un helper
-function renderNullableTaxableCell(value: number | string | null) {
-  return value ? value + "%" : "-";
-}
 
 async function getClient() {
   loading.value = true;

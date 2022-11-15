@@ -87,7 +87,10 @@
 <script setup lang="ts">
 import CompanionApi from "@/api/companion";
 import type Companion from "@/api/companion/interface";
-import { renderNullableMoneyCell } from "@/helpers/renderCellMethods";
+import {
+  renderBooleanTableCell,
+  renderNullableMoneyCell,
+} from "@/helpers/renderCellMethods";
 import { CompanionService } from "@/services/companionService";
 import { useSnackbarStore } from "@/stores/snackbar";
 import { onMounted, ref, type Ref } from "vue";
@@ -103,11 +106,6 @@ const loading = ref(false);
 onMounted(async () => {
   await getCompanion();
 });
-
-// TODO: llevame esto a un helper
-function renderBooleanTableCell(value: boolean) {
-  return value ? "Si" : "No";
-}
 
 async function getCompanion() {
   loading.value = true;

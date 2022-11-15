@@ -62,14 +62,10 @@
 import AssignmentApi from "@/api/assignment";
 import type Assignment from "@/api/assignment/interface";
 import { useFindOneService } from "@/composables/findOneItemService";
+import { renderNullableTableCell } from "@/helpers/renderCellMethods";
 import { AssignmentService } from "@/services/assignmentService";
 
 const service = new AssignmentService(new AssignmentApi());
-
-//te debo el helper
-function renderNullableTableCell(value: string | number | null) {
-  return value ?? "-";
-}
 
 const { item, error } = useFindOneService<Assignment>(service);
 </script>
