@@ -50,12 +50,12 @@
 </template>
 
 <script setup lang="ts">
-import AssignmentApi from "@/api/assignment";
-import type Assignment from "@/api/assignment/interface";
+import AssignmentTemplateApi from "@/api/assignmentTemplate";
+import type AssignmentTemplate from "@/api/assignmentTemplate/interface";
 import { useFindOneService } from "@/composables/findOneItemService";
-import { AssignmentService } from "@/services/assignmentService";
+import { AssignmentTemplateService } from "@/services/assignmentTemplateService";
 
-const service = new AssignmentService(new AssignmentApi());
+const service = new AssignmentTemplateService(new AssignmentTemplateApi());
 
-const { item, error } = useFindOneService<Assignment>(service);
+const { item, error } = useFindOneService<AssignmentTemplate>(service);
 </script>

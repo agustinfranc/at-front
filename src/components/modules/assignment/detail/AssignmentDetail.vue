@@ -25,21 +25,21 @@
           <v-row>
             <v-col>
               <p class="font-weight-bold">Fecha</p>
-              {{ item.date }}
+              {{ renderNullableTableCell(item.date) }}
+            </v-col>
+            <v-col>
+              <p class="font-weight-bold">Horas</p>
+              {{ item.hours }}
             </v-col>
           </v-row>
           <v-row>
             <v-col>
               <p class="font-weight-bold">Desde</p>
-              {{ item.from }}
+              {{ renderNullableTableCell(item.from) }}
             </v-col>
             <v-col>
               <p class="font-weight-bold">Hasta</p>
-              {{ item.to }}
-            </v-col>
-            <v-col>
-              <p class="font-weight-bold">Horas</p>
-              {{ item.hours }}
+              {{ renderNullableTableCell(item.to) }}
             </v-col>
           </v-row>
           <v-row>
@@ -49,7 +49,7 @@
             </v-col>
             <v-col>
               <p class="font-weight-bold">Modificado el</p>
-              {{ item.updated_at ?? "-" }}
+              {{ renderNullableTableCell(item.updated_at) }}
             </v-col>
           </v-row>
         </v-card-text>
@@ -65,6 +65,11 @@ import { useFindOneService } from "@/composables/findOneItemService";
 import { AssignmentService } from "@/services/assignmentService";
 
 const service = new AssignmentService(new AssignmentApi());
+
+//te debo el helper
+function renderNullableTableCell(value: string | number | null) {
+  return value ?? "-";
+}
 
 const { item, error } = useFindOneService<Assignment>(service);
 </script>
