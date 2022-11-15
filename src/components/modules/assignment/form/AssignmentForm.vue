@@ -28,19 +28,23 @@
 
           <v-row>
             <v-col>
-              <TextField type="date" label="Fecha" v-model="fields.date" />
+              <v-text-field type="date" label="Fecha" v-model="fields.date" />
             </v-col>
           </v-row>
 
           <v-row>
             <v-col>
-              <TextField type="time" label="Desde" v-model="fields.from" />
+              <v-text-field type="time" label="Desde" v-model="fields.from" />
             </v-col>
             <v-col>
-              <TextField type="time" label="Hasta" v-model="fields.to" />
+              <v-text-field type="time" label="Hasta" v-model="fields.to" />
             </v-col>
             <v-col>
-              <TextField type="number" label="Horas" v-model="fields.hours" />
+              <v-text-field
+                type="number"
+                label="Horas"
+                v-model="fields.hours"
+              />
             </v-col>
           </v-row>
 
@@ -61,7 +65,6 @@ import { ClientService } from "@/services/clientService";
 import CompanionApi from "@/api/companion";
 import { CompanionService } from "@/services/companionService";
 import AssignmentForm from "../../assignment/interfaces/assignmentForm";
-import TextField from "@/components/forms/fields/TextField.vue";
 // eslint-disable-next-line
 // @ts-ignore
 import { cloneDeep } from "lodash";
@@ -103,13 +106,13 @@ async function storeAssignment() {
   const formValidation = await form.value.validate();
   if (!formValidation.valid) return;
 
-  const assignmentTemplateForm = mapFormForRequest(
+  const assignmentForm = mapFormForRequest(
     fields.value,
     clients.value,
     companions.value
   );
 
-  saveItem(cloneDeep(assignmentTemplateForm), "assignments");
+  saveItem(cloneDeep(assignmentForm), "assignments");
 }
 
 onBeforeMount(() => {
