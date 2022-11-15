@@ -13,7 +13,7 @@ export default interface AssignmentTemplate {
     value: number;
     title: string;
     pivot: {
-      assignment_id: number;
+      assignment_template_id: number;
       day_id: number;
       from: string;
       to: string;
