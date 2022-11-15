@@ -53,6 +53,11 @@ const columns = [
     flex: 10,
   },
   {
+    headerName: "Habilitado",
+    field: "enabled",
+    flex: 10,
+  },
+  {
     suppressMovable: true,
     sortable: false,
     suppressMenu: true,

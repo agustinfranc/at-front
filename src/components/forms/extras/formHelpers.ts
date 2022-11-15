@@ -12,6 +12,7 @@ export function mapAssignmentTemplateForEditForm(
     id: assignmentTemplate.id,
     client_name: assignmentTemplate.client.name,
     companion_name: assignmentTemplate.companion.name,
+    enabled: assignmentTemplate.enabled,
     days: [
       {
         enabled: assignmentTemplate.days.find((day) => day.value === 0)
@@ -151,7 +152,7 @@ export function mapAssignmentForEditForm(
 }
 
 export function mapFormForRequest(
-  fields: AssignmentForm,
+  fields: AssignmentForm | AssignmentTemplateForm,
   clients: Client[],
   companions: Companion[]
 ) {

@@ -35,6 +35,12 @@
           </v-row>
           <v-row>
             <v-col>
+              <p class="font-weight-bold">Habilitado</p>
+              {{ item.enabled ? "Si" : "No" }}
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col>
               <p class="font-weight-bold">Creado el</p>
               {{ item.created_at }}
             </v-col>

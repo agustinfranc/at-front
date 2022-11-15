@@ -66,7 +66,16 @@
             </v-row>
           </div>
 
-          <SubmitButton :valid="valid" @click="storeAssignment" />
+          <v-row>
+            <v-col>
+              <v-checkbox
+                v-model="fields.enabled"
+                label="Habilitado"
+              ></v-checkbox>
+            </v-col>
+          </v-row>
+
+          <SubmitButton :valid="valid" @click="storeAssignmentTemplate" />
         </v-form>
       </v-card-text>
     </v-card>
@@ -94,6 +103,7 @@ import { useSaveFormService } from "@/composables/saveItemService";
 import {
   mapAssignmentTemplateForEditForm,
   mapFormForRequest,
+  mapFormTemplateForRequest,
 } from "@/components/forms/extras/formHelpers";
 // import _ from "@/plugins/lodash" not working
 
@@ -121,7 +131,7 @@ watch(item, () => {
   }
 });
 
-async function storeAssignment() {
+async function storeAssignmentTemplate() {
   const formValidation = await form.value.validate();
   if (!formValidation.valid) return;
 

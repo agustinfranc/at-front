@@ -1,4 +1,5 @@
 import type { AssignmentService } from "@/services/assignmentService";
+import type { AssignmentTemplateService } from "@/services/assignmentTemplateService";
 import type { ClientService } from "@/services/clientService";
 import type { CompanionService } from "@/services/companionService";
 import type { UserService } from "@/services/userService";
@@ -6,7 +7,12 @@ import { useSnackbarStore } from "@/stores/snackbar";
 import { useRoute, useRouter } from "vue-router";
 
 export function useSaveFormService<T extends object>(
-  service: AssignmentService | CompanionService | ClientService | UserService // type interface SaveService
+  service:
+    | AssignmentTemplateService
+    | AssignmentService
+    | CompanionService
+    | ClientService
+    | UserService // type interface SaveService
 ) {
   const route = useRoute();
   const router = useRouter();

@@ -7,6 +7,7 @@ export default interface AssignmentTemplate {
   client: Client;
   companion_id: number;
   companion: Companion;
+  enabled: boolean;
   days: {
     id: number;
     value: number;
