@@ -103,8 +103,7 @@ import { useSaveFormService } from "@/composables/saveItemService";
 import {
   mapAssignmentTemplateForEditForm,
   mapFormForRequest,
-  mapFormTemplateForRequest,
-} from "@/components/forms/extras/formHelpers";
+} from "@/components/forms/extras/assignmentTemplate/formHelpers";
 // import _ from "@/plugins/lodash" not working
 
 const route = useRoute();
