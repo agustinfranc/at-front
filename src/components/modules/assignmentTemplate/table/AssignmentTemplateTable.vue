@@ -22,15 +22,13 @@ import { useRouter } from "vue-router";
 import LazyTable from "@/components/tables/LazyTable.vue";
 import TableHeader from "@/components/tables/extras/TableHeader.vue";
 import DeleteItemModal from "@/components/modals/DeleteItemModal.vue";
-import type {
-  ColDef,
-  ValueFormatterParams,
-} from "@/components/tables/interfaces/GenericTable/columnDefinitions";
+import type { ColDef } from "@/components/tables/interfaces/GenericTable/columnDefinitions";
 import type { CellClickedEvent } from "ag-grid-community";
 import { useDeleteItemDialog } from "@/composables/deleteItem";
 import type AssignmentTemplate from "@/api/assignmentTemplate/interface";
 import { AssignmentTemplateService } from "@/services/assignmentTemplateService";
 import AssignmentTemplateApi from "@/api/assignmentTemplate";
+import { booleanFormatter } from "@/helpers/formatters";
 
 const service = new AssignmentTemplateService(new AssignmentTemplateApi());
 const router = useRouter();
@@ -99,10 +97,6 @@ function goToEdition(assignmentTemplate: AssignmentTemplate) {
     name: "assignment-template-edit",
     params: { id: assignmentTemplate.id },
   });
-}
-
-function booleanFormatter(params: ValueFormatterParams) {
-  return params.value ? "Si" : "No";
 }
 
 // DeleteItemModal Logic
