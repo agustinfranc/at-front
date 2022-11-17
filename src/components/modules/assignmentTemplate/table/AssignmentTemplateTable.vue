@@ -1,12 +1,15 @@
 <template>
   <v-container class="h-100 d-flex flex-column">
-    <TableHeader title="Acompañamientos" :route="{ name: 'assignment-new' }" />
+    <TableHeader
+      title="Templates"
+      :route="{ name: 'assignment-template-new' }"
+    />
 
     <LazyTable :columns="columns" :service="service" />
 
     <DeleteItemModal
       v-model="dialog"
-      item-name="acompañamiento"
+      item-name="template"
       :item="selectedItem"
       @click:outside.stop="dialog = false"
       @delete="deleteItem"
@@ -16,20 +19,18 @@
 
 <script setup lang="ts">
 import { useRouter } from "vue-router";
-import AssignmentApi from "@/api/assignment/index";
 import LazyTable from "@/components/tables/LazyTable.vue";
 import TableHeader from "@/components/tables/extras/TableHeader.vue";
 import DeleteItemModal from "@/components/modals/DeleteItemModal.vue";
-import { AssignmentService } from "@/services/assignmentService";
-import type {
-  ColDef,
-  ValueFormatterParams,
-} from "@/components/tables/interfaces/GenericTable/columnDefinitions";
-import type Assignment from "@/api/assignment/interface";
+import type { ColDef } from "@/components/tables/interfaces/GenericTable/columnDefinitions";
 import type { CellClickedEvent } from "ag-grid-community";
 import { useDeleteItemDialog } from "@/composables/deleteItem";
+import type AssignmentTemplate from "@/api/assignmentTemplate/interface";
+import { AssignmentTemplateService } from "@/services/assignmentTemplateService";
+import AssignmentTemplateApi from "@/api/assignmentTemplate";
+import { booleanFormatter } from "@/helpers/formatters";
 
-const service = new AssignmentService(new AssignmentApi());
+const service = new AssignmentTemplateService(new AssignmentTemplateApi());
 const router = useRouter();
 const columns = [
   {
@@ -51,6 +52,14 @@ const columns = [
     headerName: "Acompañante",
     field: "companion.name",
     flex: 10,
+  },
+  {
+    headerName: "Habilitado",
+    field: "enabled",
+    flex: 10,
+    cellClass: "d-flex justify-center",
+    suppressMenu: true,
+    valueFormatter: booleanFormatter,
   },
   {
     suppressMovable: true,
@@ -76,26 +85,22 @@ const columns = [
   },
 ] as ColDef[];
 
-function booleanFormatter(params: ValueFormatterParams) {
-  return params.value ? "Si" : "No";
-}
-
-function showDetails(assignment: Assignment) {
+function showDetails(assignmentTemplate: AssignmentTemplate) {
   router.push({
-    name: "assignment-detail",
-    params: { id: assignment.id },
+    name: "assignment-template-detail",
+    params: { id: assignmentTemplate.id },
   });
 }
 
-function goToEdition(assignment: Assignment) {
+function goToEdition(assignmentTemplate: AssignmentTemplate) {
   router.push({
-    name: "assignment-edit",
-    params: { id: assignment.id },
+    name: "assignment-template-edit",
+    params: { id: assignmentTemplate.id },
   });
 }
 
 // DeleteItemModal Logic
 
 const { dialog, selectedItem, handleDeletion, deleteItem } =
-  useDeleteItemDialog<Assignment>(service);
+  useDeleteItemDialog<AssignmentTemplate>(service);
 </script>
