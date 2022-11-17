@@ -1,7 +1,7 @@
 <template>
   <v-container class="h-100 d-flex flex-column">
     <TableHeader
-      title="Template"
+      title="Templates"
       :route="{ name: 'assignment-template-new' }"
     />
 
@@ -22,7 +22,10 @@ import { useRouter } from "vue-router";
 import LazyTable from "@/components/tables/LazyTable.vue";
 import TableHeader from "@/components/tables/extras/TableHeader.vue";
 import DeleteItemModal from "@/components/modals/DeleteItemModal.vue";
-import type { ColDef } from "@/components/tables/interfaces/GenericTable/columnDefinitions";
+import type {
+  ColDef,
+  ValueFormatterParams,
+} from "@/components/tables/interfaces/GenericTable/columnDefinitions";
 import type { CellClickedEvent } from "ag-grid-community";
 import { useDeleteItemDialog } from "@/composables/deleteItem";
 import type AssignmentTemplate from "@/api/assignmentTemplate/interface";
@@ -56,6 +59,9 @@ const columns = [
     headerName: "Habilitado",
     field: "enabled",
     flex: 10,
+    cellClass: "d-flex justify-center",
+    suppressMenu: true,
+    valueFormatter: booleanFormatter,
   },
   {
     suppressMovable: true,
@@ -93,6 +99,10 @@ function goToEdition(assignmentTemplate: AssignmentTemplate) {
     name: "assignment-template-edit",
     params: { id: assignmentTemplate.id },
   });
+}
+
+function booleanFormatter(params: ValueFormatterParams) {
+  return params.value ? "Si" : "No";
 }
 
 // DeleteItemModal Logic
