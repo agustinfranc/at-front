@@ -1,7 +1,7 @@
 <template>
   <v-container class="h-100 d-flex flex-column">
     <TableHeader
-      title="Template"
+      title="Templates"
       :route="{ name: 'assignment-template-new' }"
     />
 
@@ -28,6 +28,7 @@ import { useDeleteItemDialog } from "@/composables/deleteItem";
 import type AssignmentTemplate from "@/api/assignmentTemplate/interface";
 import { AssignmentTemplateService } from "@/services/assignmentTemplateService";
 import AssignmentTemplateApi from "@/api/assignmentTemplate";
+import { booleanFormatter } from "@/helpers/formatters";
 
 const service = new AssignmentTemplateService(new AssignmentTemplateApi());
 const router = useRouter();
@@ -56,6 +57,9 @@ const columns = [
     headerName: "Habilitado",
     field: "enabled",
     flex: 10,
+    cellClass: "d-flex justify-center",
+    suppressMenu: true,
+    valueFormatter: booleanFormatter,
   },
   {
     suppressMovable: true,
