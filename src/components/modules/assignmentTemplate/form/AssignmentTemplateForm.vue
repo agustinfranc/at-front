@@ -26,29 +26,56 @@
             </v-col>
           </v-row>
 
-          <v-row>
-            <v-col>
-              <v-text-field type="date" label="Fecha" v-model="fields.date" />
-            </v-col>
-          </v-row>
+          <div class="my-5">
+            <v-row v-for="day in fields.days" :key="day.id">
+              <v-col cols="1">
+                <v-checkbox v-model="day.enabled"></v-checkbox>
+              </v-col>
+              <v-col>
+                <v-text-field
+                  v-model="day.title"
+                  readonly
+                  :disabled="!day.enabled"
+                />
+              </v-col>
+              <v-col>
+                <v-text-field
+                  v-model="day.from"
+                  type="time"
+                  label="Desde"
+                  :disabled="!day.enabled"
+                />
+              </v-col>
+              <v-col>
+                <v-text-field
+                  v-model="day.to"
+                  type="time"
+                  label="Hasta"
+                  :disabled="!day.enabled"
+                />
+              </v-col>
+              <v-col>
+                <v-text-field
+                  type="number"
+                  label="Horas"
+                  v-model="day.hours"
+                  :disabled="!day.enabled"
+                  :rules="[(v: number) => (!!v || !day.enabled) || 'Este campo es requerido']"
+                />
+              </v-col>
+            </v-row>
+          </div>
 
           <v-row>
             <v-col>
-              <v-text-field type="time" label="Desde" v-model="fields.from" />
-            </v-col>
-            <v-col>
-              <v-text-field type="time" label="Hasta" v-model="fields.to" />
-            </v-col>
-            <v-col>
-              <v-text-field
-                type="number"
-                label="Horas"
-                v-model="fields.hours"
-              />
+              <v-checkbox
+                v-model="fields.enabled"
+                label="Habilitado"
+              ></v-checkbox>
             </v-col>
           </v-row>
 
-          <SubmitButton :valid="valid" @click="storeAssignment" />
+          <SubmitButton :valid="valid" @click="storeAssignmentTemplate" />
         </v-form>
       </v-card-text>
     </v-card>
@@ -59,24 +86,24 @@
 import { onBeforeMount, onMounted, ref, watch } from "vue";
 import ComboboxField from "@/components/forms/fields/ComboboxField.vue";
 import ClientApi from "@/api/client";
-import { AssignmentService } from "@/services/assignmentService";
 import SubmitButton from "@/components/forms/common/SubmitButton.vue";
 import { ClientService } from "@/services/clientService";
 import CompanionApi from "@/api/companion";
 import { CompanionService } from "@/services/companionService";
-import AssignmentForm from "../../assignment/interfaces/assignmentForm";
+import AssignmentTemplateForm from "../interfaces/assignmentTemplateForm";
 // eslint-disable-next-line
 // @ts-ignore
 import { cloneDeep } from "lodash";
 import { useRoute } from "vue-router";
-import type Assignment from "@/api/assignment/interface";
+import type AssignmentTemplate from "@/api/assignmentTemplate/interface";
 import { useFindOneService } from "@/composables/findOneItemService";
-import AssignmentApi from "@/api/assignment/index";
+import AssignmentTemplateApi from "@/api/assignmentTemplate";
+import { AssignmentTemplateService } from "@/services/assignmentTemplateService";
 import { useSaveFormService } from "@/composables/saveItemService";
 import {
-  mapAssignmentForEditForm,
+  mapAssignmentTemplateForEditForm,
   mapFormForRequest,
-} from "@/components/forms/extras/assignment/formHelpers";
+} from "@/components/forms/extras/assignmentTemplate/formHelpers";
 // import _ from "@/plugins/lodash" not working
 
 const route = useRoute();
@@ -85,34 +112,35 @@ const companionService = new CompanionService(new CompanionApi());
 
 const form = ref(); // declare template ref form
 const valid = ref(true);
-const fields = ref(new AssignmentForm());
+const fields = ref(new AssignmentTemplateForm());
 const clients = ref();
 const companions = ref();
-const service = new AssignmentService(new AssignmentApi());
+const service = new AssignmentTemplateService(new AssignmentTemplateApi());
 
-const { isEdit, saveItem } = useSaveFormService<AssignmentForm>(service);
+const { isEdit, saveItem } =
+  useSaveFormService<AssignmentTemplateForm>(service);
 const title = isEdit()
   ? `Acompañamiento #${route.params.id}`
   : "Nuevo acompañamiento";
 
-const { item } = useFindOneService<Assignment>(service);
+const { item } = useFindOneService<AssignmentTemplate>(service);
 watch(item, () => {
   if (item.value) {
-    fields.value = mapAssignmentForEditForm(item.value);
+    fields.value = mapAssignmentTemplateForEditForm(item.value);
   }
 });
 
-async function storeAssignment() {
+async function storeAssignmentTemplate() {
   const formValidation = await form.value.validate();
   if (!formValidation.valid) return;
 
-  const assignmentForm = mapFormForRequest(
+  const assignmentTemplateForm = mapFormForRequest(
     fields.value,
     clients.value,
     companions.value
   );
 
-  saveItem(cloneDeep(assignmentForm), "assignments");
+  saveItem(cloneDeep(assignmentTemplateForm), "assignments");
 }
 
 onBeforeMount(() => {
