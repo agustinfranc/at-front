@@ -119,9 +119,7 @@ const service = new AssignmentTemplateService(new AssignmentTemplateApi());
 
 const { isEdit, saveItem } =
   useSaveFormService<AssignmentTemplateForm>(service);
-const title = isEdit()
-  ? `Acompañamiento #${route.params.id}`
-  : "Nuevo acompañamiento";
+const title = isEdit() ? `Template #${route.params.id}` : "Nuevo template";
 
 const { item } = useFindOneService<AssignmentTemplate>(service);
 watch(item, () => {
