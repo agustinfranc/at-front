@@ -1,9 +1,39 @@
 <template>
   <v-container class="h-100 d-flex flex-column">
-    <TableHeader
-      title="Templates"
-      :route="{ name: 'assignment-template-new' }"
-    />
+    <v-row class="flex-grow-0">
+      <v-col align-self="center" cols="12" sm="4">
+        <p class="text-h4 text--primary">Templates</p>
+      </v-col>
+      <v-spacer></v-spacer>
+      <v-col align-self="center" cols="12" sm="4">
+        <v-sheet class="ma-2 pa-2">
+          <v-btn
+            rounded="lg"
+            block
+            variant="outlined"
+            dark
+            class="mb-2 text--primary"
+            :to="{ name: 'assignment-template-new' }"
+          >
+            Nuevo
+          </v-btn>
+        </v-sheet>
+      </v-col>
+      <v-col align-self="center" cols="12" sm="4">
+        <v-sheet class="ma-2 pa-2">
+          <v-btn
+            rounded="lg"
+            block
+            variant="outlined"
+            dark
+            class="mb-2 text--primary"
+            @click="generateAssignments"
+          >
+            Generar
+          </v-btn>
+        </v-sheet>
+      </v-col>
+    </v-row>
 
     <LazyTable :columns="columns" :service="service" />
 
@@ -20,7 +50,6 @@
 <script setup lang="ts">
 import { useRouter } from "vue-router";
 import LazyTable from "@/components/tables/LazyTable.vue";
-import TableHeader from "@/components/tables/extras/TableHeader.vue";
 import DeleteItemModal from "@/components/modals/DeleteItemModal.vue";
 import type { ColDef } from "@/components/tables/interfaces/GenericTable/columnDefinitions";
 import type { CellClickedEvent } from "ag-grid-community";
@@ -29,7 +58,9 @@ import type AssignmentTemplate from "@/api/assignmentTemplate/interface";
 import { AssignmentTemplateService } from "@/services/assignmentTemplateService";
 import AssignmentTemplateApi from "@/api/assignmentTemplate";
 import { booleanFormatter } from "@/helpers/formatters";
+import GenerateAssignmentApi from "@/api/generateAssigment";
 
+const generateApi = new GenerateAssignmentApi();
 const service = new AssignmentTemplateService(new AssignmentTemplateApi());
 const router = useRouter();
 const columns = [
@@ -97,6 +128,10 @@ function goToEdition(assignmentTemplate: AssignmentTemplate) {
     name: "assignment-template-edit",
     params: { id: assignmentTemplate.id },
   });
+}
+
+function generateAssignments() {
+  generateApi.generate();
 }
 
 // DeleteItemModal Logic
