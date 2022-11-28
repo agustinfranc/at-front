@@ -60,7 +60,7 @@ import AssignmentTemplateApi from "@/api/assignmentTemplate";
 import { booleanFormatter } from "@/helpers/formatters";
 import GenerateAssignmentApi from "@/api/generateAssigment";
 
-const generateApi = new GenerateAssignmentApi();
+const generateAssignmentApi = new GenerateAssignmentApi();
 const service = new AssignmentTemplateService(new AssignmentTemplateApi());
 const router = useRouter();
 const columns = [
@@ -131,7 +131,7 @@ function goToEdition(assignmentTemplate: AssignmentTemplate) {
 }
 
 function generateAssignments() {
-  generateApi.generate();
+  generateAssignmentApi.generate();
 }
 
 // DeleteItemModal Logic
