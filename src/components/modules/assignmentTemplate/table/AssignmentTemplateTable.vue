@@ -1,40 +1,6 @@
 <template>
   <v-container class="h-100 d-flex flex-column">
-    <v-row class="flex-grow-0">
-      <v-col align-self="center" cols="12" sm="4">
-        <p class="text-h4 text--primary">Templates</p>
-      </v-col>
-      <v-spacer></v-spacer>
-      <v-col align-self="center" cols="12" sm="4">
-        <v-sheet class="ma-2 pa-2">
-          <v-btn
-            rounded="lg"
-            block
-            variant="outlined"
-            dark
-            class="mb-2 text--primary"
-            :to="{ name: 'assignment-template-new' }"
-          >
-            Nuevo
-          </v-btn>
-        </v-sheet>
-      </v-col>
-      <v-col align-self="center" cols="12" sm="4">
-        <v-sheet class="ma-2 pa-2">
-          <v-btn
-            rounded="lg"
-            block
-            variant="outlined"
-            dark
-            class="mb-2 text--primary"
-            @click="generateAssignments"
-          >
-            Generar
-          </v-btn>
-        </v-sheet>
-      </v-col>
-    </v-row>
-
+    <TemplateTableHeader @generate="generateAssignments" />
     <LazyTable :columns="columns" :service="service" />
 
     <DeleteItemModal
@@ -59,6 +25,7 @@ import { AssignmentTemplateService } from "@/services/assignmentTemplateService"
 import AssignmentTemplateApi from "@/api/assignmentTemplate";
 import { booleanFormatter } from "@/helpers/formatters";
 import GenerateAssignmentApi from "@/api/generateAssigment";
+import TemplateTableHeader from "@/components/tables/extras/TemplateTableHeader.vue";
 
 const generateAssignmentApi = new GenerateAssignmentApi();
 const service = new AssignmentTemplateService(new AssignmentTemplateApi());
