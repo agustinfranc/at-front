@@ -2,7 +2,7 @@ export default class AssignmentForm {
   id?: number;
   client_name: string | null = null;
   companion_name: string | null = null;
-  enabled: boolean = true;
+  enabled = true;
   // TODO: traer los days del BE
   days = [
     {

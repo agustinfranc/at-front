@@ -76,10 +76,6 @@ const columns = [
   },
 ] as ColDef[];
 
-function booleanFormatter(params: ValueFormatterParams) {
-  return params.value ? "Si" : "No";
-}
-
 function showDetails(assignment: Assignment) {
   router.push({
     name: "assignment-detail",

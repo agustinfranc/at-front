@@ -19,7 +19,7 @@ export function useGetClientService() {
     if (!clientId) return;
 
     clientService
-      .findOne(parseInt(clientId))
+      .findOne<Client>(parseInt(clientId))
       .then((res) => (client.value = res.data?.data || null))
       .catch((err) => (error.value = err))
       .catch((err) =>
