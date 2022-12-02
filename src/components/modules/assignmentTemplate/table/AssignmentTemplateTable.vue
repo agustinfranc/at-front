@@ -26,7 +26,9 @@ import AssignmentTemplateApi from "@/api/assignmentTemplate";
 import { booleanFormatter } from "@/helpers/formatters";
 import GenerateAssignmentApi from "@/api/generateAssigment";
 import TemplateTableHeader from "@/components/tables/extras/TemplateTableHeader.vue";
+import { useSnackbarStore } from "@/stores/snackbar";
 
+const snackbarStore = useSnackbarStore();
 const generateAssignmentApi = new GenerateAssignmentApi();
 const service = new AssignmentTemplateService(new AssignmentTemplateApi());
 const router = useRouter();
@@ -98,7 +100,25 @@ function goToEdition(assignmentTemplate: AssignmentTemplate) {
 }
 
 function generateAssignments() {
-  generateAssignmentApi.generate();
+  const data = generateAssignmentApi.generate();
+
+  if (data) {
+    showNotification();
+  } else {
+    showError();
+  }
+}
+
+function showNotification() {
+  snackbarStore.showSuccess({
+    text: "Los templates se generaron exitosamente",
+  });
+}
+
+function showError() {
+  snackbarStore.showError({
+    text: "No se generaron los templates",
+  });
 }
 
 // DeleteItemModal Logic
