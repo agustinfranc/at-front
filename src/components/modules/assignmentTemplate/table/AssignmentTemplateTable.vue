@@ -25,7 +25,7 @@ import { AssignmentTemplateService } from "@/services/assignmentTemplateService"
 import AssignmentTemplateApi from "@/api/assignmentTemplate";
 import { booleanFormatter } from "@/helpers/formatters";
 import GenerateAssignmentApi from "@/api/generateAssigment";
-import TemplateTableHeader from "@/components/tables/extras/TemplateTableHeader.vue";
+import TemplateTableHeader from "@/components/modules/assignmentTemplate/extras/TemplateTableHeader.vue";
 import { useSnackbarStore } from "@/stores/snackbar";
 
 const snackbarStore = useSnackbarStore();
