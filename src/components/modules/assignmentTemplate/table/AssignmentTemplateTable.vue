@@ -1,6 +1,6 @@
 <template>
   <v-container class="h-100 d-flex flex-column">
-    <TemplateTableHeader @generate="generateAssignments" />
+    <TableHeader @generate="generateAssignments" />
     <LazyTable :columns="columns" :service="service" />
 
     <DeleteItemModal
@@ -25,7 +25,7 @@ import { AssignmentTemplateService } from "@/services/assignmentTemplateService"
 import AssignmentTemplateApi from "@/api/assignmentTemplate";
 import { booleanFormatter } from "@/helpers/formatters";
 import GenerateAssignmentApi from "@/api/generateAssigment";
-import TemplateTableHeader from "@/components/modules/assignmentTemplate/extras/TemplateTableHeader.vue";
+import TableHeader from "./TableHeader.vue";
 import { useSnackbarStore } from "@/stores/snackbar";
 
 const snackbarStore = useSnackbarStore();
@@ -99,30 +99,18 @@ function goToEdition(assignmentTemplate: AssignmentTemplate) {
   });
 }
 
-function generateAssignments() {
-  const data = generateAssignmentApi.generate();
+async function generateAssignments() {
+  const { data } = await generateAssignmentApi.generate();
 
-  if (data) {
-    showNotification();
-  } else {
-    showError();
-  }
-}
+  const text = data
+    ? "Los asignamientos se generaron exitosamente."
+    : "Ocurrio un error al generarse los asignamientos.";
+  const type = data ? "success" : "error";
 
-function showNotification() {
-  snackbarStore.showSuccess({
-    text: "Los templates se generaron exitosamente",
-  });
-}
-
-function showError() {
-  snackbarStore.showError({
-    text: "No se generaron los templates",
-  });
+  snackbarStore.show({ text, type });
 }
 
 // DeleteItemModal Logic
-
 const { dialog, selectedItem, handleDeletion, deleteItem } =
   useDeleteItemDialog<AssignmentTemplate>(service);
 </script>
