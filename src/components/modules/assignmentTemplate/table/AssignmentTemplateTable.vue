@@ -105,7 +105,6 @@ function goToEdition(assignmentTemplate: AssignmentTemplate) {
 }
 
 async function generateAssignments() {
-  //const data = await generateAssignmentApi.generate();
   const { data } = await generateAssignmentService.generate();
 
   if (data) {
