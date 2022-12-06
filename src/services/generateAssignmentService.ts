@@ -7,10 +7,6 @@ export class GenerateAssignmentService extends ApiService {
     super(api);
   }
 
-  /* async _customMethodExample(): Promise<ApiServiceResponse<unknown>> {
-    return await this.handleRequest<unknown>(this.api.getAll);
-  }
- */
   async generate(): Promise<ApiServiceResponse<AssignmentTemplate[]>> {
     return await this.handleRequest<AssignmentTemplate[]>(this.api.generate);
   }
