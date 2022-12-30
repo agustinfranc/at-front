@@ -1,8 +1,6 @@
-import type Assignment from "@/api/assignment/interface";
 import type AssignmentTemplate from "@/api/assignmentTemplate/interface";
 import type Client from "@/api/client/interface";
 import type Companion from "@/api/companion/interface";
-import type AssignmentForm from "../../../modules/assignment/interfaces/assignmentForm";
 import type AssignmentTemplateForm from "../../../modules/assignmentTemplate/interfaces/assignmentTemplateForm";
 
 export function mapAssignmentTemplateForEditForm(
