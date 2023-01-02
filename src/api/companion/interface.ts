@@ -3,6 +3,8 @@ export default interface Companion {
   name: string;
   cuit: string;
   phone: string;
+  extra_phone: string;
+  extra_phone_reference: string;
   nationality: string;
   birthday: string;
   max_taxable: number;

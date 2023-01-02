@@ -1,12 +1,12 @@
 <template>
   <v-container class="h-100 d-flex flex-column">
-    <TableHeader title="Acompañamientos" :route="{ name: 'assignment-new' }" />
+    <TableHeader title="Usuarios" :route="{ name: 'user-new' }" />
 
     <LazyTable :columns="columns" :service="service" />
 
     <DeleteItemModal
       v-model="dialog"
-      item-name="acompañamiento"
+      item-name="user"
       :item="selectedItem"
       @click:outside.stop="dialog = false"
       @delete="deleteItem"
@@ -16,20 +16,17 @@
 
 <script setup lang="ts">
 import { useRouter } from "vue-router";
-import AssignmentApi from "@/api/assignment/index";
+import UserApi from "@/api/user/index";
 import LazyTable from "@/components/tables/LazyTable.vue";
 import TableHeader from "@/components/tables/extras/TableHeader.vue";
 import DeleteItemModal from "@/components/modals/DeleteItemModal.vue";
-import { AssignmentService } from "@/services/assignmentService";
-import type {
-  ColDef,
-  ValueFormatterParams,
-} from "@/components/tables/interfaces/GenericTable/columnDefinitions";
-import type Assignment from "@/api/assignment/interface";
+import { UserService } from "@/services/userService";
+import type { ColDef } from "@/components/tables/interfaces/GenericTable/columnDefinitions";
+import type User from "@/api/user/interface";
 import type { CellClickedEvent } from "ag-grid-community";
 import { useDeleteItemDialog } from "@/composables/deleteItem";
 
-const service = new AssignmentService(new AssignmentApi());
+const service = new UserService(new UserApi());
 const router = useRouter();
 const columns = [
   {
@@ -43,13 +40,13 @@ const columns = [
     onCellClicked: (event: CellClickedEvent) => showDetails(event.data),
   },
   {
-    headerName: "Cliente",
-    field: "client.name",
+    headerName: "Nombre",
+    field: "name",
     flex: 10,
   },
   {
-    headerName: "Acompañante",
-    field: "companion.name",
+    headerName: "Rol",
+    field: "role.name",
     flex: 10,
   },
   {
@@ -76,22 +73,22 @@ const columns = [
   },
 ] as ColDef[];
 
-function showDetails(assignment: Assignment) {
+function showDetails(user: User) {
   router.push({
-    name: "assignment-detail",
-    params: { id: assignment.id },
+    name: "user-detail",
+    params: { id: user.id },
   });
 }
 
-function goToEdition(assignment: Assignment) {
+function goToEdition(user: User) {
   router.push({
-    name: "assignment-edit",
-    params: { id: assignment.id },
+    name: "user-edit",
+    params: { id: user.id },
   });
 }
 
 // DeleteItemModal Logic
 
 const { dialog, selectedItem, handleDeletion, deleteItem } =
-  useDeleteItemDialog<Assignment>(service);
+  useDeleteItemDialog<User>(service);
 </script>

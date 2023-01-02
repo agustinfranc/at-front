@@ -68,13 +68,22 @@ export default defineComponent({
           icon: "",
         },
         {
+          title: "Templates",
+          to: "/assignment-templates",
+          icon: "mdi-account-multiple-plus",
+        },
+        {
+          separator: true,
+          icon: "",
+        },
+        {
           title: "Saldos",
           to: "/balances",
           icon: "mdi-folder",
         },
         {
           title: "Usuarios",
-          to: "",
+          to: "/users",
           icon: "mdi-account-group-outline",
         },
       ],

@@ -37,9 +37,20 @@
                 <p class="font-weight-bold">Teléfono</p>
                 {{ companion.phone }}
               </v-col>
+              <v-col>
+                <p class="font-weight-bold">Teléfono Auxiliar</p>
+                {{ companion.extra_phone }}
+              </v-col>
+              <v-col>
+                <p class="font-weight-bold">Referencia Teléfono Auxiliar</p>
+                {{ companion.extra_phone_reference }}
+              </v-col>
             </v-row>
+
             <v-row> </v-row>
+
             <v-divider class="my-5"></v-divider>
+
             <v-row>
               <v-col>
                 <p class="font-weight-bold">Antecedentes</p>
@@ -76,7 +87,10 @@
 <script setup lang="ts">
 import CompanionApi from "@/api/companion";
 import type Companion from "@/api/companion/interface";
-import { renderNullableMoneyCell } from "@/helpers/renderCellMethods";
+import {
+  renderBooleanTableCell,
+  renderNullableMoneyCell,
+} from "@/helpers/renderCellMethods";
 import { CompanionService } from "@/services/companionService";
 import { useSnackbarStore } from "@/stores/snackbar";
 import { onMounted, ref, type Ref } from "vue";
@@ -86,16 +100,12 @@ const route = useRoute();
 const companionService = new CompanionService(new CompanionApi());
 const snackbarStore = useSnackbarStore();
 
-let companion: Ref<Companion | undefined> = ref();
-let loading = ref(false);
+const companion: Ref<Companion | undefined> = ref();
+const loading = ref(false);
 
 onMounted(async () => {
   await getCompanion();
 });
-
-function renderBooleanTableCell(value: boolean) {
-  return value ? "Si" : "No";
-}
 
 async function getCompanion() {
   loading.value = true;
@@ -112,6 +122,6 @@ async function getCompanion() {
     return;
   }
 
-  if (data) companion.value = data.data;
+  if (data) companion.value = data.data as Companion;
 }
 </script>

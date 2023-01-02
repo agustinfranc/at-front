@@ -24,22 +24,19 @@
           </v-row>
           <v-row>
             <v-col>
-              <p class="font-weight-bold">Fecha</p>
-              {{ renderNullableTableCell(item.date) }}
-            </v-col>
-            <v-col>
-              <p class="font-weight-bold">Horas</p>
-              {{ item.hours }}
+              <p class="font-weight-bold">Dias</p>
+              <span v-for="day in item.days" :key="day.id">
+                {{ day.title }}
+                de {{ day.pivot.from }} a {{ day.pivot.to }} ({{
+                  day.pivot.hours
+                }}hs)
+              </span>
             </v-col>
           </v-row>
           <v-row>
             <v-col>
-              <p class="font-weight-bold">Desde</p>
-              {{ renderNullableTableCell(item.from) }}
-            </v-col>
-            <v-col>
-              <p class="font-weight-bold">Hasta</p>
-              {{ renderNullableTableCell(item.to) }}
+              <p class="font-weight-bold">Habilitado</p>
+              {{ item.enabled ? "Si" : "No" }}
             </v-col>
           </v-row>
           <v-row>
@@ -49,7 +46,7 @@
             </v-col>
             <v-col>
               <p class="font-weight-bold">Modificado el</p>
-              {{ renderNullableTableCell(item.updated_at) }}
+              {{ item.updated_at ?? "-" }}
             </v-col>
           </v-row>
         </v-card-text>
@@ -59,13 +56,12 @@
 </template>
 
 <script setup lang="ts">
-import AssignmentApi from "@/api/assignment";
-import type Assignment from "@/api/assignment/interface";
+import AssignmentTemplateApi from "@/api/assignmentTemplate";
+import type AssignmentTemplate from "@/api/assignmentTemplate/interface";
 import { useFindOneService } from "@/composables/findOneItemService";
-import { renderNullableTableCell } from "@/helpers/renderCellMethods";
-import { AssignmentService } from "@/services/assignmentService";
+import { AssignmentTemplateService } from "@/services/assignmentTemplateService";
 
-const service = new AssignmentService(new AssignmentApi());
+const service = new AssignmentTemplateService(new AssignmentTemplateApi());
 
-const { item, error } = useFindOneService<Assignment>(service);
+const { item, error } = useFindOneService<AssignmentTemplate>(service);
 </script>

@@ -96,6 +96,50 @@ const router = createRouter({
       name: "balances",
       component: () => import("../views/Balance/BalanceView.vue"),
     },
+    {
+      path: "/users",
+      name: "users",
+      component: () => import("../views/User/UserListView.vue"),
+    },
+    {
+      path: "/users/new",
+      name: "user-new",
+      component: () => import("../views/User/NewUserView.vue"),
+    },
+    {
+      path: "/users/:id",
+      name: "user-detail",
+      component: () => import("../views/User/UserDetailView.vue"),
+    },
+    {
+      path: "/users/:id/edit",
+      name: "user-edit",
+      component: () => import("../views/User/EditUserView.vue"),
+    },
+    {
+      path: "/assignment-templates",
+      name: "assignment-templates",
+      component: () =>
+        import("../views/AssignmentTemplate/AssignmentTemplateListView.vue"),
+    },
+    {
+      path: "/assignment-templates/new",
+      name: "assignment-template-new",
+      component: () =>
+        import("../views/AssignmentTemplate/NewAssignmentTemplate.vue"),
+    },
+    {
+      path: "/assignment-templates/:id",
+      name: "assignment-template-detail",
+      component: () =>
+        import("../views/AssignmentTemplate/AssignmentTemplateDetailView.vue"),
+    },
+    {
+      path: "/assignment-templates/:id/edit",
+      name: "assignment-template-edit",
+      component: () =>
+        import("../views/AssignmentTemplate/EditAssignmentTemplateView.vue"),
+    },
   ],
 });
 

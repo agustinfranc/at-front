@@ -5,56 +5,92 @@
 
       <v-card-text>
         <v-form ref="form" v-model="valid" lazy-validation>
-          <TextField
-            v-model="fields.name"
-            label="Nombre"
-            required
-            append-inner-icon="mdi-exclamation"
-            :rules="[
+          <v-row>
+            <v-col>
+              <TextField
+                v-model="fields.name"
+                label="Nombre"
+                required
+                append-inner-icon="mdi-exclamation"
+                :rules="[
               (v: string) => !!v || 'Este campo es requerido',
               (v: string) => (v && v.length <= 50) || 'El nombre excede los 50 digitos',
             ]"
-            @change="(event) => capitalizeField(event.target.value, 'name')"
-          ></TextField>
+                @change="(event: any) => capitalizeField(event.target.value, 'name', fields)"
+              ></TextField>
+            </v-col>
+          </v-row>
 
-          <TextField
-            v-model="fields.cuit"
-            label="CUIT"
-            append-inner-icon="mdi-exclamation"
-            :rules="[(v: string) => !!v || 'Este campo es requerido']"
-          ></TextField>
+          <v-row>
+            <v-col>
+              <TextField
+                v-model="fields.cuit"
+                label="CUIT"
+                append-inner-icon="mdi-exclamation"
+                :rules="[(v: string) => !!v || 'Este campo es requerido']"
+              ></TextField>
+            </v-col>
+          </v-row>
 
-          <TextField
-            v-model="fields.birthday"
-            type="date"
-            label="Nacimiento"
-            prepend-inner-icon="mdi-calendar-month"
-            append-inner-icon="mdi-exclamation"
-            :rules="[(v: string) => !!v || 'Este campo es requerido']"
-          />
+          <v-row>
+            <v-col>
+              <TextField
+                v-model="fields.birthday"
+                type="date"
+                label="Nacimiento"
+                prepend-inner-icon="mdi-calendar-month"
+                append-inner-icon="mdi-exclamation"
+                :rules="[(v: string) => !!v || 'Este campo es requerido']"
+              />
+            </v-col>
+          </v-row>
 
-          <SelectField
-            v-model="fields.nationality"
-            label="Nacionalidad"
-            append-inner-icon="mdi-exclamation"
-            :rules="[(v: string) => !!v || 'Este campo es requerido']"
-            :items="countries"
-          >
-          </SelectField>
+          <v-row>
+            <v-col>
+              <SelectField
+                v-model="fields.nationality"
+                label="Nacionalidad"
+                append-inner-icon="mdi-exclamation"
+                :rules="[(v: string) => !!v || 'Este campo es requerido']"
+                :items="countries"
+              >
+              </SelectField>
+            </v-col>
+          </v-row>
 
-          <TextField
-            v-model="fields.phone"
-            label="Teléfono"
-            append-inner-icon="mdi-exclamation"
-            :rules="[(v: string) => !!v || 'Este campo es requerido']"
-          />
+          <v-row>
+            <v-col>
+              <TextField
+                v-model="fields.phone"
+                label="Teléfono"
+                append-inner-icon="mdi-exclamation"
+                :rules="[(v: string) => !!v || 'Este campo es requerido']"
+              />
+            </v-col>
+            <v-col>
+              <TextField
+                v-model="fields.extra_phone"
+                label="Teléfono Auxiliar"
+              />
+            </v-col>
+            <v-col>
+              <TextField
+                v-model="fields.extra_phone_reference"
+                label="Referencia Teléfono Auxiliar"
+              />
+            </v-col>
+          </v-row>
 
-          <TextField
-            type="number"
-            v-model="fields.max_taxable"
-            label="Máximo Facturable"
-            prepend-inner-icon="mdi-currency-usd"
-          ></TextField>
+          <v-row>
+            <v-col>
+              <TextField
+                type="number"
+                v-model="fields.max_taxable"
+                label="Máximo Facturable"
+                prepend-inner-icon="mdi-currency-usd"
+              ></TextField>
+            </v-col>
+          </v-row>
 
           <!-- TODO: crear componente -->
           <v-expansion-panels>
@@ -116,7 +152,8 @@ import type Companion from "@/api/companion/interface";
 import { useSaveFormService } from "@/composables/saveItemService";
 // eslint-disable-next-line
 // @ts-ignore
-import { cloneDeep, startCase, toLower } from "lodash";
+import { cloneDeep } from "lodash";
+import { capitalizeField } from "@/helpers/stringMethods";
 
 const route = useRoute();
 const form = ref(); // declare template ref form
@@ -156,9 +193,5 @@ async function storeCompanion() {
   if (!formValidation.valid) return;
 
   saveItem(cloneDeep(fields.value), "companions");
-}
-
-function capitalizeField(value: string, field: string) {
-  fields.value[field] = startCase(toLower(value));
 }
 </script>
