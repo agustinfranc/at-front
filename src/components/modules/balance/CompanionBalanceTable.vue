@@ -2,6 +2,7 @@
   <LazyTable :columns="columns" :service="service"></LazyTable>
 </template>
 <script setup lang="ts">
+
 import LazyTable from "@/components/tables/LazyTable.vue";
 import type { ColDef } from "@/components/tables/interfaces/GenericTable/columnDefinitions";
 import { CompanionService } from "@/services/companionService";
