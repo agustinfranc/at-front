@@ -7,26 +7,22 @@
     <v-window v-model="tab">
       <v-window-item value="clients">
         <v-card>
-          <p>clients</p>
+          <ClientsBalanceTable />
         </v-card>
       </v-window-item>
       <v-window-item value="companions">
         <v-card>
-          <p>companions</p>
+          <CompanionsBalanceTable />
         </v-card>
       </v-window-item>
     </v-window>
   </v-container>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-import ClientBalanceTable from "./ClientBalanceTable.vue";
+<script setup lang="ts">
+import { ref } from "vue";
+import ClientsBalanceTable from "./table/ClientsBalanceTable.vue";
+import CompanionsBalanceTable from "./table/CompanionsBalanceTable.vue";
 
-//es la unica forma que pude hacer que funcionen las tabs
-export default {
-  data: () => ({
-    tab: null,
-  }),
-};
+const tab = ref();
 </script>
