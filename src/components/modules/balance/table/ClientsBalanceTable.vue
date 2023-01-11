@@ -9,7 +9,7 @@
     <tbody>
       <tr v-for="item in balances" :key="item.name">
         <td>{{ item.name }}</td>
-        <td>{{ item.debt }}</td>
+        <td>${{ item.debt }}</td>
       </tr>
     </tbody>
   </v-table>
