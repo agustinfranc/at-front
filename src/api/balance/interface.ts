@@ -1,4 +1,5 @@
 export default interface Balance {
   name: string;
-  debt: number;
+  taxable_debt: number;
+  no_tax_debt: number;
 }

@@ -7,12 +7,12 @@
     <v-window v-model="tab">
       <v-window-item value="clients">
         <v-card>
-          <ClientsBalanceTable />
+          <BalanceTable value="clients" />
         </v-card>
       </v-window-item>
       <v-window-item value="companions">
         <v-card>
-          <CompanionsBalanceTable />
+          <BalanceTable value="companions" />
         </v-card>
       </v-window-item>
     </v-window>
@@ -21,8 +21,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import ClientsBalanceTable from "./table/ClientsBalanceTable.vue";
-import CompanionsBalanceTable from "./table/CompanionsBalanceTable.vue";
+import BalanceTable from "./table/BalanceTable.vue";
 
 const tab = ref();
 </script>
