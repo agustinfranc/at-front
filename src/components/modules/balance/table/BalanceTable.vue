@@ -20,30 +20,21 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from "vue";
-import BalanceApi from "@/api/balance";
-import { BalanceService } from "@/services/balanceService";
+import { onMounted, type PropType } from "vue";
 import { ref } from "vue";
 
 const props = defineProps({
-  value: {
-    type: String,
+  service: {
+    type: Object,
     required: true,
   },
 });
 
-const service = new BalanceService(new BalanceApi());
-let balances = ref();
+const balances = ref();
 
 onMounted(async () => {
-  if (props.value === "clients") {
-    const { data, error } = await service.getClientsBalances();
-    if (error || !data) return;
-    balances.value = data;
-  } else {
-    const { data, error } = await service.getCompanionsBalances();
-    if (error || !data) return;
-    balances.value = data;
-  }
+  const { data, error } = await props.service.getBalances();
+  if (error || !data) return;
+  balances.value = data;
 });
 </script>

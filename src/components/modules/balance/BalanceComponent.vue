@@ -7,12 +7,12 @@
     <v-window v-model="tab">
       <v-window-item value="clients">
         <v-card>
-          <BalanceTable value="clients" />
+          <BalanceTable :service="clientService" />
         </v-card>
       </v-window-item>
       <v-window-item value="companions">
         <v-card>
-          <BalanceTable value="companions" />
+          <BalanceTable :service="companionService" />
         </v-card>
       </v-window-item>
     </v-window>
@@ -22,6 +22,12 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import BalanceTable from "./table/BalanceTable.vue";
+import { ClientBalanceService } from "@/services/clientBalanceService";
+import { CompanionBalanceService } from "@/services/companionBalanceService";
+import BalanceApi from "@/api/balance";
+
+const clientService = new ClientBalanceService(new BalanceApi());
+const companionService = new CompanionBalanceService(new BalanceApi());
 
 const tab = ref();
 </script>
