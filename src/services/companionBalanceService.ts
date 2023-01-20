@@ -6,6 +6,7 @@ export class CompanionBalanceService extends ApiService {
   constructor(private api: BalanceApi) {
     super(api);
   }
+
   async getBalances(): Promise<ApiServiceResponse<Balance[]>> {
     return await this.handleRequest<Balance[]>(this.api.getCompanionsBalances);
   }
