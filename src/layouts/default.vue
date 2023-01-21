@@ -78,7 +78,7 @@ export default defineComponent({
         },
         {
           title: "Saldos",
-          to: "",
+          to: "/balances",
           icon: "mdi-folder",
         },
         {

@@ -92,6 +92,11 @@ const router = createRouter({
       component: () => import("../views/Client/EditClientView.vue"),
     },
     {
+      path: "/balances",
+      name: "balances",
+      component: () => import("../views/Balance/BalanceView.vue"),
+    },
+    {
       path: "/users",
       name: "users",
       component: () => import("../views/User/UserListView.vue"),
