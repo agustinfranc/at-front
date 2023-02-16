@@ -35,7 +35,6 @@
 
 <script setup lang="ts">
 import LoginApi from "@/api/login";
-import type Login from "@/api/login/interface";
 import { LoginService } from "@/services/loginService";
 import { ref } from "vue";
 import LoginForm from "./loginForm";
