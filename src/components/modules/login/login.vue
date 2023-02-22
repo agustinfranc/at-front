@@ -10,7 +10,7 @@
         <v-form ref="form" v-model="valid" lazy-validation>
           <v-text-field
             label="Usuario"
-            v-model="fields.username"
+            v-model="fields.email"
             required
           ></v-text-field>
           <v-text-field
@@ -49,6 +49,6 @@ async function login() {
   const formValidation = await form.value.validate();
   if (!formValidation.valid) return;
 
-  service.login(fields);
+  await service.login(fields.value);
 }
 </script>

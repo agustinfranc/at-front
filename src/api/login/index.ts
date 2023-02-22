@@ -4,7 +4,7 @@ import type Login from "./interface";
 
 class LoginApi {
   login(login: Login): AxiosPromise<Login> {
-    return axiosInstance.post("/login", login);
+    return axiosInstance.post("/token", login);
   }
 }
 

@@ -8,6 +8,6 @@ export class LoginService extends ApiService {
   }
 
   async login(login: Login): Promise<ApiServiceResponse<Login>> {
-    return await this.handleRequest<Login>(this.api.login);
+    return await this.handleRequest<Login>(this.api.login, { ...login });
   }
 }
