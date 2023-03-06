@@ -7,7 +7,9 @@ export class LoginService extends ApiService {
     super(api);
   }
 
-  async login(login: Login): Promise<ApiServiceResponse<Login>> {
-    return await this.handleRequest<Login>(this.api.login, { ...login });
+  async login(login: Login): Promise<ApiServiceResponse<{ token: string }>> {
+    return await this.handleRequest<{ token: string }>(this.api.login, {
+      ...login,
+    });
   }
 }
