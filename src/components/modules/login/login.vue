@@ -35,13 +35,17 @@
 
 <script setup lang="ts">
 import LoginApi from "@/api/login";
+import localStorageService from "@/services/localStorageService";
 import { LoginService } from "@/services/loginService";
 import { ref } from "vue";
+import { useRouter } from "vue-router";
 import LoginForm from "./loginForm";
 
 const fields = ref(new LoginForm());
 const valid = ref(true);
 const form = ref();
+const router = useRouter();
+const storageService = new localStorageService();
 
 const service = new LoginService(new LoginApi());
 
@@ -49,6 +53,10 @@ async function login() {
   const formValidation = await form.value.validate();
   if (!formValidation.valid) return;
 
-  await service.login(fields.value);
+  const response = await service.login(fields.value);
+  if (response.data) {
+    storageService.set("token", response.data.token);
+    router.push({ name: "home" });
+  }
 }
 </script>
