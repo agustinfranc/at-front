@@ -40,6 +40,7 @@ import { LoginService } from "@/services/loginService";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import LoginForm from "./loginForm";
+import { TokenSingleton } from "@/token/tokenSingleton";
 
 const fields = ref(new LoginForm());
 const valid = ref(true);
@@ -56,6 +57,7 @@ async function login() {
   const response = await service.login(fields.value);
   if (response.data) {
     storageService.set("token", response.data.token);
+    TokenSingleton.setToken(response.data.token);
     router.push({ name: "home" });
   }
 }
