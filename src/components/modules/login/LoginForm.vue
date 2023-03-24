@@ -39,7 +39,7 @@ import localStorageService from "@/services/localStorageService";
 import { LoginService } from "@/services/loginService";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-import LoginForm from "./loginForm";
+import LoginForm from "./interfaces/loginForm";
 import axiosInstance from "@/plugins/axios";
 
 const fields = ref(new LoginForm());
@@ -47,7 +47,6 @@ const valid = ref(true);
 const form = ref();
 const router = useRouter();
 const storageService = new localStorageService();
-
 const service = new LoginService(new LoginApi());
 
 async function login() {

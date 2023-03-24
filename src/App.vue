@@ -17,9 +17,9 @@
 </template>
 
 <script setup lang="ts">
-import DefaultLayout from "./layouts/default.vue";
+import DefaultLayout from "./layouts/DefaultLayout.vue";
 import { useSnackbarStore } from "@/stores/snackbar";
-import BlankLayout from "./layouts/blank.vue";
+import BlankLayout from "./layouts/BlankLayout.vue";
 import { useRoute } from "vue-router";
 
 const route = useRoute();

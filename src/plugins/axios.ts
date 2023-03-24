@@ -12,7 +12,7 @@ instance.setToken = function (token: string) {
   instance.defaults.headers.common = { Authorization: `Bearer ${token}` };
 };
 
-let token = localStorage.getItem("token");
+const token = localStorage.getItem("token");
 if (token) {
   instance.setToken(token);
 }
