@@ -11,4 +11,9 @@ if (localStorage.getItem("token")) {
   instance.defaults.headers.common = { Authorization: `Bearer ${token}` };
 }
 
+/* instance.prototype.setToken = function (token: string) {
+  instance.defaults.headers.common = { Authorization: `Bearer ${token}` };
+  return this;
+}; */
+
 export default instance;
