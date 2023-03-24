@@ -1,19 +1,20 @@
-import axios, { type AxiosInstance } from "axios";
+import axios, { type AxiosInstance as OriginalAxiosInstance } from "axios";
 
-var token: string | null;
+interface AxiosInstance extends OriginalAxiosInstance {
+  setToken(token: string): void;
+}
 
 const instance: AxiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
 });
 
-if (localStorage.getItem("token")) {
-  token = localStorage.getItem("token");
+instance.setToken = function (token: string) {
   instance.defaults.headers.common = { Authorization: `Bearer ${token}` };
-}
+};
 
-/* instance.prototype.setToken = function (token: string) {
-  instance.defaults.headers.common = { Authorization: `Bearer ${token}` };
-  return this;
-}; */
+let token = localStorage.getItem("token");
+if (token) {
+  instance.setToken(token);
+}
 
 export default instance;

@@ -55,11 +55,10 @@ async function login() {
   if (!formValidation.valid) return;
 
   const response = await service.login(fields.value);
+
   if (response.data) {
     storageService.set("token", response.data.token);
-    axiosInstance.defaults.headers.common = {
-      Authorization: `Bearer ${response.data.token}`,
-    };
+    axiosInstance.setToken(response.data.token as string);
     router.push({ name: "home" });
   }
 }
