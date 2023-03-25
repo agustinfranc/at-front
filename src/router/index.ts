@@ -140,6 +140,14 @@ const router = createRouter({
       component: () =>
         import("../views/AssignmentTemplate/EditAssignmentTemplateView.vue"),
     },
+    {
+      path: "/login",
+      name: "login",
+      meta: {
+        layout: "blank",
+      },
+      component: () => import("../views/Login/LoginView.vue"),
+    },
   ],
 });
 
