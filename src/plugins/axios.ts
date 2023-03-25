@@ -4,13 +4,17 @@ interface AxiosInstance extends OriginalAxiosInstance {
   setToken(token: string): void;
 }
 
-const instance: AxiosInstance = axios.create({
+const axiosInstance: OriginalAxiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
 });
 
-instance.setToken = function (token: string) {
-  instance.defaults.headers.common = { Authorization: `Bearer ${token}` };
-};
+const instance = Object.defineProperty(
+  axiosInstance,
+  "setToken",
+  (token: string) => {
+    instance.defaults.headers.common = { Authorization: `Bearer ${token}` };
+  }
+) as AxiosInstance;
 
 const token = localStorage.getItem("token");
 if (token) {
