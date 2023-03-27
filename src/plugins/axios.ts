@@ -8,13 +8,10 @@ const axiosInstance: OriginalAxiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
 });
 
-const instance = Object.defineProperty(
-  axiosInstance,
-  "setToken",
-  (token: string) => {
-    instance.defaults.headers.common = { Authorization: `Bearer ${token}` };
-  }
-) as AxiosInstance;
+const instance = axiosInstance as AxiosInstance;
+
+instance.setToken = (token: string) =>
+  (instance.defaults.headers.common = { Authorization: `Bearer ${token}` });
 
 const token = localStorage.getItem("token");
 if (token) {
