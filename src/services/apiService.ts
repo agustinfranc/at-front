@@ -1,5 +1,6 @@
-import type { AxiosError, AxiosPromise } from "axios";
 import { useSnackbarStore } from "@/stores/snackbar";
+import router from "@/router/index";
+import type { AxiosError, AxiosPromise } from "axios";
 import type { DeleteService } from "./interfaces/DeleteService";
 import type { FindService } from "./interfaces/FindService";
 import type { SaveService } from "./interfaces/SaveService";
@@ -52,11 +53,21 @@ export abstract class ApiService
     } catch (e: unknown) {
       const error = e as AxiosError<ErrorApiServiceResponse>;
 
+      this.redirectToLoginWhenUnauthenticated(error);
+
       this.snackbarStore.showError({
         text: error?.response?.data?.message || error?.message,
       });
 
       return { error };
+    }
+  }
+
+  private redirectToLoginWhenUnauthenticated(
+    error: AxiosError<ErrorApiServiceResponse>
+  ): void {
+    if (error?.response?.status === 401) {
+      router.push({ name: "login" });
     }
   }
 }
