@@ -66,7 +66,7 @@ export abstract class ApiService
   private redirectToLoginWhenUnauthenticated(
     error: AxiosError<ErrorApiServiceResponse>
   ): void {
-    if (error?.response?.status === 401) {
+    if (error?.response?.status === 401 || error?.response?.status === 405) {
       router.push({ name: "login" });
     }
   }

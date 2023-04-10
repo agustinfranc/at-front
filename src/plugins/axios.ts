@@ -1,4 +1,5 @@
 import axios, { type AxiosInstance as OriginalAxiosInstance } from "axios";
+import router from "@/router";
 
 interface AxiosInstance extends OriginalAxiosInstance {
   setToken(token: string): void;
@@ -16,6 +17,10 @@ instance.setToken = (token: string) =>
 const token = localStorage.getItem("token");
 if (token) {
   instance.setToken(token);
+} else {
+  router.push({
+    name: "login",
+  });
 }
 
 export default instance;
