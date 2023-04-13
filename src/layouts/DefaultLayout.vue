@@ -24,6 +24,12 @@
             <v-divider v-if="item.separator"></v-divider>
           </v-list-item>
         </v-list>
+
+        <template v-slot:append>
+          <v-list density="compact" nav>
+            <v-list-item title="Salir" prepend-icon="mdi-logout"> </v-list-item>
+          </v-list>
+        </template>
       </v-navigation-drawer>
 
       <v-main>
@@ -33,61 +39,51 @@
   </v-card>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-
-export default defineComponent({
-  name: "DefaultLayout",
-
-  data() {
-    return {
-      drawer: false,
-      items: [
-        {
-          title: "Calendario",
-          to: "/calendar",
-          icon: "mdi-calendar-month",
-        },
-        {
-          title: "Acompañamientos",
-          to: "/assignments",
-          icon: "mdi-account-multiple",
-        },
-        {
-          title: "Clientes",
-          to: "/clients",
-          icon: "mdi-home-city",
-        },
-        {
-          title: "Acompañantes",
-          to: "/companions",
-          icon: "mdi-account",
-        },
-        {
-          separator: true,
-          icon: "",
-        },
-        {
-          title: "Templates",
-          to: "/assignment-templates",
-          icon: "mdi-account-multiple-plus",
-        },
-        {
-          separator: true,
-          icon: "",
-        },
-        {
-          title: "Saldos",
-          to: "/balances",
-          icon: "mdi-folder",
-        },
-        {
-          title: "Usuarios",
-          to: "/users",
-          icon: "mdi-account-group-outline",
-        },
-      ],
-    };
+<script setup lang="ts">
+const drawer = false;
+const items = [
+  {
+    title: "Calendario",
+    to: "/calendar",
+    icon: "mdi-calendar-month",
   },
-});
+  {
+    title: "Acompañamientos",
+    to: "/assignments",
+    icon: "mdi-account-multiple",
+  },
+  {
+    title: "Clientes",
+    to: "/clients",
+    icon: "mdi-home-city",
+  },
+  {
+    title: "Acompañantes",
+    to: "/companions",
+    icon: "mdi-account",
+  },
+  {
+    separator: true,
+    icon: "",
+  },
+  {
+    title: "Templates",
+    to: "/assignment-templates",
+    icon: "mdi-account-multiple-plus",
+  },
+  {
+    separator: true,
+    icon: "",
+  },
+  {
+    title: "Saldos",
+    to: "/balances",
+    icon: "mdi-folder",
+  },
+  {
+    title: "Usuarios",
+    to: "/users",
+    icon: "mdi-account-group-outline",
+  },
+];
 </script>

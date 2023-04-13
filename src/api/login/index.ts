@@ -6,6 +6,10 @@ class LoginApi {
   login(login: Login): AxiosPromise<Login> {
     return axiosInstance.post("/token", login);
   }
+
+  logout(login: Login): AxiosPromise<Login> {
+    return axiosInstance.post("/logout", login);
+  }
 }
 
 export default LoginApi;
