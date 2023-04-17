@@ -27,7 +27,12 @@
 
         <template v-slot:append>
           <v-list density="compact" nav>
-            <v-list-item title="Salir" prepend-icon="mdi-logout"> </v-list-item>
+            <v-list-item
+              title="Salir"
+              prepend-icon="mdi-logout"
+              @click="logout"
+            >
+            </v-list-item>
           </v-list>
         </template>
       </v-navigation-drawer>
@@ -86,4 +91,6 @@ const items = [
     icon: "mdi-account-group-outline",
   },
 ];
+
+async function logout() {}
 </script>
