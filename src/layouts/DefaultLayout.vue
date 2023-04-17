@@ -45,7 +45,16 @@
 </template>
 
 <script setup lang="ts">
+import LoginApi from "@/api/login";
+import localStorageService from "@/services/localStorageService";
+import { LoginService } from "@/services/loginService";
+import { useRouter } from "vue-router";
+
 const drawer = false;
+const router = useRouter();
+const service = new LoginService(new LoginApi());
+const storageService = new localStorageService();
+
 const items = [
   {
     title: "Calendario",
@@ -92,5 +101,12 @@ const items = [
   },
 ];
 
-async function logout() {}
+async function logout() {
+  const response = await service.logout();
+
+  if (!response.error) {
+    storageService.delete("token");
+    router.push({ name: "login" });
+  }
+}
 </script>

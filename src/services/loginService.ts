@@ -12,4 +12,8 @@ export class LoginService extends ApiService {
       ...login,
     });
   }
+
+  async logout(): Promise<ApiServiceResponse<null>> {
+    return await this.handleRequest<null>(this.api.logout);
+  }
 }
