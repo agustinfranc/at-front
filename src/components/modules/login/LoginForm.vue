@@ -57,7 +57,7 @@ async function login() {
 
   if (response.data) {
     storageService.set("token", response.data.token);
-    storageService.set("user", JSON.stringify(response.data.user));
+    storageService.set("user", response.data.user);
     axiosInstance.setToken(response.data.token as string);
     router.push({ name: "home" });
   }
