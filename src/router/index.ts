@@ -6,7 +6,8 @@ const router = createRouter({
     {
       path: "/",
       name: "home",
-      component: () => import("../views/CalendarView.vue"),
+      component: () =>
+        import("../views/AssignmentTemplate/AssignmentTemplateListView.vue"),
     },
     {
       path: "/about",
@@ -139,6 +140,14 @@ const router = createRouter({
       name: "assignment-template-edit",
       component: () =>
         import("../views/AssignmentTemplate/EditAssignmentTemplateView.vue"),
+    },
+    {
+      path: "/login",
+      name: "login",
+      meta: {
+        layout: "blank",
+      },
+      component: () => import("../views/Login/LoginView.vue"),
     },
   ],
 });

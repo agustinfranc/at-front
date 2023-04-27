@@ -53,6 +53,11 @@ const columns = [
     flex: 10,
   },
   {
+    headerName: "Fecha",
+    field: "date",
+    flex: 10,
+  },
+  {
     suppressMovable: true,
     sortable: false,
     suppressMenu: true,
