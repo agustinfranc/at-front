@@ -78,7 +78,7 @@ const columns = [
   },
   {
     headerName: "Tarifa Acompañante",
-    field: "rate",
+    field: "companion_rate",
     flex: 4,
     cellRenderer: (params: { value: string }) => {
       return params.value ? "$" + params.value : "-";
