@@ -167,6 +167,7 @@
                 prepend-inner-icon="mdi-currency-usd"
               />
             </v-col>
+            
             <v-col
               ><TextField
                 v-model="fields.budget_date"
