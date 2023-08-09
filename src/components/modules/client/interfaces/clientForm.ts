@@ -9,7 +9,7 @@ export default class ClientForm implements Client {
   extra_phone_reference: string | null = null;
   extra_phone_bis: string | null = null;
   extra_phone_bis_reference: string | null = null;
-  rate: number | null = null;
+  rate: number = 0;
   companion_rate: number = 0;
   taxable: string | null = null;
   comments: string | null = null;
