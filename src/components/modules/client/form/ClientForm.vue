@@ -158,6 +158,16 @@
                 prepend-inner-icon="mdi-currency-usd"
               />
             </v-col>
+
+            <v-col>
+              <TextField
+                type="number"
+                v-model="fields.companion_rate"
+                label="Tarifa Acompañante"
+                prepend-inner-icon="mdi-currency-usd"
+              />
+            </v-col>
+            
             <v-col
               ><TextField
                 v-model="fields.budget_date"
