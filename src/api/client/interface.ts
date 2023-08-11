@@ -7,7 +7,8 @@ export default interface Client {
   extra_phone_reference: string | null;
   extra_phone_bis: string | null;
   extra_phone_bis_reference: string | null;
-  rate: number | null;
+  rate: number;
+  companion_rate: number;
   taxable: string | null;
   comments: string | null;
   address: string | null;

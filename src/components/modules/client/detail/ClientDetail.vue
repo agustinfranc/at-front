@@ -105,6 +105,10 @@
                 {{ renderNullableMoneyCell(client.rate) }}
               </v-col>
               <v-col>
+                <p class="font-weight-bold">Tarifa Acompañante</p>
+                {{ renderNullableMoneyCell(client.companion_rate) }}
+              </v-col>
+              <v-col>
                 <p class="font-weight-bold">Fecha Presupuesto</p>
                 {{ renderNullableTableCell(client.budget_date) }}
               </v-col>

@@ -77,6 +77,14 @@ const columns = [
     },
   },
   {
+    headerName: "Tarifa Acompañante",
+    field: "companion_rate",
+    flex: 4,
+    cellRenderer: (params: { value: string }) => {
+      return params.value ? "$" + params.value : "-";
+    },
+  },
+  {
     suppressMovable: true,
     sortable: false,
     suppressMenu: true,
